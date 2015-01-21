@@ -10,6 +10,31 @@
 
         <!-- Fonts -->
         <link href='http://fonts.googleapis.com/css?family=Lato:700' rel='stylesheet' type='text/css'>
+
+        <!-- The script loader -->
+        <script type="text/javascript">
+            //Any scripts to be added, will be added here
+            var scripts = [
+
+
+
+            ];
+
+            //Get the head element
+            var head = document.getElementsByTagName("head")[0];
+
+            //Loop through each script and add that tag to the head
+            scripts.forEach(function (script){
+                //Create the tag and set the attributes
+                var fileRef = document.createElement("script");
+                fileRef.setAttribute("type","text/javascript")
+                fileRef.setAttribute("src", "js/" + script);
+
+                //Add it to the head
+                head.appendChild(fileRef);
+            });
+
+        </script>
     </head>
 
 
@@ -21,9 +46,6 @@
         <canvas id="canvas">
             <p>Oops, seems like canvas isn't supported on your browser (hint: Get Chrome)</p>
         </canvas>
-
-
-
 
     </body>
 
