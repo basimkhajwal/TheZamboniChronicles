@@ -18,22 +18,21 @@ Game.Game.prototype = {
         var that = this;
 
         var update = function (delta) {
-
+            console.log("updatin yall");
         };
 
-        var render = function () {
+        this.timer.Initialise(update, function () {
+            console.log("called");
             that.canvas.Begin();
 
-            that.canvas.bufferContext.rect(100, 100, 30, 40);
+            that.canvas.bufferContext.fillRect(100, 100, 30, 40);
 
             that.canvas.End();
-        };
-
-
-
-        this.timer.Initialise(update, render);
+        });
 
         this.timer.Start();
+
+        console.log("Finished?");
     },
 
 

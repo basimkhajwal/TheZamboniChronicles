@@ -9,6 +9,8 @@ Game.Timer.prototype = {
 
         this.updateCallBack = updateCallBack;
         this.renderCallBack = renderCallBack;
+
+        this.renderCallBack();
     },
 
     Start: function () {
@@ -38,9 +40,10 @@ Game.Timer.prototype = {
 
             lastTime = now;
             requestAnimFrame(main);
+
         };
 
-        //main();
+        main();
     }
 
 }

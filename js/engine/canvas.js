@@ -29,6 +29,6 @@ Game.Canvas.prototype = {
     },
 
     End: function () {
-        this.canvasContext.drawImage(this.buffer, 0, 0, this.buffer.width, this.buffer.height, 0, 0, this.canvas.width, this.canvas.height);
+        this.canvasContext.drawImage(this.buffer, 0, 0);
     }
 };
