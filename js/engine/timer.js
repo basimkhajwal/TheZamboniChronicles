@@ -1,6 +1,7 @@
 Game.Timer = function () {
     this.callback = null;
     this.lastTime = null;
+
     this.requestAnimFrame = (function(){
         return window.requestAnimationFrame        ||
             window.webkitRequestAnimationFrame     ||
@@ -14,11 +15,17 @@ Game.Timer = function () {
     })();
 };
 
-
 Game.Timer.prototype = {
 
     Initialise: function (updateCallBack, renderCallBack) {
+        this.callback = function(){
+            var now = Date.now();
+            var delta = now - this.lastTime;
 
+
+            this.lastTime = Date.now();
+            this.requestAnimFrame()
+        };
     },
 
     Start: function () {
