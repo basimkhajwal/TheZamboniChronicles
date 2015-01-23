@@ -1,5 +1,7 @@
 Game.Timer = function () {
     this.callback = null;
+    this.updateCallBack = null;
+    this.renderCallBack = null;
     this.lastTime = null;
 
     this.requestAnimFrame = (function(){
@@ -18,13 +20,20 @@ Game.Timer = function () {
 Game.Timer.prototype = {
 
     Initialise: function (updateCallBack, renderCallBack) {
+
+        this.updateCallBack = updateCallBack;
+        this.renderCallBack = renderCallBack;
+
+        var that = this;
+
         this.callback = function(){
             var now = Date.now();
-            var delta = now - this.lastTime;
+            var delta = now - that.lastTime;
 
 
-            this.lastTime = Date.now();
-            this.requestAnimFrame()
+
+            that.lastTime = Date.now();
+            that.requestAnimFrame(that.callback);
         };
     },
 
