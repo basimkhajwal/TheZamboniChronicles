@@ -11,3 +11,8 @@ A javascript game, TODO
 ###To decide
 - graphics
 - level design
+
+###Stuff i'm unsure of
+- are we having a plot of some kind?(i will write if there is)
+- i would like to model some things
+- is it going to be sidescrolling?
