@@ -1,5 +1,6 @@
 Game.Timer = function () {
     this.callback = null;
+    this.lastTime = null;
     this.requestAnimFrame = (function(){
         return window.requestAnimationFrame        ||
             window.webkitRequestAnimationFrame     ||
