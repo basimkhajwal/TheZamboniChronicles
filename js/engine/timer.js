@@ -30,7 +30,10 @@ Game.Timer.prototype = {
             var now = Date.now();
             var delta = now - that.lastTime;
 
+            that.updateCallBack(delta);
+            that.renderCallBack();
 
+            console.log("Updating..");
 
             that.lastTime = Date.now();
             that.requestAnimFrame(that.callback);
@@ -38,7 +41,7 @@ Game.Timer.prototype = {
     },
 
     Start: function () {
-
+        this.callback();
     }
 
 }
