@@ -18,21 +18,21 @@ Game.Game.prototype = {
         var that = this;
 
         var update = function (delta) {
-            console.log("updatin yall");
+
         };
 
-        this.timer.Initialise(update, function () {
-            console.log("called");
+        var render =  function () {
             that.canvas.Begin();
 
             that.canvas.bufferContext.fillRect(100, 100, 30, 40);
 
             that.canvas.End();
-        });
+        };
 
+        this.timer.Initialise(update, render);
+
+        //Begin the game loop
         this.timer.Start();
-
-        console.log("Finished?");
     },
 
 

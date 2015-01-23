@@ -33,8 +33,6 @@ Game.Timer.prototype = {
             var now = Date.now();
             var delta = (now - lastTime) / 1000.0;
 
-            console.log("Updating.." + delta.toString() );
-
             that.updateCallBack(delta);
             that.renderCallBack();
 
