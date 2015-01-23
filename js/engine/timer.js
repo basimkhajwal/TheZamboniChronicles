@@ -1,20 +1,6 @@
 Game.Timer = function () {
-    this.callback = null;
     this.updateCallBack = null;
     this.renderCallBack = null;
-    this.lastTime = null;
-
-    this.requestAnimFrame = (function(){
-        return window.requestAnimationFrame        ||
-            window.webkitRequestAnimationFrame     ||
-            window.mozRequestAnimationFrame        ||
-            window.oRequestAnimationFrame          ||
-            window.msRequestAnimationFrame         ||
-
-            function(callback){
-                window.setTimeout(callback, 1000 / 60);
-            };
-    })();
 };
 
 Game.Timer.prototype = {
@@ -23,25 +9,38 @@ Game.Timer.prototype = {
 
         this.updateCallBack = updateCallBack;
         this.renderCallBack = renderCallBack;
+    },
 
+    Start: function () {
+        var requestAnimFrame = (function(){
+            return window.requestAnimationFrame        ||
+                window.webkitRequestAnimationFrame     ||
+                window.mozRequestAnimationFrame        ||
+                window.oRequestAnimationFrame          ||
+                window.msRequestAnimationFrame         ||
+
+                function(callback){
+                window.setTimeout(callback, 1000 / 60);
+            };
+        })();
+
+        var lastTime = 0;
         var that = this;
 
-        this.callback = function(){
+        function main() {
             var now = Date.now();
-            var delta = now - that.lastTime;
+            var delta = (now - lastTime) / 1000.0;
+
+            console.log("Updating.." + delta.toString() );
 
             that.updateCallBack(delta);
             that.renderCallBack();
 
-            console.log("Updating..");
-
-            that.lastTime = Date.now();
-            that.requestAnimFrame(that.callback);
+            lastTime = now;
+            requestAnimFrame(main);
         };
-    },
 
-    Start: function () {
-        this.callback();
+        //main();
     }
 
 }
