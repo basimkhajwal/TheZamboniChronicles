@@ -11,4 +11,3 @@ A javascript game, TODO
 ###To decide
 - graphics
 - level design
-Cameron
