@@ -7,8 +7,7 @@ Game.Game = function () {
 
 Game.Game.prototype = {
     Initialise: function () {
-        this.canvas = new Game.Canvas();
-        this.canvas.Initialise(1000, 600);
+        this.canvas = Game.Canvas.create(1000, 600);
 
         this.timer = new Game.Timer();
     },
@@ -22,11 +21,11 @@ Game.Game.prototype = {
         };
 
         var render =  function () {
-            that.canvas.Begin();
+            that.canvas.begin();
 
-            that.canvas.bufferContext.fillRect(100, 100, 30, 40);
+            that.canvas.getContext().fillRect(10,10,20,20);
 
-            that.canvas.End();
+            that.canvas.end();
         };
 
         this.timer.Initialise(update, render);
