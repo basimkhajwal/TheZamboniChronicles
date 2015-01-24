@@ -8,8 +8,6 @@ Game.Game = function () {
 Game.Game.prototype = {
     Initialise: function () {
         this.canvas = Game.Canvas.create(1000, 600);
-
-        this.timer = new Game.Timer();
     },
 
 
@@ -28,10 +26,10 @@ Game.Game.prototype = {
             that.canvas.end();
         };
 
-        this.timer.Initialise(update, render);
+        var timer = Game.Timer.create(update, render);
 
         //Begin the game loop
-        this.timer.Start();
+        timer.start();
     },
 
 
