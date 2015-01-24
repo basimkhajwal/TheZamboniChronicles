@@ -2,10 +2,6 @@ Game.Timer = {
 
     create: function (updateCallBack, renderCallBack) {
 
-        //Store the arguments as variables so that the closure can access them
-        var updateCallBack = updateCallBack;
-        var renderCallBack = renderCallBack;
-
         //Return a closure
         return {
             start: function () {
