@@ -1,4 +1,4 @@
-var game = new Game.Game();
+var game = Game.Game.create();
 
-game.Initialise();
-game.Start();
+
+game.start();
