@@ -1,5 +1,18 @@
 # TheZamboniChronicles
-A javascript game, TODO
+A javascript game
+
+######Current List Of Tasks To Do:
+- Finish game states and managers
+- Manage asset loading (images, sounds etc)
+- Make a JSON level parser
+- Make a 2d scene graph for GUI and base classes for rendering
+- Particle Effects
+- Keyboard Input
+- Mouse input
+
+######Live preview
+http://htmlpreview.github.io/?https://github.com/basimkhajwal/TheZamboniChronicles/blob/master/index.html
+
 ###The Game Ideas
 - 2d platformer
 - ~10 levels
@@ -7,6 +20,9 @@ A javascript game, TODO
 - moving platforms, not static game
 - enemies
 - level select map
+- parallax scrolling
+- shooting
+
 
 ###To decide
 - graphics
@@ -16,3 +32,7 @@ A javascript game, TODO
 - are we having a plot of some kind?(i will write if there is)
 - i would like to model some things
 - is it going to be sidescrolling? ==> Probably not, will work easier if is set background, and level design would be easier.
+    - I thought we could do, it won't be too difficult
+    
+    
+    
