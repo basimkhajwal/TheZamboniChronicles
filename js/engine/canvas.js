@@ -1,7 +1,6 @@
 //New modular method
 Game.Canvas = {
 
-
     //The create method implements most of it
     create: function (width, height) {
 
