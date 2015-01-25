@@ -15,4 +15,4 @@ A javascript game, TODO
 ###Stuff i'm unsure of
 - are we having a plot of some kind?(i will write if there is)
 - i would like to model some things
-- is it going to be sidescrolling?
+- is it going to be sidescrolling? ==> Probably not, will work easier if is set background, and level design would be easier.
