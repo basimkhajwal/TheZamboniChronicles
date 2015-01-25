@@ -4,9 +4,11 @@ A javascript game
 ######Current List Of Tasks To Do:
 - Finish game states and managers
 - Manage asset loading (images, sounds etc)
-- Make a JSON level parser
-- Make a 2d scene graph for GUI and base classes for rendering
-- Particle Effects
+- Make a JSON level parser (Maybe leave it till later)
+- Make a 2d scene graph for GUI and base classes for rendering (Minimalistic at first, improve later)
+- Particle Effects (Add when needed)
+- Physics Engine and collision detection
+- Tile map manager
 - Keyboard Input
 - Mouse input
 
