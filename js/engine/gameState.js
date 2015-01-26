@@ -1,4 +1,4 @@
-Game.GameState = {
+Engine.GameState = {
 
     create: function () {
 

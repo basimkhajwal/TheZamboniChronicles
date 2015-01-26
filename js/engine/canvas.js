@@ -1,5 +1,5 @@
 //New modular method
-Game.Canvas = {
+Engine.Canvas = {
 
     //The create method implements most of it
     create: function (width, height) {

@@ -1,4 +1,4 @@
-Game.FPSLogger = {
+Engine.FPSLogger = {
 
     create: function () {
 

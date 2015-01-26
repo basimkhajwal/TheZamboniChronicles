@@ -1,4 +1,4 @@
-Game.Timer = {
+Engine.Timer = {
 
     create: function (updateCallBack, renderCallBack) {
 

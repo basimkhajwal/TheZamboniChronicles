@@ -1,2 +1,2 @@
 //The top-level game container
-var Game = {};
+var Engine = {};
