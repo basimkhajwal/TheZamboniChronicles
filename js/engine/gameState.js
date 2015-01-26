@@ -8,7 +8,7 @@ Game.GameState = {
         return {
 
             //Public methods/variables
-            onCreate: function () {
+            onCreate: function (gameStateManager) {
 
             },
 

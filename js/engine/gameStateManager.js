@@ -7,6 +7,7 @@ Game.GameStateManager = {
 
         //The closure
         return {
+            that: this,
 
             setState: function (activity) {
                 if(currentActivity != null){
@@ -14,7 +15,7 @@ Game.GameStateManager = {
                 }
 
                 currentActivity = activity;
-                currentActivity.onCreate();
+                currentActivity.onCreate(that);
             },
 
             getState: function () {
