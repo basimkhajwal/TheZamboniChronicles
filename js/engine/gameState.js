@@ -4,7 +4,6 @@ Game.GameState = {
 
         //Private variables
 
-
         //Return a closure
         return {
 
@@ -21,17 +20,9 @@ Game.GameState = {
 
             },
 
-            onPause: function () {
-
-            },
-
-            onResume: function () {
-
-            },
-
             onDestroy: function () {
 
-            }
+            },
 
         };
 
