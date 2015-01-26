@@ -1,4 +1,4 @@
-var game = Game.Game.create();
+var game = Engine.Game.create();
 
 
 game.start();

@@ -5,6 +5,7 @@ Game.Game = {
         //Create the 'private' variables, needed in the closure
         var canvas = Game.Canvas.create(1000, 600);
         var fpsLogger = Game.FPSLogger.create();
+        var gameStateManager =
         var timer = null;
 
         //Return the closure

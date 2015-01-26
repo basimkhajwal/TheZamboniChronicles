@@ -5,9 +5,11 @@ Game.GameStateManager = {
         //Private variables
         var currentActivity = null;
 
-        //The closure
-        return {
-            that: this,
+        //Make an empty closure
+        var that = {};
+
+        //Add all functions
+        that.prototype = {
 
             setState: function (activity) {
                 if(currentActivity != null){
@@ -36,6 +38,7 @@ Game.GameStateManager = {
 
         };
 
+        return that;
     }
 
 }
