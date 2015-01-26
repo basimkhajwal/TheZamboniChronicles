@@ -1,4 +1,4 @@
-Game.GameStateManager = {
+Engine.GameStateManager = {
 
     create: function () {
 
