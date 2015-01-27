@@ -24,15 +24,13 @@ Engine.AssetManager = {
             },
 
             downloadAll: function(downloadCallback) {
-                if (downloadQueue.length === 0 && soundsQueue.length === 0) {
+                if (downloadQueue.length === 0) {
                     downloadCallback();
                 }
-
-                that.downloadSounds(downloadCallback);
                 
                 var successCallback = function() {
                     console.log(this.src + ' is loaded');
-                    that.successCount += 1;
+                    successCount += 1;
 
                     if (that.isDone()) {
                         downloadCallback();
@@ -40,16 +38,16 @@ Engine.AssetManager = {
                 };
                 
                 var errorCallback = function() {
-                    that.errorCount += 1;
+                    errorCount += 1;
 
                     if (that.isDone()) {
                         downloadCallback();
                     }
                 };
 
-                for (var i = 0; i < this.downloadQueue.length; i++) {
+                for (var i = 0; i < downloadQueue.length; i++) {
 
-                    var path = this.downloadQueue[i];
+                    var path = downloadQueue[i];
                     var img = new Image();
 
                     img.addEventListener("load", successCallback, false);
@@ -57,30 +55,10 @@ Engine.AssetManager = {
 
                     img.src = path;
 
-                    this.cache[path] = img;
+                    cache[path] = img;
                 }
 
 
-            },
-
-            downloadSound: function(id, path, soundsCallback) {
-                cache[path] = soundManager.createSound({
-                    id: id,
-                    autoLoad: true,
-                    url: path,
-                    onload: function() {
-                        console.log(this.url + ' is loaded');
-                        that.successCount += 1;
-
-                        if (that.isDone()) {
-                            soundsCallback();
-                        }
-                    }
-                });
-            },
-
-            getSound: function (path) {
-                return cache[path];
             },
 
             getAsset: function (path) {
@@ -89,7 +67,7 @@ Engine.AssetManager = {
 
 
             isDone: function () {
-                return (downloadQueue.length + soundsQueue.length) === (successCount + errorCount);
+                return (downloadQueue.length) === (successCount + errorCount);
             }
 
 
