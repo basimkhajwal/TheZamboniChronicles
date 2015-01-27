@@ -5,7 +5,7 @@ Engine.AssetManager = {
         //The closure
         var that = {};
 
-        //Variables
+        //Private closure variables
         var downloadQueue = [];
         var soundsQueue = [];
         var cache = {};
@@ -14,7 +14,7 @@ Engine.AssetManager = {
 
         //Add the methods
         that.prototype = {
-
+            
             queueDownlaod: function (path) {
                 downloadQueue.push(path);
             },
@@ -23,37 +23,40 @@ Engine.AssetManager = {
                 soundsQueue.push({id: id, path: path})
             },
 
-            downloadAll = function(downloadCallback) {
+            downloadAll: function(downloadCallback) {
                 if (downloadQueue.length === 0 && soundsQueue.length === 0) {
                     downloadCallback();
                 }
 
                 that.downloadSounds(downloadCallback);
+                
+                var successCallback = function() {
+                    console.log(this.src + ' is loaded');
+                    that.successCount += 1;
+
+                    if (that.isDone()) {
+                        downloadCallback();
+                    }
+                };
+                
+                var errorCallback = function() {
+                    that.errorCount += 1;
+
+                    if (that.isDone()) {
+                        downloadCallback();
+                    }
+                };
 
                 for (var i = 0; i < this.downloadQueue.length; i++) {
 
                     var path = this.downloadQueue[i];
                     var img = new Image();
-                    var that = this;
 
-                    img.addEventListener("load", function() {
-                        console.log(this.src + ' is loaded');
-                        that.successCount += 1;
-
-                        if (that.isDone()) {
-                            downloadCallback();
-                        }
-                    }, false);
-
-                    img.addEventListener("error", function() {
-                        that.errorCount += 1;
-
-                        if (that.isDone()) {
-                            downloadCallback();
-                        }
-                    }, false);
+                    img.addEventListener("load", successCallback, false);
+                    img.addEventListener("error", errorCallback, false);
 
                     img.src = path;
+
                     this.cache[path] = img;
                 }
 
