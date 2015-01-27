@@ -1,6 +1,8 @@
 # TheZamboniChronicles
 A javascript game
 
+BLAH BLAH BLAH
+
 ######Current List Of Tasks To Do:
 - Finish game states and managers
 - Manage asset loading (images, sounds etc)
