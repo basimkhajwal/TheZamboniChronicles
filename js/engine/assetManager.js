@@ -1,33 +1,40 @@
+//A module to support the loading and storing of any assets (images only for now, sounds may be added later)
 Engine.AssetManager = {
 
+    //Create a new AssetManager
     create: function () {
 
         //The closure
-        var that = {};
+        var that = {}; //Javascript convention, not my own *cough* *cough* *Jamie*
 
         //Private closure variables
-        var downloadQueue = [];
-        var soundsQueue = [];
-        var cache = {};
-        var successCount = 0;
-        var errorCount = 0;
+        var downloadQueue = []; //The downloads that need to be done
+        var cache = {}; //The stored assets
+        var successCount = 0; //How many assets were successfully loaded
+        var errorCount = 0; //How many assets had an error whilst loading
 
         //Add the methods
         that.prototype = {
             
+            //Add a new item to be downloaded
             queueDownlaod: function (path) {
                 downloadQueue.push(path);
             },
 
+            //Add a new sound to be downloaded
             queueSound: function (id, path) {
                 soundsQueue.push({id: id, path: path})
             },
 
+            //Downlaod all the assets in the current download queue, calls the callback once done
             downloadAll: function(downloadCallback) {
+
+                //Make sure we have something to download
                 if (downloadQueue.length === 0) {
                     downloadCallback();
                 }
                 
+                //The success callback for when the image has been loaded
                 var successCallback = function() {
                     console.log(this.src + ' is loaded');
                     successCount += 1;
@@ -37,6 +44,7 @@ Engine.AssetManager = {
                     }
                 };
                 
+                //The error callback for each image
                 var errorCallback = function() {
                     errorCount += 1;
 
@@ -45,32 +53,40 @@ Engine.AssetManager = {
                     }
                 };
 
+                //Load the asset using the Image class for every download in the queue
                 for (var i = 0; i < downloadQueue.length; i++) {
-
+                    //Get the path and create a new image
                     var path = downloadQueue[i];
                     var img = new Image();
 
+                    //Set the callbacks
                     img.addEventListener("load", successCallback, false);
                     img.addEventListener("error", errorCallback, false);
 
+                    //Begin loading
                     img.src = path;
 
+                    //Set the cache section
                     cache[path] = img;
                 }
 
 
             },
 
+            //Get an asset from the cache
             getAsset: function (path) {
                 return cache[path];
             },
 
-
+            //If all the items have been downloaded
             isDone: function () {
                 return (downloadQueue.length) === (successCount + errorCount);
+            },
+
+            //Return the percentage of items that have been loaded (between  0 and 1)
+            getProgress: function () {
+                return (successCount + errorCount) / downloadQueue.length;
             }
-
-
 
         };
 
