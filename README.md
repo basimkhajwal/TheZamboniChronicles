@@ -3,9 +3,9 @@ A javascript game
 
 ######Tasks done:
 - Finish game states and managers - DONE
+- Manage asset loading (images, sounds etc) - DONE
 
 ######Current List Of Tasks To Do:
-- Manage asset loading (images, sounds etc)
 - Make a JSON level parser (Maybe leave it till later)
 - Make a 2d scene graph for GUI and base classes for rendering (Minimalistic at first, improve later)
 - Particle Effects (Add when needed)
