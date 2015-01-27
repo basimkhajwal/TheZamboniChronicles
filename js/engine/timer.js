@@ -1,10 +1,10 @@
 Engine.Timer = {
 
-    create: function (updateCallBack, renderCallBack) {
+    create: function () {
 
         //Return a closure
         return {
-            start: function () {
+            start: function (updateCallBack, renderCallBack) {
 
                 //Try and get the animation frame from the window, any possible way, otherwise default to the inefficient timer interval method with a callback
                 var requestAnimFrame = (function(){

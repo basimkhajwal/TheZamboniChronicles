@@ -4,9 +4,6 @@ Engine.AssetManager = {
     //Create a new AssetManager
     create: function () {
 
-        //The closure
-        var that = {}; //Javascript convention, not my own *cough* *cough* *Jamie*
-
         //Private closure variables
         var downloadQueue = []; //The downloads that need to be done
         var cache = {}; //The stored assets
@@ -14,16 +11,12 @@ Engine.AssetManager = {
         var errorCount = 0; //How many assets had an error whilst loading
 
         //Add the methods
-        that.prototype = {
+        return {
             
             //Add a new item to be downloaded
-            queueDownlaod: function (path) {
+            queueDownload: function (path) {
+                console.log("Queued: " + path);
                 downloadQueue.push(path);
-            },
-
-            //Add a new sound to be downloaded
-            queueSound: function (id, path) {
-                soundsQueue.push({id: id, path: path})
             },
 
             //Downlaod all the assets in the current download queue, calls the callback once done
@@ -34,6 +27,8 @@ Engine.AssetManager = {
                     downloadCallback();
                 }
                 
+                var that = this;
+
                 //The success callback for when the image has been loaded
                 var successCallback = function() {
                     console.log(this.src + ' is loaded');
@@ -89,9 +84,6 @@ Engine.AssetManager = {
             }
 
         };
-
-        //
-
     }
 
 
