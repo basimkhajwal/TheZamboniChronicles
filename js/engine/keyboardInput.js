@@ -1,3 +1,6 @@
+//The namespace design pattern
+var Engine = Engine || {};
+
 //The keys object, holds all the keycodes for easy access
 Engine.Keys = {
 

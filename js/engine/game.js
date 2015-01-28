@@ -1,3 +1,6 @@
+//The namespace design pattern
+var Engine = Engine || {};
+
 Engine.Game = {
 
     create: function () {

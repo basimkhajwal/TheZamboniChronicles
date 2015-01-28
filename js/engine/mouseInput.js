@@ -1,3 +1,6 @@
+//The namespace design pattern
+var Engine = Engine || {};
+
 //Implements an abstracted set of methods of getting information about the mouse
 Engine.MouseInput = function () {
 

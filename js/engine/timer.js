@@ -1,3 +1,7 @@
+//The namespace design pattern
+var Engine = Engine || {};
+
+//The timer module that will run an update and a render call back 60 times a second using the best browser capabilities
 Engine.Timer = {
 
     create: function () {
