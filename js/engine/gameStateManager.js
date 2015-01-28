@@ -1,6 +1,6 @@
 Engine.GameStateManager = {
 
-    create: function () {
+    create: function (game) {
 
         //Private variables
         var currentActivity = null;
@@ -17,7 +17,7 @@ Engine.GameStateManager = {
                 }
 
                 currentActivity = activity;
-                currentActivity.onCreate(that);
+                currentActivity.onCreate(game);
             },
 
             getState: function () {

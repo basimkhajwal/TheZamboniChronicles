@@ -4,7 +4,7 @@ Engine.GameState = {
 
         //Return a closure
         return {
-            onCreate: function (gameStateManager) {
+            onCreate: function (game) {
 
             },
 

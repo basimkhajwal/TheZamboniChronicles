@@ -5,7 +5,7 @@ Engine.Game = {
         //Create the 'private' variables, needed in the closure
         var canvas = Engine.Canvas.create(1000, 600);
         var fpsLogger = Engine.FPSLogger.create();
-        var gameStateManager = Engine.GameStateManager.create();
+        var gameStateManager = Engine.GameStateManager.create(this);
         var assetManager = Engine.AssetManager.create();
         var timer = timer = Engine.Timer.create();
 
