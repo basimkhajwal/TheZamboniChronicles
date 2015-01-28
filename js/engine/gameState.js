@@ -18,11 +18,11 @@ Engine.GameState = {
 
             onDestroy: function () {
 
-            },
+            }
 
         };
 
     }
 
 
-}
+};

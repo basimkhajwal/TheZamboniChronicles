@@ -18,7 +18,7 @@ Engine.FPSLogger = {
                 frames++;
 
                 //Log every second and reset the data to avoid over logging
-                if (currentDelta > 1){
+                if (currentDelta > 1) {
                     console.log("FPS Logger: " + frames + "fps");
 
                     currentDelta = 0;

@@ -12,7 +12,7 @@ Engine.GameStateManager = {
         that.prototype = {
 
             setState: function (activity) {
-                if(currentActivity != null){
+                if (currentActivity !== null) {
                     currentActivity.onDestroy();
                 }
 
@@ -25,13 +25,13 @@ Engine.GameStateManager = {
             },
 
             update: function (delta) {
-                if (currentActivity != null) {
+                if (currentActivity !== null) {
                     currentActivity.update(delta);
                 }
             },
 
             render: function (context) {
-                if (currentActivity != null) {
+                if (currentActivity !== null) {
                     currentActivity.render(context);
                 }
             }
@@ -41,4 +41,4 @@ Engine.GameStateManager = {
         return that;
     }
 
-}
+};

@@ -4,8 +4,8 @@ Engine.MouseInput = function () {
     //Get the canvas element and initialise some variables
     var canvas = document.getElementById("canvas");
     var mousePos = {
-        x:0,
-        y:0,
+        x: 0,
+        y: 0
     };
     var mouseDown = false;
 
