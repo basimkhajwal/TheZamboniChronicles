@@ -15,7 +15,9 @@ A javascript game
 - Mouse input
 
 ######Live preview
-http://htmlpreview.github.io/?https://github.com/basimkhajwal/TheZamboniChronicles/blob/master/index.html
+https://rawgit.com/basimkhajwal/TheZamboniChronicles/master/index.html
+
+-Note this is not very accurate, updates may not be on there 100% of the time. For best results download the game, it will be hosted fully when it is complete.
 
 ###The Game Ideas
 - 2d platformer
