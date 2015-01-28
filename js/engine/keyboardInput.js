@@ -18,7 +18,7 @@ Engine.Keys = {
     getAlphabet: function (c) {
         return c.charCodeAt(0);
     }
-}
+};
 
 //The keyboard input class to handle key presses etc.
 Engine.KeyboardInput = function () {
@@ -27,21 +27,21 @@ Engine.KeyboardInput = function () {
     var keyStates = {};
 
     //Set a key in the keyState variable to true or false
-    var setKey = function (event, value){
+    var setKey = function (event, value) {
         keyStates[event.keyCode] = value;
     };
 
     //When a key has been pressed then set the value to be true
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', function (e) {
         setKey(e, true);
     });
 
     //When it is released then set the key state to false
-    document.addEventListener('keyup', function(e) {
+    document.addEventListener('keyup', function (e) {
         setKey(e, false);
     });
 
-    window.addEventListener('blur', function() {
+    window.addEventListener('blur', function () {
         keyStates = {};
     });
 

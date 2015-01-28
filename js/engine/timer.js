@@ -7,14 +7,14 @@ Engine.Timer = {
             start: function (updateCallBack, renderCallBack) {
 
                 //Try and get the animation frame from the window, any possible way, otherwise default to the inefficient timer interval method with a callback
-                var requestAnimFrame = (function(){
+                var requestAnimFrame = (function () {
                     return window.requestAnimationFrame        ||
                         window.webkitRequestAnimationFrame     ||
                         window.mozRequestAnimationFrame        ||
                         window.oRequestAnimationFrame          ||
                         window.msRequestAnimationFrame         ||
 
-                        function(callback){
+                        function (callback) {
                             window.setTimeout(callback, 1000 / 60);
                         };
                 })();
@@ -31,7 +31,7 @@ Engine.Timer = {
                     lastTime = now;
                     requestAnimFrame(main);
 
-                };
+                }
 
                 //Start the timer
                 main();
