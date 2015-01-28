@@ -19,6 +19,8 @@ Engine.Game = {
 
                 var update = function (delta) {
                     fpsLogger.log(delta);
+
+
                 };
 
                 var render =  function () {
@@ -30,10 +32,10 @@ Engine.Game = {
                     canvas.end();
                 };
 
-                timer = Engine.Timer.create(update, render);
+                timer = Engine.Timer.create();
 
                 //Begin the game loop
-                timer.start();
+                timer.start(update, render);
             }
 
         };
