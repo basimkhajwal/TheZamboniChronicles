@@ -20,17 +20,20 @@ Engine.MouseInput = function () {
         mousePos.y = evt.clientY - rect.top;
     };
 
+    canvas.addEventListener("mousedown", function () { mouseDown = true; }, false);
+    canvas.addEventListener("mouseup", function () { mouseDown = false; }, false);
+    canvas.addEventListener("blur", function () { mouseDown = false; }, false);
+
+    canvas.addEventListener("mousemove", calcRelativePosition, false);
 
     return {
 
         getMousePos: function () {
-
-
-
+            return mousePos;
         },
 
         isMouseDown: function () {
-
+            return mouseDown;
         }
 
     };

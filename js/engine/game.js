@@ -30,6 +30,13 @@ Engine.Game = {
 
                     if (Engine.KeyboardInput.isKeyDown(Engine.Keys.SPACE)){
                         canvas.getContext().drawImage(assetManager.getAsset("img/test.png"), 50, 50);
+
+                    }
+
+                    if(Engine.MouseInput.isMouseDown()){
+                        var mousePos = Engine.MouseInput.getMousePos();
+
+                        console.log("Mouse clicked: " + mousePos.x + ", " + mousePos.y);
                     }
 
                     canvas.end();
