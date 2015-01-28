@@ -7,7 +7,7 @@ Engine.Game = {
         var fpsLogger = Engine.FPSLogger.create();
         var gameStateManager = Engine.GameStateManager.create();
         var assetManager = Engine.AssetManager.create();
-        var timer = null;
+        var timer = timer = Engine.Timer.create();
 
         //Return the closure
         return {
@@ -27,12 +27,13 @@ Engine.Game = {
                     canvas.begin();
 
                     canvas.getContext().fillRect(10,10,20,20);
-                    canvas.getContext().drawImage(assetManager.getAsset("img/test.png"), 50, 50);
+
+                    if (Engine.KeyboardInput.isKeyDown(Engine.Keys.SPACE)){
+                        canvas.getContext().drawImage(assetManager.getAsset("img/test.png"), 50, 50);
+                    }
 
                     canvas.end();
                 };
-
-                timer = Engine.Timer.create();
 
                 //Begin the game loop
                 timer.start(update, render);
