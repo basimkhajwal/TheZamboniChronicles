@@ -4,6 +4,8 @@ A javascript game
 ######Tasks done:
 - Finish game states and managers - DONE
 - Manage asset loading (images, sounds etc) - DONE
+- Keyboard Input - DONE
+- Mouse input - DONE
 
 ######Current List Of Tasks To Do:
 - Make a JSON level parser (Maybe leave it till later)
@@ -11,8 +13,7 @@ A javascript game
 - Particle Effects (Add when needed)
 - Physics Engine and collision detection
 - Tile map manager
-- Keyboard Input
-- Mouse input
+
 
 ######Live preview
 https://rawgit.com/basimkhajwal/TheZamboniChronicles/master/index.html
