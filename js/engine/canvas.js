@@ -1,3 +1,6 @@
+//The namespace design pattern
+var Engine = Engine || {};
+
 //New modular method
 Engine.Canvas = {
 

@@ -1,3 +1,6 @@
+//The namespace design pattern
+var Engine = Engine || {};
+
 //An FPS Logger to show the FPS of the game
 Engine.FPSLogger = {
 

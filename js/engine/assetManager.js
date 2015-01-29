@@ -1,3 +1,6 @@
+//The namespace design pattern
+var Engine = Engine || {};
+
 //A module to support the loading and storing of any assets (images only for now, sounds may be added later)
 Engine.AssetManager = {
 
