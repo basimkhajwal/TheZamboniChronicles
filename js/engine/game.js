@@ -10,7 +10,9 @@ Engine.Game = {
         var fpsLogger = Engine.FPSLogger.create();
         var gameStateManager = Engine.GameStateManager.create(this);
         var assetManager = Engine.AssetManager.create();
-        var timer = timer = Engine.Timer.create();
+        var timer = Engine.Timer.create();
+
+        gameStateManager.setState(gameState);
 
         //Return the closure
         return {
@@ -23,20 +25,22 @@ Engine.Game = {
                 var update = function (delta) {
                     fpsLogger.log(delta);
 
-
+                    gameStateManager.update(delta);
                 };
 
                 var render =  function () {
                     canvas.begin();
 
-                    canvas.getContext().fillRect(10,10,20,20);
+                    gameStateManager.render(canvas.getContext());
 
-                    if (Engine.KeyboardInput.isKeyDown(Engine.Keys.SPACE)){
+                    canvas.getContext().fillRect(10, 10, 20, 20);
+
+                    if (Engine.KeyboardInput.isKeyDown(Engine.Keys.SPACE)) {
                         canvas.getContext().drawImage(assetManager.getAsset("img/test.png"), 50, 50);
 
                     }
 
-                    if(Engine.MouseInput.isMouseDown()){
+                    if (Engine.MouseInput.isMouseDown()) {
                         var mousePos = Engine.MouseInput.getMousePos();
 
                         console.log("Mouse clicked: " + mousePos.x + ", " + mousePos.y);
@@ -47,6 +51,14 @@ Engine.Game = {
 
                 //Begin the game loop
                 timer.start(update, render);
+            },
+
+            getGameStateManager: function () {
+                return gameStateManager;
+            },
+
+            getAssetManager: function () {
+                return assetManager;
             }
 
         };
@@ -54,5 +66,4 @@ Engine.Game = {
     }
 
 
-}
-
+};

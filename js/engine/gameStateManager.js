@@ -4,16 +4,12 @@ var Engine = Engine || {};
 Engine.GameStateManager = {
 
     create: function (game) {
+        "use strict";
 
         //Private variables
         var currentActivity = null;
 
-        //Make an empty closure
-        var that = {};
-
-        //Add all functions
-        that.prototype = {
-
+        return {
             setState: function (activity) {
                 if (currentActivity !== null) {
                     currentActivity.onDestroy();
@@ -40,8 +36,6 @@ Engine.GameStateManager = {
             }
 
         };
-
-        return that;
     }
 
 };
