@@ -3,7 +3,7 @@ var Engine = Engine || {};
 
 Engine.Game = {
 
-    create: function () {
+    create: function (gameState) {
 
         //Create the 'private' variables, needed in the closure
         var canvas = Engine.Canvas.create(1000, 600);
