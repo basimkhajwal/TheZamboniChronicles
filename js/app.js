@@ -15,7 +15,7 @@ var testState = (function () {
         currentY += velocity * delta;
 
         if (currentX > 300 || currentX < 0) {
-            if(currentX > 400){
+            if (currentX > 400) {
                 console.log("WHOOPS, early error!: " + currentX) ;
             }
             currentX = 150;
@@ -35,7 +35,16 @@ var testState = (function () {
 
 }());
 
-window.addEventListener("load", function () {
+var startGame = function () {
+
     var game = Engine.Game.create(testState);
-    game.start();
-}, false);
+
+    window.setTimeout(function () {
+
+        game.start();
+    }, 1000);
+
+
+};
+
+window.addEventListener("load", startGame, false);
