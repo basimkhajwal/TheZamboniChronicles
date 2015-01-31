@@ -7,7 +7,7 @@ var testState = (function () {
 
     var currentX = 10;
     var currentY = 100;
-
+    var myText = Engine.TextArea.create(200, 200, "SOME RANDOM TEST", 20);
     var velocity = 100;
 
     state.update = function (delta) {
@@ -28,6 +28,7 @@ var testState = (function () {
     state.render = function (ctx) {
         ctx.fillRect(50, 50, 100, 100);
         ctx.fillRect(currentX, currentY, 10, 10);
+        myText.render(ctx);
     };
 
 
