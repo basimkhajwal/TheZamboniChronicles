@@ -7,7 +7,7 @@ var testState = (function () {
 
     var currentX = 10;
     var currentY = 100;
-    var myText = Engine.TextArea.create(200, 200, "SOME RANDOM TEST", 20);
+    var myText = Engine.TextArea.create(200, 200, "SOME RANDOM TEST", 20, "#FF0000", "cursive", "bold");
     var velocity = 100;
 
     state.update = function (delta) {
@@ -15,9 +15,6 @@ var testState = (function () {
         currentY += velocity * delta;
 
         if (currentX > 300 || currentX < 0) {
-            if (currentX > 400) {
-                console.log("WHOOPS, early error!: " + currentX) ;
-            }
             currentX = 150;
             velocity *= -1;
             currentY = 250;
@@ -39,12 +36,7 @@ var testState = (function () {
 var startGame = function () {
 
     var game = Engine.Game.create(testState);
-
-    window.setTimeout(function () {
-
-        game.start();
-    }, 1000);
-
+    game.start();
 
 };
 
