@@ -49,9 +49,7 @@ Engine.Game = {
                 };
 
                 //Begin the game loop
-                window.setTimeout(function () {
-                    timer.start(update, render);
-                }, 100);
+                timer.start(update, render);
             },
 
             getGameStateManager: function () {

@@ -23,6 +23,8 @@ Engine.AssetManager = (function () {
         //Downlaod all the assets in the current download queue, calls the callback once done
         downloadAll: function (downloadCallback) {
 
+            downloadCallback = downloadCallback || function () {};
+
             var that = this;
             
             //Make sure we have something to download
