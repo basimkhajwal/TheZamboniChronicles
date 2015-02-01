@@ -1,9 +1,14 @@
-//Use the Engine module
+//Use the Engine module and the sub UI module
 var Engine = Engine || {};
+Engine.UI = Engine.UI || {};
 
-//Create a module
-Engine.TextArea = {
+//Create the module
+Engine.UI.TextArea = {
 
+    /*
+    *   Create a new text area with the settings, only x,y and text are mandatory
+    *   others can be added or will be set to default value.
+    */
     create: function (x, y, text, size, colour, family, weight, style, align, variant) {
         "use strict";
 
@@ -33,7 +38,6 @@ Engine.TextArea = {
             },
 
             //All the getter and setter functions, self documenting
-
             setWeight: function (newWeight) {
                 weight = newWeight;
             },

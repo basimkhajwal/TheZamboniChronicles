@@ -7,7 +7,7 @@ var testState = (function () {
 
     var currentX = 10;
     var currentY = 100;
-    var myText = Engine.TextArea.create(200, 200, "SOME RANDOM TEST", 20, "#FF0000", "cursive", "bold");
+    var myText = Engine.UI.TextArea.create(200, 200, "SOME RANDOM TEST", 20, "#FF0000", "cursive", "bold");
     var velocity = 100;
 
     state.update = function (delta) {
@@ -33,14 +33,16 @@ var testState = (function () {
 
 }());
 
+var game = Engine.Game.create({
+    state: testState,
+    width: 1000,
+    height: 600,
+    devmode: true
+});
+
 var startGame = function () {
 
-    var game = Engine.Game.create({
-        state: testState,
-        width: 1000,
-        height: 600,
-        devmode: true
-    });
+
     game.start();
 
 };

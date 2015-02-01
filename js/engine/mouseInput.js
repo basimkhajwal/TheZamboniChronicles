@@ -2,7 +2,7 @@
 var Engine = Engine || {};
 
 //Implements an abstracted set of methods of getting information about the mouse
-Engine.MouseInput = function () {
+Engine.MouseInput = (function () {
 
     //Get the canvas element and initialise some variables
     var canvas = document.getElementById("canvas");
@@ -41,4 +41,4 @@ Engine.MouseInput = function () {
 
     };
 
-}();
+}());
