@@ -9,7 +9,6 @@ Engine.Game = {
         var canvas = Engine.Canvas.create(1000, 600);
         var fpsLogger = Engine.FPSLogger.create();
         var gameStateManager = Engine.GameStateManager.create(this);
-        var assetManager = Engine.AssetManager.create();
         var timer = Engine.Timer.create();
 
         gameStateManager.setState(gameState);
@@ -19,8 +18,8 @@ Engine.Game = {
 
             start: function () {
 
-                assetManager.queueDownload("img/test.png");
-                assetManager.downloadAll(function () {});
+                Engine.AssetManager.queueDownload("img/test.png");
+                Engine.AssetManager.downloadAll(function () {});
 
                 var update = function (delta) {
                     fpsLogger.log(delta);
@@ -36,7 +35,7 @@ Engine.Game = {
                     canvas.getContext().fillRect(10, 10, 20, 20);
 
                     if (Engine.KeyboardInput.isKeyDown(Engine.Keys.SPACE)) {
-                        canvas.getContext().drawImage(assetManager.getAsset("img/test.png"), 50, 50);
+                        canvas.getContext().drawImage(Engine.AssetManager.getAsset("img/test.png"), 50, 50);
 
                     }
 
@@ -57,10 +56,6 @@ Engine.Game = {
 
             getGameStateManager: function () {
                 return gameStateManager;
-            },
-
-            getAssetManager: function () {
-                return assetManager;
             }
 
         };
