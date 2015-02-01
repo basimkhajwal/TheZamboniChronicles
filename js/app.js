@@ -35,7 +35,12 @@ var testState = (function () {
 
 var startGame = function () {
 
-    var game = Engine.Game.create(testState);
+    var game = Engine.Game.create({
+        state: testState,
+        width: 1000,
+        height: 600,
+        devmode: true
+    });
     game.start();
 
 };

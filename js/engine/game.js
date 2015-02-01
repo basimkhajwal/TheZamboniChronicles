@@ -3,48 +3,38 @@ var Engine = Engine || {};
 
 Engine.Game = {
 
-    create: function (gameState) {
+    /*
+    *   Create a new game with a gameOptions containing:
+    *       state - The initial game state
+    *       width, height - The screen dimensions
+    *       devmode - Whether to run in development mode or not
+    */
+    create: function (gameOptions) {
 
         //Create the 'private' variables, needed in the closure
-        var canvas = Engine.Canvas.create(1000, 600);
+        var canvas = Engine.Canvas.create(gameOptions.width, gameOptions.height);
         var fpsLogger = Engine.FPSLogger.create();
         var gameStateManager = Engine.GameStateManager.create(this);
         var timer = Engine.Timer.create();
 
-        gameStateManager.setState(gameState);
+        gameStateManager.setState(gameOptions.state);
 
         //Return the closure
         return {
 
             start: function () {
 
-                Engine.AssetManager.queueDownload("img/test.png");
-                Engine.AssetManager.downloadAll(function () {});
-
                 var update = function (delta) {
-                    fpsLogger.log(delta);
+                    if(gameOptions.devmode){
+                        fpsLogger.log(delta);
+                    }
 
                     gameStateManager.update(delta);
                 };
 
                 var render =  function () {
                     canvas.begin();
-
                     gameStateManager.render(canvas.getContext());
-
-                    canvas.getContext().fillRect(10, 10, 20, 20);
-
-                    if (Engine.KeyboardInput.isKeyDown(Engine.Keys.SPACE)) {
-                        canvas.getContext().drawImage(Engine.AssetManager.getAsset("img/test.png"), 50, 50);
-
-                    }
-
-                    if (Engine.MouseInput.isMouseDown()) {
-                        var mousePos = Engine.MouseInput.getMousePos();
-
-                        console.log("Mouse clicked: " + mousePos.x + ", " + mousePos.y);
-                    }
-
                     canvas.end();
                 };
 
