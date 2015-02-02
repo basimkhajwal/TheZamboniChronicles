@@ -6,6 +6,7 @@ Engine.FPSLogger = {
 
     //The create function to make a new FPS Logger
     create: function () {
+        "use strict";
 
         //The private variables that won't be accessible from outside
         var currentDelta = 0;
@@ -18,7 +19,7 @@ Engine.FPSLogger = {
             log: function (delta) {
                 //Update the variables
                 currentDelta += delta;
-                frames++;
+                frames += 1;
 
                 //Log every second and reset the data to avoid over logging
                 if (currentDelta > 1) {

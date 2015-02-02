@@ -1,4 +1,12 @@
+//The modules
 var Engine = Engine || {};
+var Zamboni = Zamboni || {};
+
+//The sub-modules
+Zamboni.States = Zamboni.States || {};
+Zamboni.Utils = Zamboni.Utils || {};
+
+Engine.UI = Engine.UI || {};
 
 var testState = (function () {
     "use strict";
@@ -33,15 +41,17 @@ var testState = (function () {
 
 }());
 
-var game = Engine.Game.create({
-    state: testState,
-    width: 1000,
-    height: 600,
-    devmode: true
-});
+
 
 var startGame = function () {
+    "use strict";
 
+    var game = Engine.Game.create({
+        state: Zamboni.States.LoadingState.create(),
+        width: Zamboni.Utils.GameSettings.canvasWidth,
+        height: Zamboni.Utils.GameSettings.canvasHeight,
+        devmode: true
+    });
 
     game.start();
 
