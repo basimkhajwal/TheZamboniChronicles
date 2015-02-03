@@ -49,6 +49,30 @@ Engine.UI.TextArea = {
 
             getHeight: function () {
                 return buttonHeight;
+            },
+
+            setColour: function (colour) {
+                buttonColour = colour;
+            },
+
+            getColour: function () {
+                return buttonColour;
+            },
+
+            setHoverColour: function (colour) {
+                hoverColour = colour;
+            },
+
+            getHoverColour: function () {
+                return hoverColour;
+            },
+
+            setClickColour: function (colour) {
+                clickColour = colour;
+            },
+
+            getClickColour: function () {
+                return clickColour;
             }
 
         };
