@@ -15,10 +15,11 @@ Zamboni.States.LoadingState = {
         var game = null;
         var state = Engine.GameState.create();
 
-        var loadingText = Engine.UI.TextArea.create(Zamboni.Utils.GameSettings.canvasWidth / 2, 200, "Loading..");
-        loadingText.setSize(50);
+        var loadingText = Engine.UI.TextArea.create(Zamboni.Utils.GameSettings.canvasWidth / 2, 300, "Loading..");
+        loadingText.setSize(30);
+        loadingText.set
         loadingText.setFamily(Zamboni.Utils.GameSettings.gameFont);
-        loadingText.setColour("#F00");
+        loadingText.setColour(Zamboni.Utils.ColourScheme.SUN_FLOWER);
 
         state.onCreate = function (g) {
             game = g;
@@ -31,7 +32,7 @@ Zamboni.States.LoadingState = {
         };
 
         state.render = function (ctx) {
-            ctx.fillStyle = "#EEE";
+            ctx.fillStyle = Zamboni.Utils.ColourScheme.ALIZARIN;
             ctx.fillRect(0, 0, 1000, 600);
 
             loadingText.render(ctx);

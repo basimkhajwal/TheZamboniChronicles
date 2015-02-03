@@ -9,7 +9,7 @@ Engine.UI.TextArea = {
     *   Create a new text area with the settings, only x,y and text are mandatory
     *   others can be added or will be set to default value.
     */
-    create: function (x, y, text, size, colour, family, weight, style, align, variant) {
+    create: function (x, y, text, size, colour, family, weight, style, align, variant, baseline) {
         "use strict";
 
         //All the private variables for the closure to use
@@ -20,6 +20,7 @@ Engine.UI.TextArea = {
         style = style || "normal";
         align = align || "center";
         variant = variant || "normal";
+        baseline = baseline || "bottom";
 
         //The closure that will contain the public methods
         return {
@@ -29,15 +30,24 @@ Engine.UI.TextArea = {
                 //Put all the values in the correct order
                 ctx.font = style + " " + variant + " " + weight + " " + size + "px " + family;
 
-                //Set the align and colour
+                //Set the align, colour and baseline
                 ctx.textAlign = align;
                 ctx.fillStyle = colour;
+                ctx.textBaseline = baseline;
 
                 //Draw the text at the current position
                 ctx.fillText(text, x, y);
             },
 
             //All the getter and setter functions, self documenting
+            setBaseline: function (newBaseline) {
+                baseline = newBaseline;
+            },
+
+            getBaseline: function () {
+                return baseline;
+            },
+
             setWeight: function (newWeight) {
                 weight = newWeight;
             },
