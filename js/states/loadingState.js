@@ -18,9 +18,14 @@ Zamboni.States.LoadingState = {
         var changing = false;
 
         var loadingText = Engine.UI.TextArea.create(Zamboni.Utils.GameSettings.canvasWidth / 2, 300, "Loading..");
-        loadingText.setSize(30);
+        loadingText.setSize(40);
         loadingText.setFamily(Zamboni.Utils.GameSettings.gameFont);
         loadingText.setColour(Zamboni.Utils.ColourScheme.SUN_FLOWER);
+
+        var changingText = Engine.UI.TextArea.create(Zamboni.Utils.GameSettings.canvasWidth / 2, 450, "Changing screen..");
+        changingText.setSize(20);
+        changingText.setFamily(Zamboni.Utils.GameSettings.gameFont);
+        changingText.setColour(Zamboni.Utils.ColourScheme.ORANGE);
 
         var loadingBar = Engine.UI.LoadingBar.create(320, 800, 30, 1000);
         loadingBar.setColour(Zamboni.Utils.ColourScheme.POMEGRANATE);
@@ -44,13 +49,13 @@ Zamboni.States.LoadingState = {
 
                 window.setInterval(function () {
                     changing = true;
-                }, 500);
+                }, 1500);
             }
 
             if (changing) {
                 var gsm = game.getGameStateManager();
 
-                gsm.setState();
+                gsm.setState(Zamboni.States.MenuState.create());
             }
         };
 
@@ -64,6 +69,11 @@ Zamboni.States.LoadingState = {
 
             //Draw the loading bar
             loadingBar.render(ctx);
+
+            //Draw if we are changing
+            if(startedChanging) {
+                changingText.render(ctx);
+            }
         };
 
         return state;

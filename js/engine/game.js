@@ -10,22 +10,25 @@ Engine.Game = {
     *       devmode - Whether to run in development mode or not
     */
     create: function (gameOptions) {
+        "use strict";
 
-        //Create the 'private' variables, needed in the closure
-        var canvas = Engine.Canvas.create(gameOptions.width, gameOptions.height);
-        var fpsLogger = Engine.FPSLogger.create();
-        var gameStateManager = Engine.GameStateManager.create(this);
-        var timer = Engine.Timer.create();
-
-        gameStateManager.setState(gameOptions.state);
+        var gameStateManager = null;
 
         //Return the closure
         return {
 
             start: function () {
 
+                //Create the 'private' variables, needed in the closure
+                var canvas = Engine.Canvas.create(gameOptions.width, gameOptions.height);
+                var fpsLogger = Engine.FPSLogger.create();
+                var timer = Engine.Timer.create();
+
+                gameStateManager = Engine.GameStateManager.create(this);
+                gameStateManager.setState(gameOptions.state);
+
                 var update = function (delta) {
-                    if(gameOptions.devmode){
+                    if (gameOptions.devmode) {
                         fpsLogger.log(delta);
                     }
 
