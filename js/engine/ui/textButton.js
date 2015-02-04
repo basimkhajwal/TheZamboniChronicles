@@ -116,7 +116,7 @@ Engine.UI.TextButton = {
                 text = txt;
             },
 
-            getContext: function () {
+            getText: function () {
                 return text;
             },
 
