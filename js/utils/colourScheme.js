@@ -7,6 +7,7 @@ Zamboni.Utils = Zamboni.Utils || {};
 
 Zamboni.Utils.ColourScheme = {
 
+    //Flat UI Colours
     TURQUOISE: "rgb(26, 188, 156)",
     EMERALD: "rgb(46, 204, 113)",
     PETER_RIVER: "rgb(52, 152, 219)",
@@ -26,7 +27,9 @@ Zamboni.Utils.ColourScheme = {
     PUMPKIN: "rgb(211, 84, 0)",
     POMEGRANATE: "rgb(192, 57, 43)",
     SILVER: "rgb(189, 195, 199)",
-    ASBETOS: "rgb(127, 140, 141)"
+    ASBETOS: "rgb(127, 140, 141)",
 
-
+    //Others -- add your own but try to stick to flat-ish colours ;) http://www.flatuicolorpicker.com/
+    EUCALYPTUS: "rgb(38, 166, 91)",
+    SALEM: "rgb(30, 130, 76)"
 };
