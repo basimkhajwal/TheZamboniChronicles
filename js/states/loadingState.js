@@ -32,10 +32,14 @@ Zamboni.States.LoadingState = {
 
         state.onCreate = function (g) {
             game = g;
-            var i;
 
-            for (i = 0; i < Zamboni.Utils.Assets.images.length; i += 1) {
-                Engine.AssetManager.queueDownload(Zamboni.Utils.Assets.images[i]);
+            var asset;
+            var assets = Zamboni.Utils.Assets; //Save for quick reference
+
+            for (asset in assets) {
+                if (assets.hasOwnProperty(asset)) {
+                    Engine.AssetManager.queueDownload(assets[asset]);
+                }
             }
 
             Engine.AssetManager.downloadAll();
@@ -71,7 +75,7 @@ Zamboni.States.LoadingState = {
             loadingBar.render(ctx);
 
             //Draw if we are changing
-            if(startedChanging) {
+            if (startedChanging) {
                 changingText.render(ctx);
             }
         };

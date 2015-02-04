@@ -8,8 +8,7 @@ Zamboni.Utils = Zamboni.Utils || {};
 
 Zamboni.Utils.Assets = {
 
-    images: [
-        "img/test.png"
-    ]
+    CLOUD_FUZZY: "img/cloud-fuzzy.png",
+    MENU_BG_FUZZY: "img/menu-bg-fuzzy.png",
 
 };
