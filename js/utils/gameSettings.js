@@ -10,6 +10,9 @@ Zamboni.Utils.GameSettings = {
     canvasWidth: 1000,
     canvasHeight: 600,
 
+    fuzzyCloudWidth: 360,
+    fuzzyCloudHeight: 180,
+
     gameFont: "Lato",
 
     //The colours
