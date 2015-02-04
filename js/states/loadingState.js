@@ -53,7 +53,7 @@ Zamboni.States.LoadingState = {
 
                 window.setInterval(function () {
                     changing = true;
-                }, 1500);
+                }, 500);
             }
 
             if (changing) {
