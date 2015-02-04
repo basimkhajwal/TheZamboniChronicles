@@ -20,7 +20,6 @@ Zamboni.States.MenuState = {
         title.setBaseline("top");
         title.setSize(60);
         title.setColour(Zamboni.Utils.ColourScheme.MIDNIGHT_BLUE);
-        title.setVariant("small-caps");
 
         var startGame = Engine.UI.TextButton.create(350, 400, 300, 80, "Start Game");
         (function () {
@@ -36,29 +35,88 @@ Zamboni.States.MenuState = {
         }());
 
         var background = null;
-        var cloud = null;
 
-        var cloudWidth = Zamboni.Utils.GameSettings.fuzzyCloudWidth * Zamboni.Utils.GameSettings.pixelScaleFactor;
-        var cloudHeight = Zamboni.Utils.GameSettings.fuzzyCloudHeight * Zamboni.Utils.GameSettings.pixelScaleFactor;
+        var cloudImg = null;
+        var cloudWidth = Zamboni.Utils.GameSettings.fuzzyCloudWidth;
+        var cloudHeight = Zamboni.Utils.GameSettings.fuzzyCloudHeight;
+
+        var cloudManager = (function () {
+
+            var getRan = function (min, max) {
+                return Math.random() * (max - min) + min;
+            };
+
+            var genCloud = function () {
+                var vx;
+
+                do {
+                    vx = getRan(-50, 50);
+                } while (Math.abs(vx) < 15);
+
+                var width = cloudWidth * getRan(0.4, 1);
+                var height = cloudHeight * getRan(0.4, 1);
+
+                var x = (vx > 0) ? getRan(-400, -1 * (width + 10)) : getRan(1010, 1200);
+                var y = getRan(20 - height, 390 - height);
+
+                return [x, y, width, height, vx];
+            };
+
+            //The clouds each have an x,y,width,height and vx
+            var clouds = [
+                genCloud(),
+                genCloud()
+            ];
+
+            var offscreenAmount = 20;
+
+            return {
+
+                update: function (delta) {
+                    var i;
+
+                    for (i = 0; i < clouds.length; i += 1) {
+                        clouds[i][0] += clouds[i][4] * delta;
+
+                        if ((clouds[i][4] < 0 && clouds[i][0] + clouds[i][2] < offscreenAmount) || (clouds[i][4] > 0 && clouds[i][0] > 1000 + offscreenAmount)) {
+                            clouds[i] = genCloud();
+                        }
+                    }
+                },
+
+                render: function (ctx) {
+                    var i;
+                    ctx.imageSmoothingEnabled = false;
+
+                    for (i = 0; i < clouds.length; i += 1) {
+                        ctx.drawImage(cloudImg, clouds[i][0], clouds[i][1], clouds[i][2], clouds[i][3]);
+                    }
+                }
+
+            };
+        }());
 
         state.onCreate = function (g) {
             game = g;
 
             background = Engine.AssetManager.getAsset(Zamboni.Utils.Assets.MENU_BG_FUZZY);
-            cloud = Engine.AssetManager.getAsset(Zamboni.Utils.Assets.CLOUD_FUZZY);
+            cloudImg = Engine.AssetManager.getAsset(Zamboni.Utils.Assets.CLOUD_FUZZY);
         };
 
         state.render = function (ctx) {
+            var i;
+
             ctx.drawImage(background, 0, 0, Zamboni.Utils.GameSettings.canvasWidth, Zamboni.Utils.GameSettings.canvasHeight);
 
-            ctx.drawImage(cloud, 10, 10, cloudWidth, cloudHeight);
-
+            cloudManager.render(ctx);
             title.render(ctx);
             startGame.render(ctx);
         };
 
         state.update = function (delta) {
             startGame.update();
+
+            cloudManager.update(delta);
         };
 
 
