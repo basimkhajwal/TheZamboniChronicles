@@ -24,25 +24,23 @@ Engine.UI.TextButton = {
         text.setColour("#FFF");
         text.setBaseline("middle");
 
-        var update = function () {
-
-            var mousePos = Engine.MouseInput.getMousePos();
-
-            if (mousePos.x > buttonX && mousePos.x < buttonX + buttonWidth && mousePos.y > buttonY && mousePos.y < buttonY + buttonHeight) {
-                mouseOver = true;
-                clicked = Engine.MouseInput.isMouseDown();
-            } else {
-                mouseOver = false;
-                clicked = false;
-            }
-
-        };
-
         //The public stuff
         return {
+            update: function () {
+
+                var mousePos = Engine.MouseInput.getMousePos();
+
+                if (mousePos.x > buttonX && mousePos.x < buttonX + buttonWidth && mousePos.y > buttonY && mousePos.y < buttonY + buttonHeight) {
+                    mouseOver = true;
+                    clicked = Engine.MouseInput.isMouseDown();
+                } else {
+                    mouseOver = false;
+                    clicked = false;
+                }
+
+            },
 
             render: function (ctx) {
-                update();
 
                 if (clicked) {
                     ctx.fillStyle = clickColour;
@@ -114,20 +112,12 @@ Engine.UI.TextButton = {
                 return clickColour;
             },
 
-            setTextColour: function (colour) {
-                text.setColour(colour);
+            setText: function (txt) {
+                text = txt;
             },
 
-            getTextColour: function () {
-                return text.getColour();
-            },
-
-            setFont: function (font) {
-                text.setFamily(font);
-            },
-
-            getFont: function () {
-                return text.getFamily();
+            getContext: function () {
+                return text;
             },
 
             setCornerRadius: function (radius) {
