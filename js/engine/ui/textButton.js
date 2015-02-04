@@ -28,9 +28,12 @@ Engine.UI.TextButton = {
 
             var mousePos = Engine.MouseInput.getMousePos();
 
-            if (mousePos.x > buttonX && mousePos.x < buttonX + buttonWidth && mousePos.y > buttonY && mousePos.y < buttonY + buttonWidth) {
+            if (mousePos.x > buttonX && mousePos.x < buttonX + buttonWidth && mousePos.y > buttonY && mousePos.y < buttonY + buttonHeight) {
                 mouseOver = true;
                 clicked = Engine.MouseInput.isMouseDown();
+            } else {
+                mouseOver = false;
+                clicked = false;
             }
 
         };
@@ -50,6 +53,8 @@ Engine.UI.TextButton = {
                 }
 
                 Engine.DrawTools.roundRect(ctx, buttonX, buttonY, buttonWidth, buttonHeight, cornerRadius, true, false);
+
+                text.render(ctx);
             },
 
             //The getters and setters
