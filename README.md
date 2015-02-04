@@ -43,26 +43,26 @@ https://rawgit.com/basimkhajwal/TheZamboniChronicles/master/index.html
     
     
 ###Credits, add if you feel neccecary
--Credits
--Matthew Bullock – music provider (I can run in 13 swegz per minute beat that)
--Basim Khajwal – main coder person 
--Cameron Hargreaves – the one with illustrator at home (the sweg one)
--Jamie Stirling – Rival (basis for main villain) 
--Jaymie – Um… Don’t care
--The Illuminati – father of code
--Tanvi Kishore – Rarely plays TF2
--Oliver Walker – TheHeliumHamster
--Jeff – follows from “My Name is:”
--Brendan Eich – what a lad
--Ricky WhatsHisFace – son of the jamie
--Alex Turner – Entertainment
--505 – a 7 hour flight? 45 min drive?
--Brian – Top marks for not trying
--Nitish Bala – Giving me the answers in physics
--Nitish Veerla – THE IPAD INCIDENT. NOTHING ELSE
--Jaymie – Top Class Banter
--Jaymay – He is a scumbag
--Jamay – Don’t u know
--JavaScript – Even if it has no class
--javaScript – AHEM JAMIE
--DEFINITELY NOT C - *ahem* jamie
+- Credits
+- Matthew Bullock; music provider (I can run in 13 swegz per minute beat that)
+- Basim Khajwal; main coder person 
+- Cameron Hargreaves; the one with illustrator at home (the sweg one)
+- Jamie Stirling; Rival (basis for main villain) 
+- Jaymie; Um… Don’t care
+- The Illuminati; father of code
+- Tanvi Kishore; Rarely plays TF2
+- Oliver Walker; TheHeliumHamster
+- Jeff; follows from “My Name is:”
+- Brendan Eich; what a lad
+- Ricky WhatsHisFace; son of the jamie
+- Alex Turner; Entertainment
+- 505; a 7 hour flight? 45 min drive?
+- Brian; Top marks for not trying
+- Nitish Bala; Giving me the answers in physics
+- Nitish Veerla; THE IPAD INCIDENT. NOTHING ELSE
+- Jaymie; Top Class Banter
+- Jaymay; He is a scumbag
+- Jamay; Don’t u know
+- JavaScript; Even if it has no class
+- javaScript; AHEM JAMIE
+- DEFINITELY NOT C; *ahem* jamie
