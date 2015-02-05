@@ -14,8 +14,19 @@ Zamboni.States.GameState = {
         "use strict";
 
         var state = Engine.GameState.create();
+        var game = null;
 
+        state.onCreate = function (g) {
+            game = g;
+        };
 
+        state.render = function (ctx) {
+
+        };
+
+        state.update = function (delta) {
+
+        };
 
         return state;
     }
