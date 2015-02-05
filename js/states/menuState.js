@@ -115,8 +115,13 @@ Zamboni.States.MenuState = {
 
         state.update = function (delta) {
             startGame.update();
-
             cloudManager.update(delta);
+
+            if (startGame.isClicked()) {
+                var gsm = game.getGameStateManager();
+
+                gsm.setState(Zamboni.States.GameState.create());
+            }
         };
 
 

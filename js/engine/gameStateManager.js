@@ -8,6 +8,7 @@ Engine.GameStateManager = {
 
         //Private variables
         var currentActivity = null;
+        var changed = false;
 
         return {
             setState: function (activity) {
@@ -17,6 +18,8 @@ Engine.GameStateManager = {
 
                 currentActivity = activity;
                 currentActivity.onCreate(game);
+
+                changed = true;
             },
 
             getState: function () {
@@ -30,9 +33,11 @@ Engine.GameStateManager = {
             },
 
             render: function (context) {
-                if (currentActivity !== null) {
+                if (currentActivity !== null && !changed) {
                     currentActivity.render(context);
                 }
+
+                changed = false;
             }
 
         };
