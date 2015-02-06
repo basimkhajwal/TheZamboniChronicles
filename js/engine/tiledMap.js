@@ -9,15 +9,18 @@ Engine.TiledMap = {
         "use strict";
 
         var tiles = [];
+        var renderMap = [];
+        var xOffset = 0;
+        var yOffset = 0;
 
         (function () {
             var row, col;
 
             for (row = 0; row < tileHeight; row += 1) {
-                tiles.push(new Array());
+                tiles.push([]);
 
                 for (col = 0; col < tileWidth; col += 1) {
-                    tiles[i].push(0);
+                    tiles[row].push(0);
                 }
             }
 
@@ -26,6 +29,10 @@ Engine.TiledMap = {
         return {
 
             render: function (ctx) {
+
+
+
+
 
             },
 
@@ -51,6 +58,30 @@ Engine.TiledMap = {
 
             getTileHeight: function () {
                 return tileHeight;
+            },
+
+            setOffset: function (x, y) {
+                xOffset = x;
+                yOffset = y;
+            },
+
+            getOffset: function () {
+                return {
+                    x: xOffset,
+                    y: yOffset
+                };
+            },
+
+            setRenderMap: function (map) {
+                renderMap = map;
+            },
+
+            getRenderMap: function () {
+                return renderMap;
+            },
+
+            putRenderable: function (id, val) {
+                renderMap[id] = val;
             }
         };
     }
