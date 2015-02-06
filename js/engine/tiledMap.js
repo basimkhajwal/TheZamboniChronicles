@@ -29,11 +29,17 @@ Engine.TiledMap = {
         return {
 
             render: function (ctx) {
+                var row, col, val;
 
+                for (row = 0; row < mapHeight; row += 1) {
+                    for (col = 0; col < mapWidth; col += 1) {
+                        val = tiles[row][col];
 
-
-
-
+                        if (val in renderMap && renderMap[val] instanceof Image){
+                            ctx.drawImage(renderMap[val], xOffset + col * tileWidth, yOffset + row * tileHeight, tileWidth, tileHeight);
+                        }
+                    }
+                }
             },
 
             getTileAt: function (row, col) {
