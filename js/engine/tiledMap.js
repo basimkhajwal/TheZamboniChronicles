@@ -16,10 +16,10 @@ Engine.TiledMap = {
         (function () {
             var row, col;
 
-            for (row = 0; row < tileHeight; row += 1) {
+            for (row = 0; row < mapHeight; row += 1) {
                 tiles.push([]);
 
-                for (col = 0; col < tileWidth; col += 1) {
+                for (col = 0; col < mapWidth; col += 1) {
                     tiles[row].push(0);
                 }
             }
