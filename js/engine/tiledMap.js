@@ -25,6 +25,10 @@ Engine.TiledMap = {
 
         return {
 
+            render: function (ctx) {
+
+            },
+
             getTileAt: function (row, col) {
                 return tiles[row][col];
             },
