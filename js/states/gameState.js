@@ -15,8 +15,6 @@ Zamboni.States.GameState = {
         var x = 0, y = 0;
         var state = Engine.GameState.create();
         var game = null;
-        var clicked = false;
-        var map = Engine.TiledMap.create(50, 30, 20, 20);
 
         map.putRenderable(1, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.CLOUD_FUZZY));
 
@@ -32,17 +30,7 @@ Zamboni.States.GameState = {
         };
 
         state.update = function (delta) {
-            if (Engine.MouseInput.isMouseDown()) {
-                if (!clicked) {
 
-                    map.setTileAt(x += 1, y += 1, 1);
-
-                    clicked = true;
-                }
-
-            } else {
-                clicked = false;
-            }
         };
 
         return state;
