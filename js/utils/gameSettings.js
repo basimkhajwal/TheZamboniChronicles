@@ -13,8 +13,6 @@ Zamboni.Utils.GameSettings = {
     fuzzyCloudWidth: 360,
     fuzzyCloudHeight: 180,
 
-    gameFont: "Lato",
-
-    //The colours
+    gameFont: "Lato"
 
 };
