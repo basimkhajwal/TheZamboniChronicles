@@ -4,7 +4,9 @@ var Zamboni = Zamboni || {};
 //Sub modules
 Zamboni.Utils = Zamboni.Utils || {};
 
-
+/*
+*   Manages all the colours in the game, they shouldn't be hard coded but instead put here
+*/
 Zamboni.Utils.ColourScheme = {
 
     //Flat UI Colours
