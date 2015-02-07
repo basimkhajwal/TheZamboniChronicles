@@ -18,8 +18,10 @@ Zamboni.World.GameWorld = {
     *   Create a new empty world
     */
     create: function () {
+        "use strict";
 
         //All the private methods and variables
+        var tiledMap = Engine.TiledMap.create(50, 30, 20, 20);
 
         //Return all the public methods and variables
         return {

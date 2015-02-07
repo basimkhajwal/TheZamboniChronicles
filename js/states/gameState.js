@@ -12,25 +12,22 @@ Zamboni.States.GameState = {
 
     create: function () {
         "use strict";
-        var x = 0, y = 0;
+
         var state = Engine.GameState.create();
         var game = null;
+        var world = Zamboni.World.GameWorld.create();
 
-        map.putRenderable(1, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.CLOUD_FUZZY));
 
         state.onCreate = function (g) {
             game = g;
         };
 
         state.render = function (ctx) {
-            ctx.fillStyle = Zamboni.Utils.ColourScheme.BACKGROUND_COLOUR;
-            ctx.fillRect(0, 0, 1000, 600);
-
-            map.render(ctx);
+            world.render(ctx);
         };
 
         state.update = function (delta) {
-
+            world.update(delta);
         };
 
         return state;
