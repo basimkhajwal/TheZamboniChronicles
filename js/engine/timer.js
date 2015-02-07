@@ -21,20 +21,26 @@ Engine.Timer = {
                 };
         }());
 
+        //The last time since it was called
         var lastTime = 0;
 
         //Return a closure
         return {
             start: function (updateCallBack, renderCallBack) {
 
+                //Set the initial value
+                lastTime = Date.now();
 
                 function main() {
+                    //Get the new time and work out how much has elapsed since the last tick in milliseconds
                     var now = Date.now();
                     var delta = (now - lastTime) / 1000.0;
 
+                    //Call the callbacks
                     updateCallBack(delta);
                     renderCallBack();
 
+                    //Request the next frame
                     lastTime = now;
                     requestAnimFrame(main);
 
