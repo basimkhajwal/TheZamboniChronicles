@@ -33,3 +33,6 @@ Zamboni.Utils.ColourScheme = {
     EUCALYPTUS: "rgb(38, 166, 91)",
     SALEM: "rgb(30, 130, 76)"
 };
+
+//Colours for in-game use
+Zamboni.Utils.ColourScheme.BACKGROUND_COLOUR = Zamboni.Utils.ColourScheme.PETER_RIVER;

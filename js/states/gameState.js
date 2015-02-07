@@ -25,7 +25,7 @@ Zamboni.States.GameState = {
         };
 
         state.render = function (ctx) {
-            ctx.fillStyle = "#BBB";
+            ctx.fillStyle = Zamboni.Utils.ColourScheme.BACKGROUND_COLOUR;
             ctx.fillRect(0, 0, 1000, 600);
 
             map.render(ctx);
