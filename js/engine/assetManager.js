@@ -23,6 +23,7 @@ Engine.AssetManager = (function () {
 
         queueRequest: function (path) {
             console.log("Requested: " + path);
+            ajaxQueue.push(path);
         },
 
         //Downlaod all the assets in the current download queue, calls the callback once done
@@ -31,14 +32,15 @@ Engine.AssetManager = (function () {
             downloadCallback = downloadCallback || function () {};
 
             var that = this;
+            var i;
             
             //Make sure we have something to download
-            if (downloadQueue.length === 0) {
+            if ((downloadQueue.length + ajaxQueue.length) === 0) {
                 downloadCallback();
             }
 
             //The success callback for when the image has been loaded
-            var successCallback = function() {
+            var successCallback = function () {
                 console.log(this.src + ' is loaded');
                 successCount += 1;
 
@@ -48,7 +50,7 @@ Engine.AssetManager = (function () {
             };
 
             //The error callback for each image
-            var errorCallback = function() {
+            var errorCallback = function () {
                 errorCount += 1;
 
                 if (that.isDone()) {
@@ -56,8 +58,31 @@ Engine.AssetManager = (function () {
                 }
             };
 
+            //The request callback
+            var requestCallback = function (req, url) {
+
+                if (req !== null) {
+                    console.log(url + " successfully loaded");
+                    successCallback += 1;
+
+                    if (that.isDone()) {
+                        downloadCallback();
+                    }
+
+                    cache[path] = req.responseText;
+                } else {
+                    console.log("Error for getting request: " + url);
+                    errorCount += 1;
+
+                    if (that.isDone()) {
+                        downloadCallback();
+                    }
+                }
+
+            };
+
             //Load the asset using the Image class for every download in the queue
-            for (var i = 0; i < downloadQueue.length; i++) {
+            for (i = 0; i < downloadQueue.length; i += 1) {
                 //Get the path and create a new image
                 var path = downloadQueue[i];
                 var img = new Image();
@@ -73,6 +98,14 @@ Engine.AssetManager = (function () {
                 cache[path] = img;
             }
 
+            //Request all the ajax requests
+            for (i = 0; i < ajaxQueue.length; i += 1) {
+                //Get the request
+                var url = ajaxQueue[i];
+
+                //Set the callback and request it
+                Engine.Ajax.get(url, requestCallback);
+            }
 
         },
 
@@ -83,12 +116,12 @@ Engine.AssetManager = (function () {
 
         //If all the items have been downloaded
         isDone: function () {
-            return (downloadQueue.length) === (successCount + errorCount);
+            return (downloadQueue.length + ajaxQueue.length) === (successCount + errorCount);
         },
 
         //Return the percentage of items that have been loaded (between  0 and 1)
         getProgress: function () {
-            return (successCount + errorCount) / downloadQueue.length;
+            return (successCount + errorCount) / (downloadQueue.length + ajaxQueue.length);
         }
 
     };

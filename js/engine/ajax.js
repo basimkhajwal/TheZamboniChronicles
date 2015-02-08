@@ -15,9 +15,9 @@ Engine.Ajax = (function () {
         request.onreadystatechange = function () {
 
             if ((request.readyState === 4) && (request.status === 200)) {
-                onchange(request);
+                onchange(request, url);
             } else {
-                onchange(null);
+                onchange(null, url);
             }
         };
 
