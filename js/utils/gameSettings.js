@@ -23,9 +23,9 @@ Zamboni.Utils.GameSettings = {
     gameFont: "Lato",
 
     //The levels
-    levels: [
-        "test.json"
-    ]
+    levels: {
+        TEST: "test.json"
+    }
 
 
 };

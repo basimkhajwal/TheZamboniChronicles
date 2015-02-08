@@ -43,15 +43,18 @@ Zamboni.States.LoadingState = {
                 }
             }
 
-            Engine.AssetManager.downloadAll();
-
             //The level loading stuff
             var levels = Zamboni.Utils.GameSettings.levels;
-            var i;
+            var level;
 
-            for (i = 0; i < levels.length; i += 1) {
-
+            for (level in levels) {
+                if (levels.hasOwnProperty(level)) {
+                    Engine.AssetManager.queueRequest(levels[level]);
+                }
             }
+
+            //Download everything
+            Engine.AssetManager.downloadAll();
         };
 
         state.update = function (delta) {
