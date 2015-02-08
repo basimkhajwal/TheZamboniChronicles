@@ -14,12 +14,13 @@ Zamboni.World.LevelParser = (function () {
     "use strict";
 
 
-    var self = {};
+    return {
 
-    self.parse = function (file) {
-        //var jsonObj = JSON.parse(file);
-        //return jsonObj.layers[0].data;
+        parseLevel: function (fileText) {
+            var jsonObj = JSON.parse(fileText);
+
+            return jsonObj.layers[0].data;
+        }
+
     };
-
-    return self;
 }());
