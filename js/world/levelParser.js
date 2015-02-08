@@ -17,8 +17,8 @@ Zamboni.World.LevelParser = (function () {
     var self = {};
 
     self.parse = function (file) {
-
-
+        var jsonObj = JSON.parse(file);
+        return jsonObj.layers[0].data;
     };
 
     return self;
