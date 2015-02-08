@@ -6,14 +6,18 @@ Engine.Ajax = (function () {
 
     var self = {};
 
-    self.get = function (url, onsuccess) {
+    self.get = function (url, onchange) {
         var request = new XMLHttpRequest();
+
+        onchange = onchange || function () {};
 
         //The request handler
         request.onreadystatechange = function () {
 
             if ((request.readyState === 4) && (request.status === 200)) {
-                onsuccess(request);
+                onchange(request);
+            } else {
+                onchange(null);
             }
         };
 
