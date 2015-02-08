@@ -23,6 +23,8 @@ Zamboni.World.GameWorld = {
         //All the private methods and variables
         var tiledMap = Engine.TiledMap.create(50, 30, 20, 20);
 
+        console.log(Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.levels.TEST));
+
         /*var level = Zamboni.World.LevelParser.parse(Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.levels.TEST));
 
         (function () {
