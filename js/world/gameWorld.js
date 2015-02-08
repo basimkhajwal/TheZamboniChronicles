@@ -34,15 +34,22 @@ Zamboni.World.GameWorld = {
             //Parse a new level from a given string
             parseLevel = function (fileText) {
 
+                //Parse the actual JSOn Object first
                 var jsonObj = JSON.parse(fileText),
+
+                    //Counter variable
                     i,
 
                     //The tile layer from the JSON
                     tiles = jsonObj.layers[0].data,
+
+                    //Get all the objects
                     objects = jsonObj.layers[1].data;
 
                 //Set all the background tiles
                 for (i = 0; i < tiles.length; i += 1) {
+
+                    //Set the correct row and column to the value that is at that tile
                     tiledMap.setTileAt(Math.floor(i / 50), i % 50, tiles[i]);
                 }
 
@@ -55,7 +62,7 @@ Zamboni.World.GameWorld = {
         tiledMap.putRenderable(Zamboni.Utils.Tiles.GRASS_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.GRASS_DARK));
 
 
-
+        //Parse the test level - TODO
         parseLevel(Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.levels.TEST));
 
         //Return all the public methods and variables
