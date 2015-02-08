@@ -63,16 +63,15 @@ Engine.AssetManager = (function () {
 
                 if (req !== null) {
                     console.log(url + " successfully loaded");
-                    successCallback += 1;
+
+                    successCount += 1;
 
                     if (that.isDone()) {
                         downloadCallback();
                     }
 
-                    cache[path] = req.responseText;
+                    cache[url] = req.responseText;
                 } else {
-                    console.log("Error for getting request: " + url);
-                    errorCount += 1;
 
                     if (that.isDone()) {
                         downloadCallback();
