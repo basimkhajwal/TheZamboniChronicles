@@ -9,8 +9,6 @@ Engine.Ajax = (function () {
     self.get = function (url, onchange) {
         var request = new XMLHttpRequest();
 
-        onchange = onchange || function () {};
-
         //The request handler
         request.onreadystatechange = function () {
 
