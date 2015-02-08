@@ -23,32 +23,40 @@ Zamboni.World.GameWorld = {
         //All the private methods and variables
         var tiledMap = Engine.TiledMap.create(50, 30, 20, 20);
         var camera = Engine.Camera.create(0, 0, 0);
+        var player = {};
 
         var parseLevel = function (fileText) {
-            var jsonObj = JSON.parse(fileText);
 
-            return jsonObj.layers[0].data;
-        };
+            var jsonObj = JSON.parse(fileText),
+                i,
+                tiles = jsonObj.layers[0].data;
 
 
-        var level = parseLevel(Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.levels.TEST));
 
-        (function () {
-            var i;
-
-            for (i = 0; i < level.length; i += 1) {
-                tiledMap.setTileAt(Math.floor(i / 50), i % 50, level[i]);
+            for (i = 0; i < tiles.length; i += 1) {
+                tiledMap.setTileAt(Math.floor(i / 50), i % 50, tiles[i]);
             }
-        }());
+
+
+        };
 
         tiledMap.putRenderable(Zamboni.Utils.Tiles.GRASS, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.GRASS));
         tiledMap.putRenderable(Zamboni.Utils.Tiles.GRASS_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.GRASS_DARK));
+
+        parseLevel(Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.levels.TEST));
+
+
 
         //Return all the public methods and variables
         return {
 
             //Render the world on the context ctx
             render: function (ctx) {
+                //Set the background colour
+                ctx.fillStyle = Zamboni.Utils.ColourScheme.BACKGROUND_COLOUR;
+                ctx.fillRect(0, 0, 1000, 600);
+
+
                 camera.projectContext(ctx);
                 tiledMap.render(ctx);
                 camera.unProjectContext(ctx);

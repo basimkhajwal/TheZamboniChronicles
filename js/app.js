@@ -11,9 +11,6 @@ var Zamboni = Zamboni || {};
 Zamboni.States = Zamboni.States || {};
 Zamboni.Utils = Zamboni.Utils || {};
 
-Engine.UI = Engine.UI || {};
-
-
 var startGame = function () {
     "use strict";
 
