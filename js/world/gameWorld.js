@@ -24,7 +24,14 @@ Zamboni.World.GameWorld = {
         var tiledMap = Engine.TiledMap.create(50, 30, 20, 20);
         var camera = Engine.Camera.create(0, 0, 0);
 
-        var level = Zamboni.World.LevelParser.parseLevel(Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.levels.TEST));
+        var parseLevel = function (fileText) {
+            var jsonObj = JSON.parse(fileText);
+
+            return jsonObj.layers[0].data;
+        };
+
+
+        var level = parseLevel(Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.levels.TEST));
 
         (function () {
             var i;
@@ -34,8 +41,8 @@ Zamboni.World.GameWorld = {
             }
         }());
 
-        tiledMap.putRenderable(1, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.GRASS));
-        tiledMap.putRenderable(2, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.GRASS_DARK));
+        tiledMap.putRenderable(Zamboni.Utils.Tiles.GRASS, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.GRASS));
+        tiledMap.putRenderable(Zamboni.Utils.Tiles.GRASS_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.GRASS_DARK));
 
         //Return all the public methods and variables
         return {

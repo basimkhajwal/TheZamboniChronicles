@@ -7,7 +7,7 @@ Zamboni.Utils = Zamboni.Utils || {};
 Zamboni.Utils.Tiles = {
 
     EMPTY: 0,
-    GRASS: 1,
-    GRASS_DARK: 2
+    GRASS_DARK: 1,
+    GRASS: 2
 
 };

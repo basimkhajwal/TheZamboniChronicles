@@ -20,7 +20,7 @@ Engine.TiledMap = {
                 tiles.push([]);
 
                 for (col = 0; col < mapWidth; col += 1) {
-                    tiles[row].push(0);
+                    tiles[row].push(-1);
                 }
             }
 
