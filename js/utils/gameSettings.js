@@ -20,6 +20,12 @@ Zamboni.Utils.GameSettings = {
     fuzzyCloudHeight: 180,
 
     //The font for all the buttons, titles etc.
-    gameFont: "Lato"
+    gameFont: "Lato",
+
+    //The levels
+    levels: [
+        "test.json"
+    ]
+
 
 };

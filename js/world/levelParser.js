@@ -18,10 +18,6 @@ Zamboni.World.LevelParser = (function () {
 
     self.parse = function (file) {
 
-        Engine.Ajax.get(file, function (req) {
-            console.log(req.responseText);
-        });
-
 
     };
 

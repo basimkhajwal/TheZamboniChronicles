@@ -13,13 +13,11 @@ Engine.Ajax = (function () {
         request.onreadystatechange = function () {
 
             if ((request.readyState === 4) && (request.status === 200)) {
-                console.log("Successfully loaded " + url);
                 onsuccess(request);
             }
         };
 
         //Send the request
-        console.log("Requesting " + url + "...");
         request.open("GET", url, true);
         request.send();
     };

@@ -7,6 +7,7 @@ Engine.AssetManager = (function () {
 
     //Private closure variables
     var downloadQueue = []; //The downloads that need to be done
+    var ajaxQueue = [];
     var cache = {}; //The stored assets
     var successCount = 0; //How many assets were successfully loaded
     var errorCount = 0; //How many assets had an error whilst loading
@@ -18,6 +19,10 @@ Engine.AssetManager = (function () {
         queueDownload: function (path) {
             console.log("Queued: " + path);
             downloadQueue.push(path);
+        },
+
+        queueRequest: function (path) {
+            console.log("Requested: " + path);
         },
 
         //Downlaod all the assets in the current download queue, calls the callback once done

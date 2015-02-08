@@ -58,6 +58,8 @@ var startGame = function () {
         devmode: true
     });
 
+    Zamboni.World.LevelParser.parse("levels/test.json");
+
     game.start();
 
 };

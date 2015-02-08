@@ -33,6 +33,7 @@ Zamboni.States.LoadingState = {
         state.onCreate = function (g) {
             game = g;
 
+            //The image loading stuff
             var asset;
             var assets = Zamboni.Utils.Assets; //Save for quick reference
 
@@ -43,6 +44,14 @@ Zamboni.States.LoadingState = {
             }
 
             Engine.AssetManager.downloadAll();
+
+            //The level loading stuff
+            var levels = Zamboni.Utils.GameSettings.levels;
+            var i;
+
+            for (i = 0; i < levels.length; i += 1) {
+
+            }
         };
 
         state.update = function (delta) {
