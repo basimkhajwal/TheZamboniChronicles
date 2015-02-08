@@ -49,7 +49,7 @@ Zamboni.States.LoadingState = {
 
             for (level in levels) {
                 if (levels.hasOwnProperty(level)) {
-                    Engine.AssetManager.queueRequest(levels[level]);
+                    Engine.AssetManager.queueRequest("levels/" + levels[level]);
                 }
             }
 
