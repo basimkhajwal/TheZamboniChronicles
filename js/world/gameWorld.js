@@ -22,6 +22,7 @@ Zamboni.World.GameWorld = {
 
         //All the private methods and variables
         var tiledMap = Engine.TiledMap.create(50, 30, 20, 20);
+        var camera = Engine.Camera.create(0, 0, 0);
 
         var level = Zamboni.World.LevelParser.parseLevel(Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.levels.TEST));
 
@@ -41,12 +42,36 @@ Zamboni.World.GameWorld = {
 
             //Render the world on the context ctx
             render: function (ctx) {
+                camera.projectContext(ctx);
                 tiledMap.render(ctx);
+                camera.unProjectContext(ctx);
             },
 
             //Update the world with time delta
             update: function (delta) {
+                if (Engine.KeyboardInput.isKeyDown(Engine.Keys.RIGHT)) {
+                    camera.translate(-400 * delta, 0);
+                }
 
+                if (Engine.KeyboardInput.isKeyDown(Engine.Keys.LEFT)) {
+                    camera.translate(400 * delta, 0);
+                }
+
+                if (Engine.KeyboardInput.isKeyDown(Engine.Keys.DOWN)) {
+                    camera.translate(0, -400 * delta);
+                }
+
+                if (Engine.KeyboardInput.isKeyDown(Engine.Keys.UP)) {
+                    camera.translate(0, 400 * delta);
+                }
+
+                if (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("Q"))) {
+                    camera.rotate(10 * delta);
+                }
+
+                if (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("W"))) {
+                    camera.rotate(-10 * delta);
+                }
             }
 
 

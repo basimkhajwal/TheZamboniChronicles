@@ -27,8 +27,8 @@ Engine.Camera = {
             },
 
             unProjectContext: function (ctx) {
-                ctx.translate(-x, -y);
                 ctx.rotate(-angleInRad);
+                ctx.translate(-x, -y);
             },
 
             projectPoint: function (pX, pY) {
