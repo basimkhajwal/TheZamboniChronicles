@@ -21,31 +21,42 @@ Zamboni.World.GameWorld = {
         "use strict";
 
         //All the private methods and variables
-        var tiledMap = Engine.TiledMap.create(50, 30, 20, 20);
-        var camera = Engine.Camera.create(0, 0, 0);
-        var player = {};
 
-        var parseLevel = function (fileText) {
+        //The tiled map for the background
+        var tiledMap = Engine.TiledMap.create(50, 30, 20, 20),
 
-            var jsonObj = JSON.parse(fileText),
-                i,
-                tiles = jsonObj.layers[0].data;
+            //The camera for viewing the world (in the eyes of the player)
+            camera = Engine.Camera.create(0, 0, 0),
+
+            //The player entity
+            player = Zamboni.World.GameEntity.createEmpty(),
+
+            //Parse a new level from a given string
+            parseLevel = function (fileText) {
+
+                var jsonObj = JSON.parse(fileText),
+                    i,
+
+                    //The tile layer from the JSON
+                    tiles = jsonObj.layers[0].data,
+                    objects = jsonObj.layers[1].data;
+
+                //Set all the background tiles
+                for (i = 0; i < tiles.length; i += 1) {
+                    tiledMap.setTileAt(Math.floor(i / 50), i % 50, tiles[i]);
+                }
 
 
-
-            for (i = 0; i < tiles.length; i += 1) {
-                tiledMap.setTileAt(Math.floor(i / 50), i % 50, tiles[i]);
-            }
+            };
 
 
-        };
-
+        //Put all the renderable tiles into the tiled maps renderable so that they are rendered correctly
         tiledMap.putRenderable(Zamboni.Utils.Tiles.GRASS, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.GRASS));
         tiledMap.putRenderable(Zamboni.Utils.Tiles.GRASS_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.GRASS_DARK));
 
+
+
         parseLevel(Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.levels.TEST));
-
-
 
         //Return all the public methods and variables
         return {
