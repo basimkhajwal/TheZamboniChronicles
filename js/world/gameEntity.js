@@ -158,6 +158,11 @@ Zamboni.World.GameEntity = {
 
                 //No collision occurred
                 return false;
+            },
+
+            //Check if the object collides with a given collision function
+            collides: function (collisionFunc) {
+                return this.collidesBottom(collisionFunc) || this.collidesTop(collisionFunc) || this.collidesLeft(collisionFunc) || this.collidesRight(collisionFunc);
             }
 
         };
