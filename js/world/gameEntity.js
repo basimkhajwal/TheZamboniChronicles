@@ -48,9 +48,33 @@ Zamboni.World.GameEntity = {
             },
 
             //Update the x and y based on the velocity and the delta
-            update: function (delta) {
-                this.x += delta * this.vx;
-                this.y += delta * this.vy;
+            update: function (delta, collisionFunction) {
+
+                if (typeof collisionFunction === "undefined") {
+                    this.x += delta * this.vx;
+                    this.y += delta * this.vy;
+                } else {
+
+                    var oldX = this.x,
+                        oldY = this.y,
+                        collided = false;
+
+                    this.x += delta * this.vx;
+                    this.y += delta * this.vy;
+
+                    if (this.collidesTop(collisionFunction) || this.collidesBottom(collisionFunction)) {
+                        this.y = oldY;
+                        this.vy = 0;
+
+                        collided = true;
+                    }
+
+                    if (!collided && (this.collidesLeft(collisionFunction) || this.collidesRight(collisionFunction))) {
+                        this.x = oldX;
+                        this.vx = 0;
+                    }
+                }
+
             },
 
             //Draw the image or a solid colour at the entity's position

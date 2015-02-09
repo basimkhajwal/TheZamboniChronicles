@@ -56,14 +56,19 @@ Engine.TiledMap = {
 
                     for (i in renderMap) {
                         if (renderMap.hasOwnProperty(i)) {
-                            blockedList.push(i);
+                            blockedList.push(parseInt(i, 10));
                         }
                     }
                 }
 
                 return function (x, y) {
+
                     x = Math.floor(x / tileWidth);
                     y = Math.floor(y / tileHeight);
+
+                    if (x >= mapWidth || x <= 0 || y > mapHeight || y < 0) {
+                        return false;
+                    }
 
                     return blockedList.indexOf(tiles[y][x]) >= 0;
                 };

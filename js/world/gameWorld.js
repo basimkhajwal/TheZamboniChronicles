@@ -25,6 +25,9 @@ Zamboni.World.GameWorld = {
         //The tiled map for the background
         var tiledMap = Engine.TiledMap.create(50, 30, 20, 20),
 
+            //The tiled maps collision function
+            tiledCollision,
+
             //The camera for viewing the world (in the eyes of the player)
             camera = Engine.Camera.create(0, 0, 0),
 
@@ -77,6 +80,9 @@ Zamboni.World.GameWorld = {
                         break;
                     }
                 }
+
+                //Get the collision function
+                tiledCollision = tiledMap.generateCollisionFunction();
             },
 
             jumped = false;
@@ -113,21 +119,14 @@ Zamboni.World.GameWorld = {
 
 
                 //Test movement code
+                player.vx *= 0.5;
 
                 if (Engine.KeyboardInput.isKeyDown(Engine.Keys.RIGHT)) {
-                    player.x += 400 * delta;
+                    player.vx += 400;
                 }
 
                 if (Engine.KeyboardInput.isKeyDown(Engine.Keys.LEFT)) {
-                    player.x += -400 * delta;
-                }
-
-                if (Engine.KeyboardInput.isKeyDown(Engine.Keys.DOWN)) {
-                    player.y += 400 * delta;
-                }
-
-                if (Engine.KeyboardInput.isKeyDown(Engine.Keys.UP)) {
-                    player.y += -400 * delta;
+                    player.vx -= 400;
                 }
 
                 if (Engine.KeyboardInput.isKeyDown(Engine.Keys.SPACE) && !jumped) {
@@ -146,7 +145,7 @@ Zamboni.World.GameWorld = {
                 }
 
                 player.accelerate(0, Zamboni.Utils.GameSettings.gravityForce * delta);
-                player.update(delta);
+                player.update(delta, tiledCollision);
 
             }
 
