@@ -42,6 +42,11 @@ Zamboni.World.GameEntity = {
                 this.vy += dy;
             },
 
+            update: function (delta) {
+                this.x += delta * this.vx;
+                this.y += delta * this.vy;
+            },
+
             render: function (ctx) {
                 if (this.img !== null) {
                     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);

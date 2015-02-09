@@ -81,8 +81,8 @@ Zamboni.World.GameWorld = {
 
 
         //Put all the renderable tiles into the tiled maps renderable so that they are rendered correctly
-        tiledMap.putRenderable(Zamboni.Utils.Tiles.GRASS, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.GRASS));
-        tiledMap.putRenderable(Zamboni.Utils.Tiles.GRASS_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.GRASS_DARK));
+        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.GRASS, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.GRASS));
+        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.GRASS_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.GRASS_DARK));
 
 
         //Parse the test level - TODO
@@ -101,8 +101,7 @@ Zamboni.World.GameWorld = {
                 camera.projectContext(ctx);
                 tiledMap.render(ctx);
 
-                ctx.fillStyle = Zamboni.Utils.ColourScheme.CARROT;
-                ctx.fillRect(player.x, player.y, player.width, player.height);
+                player.render(ctx);
 
                 camera.unProjectContext(ctx);
             },

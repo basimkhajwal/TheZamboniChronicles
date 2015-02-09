@@ -22,10 +22,19 @@ Zamboni.Utils.GameSettings = {
     //The font for all the buttons, titles etc.
     gameFont: "Lato",
 
+    //World settings
+    gravityForce: 10,
+
     //The levels
     levels: {
         TEST: "levels/test.json"
+    },
+
+    tiles: {
+
+        EMPTY: 0,
+        GRASS_DARK: 1,
+        GRASS: 2
+
     }
-
-
 };
