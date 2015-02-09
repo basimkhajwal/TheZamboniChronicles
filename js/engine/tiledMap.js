@@ -8,10 +8,15 @@ Engine.TiledMap = {
     create: function (mapWidth, mapHeight, tileWidth, tileHeight) {
         "use strict";
 
-        var tiles = [];
-        var renderMap = [];
-        var xOffset = 0;
-        var yOffset = 0;
+        //The tiles themselves
+        var tiles = [],
+
+            //The render map, each number in it has an image to draw for that specific tile
+            renderMap = [],
+
+            //The offsets from the origin
+            xOffset = 0,
+            yOffset = 0;
 
         (function () {
             var row, col;
@@ -40,6 +45,26 @@ Engine.TiledMap = {
                         }
                     }
                 }
+            },
+
+            generateCollisionFunction: function (blockedList) {
+                var that = this,
+                    i;
+
+                if (typeof blockedList === "undefined") {
+                    blockedList = [];
+
+                    for (i in renderMap) {
+                        blockedList.push(i);
+                    }
+                }
+
+                return function (x, y) {
+                    x = Math.floor(x / tileWidth);
+                    y = Math.floor(y / tileHeight);
+
+                    return blockedList.indexOf(tiles[y][x]) >= 0;
+                };
             },
 
             getTileAt: function (row, col) {
