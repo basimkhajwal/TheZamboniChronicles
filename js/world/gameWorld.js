@@ -77,7 +77,9 @@ Zamboni.World.GameWorld = {
                         break;
                     }
                 }
-            };
+            },
+
+            jumped = false;
 
 
         //Put all the renderable tiles into the tiled maps renderable so that they are rendered correctly
@@ -99,8 +101,8 @@ Zamboni.World.GameWorld = {
 
 
                 camera.projectContext(ctx);
-                tiledMap.render(ctx);
 
+                tiledMap.render(ctx);
                 player.render(ctx);
 
                 camera.unProjectContext(ctx);
@@ -108,6 +110,7 @@ Zamboni.World.GameWorld = {
 
             //Update the world with time delta
             update: function (delta) {
+
 
                 //Test movement code
 
@@ -127,6 +130,13 @@ Zamboni.World.GameWorld = {
                     player.y += -400 * delta;
                 }
 
+                if (Engine.KeyboardInput.isKeyDown(Engine.Keys.SPACE) && !jumped) {
+                    player.vy = -200;
+                    jumped = true;
+                } else if (Engine.KeyboardInput.isKeyDown(Engine.Keys.SPACE)) {
+                    jumped = false;
+                }
+
                 if (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("Q"))) {
                     camera.rotate(10 * delta);
                 }
@@ -134,6 +144,10 @@ Zamboni.World.GameWorld = {
                 if (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("W"))) {
                     camera.rotate(-10 * delta);
                 }
+
+                player.accelerate(0, Zamboni.Utils.GameSettings.gravityForce * delta);
+                player.update(delta);
+
             }
 
 
