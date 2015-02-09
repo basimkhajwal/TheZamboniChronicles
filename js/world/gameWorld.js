@@ -31,6 +31,20 @@ Zamboni.World.GameWorld = {
             //The player entity
             player = Zamboni.World.GameEntity.createEmpty(),
 
+            //Parse a new player from the JSON object
+            parsePlayer = function (playerObj) {
+
+                player.x = playerObj.x;
+                player.y = playerObj.y;
+
+                player.vx = 0;
+                player.vy = 0;
+
+                player.width = playerObj.width;
+                player.height = playerObj.height;
+
+            },
+
             //Parse a new level from a given string
             parseLevel = function (fileText) {
 
@@ -44,7 +58,7 @@ Zamboni.World.GameWorld = {
                     tiles = jsonObj.layers[0].data,
 
                     //Get all the objects
-                    objects = jsonObj.layers[1].data;
+                    objects = jsonObj.layers[1].objects;
 
                 //Set all the background tiles
                 for (i = 0; i < tiles.length; i += 1) {
@@ -53,7 +67,16 @@ Zamboni.World.GameWorld = {
                     tiledMap.setTileAt(Math.floor(i / 50), i % 50, tiles[i]);
                 }
 
+                //Loop over every object defined in the second layer
+                for (i = 0; i < objects.length; i += 1) {
 
+                    switch (objects[i].type) {
+
+                    case "player":
+                        parsePlayer(objects[i]);
+                        break;
+                    }
+                }
             };
 
 
@@ -77,25 +100,32 @@ Zamboni.World.GameWorld = {
 
                 camera.projectContext(ctx);
                 tiledMap.render(ctx);
+
+                ctx.fillStyle = Zamboni.Utils.ColourScheme.CARROT;
+                ctx.fillRect(player.x, player.y, player.width, player.height);
+
                 camera.unProjectContext(ctx);
             },
 
             //Update the world with time delta
             update: function (delta) {
+
+                //Test movement code
+
                 if (Engine.KeyboardInput.isKeyDown(Engine.Keys.RIGHT)) {
-                    camera.translate(-400 * delta, 0);
+                    player.x += 400 * delta;
                 }
 
                 if (Engine.KeyboardInput.isKeyDown(Engine.Keys.LEFT)) {
-                    camera.translate(400 * delta, 0);
+                    player.x += -400 * delta;
                 }
 
                 if (Engine.KeyboardInput.isKeyDown(Engine.Keys.DOWN)) {
-                    camera.translate(0, -400 * delta);
+                    player.y += 400 * delta;
                 }
 
                 if (Engine.KeyboardInput.isKeyDown(Engine.Keys.UP)) {
-                    camera.translate(0, 400 * delta);
+                    player.y += -400 * delta;
                 }
 
                 if (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("Q"))) {
