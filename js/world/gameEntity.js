@@ -27,9 +27,29 @@ Zamboni.World.GameEntity = {
             height: 20,
 
             vx: 0,
-            vy: 0
+            vy: 0,
 
+            img: null,
+            colour: "#000",
 
+            translate: function (dx, dy) {
+                this.x += dx;
+                this.y += dy;
+            },
+
+            accelerate: function (dx, dy) {
+                this.vx += dx;
+                this.vy += dy;
+            },
+
+            render: function (ctx) {
+                if (this.img !== null) {
+                    ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+                } else {
+                    ctx.fillStyle = this.colour;
+                    ctx.fillRect(this.x, this.y, this.width, this.height);
+                }
+            }
         };
 
     }
