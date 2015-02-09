@@ -31,11 +31,6 @@
                  "y":280
                 }],
          "opacity":1,
-         "properties":
-            {
-             "startx":"2",
-             "starty":"16"
-            },
          "type":"objectgroup",
          "visible":true,
          "width":50,
