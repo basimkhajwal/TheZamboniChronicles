@@ -23,6 +23,10 @@ Zamboni.Utils.GameSettings = {
     gameFont: "Lato",
 
     //World settings
+
+    //The collision resolution (how many to check per side)
+    collisionResolution: 4,
+
     gravityForce: 10,
 
     //The levels
