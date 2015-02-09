@@ -40,7 +40,7 @@ Engine.TiledMap = {
                     for (col = 0; col < mapWidth; col += 1) {
                         val = tiles[row][col];
 
-                        if (val in renderMap && renderMap[val] instanceof Image){
+                        if (typeof renderMap[val] !== "undefined" && renderMap[val] instanceof Image) {
                             ctx.drawImage(renderMap[val], xOffset + col * tileWidth, yOffset + row * tileHeight, tileWidth, tileHeight);
                         }
                     }
@@ -55,7 +55,9 @@ Engine.TiledMap = {
                     blockedList = [];
 
                     for (i in renderMap) {
-                        blockedList.push(i);
+                        if (renderMap.hasOwnProperty(i)) {
+                            blockedList.push(i);
+                        }
                     }
                 }
 
