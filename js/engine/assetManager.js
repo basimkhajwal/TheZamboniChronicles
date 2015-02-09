@@ -6,11 +6,20 @@ Engine.AssetManager = (function () {
     "use strict";
 
     //Private closure variables
-    var downloadQueue = []; //The downloads that need to be done
-    var ajaxQueue = [];
-    var cache = {}; //The stored assets
-    var successCount = 0; //How many assets were successfully loaded
-    var errorCount = 0; //How many assets had an error whilst loading
+    //The downloads that need to be done
+    var downloadQueue = [],
+
+        //The ajax request queue
+        ajaxQueue = [],
+
+        //The stored assets
+        cache = {},
+
+        //How many assets were successfully loaded
+        successCount = 0,
+
+        //How many assets had an error whilst loading
+        errorCount = 0;
 
     //Add the public methods
     return {
@@ -29,62 +38,65 @@ Engine.AssetManager = (function () {
         //Downlaod all the assets in the current download queue, calls the callback once done
         downloadAll: function (downloadCallback) {
 
+            //Check if we have a valid download callback, otherwise a simple function
             downloadCallback = downloadCallback || function () {};
-
-            var that = this;
-            var i;
             
             //Make sure we have something to download
             if ((downloadQueue.length + ajaxQueue.length) === 0) {
                 downloadCallback();
             }
 
-            //The success callback for when the image has been loaded
-            var successCallback = function () {
-                console.log(this.src + ' is loaded');
-                successCount += 1;
+            //Store the function state for closures
+            var that = this,
 
-                if (that.isDone()) {
-                    downloadCallback();
-                }
-            };
+                //The counter variable
+                i,
 
-            //The error callback for each image
-            var errorCallback = function () {
-                errorCount += 1;
-
-                if (that.isDone()) {
-                    downloadCallback();
-                }
-            };
-
-            //The request callback
-            var requestCallback = function (req, url) {
-
-                if (req !== null) {
-                    console.log(url + " successfully loaded");
-
+                //The success callback for when the image has been loaded
+                successCallback = function () {
+                    console.log(this.src + ' is loaded');
                     successCount += 1;
 
                     if (that.isDone()) {
                         downloadCallback();
                     }
+                },
 
-                    cache[url] = req.responseText;
-                } else {
+                //The error callback for each image
+                errorCallback = function () {
+                    errorCount += 1;
 
                     if (that.isDone()) {
                         downloadCallback();
                     }
-                }
+                },
 
-            };
+                //The request callback
+                requestCallback = function (req, url) {
+
+                    if (req !== null) {
+                        console.log(url + " successfully loaded");
+
+                        successCount += 1;
+                        cache[url] = req.responseText;
+                    }
+
+                    if (that.isDone()) {
+                        downloadCallback();
+                    }
+
+                },
+
+                //The original paths and images
+                path = null,
+                img = null,
+                url = null;
 
             //Load the asset using the Image class for every download in the queue
             for (i = 0; i < downloadQueue.length; i += 1) {
                 //Get the path and create a new image
-                var path = downloadQueue[i];
-                var img = new Image();
+                path = downloadQueue[i];
+                img = new Image();
 
                 //Set the callbacks
                 img.addEventListener("load", successCallback, false);
@@ -100,7 +112,7 @@ Engine.AssetManager = (function () {
             //Request all the ajax requests
             for (i = 0; i < ajaxQueue.length; i += 1) {
                 //Get the request
-                var url = ajaxQueue[i];
+                url = ajaxQueue[i];
 
                 //Set the callback and request it
                 Engine.Ajax.get(url, requestCallback);
