@@ -119,7 +119,7 @@ Zamboni.World.GameWorld = {
 
 
                 //Test movement code
-                player.vx *= 0.5;
+                player.vx = 0;
 
                 if (Engine.KeyboardInput.isKeyDown(Engine.Keys.RIGHT)) {
                     player.vx += 400;
