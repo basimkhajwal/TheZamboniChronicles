@@ -40,12 +40,10 @@ Zamboni.World.GameWorld = {
                 player.x = playerObj.x;
                 player.y = playerObj.y;
 
-                player.vx = 0;
-                player.vy = 0;
-
                 player.width = playerObj.width;
                 player.height = playerObj.height;
 
+                player.applyGravity = true;
             },
 
             //Parse a new level from a given string
@@ -135,6 +133,8 @@ Zamboni.World.GameWorld = {
                         player.vy = -200;
                         
                         jumped = true;
+
+                        console.log("Player At: " + player.x + ", " + player.y);
                     }
                     
                 } else {
@@ -149,7 +149,6 @@ Zamboni.World.GameWorld = {
                     camera.rotate(-10 * delta);
                 }
 
-                player.accelerate(0, Zamboni.Utils.GameSettings.gravityForce * delta);
                 player.update(delta, tiledCollision);
 
             }

@@ -26,14 +26,36 @@ Zamboni.World.GameEntity = {
         return {
 
             //The variables for an entity
+            //The position
             x: 0,
             y: 0,
+
+            //The size
             width: 20,
             height: 20,
+
+            //The velocity
             vx: 0,
             vy: 0,
+
+            //The acceleration
+            ax: 0,
+            ay: 0,
+
+            //The impulse
+            ix: 0,
+            iy: 0,
+
+            //Render variables
             img: null,
             colour: "#000",
+
+            //The mass of the object
+            mass: 1,
+
+            //Forces to apply on it
+            applyGravity: false,
+            gravityForce: Zamboni.Utils.GameSettings.gravityForce,
 
             //Change the position by a certain amount
             translate: function (dx, dy) {
@@ -47,12 +69,19 @@ Zamboni.World.GameEntity = {
                 this.vy += dy;
             },
 
+            //Apply a force on it
+            applyForce: function (fx, fy) {
+                this.ax += fx / this.mass;
+                this.ay += fy / this.mass;
+            },
+
             //Update the x and y based on the velocity and the delta
             update: function (delta, collisionFunction) {
 
                 if (typeof collisionFunction === "undefined") {
-                    this.x += delta * this.vx;
-                    this.y += delta * this.vy;
+                    this.accelerate(this.ax * delta, this.ay * delta);
+                    this.translate(this.vx * delta, this.vy * delta);
+
                 } else {
 
                     var oldX = this.x,
