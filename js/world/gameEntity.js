@@ -93,7 +93,7 @@ Zamboni.World.GameEntity = {
                         wasRight = this.vx > 0,
                         ddx = 0,
                         ddy = 0,
-                        accel = this.accelForce * (this.falling ? 1.0: 0.5),
+                        accel = this.accelForce * (this.falling ? 1.0 : 0.5),
                         friction = this.frictionForce * (this.falling ? 0.5 : 1.0);
 
                     if (this.applyGravity) {
