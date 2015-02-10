@@ -133,8 +133,6 @@ Zamboni.World.GameWorld = {
                         player.vy = -200;
                         
                         jumped = true;
-
-                        console.log("Player At: " + player.x + ", " + player.y);
                     }
                     
                 } else {

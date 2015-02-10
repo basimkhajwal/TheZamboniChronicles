@@ -20,6 +20,11 @@ Zamboni.World.GameEntity = {
     createEmpty: function (collisionRes) {
         "use strict";
 
+        //Utility function to clamp a value in a specified interval
+        var clamp = function (val, min, max) {
+            return Math.max(min, Math.min(max, val));
+        };
+
         //How many times to check each side
         collisionRes = collisionRes || Zamboni.Utils.GameSettings.collisionResolution;
 
@@ -53,6 +58,9 @@ Zamboni.World.GameEntity = {
             //The mass of the object
             mass: 1,
 
+            //Clamp values
+            maxVelocity: 100,
+
             //Forces to apply on it
             applyGravity: false,
             gravityForce: Zamboni.Utils.GameSettings.gravityForce,
@@ -79,13 +87,19 @@ Zamboni.World.GameEntity = {
             update: function (delta, collisionFunction) {
 
                 if (typeof collisionFunction === "undefined") {
-                    this.accelerate(this.ax * delta, this.ay * delta);
+                    this.applyForce(this.ix, this.iy);
                     this.translate(this.vx * delta, this.vy * delta);
 
                 } else {
 
                     var oldX = this.x,
                         oldY = this.y;
+
+                    if (this.applyGravity) {
+                        this.applyForce(0, this.gravityForce);
+                    }
+
+                    this.applyForce(this.ix, this.iy);
 
                     this.y += delta * this.vy;
 
@@ -102,6 +116,9 @@ Zamboni.World.GameEntity = {
                     }
                 }
 
+
+                this.accelerate(this.ax * delta, this.ay * delta);
+                this.ix = this.iy = 0;
             },
 
             //Draw the image or a solid colour at the entity's position
