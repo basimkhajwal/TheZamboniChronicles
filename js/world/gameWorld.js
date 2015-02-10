@@ -82,7 +82,7 @@ Zamboni.World.GameWorld = {
                 }
 
                 //Get the collision function
-                tiledCollision = tiledMap.generateCollisionFunction();
+                tiledCollision = tiledMap.isCellBlocked;
             },
 
             jumped = false;

@@ -46,10 +46,6 @@ Engine.TiledMap = {
                     }
                 }
             },
-
-            generateCollisionFunction: function () {
-                return this.isCellBlocked;
-            },
             
              //Check if a cell isn't zero at an x, y (not cell co-ordinates)
             isCellBlocked: function (x, y) {
@@ -60,7 +56,7 @@ Engine.TiledMap = {
                     return false;
                 }
 
-                return tiles[y][x] !== -1;
+                return tiles[y][x] !== 0;
             },
 
             getTileAt: function (row, col) {
