@@ -81,9 +81,7 @@ Zamboni.World.GameWorld = {
 
                 //Get the collision function
                 tiledCollision = tiledMap.isCellBlocked;
-            },
-
-            jumped = false;
+            };
 
 
         //Put all the renderable tiles into the tiled maps renderable so that they are rendered correctly
@@ -117,27 +115,9 @@ Zamboni.World.GameWorld = {
 
 
                 //Test movement code
-                player.vx = 0;
-
-                if (Engine.KeyboardInput.isKeyDown(Engine.Keys.RIGHT)) {
-                    player.vx += 100;
-                }
-
-                if (Engine.KeyboardInput.isKeyDown(Engine.Keys.LEFT)) {
-                    player.vx -= 100;
-                }
-
-                if (Engine.KeyboardInput.isKeyDown(Engine.Keys.SPACE)) {
-                    
-                    if (!jumped) {
-                        player.vy = -200;
-                        
-                        jumped = true;
-                    }
-                    
-                } else {
-                    jumped = false;
-                }
+                player.moveRight = (Engine.KeyboardInput.isKeyDown(Engine.Keys.RIGHT));
+                player.moveLeft = (Engine.KeyboardInput.isKeyDown(Engine.Keys.LEFT));
+                player.jump = (Engine.KeyboardInput.isKeyDown(Engine.Keys.SPACE));
 
                 if (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("Q"))) {
                     camera.rotate(10 * delta);

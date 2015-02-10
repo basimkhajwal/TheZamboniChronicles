@@ -43,27 +43,30 @@ Zamboni.World.GameEntity = {
             vx: 0,
             vy: 0,
 
-            //The acceleration
-            ax: 0,
-            ay: 0,
-
-            //The impulse
-            ix: 0,
-            iy: 0,
+            //The acceleration and frictional force in the horizontal directions
+            accelForce: 400,
+            frictionForce: 300,
+            jumpForce: 30000,
 
             //Render variables
             img: null,
             colour: "#000",
 
-            //The mass of the object
-            mass: 1,
-
             //Clamp values
-            maxVelocity: 100,
+            maxVx: 500,
+            maxVy: 600,
 
             //Forces to apply on it
             applyGravity: false,
-            gravityForce: Zamboni.Utils.GameSettings.gravityForce,
+            gravityForce: 3000,
+
+            //States
+            moveLeft: false,
+            moveRight: false,
+            jump: false,
+            falling: false,
+            jumping: false,
+
 
             //Change the position by a certain amount
             translate: function (dx, dy) {
@@ -77,33 +80,62 @@ Zamboni.World.GameEntity = {
                 this.vy += dy;
             },
 
-            //Apply a force on it
-            applyForce: function (fx, fy) {
-                this.ax += fx / this.mass;
-                this.ay += fy / this.mass;
-            },
-
             //Update the x and y based on the velocity and the delta
             update: function (delta, collisionFunction) {
 
                 if (typeof collisionFunction === "undefined") {
-                    this.applyForce(this.ix, this.iy);
                     this.translate(this.vx * delta, this.vy * delta);
-
                 } else {
 
                     var oldX = this.x,
-                        oldY = this.y;
+                        oldY = this.y,
+                        wasLeft = this.vx < 0,
+                        wasRight = this.vx > 0,
+                        ddx = 0,
+                        ddy = 0,
+                        accel = this.accelForce * (this.falling ? 1.0: 0.5),
+                        friction = this.frictionForce * (this.falling ? 0.5 : 1.0);
 
                     if (this.applyGravity) {
-                        this.applyForce(0, this.gravityForce);
+                        ddy += this.gravityForce;
                     }
 
-                    this.applyForce(this.ix, this.iy);
+                    if (this.moveLeft) {
+                        ddx -= accel;
+                    } else if (wasLeft) {
+                        ddx += friction;
+                    }
+
+                    if (this.moveRight) {
+                        ddx += accel;
+                    } else if (wasRight) {
+                        ddx -= friction;
+                    }
+
+                    if (this.jump && !this.jumping && !this.falling) {
+                        ddy -= this.jumpForce;
+                        this.jumping = true;
+                    }
+
+                    this.accelerate(ddx * delta, ddy * delta);
+                    this.vx = clamp(this.vx, -this.maxVx, this.maxVx);
+                    this.vy = clamp(this.vy, -this.maxVy, this.maxVy);
+
+                    if ((wasLeft  && (this.vx > 0)) || (wasRight && (this.vx < 0))) {
+                        this.vx = 0;
+                    }
 
                     this.y += delta * this.vy;
 
-                    if (this.collidesTop(collisionFunction) || this.collidesBottom(collisionFunction)) {
+                    if (this.collidesTop(collisionFunction)) {
+                        this.y = oldY;
+                        this.vy = 0;
+                    }
+
+                    if (this.collidesBottom(collisionFunction)) {
+                        this.jumping = false;
+                        this.falling = false;
+
                         this.y = oldY;
                         this.vy = 0;
                     }
@@ -115,10 +147,6 @@ Zamboni.World.GameEntity = {
                         this.vx = 0;
                     }
                 }
-
-
-                this.accelerate(this.ax * delta, this.ay * delta);
-                this.ix = this.iy = 0;
             },
 
             //Draw the image or a solid colour at the entity's position
