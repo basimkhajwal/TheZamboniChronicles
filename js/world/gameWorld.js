@@ -129,10 +129,15 @@ Zamboni.World.GameWorld = {
                     player.vx -= 100;
                 }
 
-                if (Engine.KeyboardInput.isKeyDown(Engine.Keys.SPACE) && !jumped) {
-                    player.vy = -200;
-                    jumped = true;
-                } else if (! Engine.KeyboardInput.isKeyDown(Engine.Keys.SPACE)) {
+                if (Engine.KeyboardInput.isKeyDown(Engine.Keys.SPACE)) {
+                    
+                    if (!jumped) {
+                        player.vy = -200;
+                        
+                        jumped = true;
+                    }
+                    
+                } else {
                     jumped = false;
                 }
 
