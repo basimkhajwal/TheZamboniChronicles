@@ -47,31 +47,20 @@ Engine.TiledMap = {
                 }
             },
 
-            generateCollisionFunction: function (blockedList) {
-                var that = this,
-                    i;
+            generateCollisionFunction: function () {
+                return this.isCellBlocked;
+            },
+            
+             //Check if a cell isn't zero at an x, y (not cell co-ordinates)
+            isCellBlocked: function (x, y) {
+                x = Math.floor(x / tileWidth);
+                y = Math.floor(y / tileHeight);
 
-                if (typeof blockedList === "undefined") {
-                    blockedList = [];
-
-                    for (i in renderMap) {
-                        if (renderMap.hasOwnProperty(i)) {
-                            blockedList.push(parseInt(i, 10));
-                        }
-                    }
+                if (x >= mapWidth || x < 0 || y >= mapHeight || y < 0) {
+                    return false;
                 }
 
-                return function (x, y) {
-
-                    x = Math.floor(x / tileWidth);
-                    y = Math.floor(y / tileHeight);
-
-                    if (x >= mapWidth || x <= 0 || y > mapHeight || y < 0) {
-                        return false;
-                    }
-
-                    return blockedList.indexOf(tiles[y][x]) >= 0;
-                };
+                return tiles[y][x] !== -1;
             },
 
             getTileAt: function (row, col) {
