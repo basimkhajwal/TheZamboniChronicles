@@ -122,17 +122,17 @@ Zamboni.World.GameWorld = {
                 player.vx = 0;
 
                 if (Engine.KeyboardInput.isKeyDown(Engine.Keys.RIGHT)) {
-                    player.vx += 400;
+                    player.vx += 100;
                 }
 
                 if (Engine.KeyboardInput.isKeyDown(Engine.Keys.LEFT)) {
-                    player.vx -= 400;
+                    player.vx -= 100;
                 }
 
                 if (Engine.KeyboardInput.isKeyDown(Engine.Keys.SPACE) && !jumped) {
                     player.vy = -200;
                     jumped = true;
-                } else if (Engine.KeyboardInput.isKeyDown(Engine.Keys.SPACE)) {
+                } else if (! Engine.KeyboardInput.isKeyDown(Engine.Keys.SPACE)) {
                     jumped = false;
                 }
 
