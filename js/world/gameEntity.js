@@ -56,20 +56,18 @@ Zamboni.World.GameEntity = {
                 } else {
 
                     var oldX = this.x,
-                        oldY = this.y,
-                        collided = false;
+                        oldY = this.y;
 
-                    this.x += delta * this.vx;
                     this.y += delta * this.vy;
 
                     if (this.collidesTop(collisionFunction) || this.collidesBottom(collisionFunction)) {
                         this.y = oldY;
                         this.vy = 0;
-
-                        collided = true;
                     }
+                    
+                    this.x += delta * this.vx;
 
-                    if (!collided && (this.collidesLeft(collisionFunction) || this.collidesRight(collisionFunction))) {
+                    if (this.collidesLeft(collisionFunction) || this.collidesRight(collisionFunction)) {
                         this.x = oldX;
                         this.vx = 0;
                     }
