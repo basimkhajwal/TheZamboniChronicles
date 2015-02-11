@@ -32,10 +32,12 @@ Zamboni.World.GameWorld = {
             camera = Engine.Camera.create(0, 0, 0),
 
             //The player entity
-            player = Zamboni.World.GameEntity.createEmpty(),
+            player,
 
             //Parse a new player from the JSON object
             parsePlayer = function (playerObj) {
+
+                player = Zamboni.World.GameEntity.createEmpty();
 
                 player.x = playerObj.x;
                 player.y = playerObj.y;
@@ -43,7 +45,10 @@ Zamboni.World.GameWorld = {
                 player.width = playerObj.width;
                 player.height = playerObj.height;
 
+                player.img = Engine.AssetManager.getAsset(Zamboni.Utils.Assets.PLAYER);
+
                 player.applyGravity = true;
+
             },
 
             //Parse a new level from a given string
@@ -118,10 +123,6 @@ Zamboni.World.GameWorld = {
                 player.moveRight = (Engine.KeyboardInput.isKeyDown(Engine.Keys.RIGHT));
                 player.moveLeft = (Engine.KeyboardInput.isKeyDown(Engine.Keys.LEFT));
                 player.jump = (Engine.KeyboardInput.isKeyDown(Engine.Keys.SPACE));
-                
-                if (player.jump && !player.jumping) {
-                    console.log("Player is at: " + player.x + ", " + player.y);
-                }
 
                 if (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("Q"))) {
                     camera.rotate(10 * delta);

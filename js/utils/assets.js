@@ -14,6 +14,8 @@ Zamboni.Utils.Assets = {
 
     //The tiles
     GRASS: "img/tiles/grass.png",
-    GRASS_DARK: "img/tiles/grass_dark.png"
+    GRASS_DARK: "img/tiles/grass_dark.png",
 
+    //The sprites
+    PLAYER: "img/sprites/player.png"
 };
