@@ -119,7 +119,7 @@ Zamboni.World.GameWorld = {
                 player.moveLeft = (Engine.KeyboardInput.isKeyDown(Engine.Keys.LEFT));
                 player.jump = (Engine.KeyboardInput.isKeyDown(Engine.Keys.SPACE));
                 
-                if (player.jump) {
+                if (player.jump && !player.jumping) {
                     console.log("Player is at: " + player.x + ", " + player.y);
                 }
 

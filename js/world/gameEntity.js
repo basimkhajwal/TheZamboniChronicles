@@ -46,7 +46,9 @@ Zamboni.World.GameEntity = {
             //The acceleration and frictional force in the horizontal directions
             accelForce: 400,
             frictionForce: 350,
-            jumpForce: 30000,
+
+            //Acceleration when jumping
+            jumpForce: 1000,
 
             //Render variables
             img: null,
@@ -54,7 +56,7 @@ Zamboni.World.GameEntity = {
 
             //Clamp values
             maxVx: 500,
-            maxVy: 600,
+            maxVy: 400,
 
             //Forces to apply on it
             applyGravity: false,
@@ -97,7 +99,7 @@ Zamboni.World.GameEntity = {
                         friction = this.frictionForce * (this.falling ? 0.5 : 1.0);
 
                     if (this.applyGravity) {
-                        ddy += this.gravityForce;
+                        ddy = this.gravityForce;
                     }
 
                     if (this.moveLeft) {
@@ -112,11 +114,6 @@ Zamboni.World.GameEntity = {
                         ddx -= friction;
                     }
 
-                    if (this.jump && !this.jumping && !this.falling) {
-                        ddy -= this.jumpForce;
-                        this.jumping = true;
-                    }
-
                     this.accelerate(ddx * delta, ddy * delta);
                     this.vx = clamp(this.vx, -this.maxVx, this.maxVx);
                     this.vy = clamp(this.vy, -this.maxVy, this.maxVy);
@@ -125,19 +122,25 @@ Zamboni.World.GameEntity = {
                         this.vx = 0;
                     }
 
+                    if (this.jump && !this.jumping && !this.falling) {
+                        this.vy -= this.jumpForce;
+                        this.jumping = true;
+                    }
+
                     this.y += delta * this.vy;
 
                     if (this.collidesTop(collisionFunction)) {
                         this.y = oldY;
                         this.vy = 0;
-                    }
+                    } else if (this.collidesBottom(collisionFunction)) {
 
-                    if (this.collidesBottom(collisionFunction)) {
                         this.jumping = false;
                         this.falling = false;
 
                         this.y = oldY;
                         this.vy = 0;
+                    } else {
+                        this.falling = true;
                     }
                     
                     this.x += delta * this.vx;
