@@ -60,7 +60,7 @@ Zamboni.World.GameEntity = {
 
             //Forces to apply on it
             applyGravity: false,
-            gravityForce: 50,
+            gravityForce: 30,
 
             //States
             moveLeft: false,
@@ -123,13 +123,12 @@ Zamboni.World.GameEntity = {
                         this.vx = 0;
                     }
 
-                    if (this.jump && !this.jumping && !this.falling) {
+                    if (this.jump && !this.jumping) {
                         this.vy -= this.jumpForce;
                         this.jumping = true;
                     }
 
                     this.y += delta * this.vy;
-                    this.y = Math.round(this.y);
 
                     if (this.collidesTop(collisionFunction)) {
                         this.y = oldY;
@@ -139,13 +138,13 @@ Zamboni.World.GameEntity = {
                         this.jumping = false;
                         this.falling = false;
 
-                        if (this.vy > 0) {
+                        if (this.vy > 0 && (this.y - oldY > 10)) {
 
                             while (this.collidesBottom(collisionFunction)) {
                                 this.y -= 1;
                             }
-
-                            this.y += 1;
+                        } else {
+                            this.y = oldY;
                         }
 
                         this.vy = 0;
@@ -154,9 +153,8 @@ Zamboni.World.GameEntity = {
                     }
                     
                     this.x += delta * this.vx;
-                    this.x = Math.round(this.x);
 
-                    if (this.collidesLeft(collisionFunction) || this.collidesRight(collisionFunction)) {
+                    if ((this.vx < 0 && this.collidesLeft(collisionFunction)) || (this.vx > 0 && this.collidesRight(collisionFunction))) {
                         this.x = oldX;
                         this.vx = 0;
                     }
