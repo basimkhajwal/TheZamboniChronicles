@@ -1,6 +1,12 @@
 # TheZamboniChronicles
 A javascript game using the html5 canvas, still in development but comes with (hopefully) a useful underlying engine self-made ( that probably still has a lot of errors but never mind :P), the game idea is a simple 2d platformer, the full details are still under development but will hopefully come into shape soon and the game will progress from therein. 
 
+######Current List Of Tasks To Do:
+- Particle Effects (Add when needed)
+- Physics Engine and collision detection
+- MAKE COLLISION BETTER *sigh*
+- ADD ONBLUR AND ONFOCUS EVENT LISTENERS TO PREVENT PAUSE MOVEMENT
+
 ###The Game Ideas
 The game still needs to be planned ..
 
@@ -28,10 +34,6 @@ The game still needs to be planned ..
 - Make a JSON level parser (Maybe leave it till later) - DONE (kind of cheating, already implemented by browser!)
 - Make a 2d scene graph for GUI and base classes for rendering (Minimalistic at first, improve later) - DONE (basic stuff)
 - Tile map manager - DONE (yaay! works with Tiled !!)
-
-######Current List Of Tasks To Do:
-- Particle Effects (Add when needed)
-- Physics Engine and collision detection
 
 
 ######Live preview
