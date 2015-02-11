@@ -10,30 +10,35 @@ Engine.Timer = {
         //Try and get the animation frame from the window, any possible way, otherwise default to the inefficient timer interval method with a callback
         var requestAnimFrame = (function () {
 
-            return window.requestAnimationFrame        ||
-                window.webkitRequestAnimationFrame     ||
-                window.mozRequestAnimationFrame        ||
-                window.oRequestAnimationFrame          ||
-                window.msRequestAnimationFrame         ||
+                return window.requestAnimationFrame        ||
+                    window.webkitRequestAnimationFrame     ||
+                    window.mozRequestAnimationFrame        ||
+                    window.oRequestAnimationFrame          ||
+                    window.msRequestAnimationFrame         ||
 
-                function (callback) {
-                    window.setTimeout(callback, 1000 / 60);
-                };
-        }());
+                    function (callback) {
+                        window.setTimeout(callback, 1000 / 60);
+                    };
+            }()),
+            
+            //A faster time function
+            getTime = function () {
+                return window.performance && window.performance.now ? window.performance.now() : new Date().getTime();
+            },
 
-        //The last time since it was called
-        var lastTime = 0;
+            //The last time since it was called
+            lastTime = 0;
 
         //Return a closure
         return {
             start: function (updateCallBack, renderCallBack) {
 
                 //Set the initial value
-                lastTime = Date.now();
+                lastTime = getTime();
 
-                function main() {
+                var main = function () {
                     //Get the new time and work out how much has elapsed since the last tick in milliseconds
-                    var now = Date.now();
+                    var now = getTime();
                     var delta = (now - lastTime) / 1000.0;
 
                     //Call the callbacks
