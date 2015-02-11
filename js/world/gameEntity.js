@@ -45,7 +45,7 @@ Zamboni.World.GameEntity = {
 
             //The acceleration and frictional force in the horizontal directions
             accelForce: 400,
-            frictionForce: 300,
+            frictionForce: 350,
             jumpForce: 30000,
 
             //Render variables

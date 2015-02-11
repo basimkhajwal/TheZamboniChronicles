@@ -3,6 +3,19 @@
 
 //^ Some JS Lint stuff
 
+/*** Console modifications so that we can see that is happening***/
+if (typeof console  != "undefined") 
+    if (typeof console.log != 'undefined')
+        console.olog = console.log;
+    else
+        console.olog = function() {};
+
+console.log = function(message) {
+    console.olog(message);
+    $('#debugDiv').append('<p>' + message + '</p>');
+};
+console.error = console.debug = console.info =  console.log
+
 //The modules
 var Engine = Engine || {};
 var Zamboni = Zamboni || {};
