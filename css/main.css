@@ -28,3 +28,12 @@ body{
     display: block;
     background-color: white;
 }
+
+#debugDiv{
+    height: 200px;
+    overflow-y: scroll;
+    background-color: #44cc88;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 0.8em;
+}

@@ -118,6 +118,10 @@ Zamboni.World.GameWorld = {
                 player.moveRight = (Engine.KeyboardInput.isKeyDown(Engine.Keys.RIGHT));
                 player.moveLeft = (Engine.KeyboardInput.isKeyDown(Engine.Keys.LEFT));
                 player.jump = (Engine.KeyboardInput.isKeyDown(Engine.Keys.SPACE));
+                
+                if (player.jump) {
+                    console.log("Player is at: " + player.x + ", " + player.y);
+                }
 
                 if (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("Q"))) {
                     camera.rotate(10 * delta);

@@ -4,17 +4,27 @@
 //^ Some JS Lint stuff
 
 /*** Console modifications so that we can see that is happening***/
-if (typeof console  != "undefined") 
-    if (typeof console.log != 'undefined')
+if (typeof console !== "undefined") {
+    if (typeof console.log !== "undefined") {
         console.olog = console.log;
-    else
-        console.olog = function() {};
+    } else {
+        console.olog = function () {};
+    }
+}
 
 console.log = function(message) {
     console.olog(message);
-    $('#debugDiv').append('<p>' + message + '</p>');
+    document.getElementById("debugDiv").innerHTML += message + "<br>";
 };
+
 console.error = console.debug = console.info =  console.log
+
+window.setInterval(function() {
+  var elem = document.getElementById('debugDiv');
+  elem.scrollTop = elem.scrollHeight;
+}, 1000);
+
+//End console stuff
 
 //The modules
 var Engine = Engine || {};
