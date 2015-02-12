@@ -48,7 +48,7 @@ Zamboni.World.GameEntity = {
             frictionForce: 20,
 
             //Acceleration when jumping
-            jumpForce: 150000,
+            jumpForce: 1500,
 
             //Render variables
             img: null,
@@ -68,8 +68,7 @@ Zamboni.World.GameEntity = {
             jump: false,
             falling: false,
             jumping: false,
-
-
+            
             //Change the position by a certain amount
             translate: function (dx, dy) {
                 this.x += dx;
@@ -138,7 +137,7 @@ Zamboni.World.GameEntity = {
                         this.jumping = false;
                         this.falling = false;
 
-                        if (this.vy > 0 && (this.y - oldY > 5)) {
+                        if (this.vy > 0 && (this.y - oldY > 10)) {
 
                             while (this.collidesBottom(collisionFunction)) {
                                 this.y -= 1;
