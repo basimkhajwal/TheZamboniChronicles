@@ -5,7 +5,6 @@ A javascript game using the html5 canvas, still in development but comes with (h
 - Particle Effects (Add when needed)
 - Physics Engine and collision detection
 - MAKE COLLISION BETTER *sigh*
-- ADD ONBLUR AND ONFOCUS EVENT LISTENERS TO PREVENT PAUSE MOVEMENT
 
 ###The Game Ideas
 The game still needs to be planned ..
@@ -27,6 +26,7 @@ The game still needs to be planned ..
 - shooting
 
 ######Tasks done:
+- ADD ONBLUR AND ONFOCUS EVENT LISTENERS TO PREVENT PAUSE MOVEMENT - DONE
 - Finish game states and managers - DONE
 - Manage asset loading (images, sounds etc) - DONE
 - Keyboard Input - DONE
