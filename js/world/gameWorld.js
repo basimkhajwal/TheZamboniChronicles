@@ -94,8 +94,8 @@ Zamboni.World.GameWorld = {
         tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.GRASS_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.GRASS_DARK));
 
 
-        //Parse the test level - TODO
-        parseLevel(Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.levels.TEST));
+        //Parse the level 1 - TODO
+        parseLevel(Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.levels.LEVEL1));
 
         //Return all the public methods and variables
         return {

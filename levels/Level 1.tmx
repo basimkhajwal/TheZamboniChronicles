@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="20" tileheight="20" nextobjectid="1">
+ <tileset firstgid="1" name="grass" tilewidth="20" tileheight="20">
+  <image source="../img/tiles/grass.png" width="20" height="20"/>
+ </tileset>
+ <tileset firstgid="2" name="grass_dark" tilewidth="20" tileheight="20">
+  <image source="../img/tiles/grass_dark.png" width="20" height="20"/>
+ </tileset>
+ <tileset firstgid="3" name="cloulds" tilewidth="20" tileheight="20">
+  <image source="../img/tiles/cloulds.png" width="20" height="20"/>
+ </tileset>
+ <tileset firstgid="4" name="clouds_dark" tilewidth="20" tileheight="20">
+  <image source="../img/tiles/clouds_dark.png" width="20" height="20"/>
+ </tileset>
+ <tileset firstgid="5" name="black" tilewidth="20" tileheight="20">
+  <image source="../img/tiles/road.png" width="20" height="20"/>
+ </tileset>
+ <tileset firstgid="6" name="black_dark" tilewidth="20" tileheight="20">
+  <image source="../img/tiles/dark.png" width="20" height="20"/>
+ </tileset>
+ <tileset firstgid="7" name="sky" tilewidth="20" tileheight="20">
+  <image source="../img/tiles/sky.png" width="20" height="20"/>
+ </tileset>
+ <tileset firstgid="8" name="sky_dark" tilewidth="20" tileheight="20">
+  <image source="../img/tiles/sky_dark.png" width="20" height="20"/>
+ </tileset>
+ <tileset firstgid="9" name="red" tilewidth="20" tileheight="20">
+  <image source="../img/tiles/red.png" width="20" height="20"/>
+ </tileset>
+ <tileset firstgid="10" name="red_dark" tilewidth="20" tileheight="20">
+  <image source="../img/tiles/red_dark.png" width="20" height="20"/>
+ </tileset>
+ <tileset firstgid="11" name="turquoise" tilewidth="20" tileheight="20">
+  <image source="../img/tiles/turquoise.png" width="20" height="20"/>
+ </tileset>
+ <tileset firstgid="12" name="turquoise_dark" tilewidth="20" tileheight="20">
+  <image source="../img/tiles/turquoise_dark.png" width="20" height="20"/>
+ </tileset>
+ <tileset firstgid="13" name="orange" tilewidth="20" tileheight="20">
+  <image source="../img/tiles/orange.png" width="20" height="20"/>
+ </tileset>
+ <tileset firstgid="14" name="orange_dark" tilewidth="20" tileheight="20">
+  <image source="../img/tiles/orange_dark.png" width="20" height="20"/>
+ </tileset>
+ <tileset firstgid="15" name="purple" tilewidth="20" tileheight="20">
+  <image source="../img/tiles/purple.png" width="20" height="20"/>
+ </tileset>
+ <tileset firstgid="16" name="purple_dark" tilewidth="20" tileheight="20">
+  <image source="../img/tiles/purple_dark.png" width="20" height="20"/>
+ </tileset>
+ <tileset firstgid="17" name="yellow" tilewidth="20" tileheight="20">
+  <image source="../img/tiles/yellow.png" width="20" height="20"/>
+ </tileset>
+ <tileset firstgid="18" name="yellow_dark" tilewidth="20" tileheight="20">
+  <image source="../img/tiles/yellow_dark.png" width="20" height="20"/>
+ </tileset>
+ <tileset firstgid="19" name="grey" tilewidth="20" tileheight="20">
+  <image source="../img/tiles/grey.png" width="20" height="20"/>
+ </tileset>
+ <tileset firstgid="20" name="grey_dark" tilewidth="20" tileheight="20">
+  <image source="../img/tiles/grey_dark.png" width="20" height="20"/>
+ </tileset>
+ <imagelayer name="Background">
+  <image source="../img/game_background.png"/>
+ </imagelayer>
+ <layer name="Tile Layer 1" width="50" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztlwuLgzAQhAOth9eH7an//7eWQBaGZfKOyXncwFB3Tcx+JrFqzL/+sq7EZxNjyGVpzX9xzlGII1ZXLT/ThTimGEOophp+X32MIYUlhcNXU2m/nPt8tEr5c9dLK80dx6rV7Dlmcep1RijEkdInt+9v0hlrLtEoztb7oidH6f6uYT5CpeOPrjtVZ6kzpqP2xlpQSy/lchzN0mMtraYtS849jD2b3hnjrqYtS836t/ETbDleqs0PGLUZzqLfjVl938Rad2KfpP7F+e3G1f9Fs+LY4Bg52Du+vh7j0G2w9llZa1MMwvFS7fV8IIPEwhH6/sPvEzYfOC9sLvS8PGF8beGQtbUrDtZHbDm+nLF2nTOQuzljbPWA3IPEwrG4seXc7oyx8eT3QF5iVEqupA2upZTr5eTtvpjA14453B8YT+qcjpmnQV7IL6s9hWEkx0TGD9Uf4/kAghgP+Q==
+  </data>
+ </layer>
+</map>
