@@ -7,9 +7,6 @@ A javascript game made using the html5 canvas, still in development but comes wi
 - Particle Effects (Add when needed)
 - Physics Engine and collision detection
 - MAKE COLLISION BETTER *sigh*
-- 
-
-random hahdhdbnxndbd
 
 ###The Game Ideas
 The game still needs to be planned ..
