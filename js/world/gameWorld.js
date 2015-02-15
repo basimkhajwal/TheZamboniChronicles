@@ -90,12 +90,30 @@ Zamboni.World.GameWorld = {
 
 
         //Put all the renderable tiles into the tiled maps renderable so that they are rendered correctly
+        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.BLACK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.BLACK));
+        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.BLACK_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.BLACK_DARK));
+        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.CLOUDS, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.CLOUDS));
+        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.CLOUDS_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.CLOUDS_DARK));
         tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.GRASS, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.GRASS));
         tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.GRASS_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.GRASS_DARK));
+        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.GREY, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.GREY));
+        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.GREY_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.GREY_DARK));
+        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.ORANGE, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.ORANGE));
+        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.ORANGE_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.ORANGE_DARK));
+        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.PURPLE, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.PURPLE));
+        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.PURPLE_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.PURPLE_DARK));
+        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.RED, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.RED));
+        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.RED_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.RED_DARK));
+        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.SKY, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.SKY));
+        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.SKY_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.SKY_DARK));
+        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.TURQUOISE, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.TURQUOISE));
+        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.TURQUOISE_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.TURQUOISE_DARK));
+        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.YELLOW, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.YELLOW));
+        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.YELLOW_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.YELLOW_DARK));
 
 
-        //Parse the TEST level - TODO
-        parseLevel(Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.levels.TEST));
+        //Parse the LEVEL1 level - TODO
+        parseLevel(Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.levels.LEVEL1));
 
         //Return all the public methods and variables
         return {
@@ -122,7 +140,7 @@ Zamboni.World.GameWorld = {
                 //Test movement code
                 player.moveRight = (Engine.KeyboardInput.isKeyDown(Engine.Keys.RIGHT));
                 player.moveLeft = (Engine.KeyboardInput.isKeyDown(Engine.Keys.LEFT));
-                player.jump = (Engine.KeyboardInput.isKeyDown(Engine.Keys.SPACE));
+                player.jump = (Engine.KeyboardInput.isKeyDown(Engine.Keys.UP));
 
                 if (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("Q"))) {
                     camera.rotate(10 * delta);
