@@ -13,10 +13,10 @@
   <image source="../img/tiles/clouds_dark.png" width="20" height="20"/>
  </tileset>
  <tileset firstgid="5" name="black" tilewidth="20" tileheight="20">
-  <image source="../img/tiles/road.png" width="20" height="20"/>
+  <image source="../img/tiles/black.png" width="20" height="20"/>
  </tileset>
  <tileset firstgid="6" name="black_dark" tilewidth="20" tileheight="20">
-  <image source="../img/tiles/dark.png" width="20" height="20"/>
+  <image source="../img/tiles/black_dark.png" width="20" height="20"/>
  </tileset>
  <tileset firstgid="7" name="sky" tilewidth="20" tileheight="20">
   <image source="../img/tiles/sky.png" width="20" height="20"/>
