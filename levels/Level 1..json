@@ -93,7 +93,7 @@
         }, 
         {
          "firstgid":5,
-         "image":"..\/img\/tiles\/road.png",
+         "image":"..\/img\/tiles\/black.png",
          "imageheight":20,
          "imagewidth":20,
          "margin":0,
@@ -108,7 +108,7 @@
         }, 
         {
          "firstgid":6,
-         "image":"..\/img\/tiles\/dark.png",
+         "image":"..\/img\/tiles\/black_dark.png",
          "imageheight":20,
          "imagewidth":20,
          "margin":0,
