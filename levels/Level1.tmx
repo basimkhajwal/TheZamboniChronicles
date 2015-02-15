@@ -60,9 +60,6 @@
  <tileset firstgid="20" name="grey_dark" tilewidth="20" tileheight="20">
   <image source="../img/tiles/grey_dark.png" width="20" height="20"/>
  </tileset>
- <imagelayer name="Background">
-  <image source="../img/game_background.png"/>
- </imagelayer>
  <layer name="Tile Layer 1" width="50" height="30">
   <data encoding="base64" compression="zlib">
    eJztlwuLgzAQhAOth9eH7an//7eWQBaGZfKOyXncwFB3Tcx+JrFqzL/+sq7EZxNjyGVpzX9xzlGII1ZXLT/ThTimGEOophp+X32MIYUlhcNXU2m/nPt8tEr5c9dLK80dx6rV7Dlmcep1RijEkdInt+9v0hlrLtEoztb7oidH6f6uYT5CpeOPrjtVZ6kzpqP2xlpQSy/lchzN0mMtraYtS849jD2b3hnjrqYtS836t/ETbDleqs0PGLUZzqLfjVl938Rad2KfpP7F+e3G1f9Fs+LY4Bg52Du+vh7j0G2w9llZa1MMwvFS7fV8IIPEwhH6/sPvEzYfOC9sLvS8PGF8beGQtbUrDtZHbDm+nLF2nTOQuzljbPWA3IPEwrG4seXc7oyx8eT3QF5iVEqupA2upZTr5eTtvpjA14453B8YT+qcjpmnQV7IL6s9hWEkx0TGD9Uf4/kAghgP+Q==
