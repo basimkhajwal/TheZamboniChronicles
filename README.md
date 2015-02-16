@@ -43,43 +43,43 @@ https://rawgit.com/basimkhajwal/TheZamboniChronicles/master/index.html
 
 ###Credits, add if you feel neccecary
 ##Credits:
--Matthew Bullock; music provider (I can run in 13 swegz per minute beat that)
--Basim Khajwal; main coder person 
--Cameron Hargreaves; the one with illustrator at home (the swegmaester)
--Jamie Stirling; Rival (basis for main villain) 
--Jaymie; Um… Don’t care
--The Illuminati; father of code
--Tanvi Kishore; Rarely plays TF2
--Oliver Walker; TheHeliumHamster
--Jeff; follows from “My Name is:”
--Brendan Eich; what a lad
--Ricky WhatsHisFace; son of the jamie
--Alex Turner; Entertainment
--505; a 7 hour flight? 45 min drive?
--Brian; Top marks for not trying
--Nitish Bala; Giving me the answers in physics
--Nitish Veerla; THE IPAD INCIDENT. NOTHING ELSE
--Jaymie; Top Class Banter
--Jaymay; He is a scumbag
--Jamay; Don’t u know
--JavaScript; Even if it has no class
--javaScript; AHEM JAMIE
--DEFINITELY NOT C; *ahem* Jamie... C has no class…
--Michael; with his little  bae ;)
--MR Lukic; being a TOP KEK CS teacher
--Thomas Wetherill; I can spell ur surname ;)
--James Williams; that propaganda officer
--John; being a farmer.
--Illuminati, The; for being MLG
--MR GENT; being a care bear.
--The Illuminati; LOOOOOOOOOOOOOOOOOOOOOOOOOOOMY
--Lennie from Of Mice and Men; Gets shot
--George; 180 no scoped Lennie.
--Michael Rosen; nice
--Speedrunners; being sexay and quick and speedy and running
--Sam Road; Doing the business presentation
--Charlie How; *cough cough*
--Oliver Walkers crisps; no reason
--Oliver walkers crisps’ sister; for screaming at him while we play GTA
--Thomas Weatherhill; oh wait I cant.
--Thomas Wetherhill; motivating many peoples lives.
+- Matthew Bullock; music provider (I can run in 13 swegz per minute beat that)
+- Basim Khajwal; main coder person 
+- Cameron Hargreaves; the one with illustrator at home (the swegmaester)
+- Jamie Stirling; Rival (basis for main villain) 
+- Jaymie; Um… Don’t care
+- The Illuminati; father of code
+- Tanvi Kishore; Rarely plays TF2
+- Oliver Walker; TheHeliumHamster
+- Jeff; follows from “My Name is:”
+- Brendan Eich; what a lad
+- Ricky WhatsHisFace; son of the jamie
+- Alex Turner; Entertainment
+- 505; a 7 hour flight? 45 min drive?
+- Brian; Top marks for not trying
+- Nitish Bala; Giving me the answers in physics
+- Nitish Veerla; THE IPAD INCIDENT. NOTHING ELSE
+- Jaymie; Top Class Banter
+- Jaymay; He is a scumbag
+- Jamay; Don’t u know
+- JavaScript; Even if it has no class
+- javaScript; AHEM JAMIE
+- DEFINITELY NOT C; *ahem* Jamie... C has no class…
+- Michael; with his little  bae ;)
+- MR Lukic; being a TOP KEK CS teacher
+- Thomas Wetherill; I can spell ur surname ;)
+- James Williams; that propaganda officer
+- John; being a farmer.
+- Illuminati, The; for being MLG
+- MR GENT; being a care bear.
+- The Illuminati; LOOOOOOOOOOOOOOOOOOOOOOOOOOOMY
+- Lennie from Of Mice and Men; Gets shot
+- George; 180 no scoped Lennie.
+- Michael Rosen; nice
+- Speedrunners; being sexay and quick and speedy and running
+- Sam Road; Doing the business presentation
+- Charlie How; *cough cough*
+- Oliver Walkers crisps; no reason
+- Oliver walkers crisps’ sister; for screaming at him while we play GTA
+- Thomas Weatherhill; oh wait I cant.
+- Thomas Wetherhill; motivating many peoples lives.
