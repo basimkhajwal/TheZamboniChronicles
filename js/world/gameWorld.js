@@ -113,7 +113,7 @@ Zamboni.World.GameWorld = {
 
 
         //Parse the LEVEL1 level - TODO
-        parseLevel(Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.levels.TEST));
+        parseLevel(Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.levels.LEVEL1));
 
         //Return all the public methods and variables
         return {
