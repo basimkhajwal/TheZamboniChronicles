@@ -8,11 +8,12 @@ if (typeof console !== "undefined") {
     if (typeof console.log !== "undefined") {
         console.olog = console.log;
     } else {
-        console.olog = function () {};
+        console.olog = function () {"use strict"; };
     }
 }
 
 console.log = function (message) {
+    "use strict";
     console.olog(message);
     document.getElementById("debugDiv").innerHTML += message + "<br>";
 };
@@ -20,6 +21,7 @@ console.log = function (message) {
 console.error = console.debug = console.info =  console.log;
 
 window.setInterval(function () {
+    "use strict";
     var elem = document.getElementById('debugDiv');
     elem.scrollTop = elem.scrollHeight;
 }, 1000);

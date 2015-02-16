@@ -12,30 +12,36 @@ Zamboni.States.LoadingState = {
     create: function () {
         "use strict";
 
-        var game = null;
-        var state = Engine.GameState.create();
-        var startedChanging = false;
-        var changing = false;
+        var game = null,
+            state = Engine.GameState.create(),
+            startedChanging = false,
+            changing = false,
 
-        var loadingText = Engine.UI.TextArea.create(Zamboni.Utils.GameSettings.canvasWidth / 2, 300, "Loading..");
+            loadingText = Engine.UI.TextArea.create(Zamboni.Utils.GameSettings.canvasWidth / 2, 300, "Loading.."),
+
+            changingText = Engine.UI.TextArea.create(Zamboni.Utils.GameSettings.canvasWidth / 2, 450, "Changing screen.."),
+
+            loadingBar = Engine.UI.LoadingBar.create(320, 800, 30, 1000);
+
         loadingText.setSize(40);
         loadingText.setFamily(Zamboni.Utils.GameSettings.gameFont);
         loadingText.setColour(Zamboni.Utils.ColourScheme.SUN_FLOWER);
 
-        var changingText = Engine.UI.TextArea.create(Zamboni.Utils.GameSettings.canvasWidth / 2, 450, "Changing screen..");
         changingText.setSize(20);
         changingText.setFamily(Zamboni.Utils.GameSettings.gameFont);
         changingText.setColour(Zamboni.Utils.ColourScheme.ORANGE);
 
-        var loadingBar = Engine.UI.LoadingBar.create(320, 800, 30, 1000);
         loadingBar.setColour(Zamboni.Utils.ColourScheme.POMEGRANATE);
 
         state.onCreate = function (g) {
             game = g;
 
             //The image loading stuff
-            var asset;
-            var assets = Zamboni.Utils.Assets; //Save for quick reference
+            var asset,
+                assets = Zamboni.Utils.Assets, //Save for quick reference
+
+                levels = Zamboni.Utils.GameSettings.levels,
+                level;
 
             for (asset in assets) {
                 if (assets.hasOwnProperty(asset)) {
@@ -44,8 +50,6 @@ Zamboni.States.LoadingState = {
             }
 
             //The level loading stuff
-            var levels = Zamboni.Utils.GameSettings.levels;
-            var level;
 
             for (level in levels) {
                 if (levels.hasOwnProperty(level)) {

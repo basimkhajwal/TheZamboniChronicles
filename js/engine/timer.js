@@ -38,8 +38,8 @@ Engine.Timer = {
 
                 var main = function () {
                     //Get the new time and work out how much has elapsed since the last tick in milliseconds
-                    var now = getTime();
-                    var delta = (now - lastTime) / 1000.0;
+                    var now = getTime(),
+                        delta = (now - lastTime) / 1000.0;
 
                     //Call the callbacks
                     updateCallBack(delta);

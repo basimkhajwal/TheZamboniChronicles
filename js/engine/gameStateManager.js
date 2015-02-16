@@ -13,6 +13,7 @@ Engine.GameState = {
     create: function () {
 
         //Return a closure
+        "use strict";
         return {
             //Called when this game is added to the game, with the game passed as the parameter
             onCreate: function (game) {
@@ -56,10 +57,10 @@ Engine.GameStateManager = {
 
         //Private variables
         //The current state, initially null
-        var currentActivity = null;
+        var currentActivity = null,
 
         //Whether or not a state was recently changed (to avoid jitter when changing)
-        var changed = false;
+            changed = false;
 
         return {
             //Set the state and call the destroy of the current state if it isn't null

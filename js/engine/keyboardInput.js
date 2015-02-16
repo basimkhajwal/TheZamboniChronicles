@@ -19,6 +19,7 @@ Engine.Keys = {
     DOWN: 40,
 
     getAlphabet: function (c) {
+        "use strict";
         return c.charCodeAt(0);
     }
 };
@@ -27,12 +28,13 @@ Engine.Keys = {
 Engine.KeyboardInput = function () {
 
     //Hold the current state of which keys are pressed
-    var keyStates = {};
+    "use strict";
+    var keyStates = {},
 
     //Set a key in the keyState variable to true or false
-    var setKey = function (event, value) {
-        keyStates[event.keyCode] = value;
-    };
+        setKey = function (event, value) {
+            keyStates[event.keyCode] = value;
+        };
 
     //When a key has been pressed then set the value to be true
     document.addEventListener('keydown', function (e) {

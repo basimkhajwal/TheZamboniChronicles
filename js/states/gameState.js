@@ -13,9 +13,9 @@ Zamboni.States.GameState = {
     create: function () {
         "use strict";
 
-        var state = Engine.GameState.create();
-        var game = null;
-        var world = Zamboni.World.GameWorld.create();
+        var state = Engine.GameState.create(),
+            game = null,
+            world = Zamboni.World.GameWorld.create();
 
 
         state.onCreate = function (g) {

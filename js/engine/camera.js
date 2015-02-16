@@ -11,13 +11,13 @@ Engine.Camera = {
 
         var toDegrees = function (rad) {
             return rad * (180 / Math.PI);
-        };
+        },
 
-        var toRadians = function (deg) {
-            return deg * (Math.PI / 180);
-        };
+            toRadians = function (deg) {
+                return deg * (Math.PI / 180);
+            },
 
-        var angleInRad = toRadians(angle);
+            angleInRad = toRadians(angle);
 
         return {
 

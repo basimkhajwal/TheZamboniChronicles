@@ -9,8 +9,8 @@ Engine.FPSLogger = {
         "use strict";
 
         //The private variables that won't be accessible from outside
-        var currentDelta = 0;
-        var frames = 0;
+        var currentDelta = 0,
+            frames = 0;
 
         //Return a closure
         return {

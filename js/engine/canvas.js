@@ -8,16 +8,18 @@ Engine.Canvas = {
     create: function (width, height) {
 
         //Get the main canvas
-        var canvas = document.getElementById("canvas");
+        "use strict";
+        var canvas = document.getElementById("canvas"),
 
         //Get the context to draw on
-        var canvasContext = canvas.getContext("2d");
+            canvasContext = canvas.getContext("2d"),
 
         //Create a back-buffer with the settings but don't add it to the DOM
-        var buffer = document.createElement("canvas");
+            buffer = document.createElement("canvas"),
+            bufferContext = buffer.getContext("2d");
+
         buffer.width = width;
         buffer.height = height;
-        var bufferContext = buffer.getContext("2d");
 
         //Return a closure with all the public methods
         return {

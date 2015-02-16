@@ -10,17 +10,17 @@ Engine.UI.TextButton = {
         "use strict";
 
         //The default values
-        var clicked = false;
-        var mouseOver = false;
+        var clicked = false,
+            mouseOver = false,
 
-        var buttonColour = "#000";
-        var hoverColour = "#666";
-        var clickColour = "#222";
+            buttonColour = "#000",
+            hoverColour = "#666",
+            clickColour = "#222",
 
-        var cornerRadius = 0;
+            cornerRadius = 0,
 
         //Private stuff
-        var text = Engine.UI.TextArea.create(buttonX + buttonWidth / 2, buttonY + buttonHeight / 2, textString);
+            text = Engine.UI.TextArea.create(buttonX + buttonWidth / 2, buttonY + buttonHeight / 2, textString);
         text.setColour("#FFF");
         text.setBaseline("middle");
 
