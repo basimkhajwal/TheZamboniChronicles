@@ -26,11 +26,11 @@ Engine.Game = {
                 var pause = false;
                 var timeout = false;
                 
-                window.addEventListener('focus', function() {
+                window.addEventListener('focus', function () {
                     pause = false;
                 });
 
-                window.addEventListener('blur', function() {
+                window.addEventListener('blur', function () {
                     pause = true;
                 });
 
@@ -44,8 +44,8 @@ Engine.Game = {
                     
                     if (1000 / delta < 40) {
                         pause = true;
-                    } else if (!timeout){
-                        window.setTimeout(function() {
+                    } else if (!timeout) {
+                        window.setTimeout(function () {
                             pause = false;
                         }, 1000);
                         

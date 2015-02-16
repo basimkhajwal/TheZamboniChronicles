@@ -30,7 +30,7 @@ Zamboni.Utils.GameSettings = {
     //The levels
     levels: {
         TEST: "levels/test.json",
-        LEVEL1: "levels/Level1.json
+        LEVEL1: "levels/Level1.json"
     },
 
     tiles: {
@@ -38,24 +38,24 @@ Zamboni.Utils.GameSettings = {
         EMPTY: 0,
         GRASS_DARK: 1,
         GRASS: 2,
-        CLOUDS:3,
-        CLOUDS_DARK:4,
-        BLACK:5,
-        BLACK_DARK:6,
-        SKY:7,
-        SKY_DARK:8,
-        RED:9,
-        RED_DARK:10,
-        TURQUOISE:11,
-        TURQUOISE_DARK:12,
-        ORANGE:13,
-        ORANGE_DARK:14,
-        PURPLE:15,
-        PURPLE_DARK:16,
-        YELLOW:17,
-        YELLOW_DARK:18,
-        GREY:19,
-        GREY_DARK:20
+        CLOUDS: 3,
+        CLOUDS_DARK: 4,
+        BLACK: 5,
+        BLACK_DARK: 6,
+        SKY: 7,
+        SKY_DARK: 8,
+        RED: 9,
+        RED_DARK: 10,
+        TURQUOISE: 11,
+        TURQUOISE_DARK: 12,
+        ORANGE: 13,
+        ORANGE_DARK: 14,
+        PURPLE: 15,
+        PURPLE_DARK: 16,
+        YELLOW: 17,
+        YELLOW_DARK: 18,
+        GREY: 19,
+        GREY_DARK: 20
 
     }
 };

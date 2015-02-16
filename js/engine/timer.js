@@ -49,7 +49,7 @@ Engine.Timer = {
                     lastTime = now;
                     requestAnimFrame(main);
 
-                }
+                };
 
                 //Start the timer
                 main();

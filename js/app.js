@@ -12,16 +12,16 @@ if (typeof console !== "undefined") {
     }
 }
 
-console.log = function(message) {
+console.log = function (message) {
     console.olog(message);
     document.getElementById("debugDiv").innerHTML += message + "<br>";
 };
 
-console.error = console.debug = console.info =  console.log
+console.error = console.debug = console.info =  console.log;
 
-window.setInterval(function() {
-  var elem = document.getElementById('debugDiv');
-  elem.scrollTop = elem.scrollHeight;
+window.setInterval(function () {
+    var elem = document.getElementById('debugDiv');
+    elem.scrollTop = elem.scrollHeight;
 }, 1000);
 
 //End console stuff
