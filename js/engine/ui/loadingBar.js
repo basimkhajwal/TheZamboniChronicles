@@ -6,14 +6,14 @@ Engine.UI = Engine.UI || {};
 Engine.UI.LoadingBar = {
 
 
-    create: function (bar_Y, bar_Width, bar_Height, canvas_Width, bar_Colour) {
+    create: function (barY, barWidth, barHeight, canvasWidth, barColour) {
         "use strict";
 
-        var barColour = bar_Colour || "#000",
-            canvasWidth = canvas_Width || 1000,
-            barHeight = bar_Height || 30,
-            barWidth = bar_Width || canvasWidth,
-            barY = bar_Y || 100,
+        var barColour = barColour || "#000",
+            canvasWidth = canvasWidth || 1000,
+            barHeight = barHeight || 30,
+            barWidth = barWidth || canvasWidth,
+            barY = barY || 100,
 
             currentPercentage = 0,
             barX = (canvasWidth - barWidth) / 2;
