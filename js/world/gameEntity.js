@@ -131,9 +131,9 @@ Zamboni.World.GameEntity = {
 
                     if (this.collidesTop(collisionFunction)) {
 
-                        if (this.vy > 0 && (this.y - oldY > 10)) {
+                        if (this.vy < 0 && (oldY - this.y > 10)) {
 
-                            while (this.collidesBottom(collisionFunction)) {
+                            while (this.collidesTop(collisionFunction)) {
                                 this.y += 1;
                             }
                         } else {
