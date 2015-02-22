@@ -130,8 +130,18 @@ Zamboni.World.GameEntity = {
                     this.y += delta * this.vy;
 
                     if (this.collidesTop(collisionFunction)) {
-                        this.y = oldY;
+
+                        if (this.vy > 0 && (this.y - oldY > 10)) {
+
+                            while (this.collidesBottom(collisionFunction)) {
+                                this.y += 1;
+                            }
+                        } else {
+                            this.y = oldY;
+                        }
+
                         this.vy = 0;
+
                     } else if (this.collidesBottom(collisionFunction)) {
 
                         this.jumping = false;
