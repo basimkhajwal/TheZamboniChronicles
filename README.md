@@ -1,9 +1,4 @@
 # TheZamboniChronicles
-
-I'm doing this just for my streak from a phone at the moment and there isn't a good enough wifi connection here and it's only in one part of the hotel :( so I cant do much but I'll have a look at it when I get back, btw what did I miss in maths and what do I have to do for the controlled assesment to catch up plus any other hmwrk from bio/chem in friday. Random streak stuff again blah blah
-
-I'm back!!
-
 A javascript game made using the HTML5 canvas, still in development but comes with (hopefully) a useful underlying engine self-made ( that probably still has a lot of errors but never mind :P), the game idea is a simple 2d platformer, the full details are still under development but will hopefully come into shape soon and the game will progress from therein. 
 
 ######Current List Of Tasks To Do:
