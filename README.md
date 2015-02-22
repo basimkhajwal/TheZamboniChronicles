@@ -22,6 +22,7 @@ The game still needs to be planned ..
 - Change player skin option
 - More customisation option (customisation = good)
 - Lighting, maybe a dark level where you get a torch or lantern
+- Tutorial level, pop up hints, maybe with alert() that triggers in a certain place on the level
 
 ##Current things to decide
 - Should we stick with 20 x 20 tiles (50 tiles across and 30 up) like it is or make them bigger?
