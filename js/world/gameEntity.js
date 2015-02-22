@@ -106,11 +106,7 @@ Zamboni.World.GameEntity = {
 
                     //The default forces to apply for movement
                     accel = this.accelForce * (this.falling ? 0.5 : 1.0),
-                    friction = this.frictionForce * (this.falling ? 1.0 : 0.5),
-
-                    //The collision step direction and the function to use
-                    step,
-                    stepFunction;
+                    friction = this.frictionForce * (this.falling ? 1.0 : 0.5);
 
                 //If gravity is enabled for the sprite and it is falling apply it initially
                 if (this.applyGravity && this.falling) {
@@ -165,25 +161,26 @@ Zamboni.World.GameEntity = {
                     //Check if either side collided
                     if (this.collidedDown || this.collidedUp) {
 
-                        if (this.collidedUp) {
-                            step = 1;
-                            stepFunction = this.collidesTop;
-                        } else {
-
+                        if (this.collidedDown) {
                             //If it collided on the bottom then set the states
                             this.jumping = false;
                             this.falling = false;
-
-                            step = -1;
-                            stepFunction = this.collidesBottom;
                         }
 
                         //If it collides then move up until it doesn't collide
                         if (this.vy !== 0 && Math.abs(oldY - this.y) > 10) {
 
-                            while (stepFunction(collisionFunction)) {
-                                this.y += step;
+
+                            if (this.collidedDown) {
+                                while (this.collidesBottom(collisionFunction)) {
+                                    this.y -= 1;
+                                }
+                            } else {
+                                while (this.collidesTop(collisionFunction)) {
+                                    this.y += 1;
+                                }
                             }
+
                         } else {
                             this.y = oldY;
                         }
@@ -203,18 +200,16 @@ Zamboni.World.GameEntity = {
 
                     if (this.collidedLeft || this.collidedRight) {
 
-                        if (this.collidedLeft) {
-                            step = 1;
-                            stepFunction = this.collidesLeft;
-                        } else {
-                            step = -1;
-                            stepFunction = this.collidesRight;
-                        }
-
                         if (this.vx !== 0 && (Math.abs(this.x - oldX) > 10)) {
 
-                            while (stepFunction(collisionFunction)) {
-                                this.x += step;
+                            if (this.collidedLeft) {
+                                while (this.collidesLeft(collisionFunction)) {
+                                    this.x += 1;
+                                }
+                            } else {
+                                while (this.collidedRight(collisionFunction)) {
+                                    this.x -= 1;
+                                }
                             }
 
                         } else {
