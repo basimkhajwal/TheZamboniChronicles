@@ -100,7 +100,13 @@ Zamboni.World.GameEntity = {
 
                     //The default forces to apply for movement
                     accel = this.accelForce * (this.falling ? 1.0 : 0.5),
-                    friction = this.frictionForce * (this.falling ? 0.5 : 1.0);
+                    friction = this.frictionForce * (this.falling ? 0.5 : 1.0),
+
+                    //The collision flags
+                    collidedUp,
+                    collidedDown,
+                    collidedRight,
+                    collidedLeft;
 
                 //If gravity is enables for the sprite apply it initially
                 if (this.applyGravity) {
@@ -189,11 +195,29 @@ Zamboni.World.GameEntity = {
                     
                     this.x += delta * this.vx;
 
-                    var collidedLeft = (this.vx > 0 && this.collidesLeft(collisionFunction),
-                        collidedRight = this.collidesRight(collisionFunction);
+                    collidedLeft = this.collidesLeft(collisionFunction);
+                    collidedRight = this.collidesRight(collisionFunction);
 
-                    if ((this.vx < 0 && (collidedLeft || collidedRight) ) {
-                        this.x = oldX;
+                    if (collidedLeft || collidedRight) {
+
+
+
+                        if (this.vx !== 0 && (Math.abs(this.x - oldX) > 10)) {
+
+                            if (collidedLeft) {
+                                while (this.collidesLeft(collisionFunction)) {
+                                    this.x += 1;
+                                }
+                            } else {
+                                while (this.collidesRight(collisionFunction)) {
+                                    this.x -= 1;
+                                }
+                            }
+
+                        } else {
+                            this.x = oldX;
+                        }
+
                         this.vx = 0;
                     }
                 }
