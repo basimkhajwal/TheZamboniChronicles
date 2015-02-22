@@ -29,8 +29,8 @@ Zamboni.Utils.GameSettings = {
 
     //The levels
     levels: {
-        TEST: "levels/test.json",
-        LEVEL1: "levels/Level1.json"
+        TEST: "levels/test.json"
+        //LEVEL1: "levels/Level1.json"
     },
 
     tiles: {
