@@ -80,6 +80,7 @@ Zamboni.World.GameEntity = {
                 this.vx += dx;
                 this.vy += dy;
 
+                //Make sure that the new velocity is in the range for this sprite
                 this.vx = clamp(this.vx, -this.maxVx, this.maxVx);
                 this.vy = clamp(this.vy, -this.maxVy, this.maxVy);
             },
@@ -87,50 +88,69 @@ Zamboni.World.GameEntity = {
             //Update the x and y based on the velocity and the delta
             update: function (delta, collisionFunction) {
 
+                //The initial values for the sprite to check for collisions
+                var oldX = this.x,
+                    oldY = this.y,
+                    wasLeft = this.vx < 0,
+                    wasRight = this.vx > 0,
+
+                    //The change in velocity (acceleration)
+                    ddx = 0,
+                    ddy = 0,
+
+                    //The default forces to apply for movement
+                    accel = this.accelForce * (this.falling ? 1.0 : 0.5),
+                    friction = this.frictionForce * (this.falling ? 0.5 : 1.0);
+
+                //If gravity is enables for the sprite apply it initially
+                if (this.applyGravity) {
+                    ddy += this.gravityForce;
+                }
+
+                //Add appropritate friction to the sides depending on which direction you are moving
+                if (this.moveLeft) {
+                    ddx -= accel;
+                } else if (wasLeft) {
+                    ddx += friction;
+                }
+
+                if (this.moveRight) {
+                    ddx += accel;
+                } else if (wasRight) {
+                    ddx -= friction;
+                }
+
+                //If the jump command has just been called then apply a single large impulse
+                if (this.jump && !this.jumping) {
+                    ddy -= this.jumpForce;
+                    this.jumping = true;
+                }
+
+                //Accelerate by delta * 60 so that we dont have to change other values
+                this.accelerate(ddx * delta * 60, ddy * delta * 60);
+
+                //To prevent the sprite from moving backwards from friction
+                if ((wasLeft  && (this.vx > 0)) || (wasRight && (this.vx < 0))) {
+                    this.vx = 0;
+                }
+
+                //If there is no collision function then just do a simple update
                 if (typeof collisionFunction === "undefined") {
+
+                    //Just move by velocity * delta
                     this.translate(this.vx * delta, this.vy * delta);
+
                 } else {
+                    //Otherwise if we do have a collision function do a collision check update
+                    //we assume that the current position is free from collision
 
-                    var oldX = this.x,
-                        oldY = this.y,
-                        wasLeft = this.vx < 0,
-                        wasRight = this.vx > 0,
-                        ddx = 0,
-                        ddy = 0,
-                        accel = this.accelForce * (this.falling ? 1.0 : 0.5),
-                        friction = this.frictionForce * (this.falling ? 0.5 : 1.0);
-
-                    if (this.applyGravity) {
-                        ddy = this.gravityForce;
-                    }
-
-                    if (this.moveLeft) {
-                        ddx -= accel;
-                    } else if (wasLeft) {
-                        ddx += friction;
-                    }
-
-                    if (this.moveRight) {
-                        ddx += accel;
-                    } else if (wasRight) {
-                        ddx -= friction;
-                    }
-
-                    this.accelerate(ddx, ddy);
-
-                    if ((wasLeft  && (this.vx > 0)) || (wasRight && (this.vx < 0))) {
-                        this.vx = 0;
-                    }
-
-                    if (this.jump && !this.jumping) {
-                        this.vy -= this.jumpForce;
-                        this.jumping = true;
-                    }
-
+                    //First move the y by the current velocity
                     this.y += delta * this.vy;
 
+                    //Now check if this new y has collided with anything top or bottom
                     if (this.collidesTop(collisionFunction)) {
 
+                        //If it collided on top then move up until it collides
                         if (this.vy < 0 && (oldY - this.y > 10)) {
 
                             while (this.collidesTop(collisionFunction)) {
@@ -140,13 +160,16 @@ Zamboni.World.GameEntity = {
                             this.y = oldY;
                         }
 
+                        //Now set the velocity to 0
                         this.vy = 0;
 
                     } else if (this.collidesBottom(collisionFunction)) {
 
+                        //If it collided on the bottom then set the states
                         this.jumping = false;
                         this.falling = false;
 
+                        //Move down until we collide
                         if (this.vy > 0 && (this.y - oldY > 10)) {
 
                             while (this.collidesBottom(collisionFunction)) {
@@ -156,14 +179,20 @@ Zamboni.World.GameEntity = {
                             this.y = oldY;
                         }
 
+                        //Set the velocity back to 0
                         this.vy = 0;
+
                     } else {
+                        //If it didn't collide on top or bottom then the sprite is falling
                         this.falling = true;
                     }
                     
                     this.x += delta * this.vx;
 
-                    if ((this.vx < 0 && this.collidesLeft(collisionFunction)) || (this.vx > 0 && this.collidesRight(collisionFunction))) {
+                    var collidedLeft = (this.vx > 0 && this.collidesLeft(collisionFunction),
+                        collidedRight = this.collidesRight(collisionFunction);
+
+                    if ((this.vx < 0 && (collidedLeft || collidedRight) ) {
                         this.x = oldX;
                         this.vx = 0;
                     }

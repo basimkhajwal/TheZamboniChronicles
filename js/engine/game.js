@@ -78,7 +78,6 @@ Engine.Game = {
                 gameStateManager = Engine.GameStateManager.create(this);
                 gameStateManager.setState(gameOptions.state);
 
-
                 //Begin the game loop
                 timer.start(update, render);
             },
