@@ -11,6 +11,19 @@ A javascript game made using the HTML5 canvas, still in development but comes wi
 ###The Game Ideas
 The game still needs to be planned ..
 
+###Possible Additions
+- Lava that kills the player
+- Water to swim in
+- Enemies that move side to side
+- Enemies that aim
+- Moving platforms
+- Balls that roll with rotations
+- Gun for player
+- Change player skin option
+- More customisation option (customisation = good)
+- Lighting, maybe a dark level where you get a torch or lantern
+- Tutorial level, pop up hints, maybe with alert() that triggers in a certain place on the level
+
 ##Current things to decide
 - Should we stick with 20 x 20 tiles (50 tiles across and 30 up) like it is or make them bigger?
 - How big should the player be?
@@ -45,8 +58,8 @@ https://rawgit.com/basimkhajwal/TheZamboniChronicles/master/index.html
 
 ###Credits, add if you feel neccecary
 ##Credits:
-- Matthew Bullock; music provider (I can run in 13 swegz per minute beat that)
 - Basim Khajwal; main coder person 
+- Matthew Bullock; music provider (I can run in 13 swegz per minute)
 - Cameron Hargreaves; the one with illustrator at home (the swegmaester)
 - Jamie Stirling; Rival (basis for main villain) 
 - Jaymie; Um… Don’t care
