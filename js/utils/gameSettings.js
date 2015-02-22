@@ -22,11 +22,6 @@ Zamboni.Utils.GameSettings = {
     //The font for all the buttons, titles etc.
     gameFont: "Lato",
 
-    //World settings
-
-    //The collision resolution (how many to check per side)
-    collisionResolution: 4,
-
     //The levels
     levels: {
         TEST: "levels/test.json"

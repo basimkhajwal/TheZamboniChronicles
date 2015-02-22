@@ -2,6 +2,7 @@
 A javascript game made using the HTML5 canvas, still in development but comes with (hopefully) a useful underlying engine self-made ( that probably still has a lot of errors but never mind :P), the game idea is a simple 2d platformer, the full details are still under development but will hopefully come into shape soon and the game will progress from therein. 
 
 ######Current List Of Tasks To Do:
+- FIX FUNCTION POINTER ERROR IN COLLISION
 - Particle Effects (Add when needed)
 - Physics Engine and collision detection
 - MAKE COLLISION BETTER *sigh*

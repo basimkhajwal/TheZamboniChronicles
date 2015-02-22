@@ -90,7 +90,6 @@ Zamboni.World.GameWorld = {
 
 
         //Put all the renderable tiles into the tiled maps renderable so that they are rendered correctly
-
         tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.BLACK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.BLACK));
         tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.BLACK_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.BLACK_DARK));
         tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.CLOUDS, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.CLOUDS));

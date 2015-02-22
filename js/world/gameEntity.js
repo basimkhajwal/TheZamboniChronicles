@@ -17,16 +17,13 @@ Zamboni.World.GameEntity = {
     /*
     *   Create a new empty entity with all the default values
     */
-    createEmpty: function (collisionRes) {
+    createEmpty: function () {
         "use strict";
 
         //Utility function to clamp a value in a specified interval
         var clamp = function (val, min, max) {
             return Math.max(min, Math.min(max, val));
         };
-
-        //How many times to check each side
-        collisionRes = collisionRes || Zamboni.Utils.GameSettings.collisionResolution;
 
         return {
 
@@ -43,6 +40,9 @@ Zamboni.World.GameEntity = {
             vx: 0,
             vy: 0,
 
+            //The collision resolution (how many to check per side)
+            collisionRes: 4,
+
             //The acceleration and frictional force in the horizontal directions
             accelForce: 30,
             frictionForce: 20,
@@ -56,7 +56,7 @@ Zamboni.World.GameEntity = {
 
             //Clamp values
             maxVx: 200,
-            maxVy: 400,
+            maxVy: 600,
 
             //Forces to apply on it
             applyGravity: false,
@@ -69,6 +69,12 @@ Zamboni.World.GameEntity = {
             falling: false,
             jumping: false,
             
+            //The collision flags
+            collidedUp: false,
+            collidedDown: false,
+            collidedRight: false,
+            collidedLeft: false,
+
             //Change the position by a certain amount
             translate: function (dx, dy) {
                 this.x += dx;
@@ -99,17 +105,15 @@ Zamboni.World.GameEntity = {
                     ddy = 0,
 
                     //The default forces to apply for movement
-                    accel = this.accelForce * (this.falling ? 1.0 : 0.5),
-                    friction = this.frictionForce * (this.falling ? 0.5 : 1.0),
+                    accel = this.accelForce * (this.falling ? 0.5 : 1.0),
+                    friction = this.frictionForce * (this.falling ? 1.0 : 0.5),
 
-                    //The collision flags
-                    collidedUp,
-                    collidedDown,
-                    collidedRight,
-                    collidedLeft;
+                    //The collision step direction and the function to use
+                    step,
+                    stepFunction;
 
-                //If gravity is enables for the sprite apply it initially
-                if (this.applyGravity) {
+                //If gravity is enabled for the sprite and it is falling apply it initially
+                if (this.applyGravity && this.falling) {
                     ddy += this.gravityForce;
                 }
 
@@ -129,6 +133,7 @@ Zamboni.World.GameEntity = {
                 //If the jump command has just been called then apply a single large impulse
                 if (this.jump && !this.jumping) {
                     ddy -= this.jumpForce;
+
                     this.jumping = true;
                 }
 
@@ -148,44 +153,42 @@ Zamboni.World.GameEntity = {
 
                 } else {
                     //Otherwise if we do have a collision function do a collision check update
-                    //we assume that the current position is free from collision
+                    //we assume that the previous position is free from collision
 
                     //First move the y by the current velocity
                     this.y += delta * this.vy;
 
-                    //Now check if this new y has collided with anything top or bottom
-                    if (this.collidesTop(collisionFunction)) {
+                    //Check if a collision occured vertically and set the flags
+                    this.collidedUp = this.collidesTop(collisionFunction);
+                    this.collidedDown = this.collidesBottom(collisionFunction);
 
-                        //If it collided on top then move up until it collides
-                        if (this.vy < 0 && (oldY - this.y > 10)) {
+                    //Check if either side collided
+                    if (this.collidedDown || this.collidedUp) {
 
-                            while (this.collidesTop(collisionFunction)) {
-                                this.y += 1;
+                        if (this.collidedUp) {
+                            step = 1;
+                            stepFunction = this.collidesTop;
+                        } else {
+
+                            //If it collided on the bottom then set the states
+                            this.jumping = false;
+                            this.falling = false;
+
+                            step = -1;
+                            stepFunction = this.collidesBottom;
+                        }
+
+                        //If it collides then move up until it doesn't collide
+                        if (this.vy !== 0 && Math.abs(oldY - this.y) > 10) {
+
+                            while (stepFunction(collisionFunction)) {
+                                this.y += step;
                             }
                         } else {
                             this.y = oldY;
                         }
 
                         //Now set the velocity to 0
-                        this.vy = 0;
-
-                    } else if (this.collidesBottom(collisionFunction)) {
-
-                        //If it collided on the bottom then set the states
-                        this.jumping = false;
-                        this.falling = false;
-
-                        //Move down until we collide
-                        if (this.vy > 0 && (this.y - oldY > 10)) {
-
-                            while (this.collidesBottom(collisionFunction)) {
-                                this.y -= 1;
-                            }
-                        } else {
-                            this.y = oldY;
-                        }
-
-                        //Set the velocity back to 0
                         this.vy = 0;
 
                     } else {
@@ -195,23 +198,23 @@ Zamboni.World.GameEntity = {
                     
                     this.x += delta * this.vx;
 
-                    collidedLeft = this.collidesLeft(collisionFunction);
-                    collidedRight = this.collidesRight(collisionFunction);
+                    this.collidedLeft = this.collidesLeft(collisionFunction);
+                    this.collidedRight = this.collidesRight(collisionFunction);
 
-                    if (collidedLeft || collidedRight) {
+                    if (this.collidedLeft || this.collidedRight) {
 
-
+                        if (this.collidedLeft) {
+                            step = 1;
+                            stepFunction = this.collidesLeft;
+                        } else {
+                            step = -1;
+                            stepFunction = this.collidesRight;
+                        }
 
                         if (this.vx !== 0 && (Math.abs(this.x - oldX) > 10)) {
 
-                            if (collidedLeft) {
-                                while (this.collidesLeft(collisionFunction)) {
-                                    this.x += 1;
-                                }
-                            } else {
-                                while (this.collidesRight(collisionFunction)) {
-                                    this.x -= 1;
-                                }
+                            while (stepFunction(collisionFunction)) {
+                                this.x += step;
                             }
 
                         } else {
@@ -221,6 +224,8 @@ Zamboni.World.GameEntity = {
                         this.vx = 0;
                     }
                 }
+
+
             },
 
             //Draw the image or a solid colour at the entity's position
@@ -248,7 +253,7 @@ Zamboni.World.GameEntity = {
             collidesLeft: function (collisionFunc) {
 
                 //How much to change each time
-                var step = this.height / collisionRes,
+                var step = this.height / this.collisionRes,
 
                     //The counter variable
                     i;
@@ -269,7 +274,7 @@ Zamboni.World.GameEntity = {
             collidesRight: function (collisionFunc) {
 
                 //How much to change each time
-                var step = this.height / collisionRes,
+                var step = this.height / this.collisionRes,
 
                     //The counter variable
                     i;
@@ -291,7 +296,7 @@ Zamboni.World.GameEntity = {
             collidesTop: function (collisionFunc) {
 
                 //How much to change each time
-                var step = this.width / collisionRes,
+                var step = this.width / this.collisionRes,
 
                     //The counter variable
                     i;
@@ -311,9 +316,9 @@ Zamboni.World.GameEntity = {
 
             //Check if the bottom side collides with the respective collision function
             collidesBottom: function (collisionFunc) {
-
+                //console.log("Called " + this);
                 //How much to change each time
-                var step = this.width / collisionRes,
+                var step = this.width / this.collisionRes,
 
                     //The counter variable
                     i;

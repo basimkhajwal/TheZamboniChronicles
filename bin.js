@@ -66,6 +66,8 @@ this.y += this.vy * delta;
 
 
 
+            //How many iterations to trace ray by each time
+            collisionSteps: 25,
 
 
 */
