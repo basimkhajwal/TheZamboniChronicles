@@ -9,6 +9,8 @@ A javascript game made using the HTML5 canvas, still in development but comes wi
 - Make it side scrolling with bigger levels
 - Parallax scrolling and background effects
 
+
+
 ###The Game Ideas
 The game still needs to be planned ..
 
