@@ -152,6 +152,9 @@ Zamboni.World.GameWorld = {
 
                 player.update(delta, tiledCollision);
 
+                //Update the camera position - TEMP
+                camera.setX(player.x - 200);
+                camera.setY(player.y - 200);
             }
 
 

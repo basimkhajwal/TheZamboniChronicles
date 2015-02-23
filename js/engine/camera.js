@@ -22,13 +22,13 @@ Engine.Camera = {
         return {
 
             projectContext: function (ctx) {
-                ctx.translate(x, y);
+                ctx.translate(-x, -y);
                 ctx.rotate(angleInRad);
             },
 
             unProjectContext: function (ctx) {
                 ctx.rotate(-angleInRad);
-                ctx.translate(-x, -y);
+                ctx.translate(x, y);
             },
 
             projectPoint: function (pX, pY) {
