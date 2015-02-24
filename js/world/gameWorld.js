@@ -23,7 +23,7 @@ Zamboni.World.GameWorld = {
         //All the private methods and variables
 
         //The tiled map for the background
-        var tiledMap = Engine.TiledMap.create(50, 30, 20, 20),
+        var tiledMap,
 
             //The tiled maps collision function
             tiledCollision,
@@ -66,11 +66,36 @@ Zamboni.World.GameWorld = {
                     //Get all the objects
                     objects = jsonObj.layers[1].objects;
 
+                //Create a new tiled map for the level
+                tiledMap = Engine.TiledMap.create(jsonObj.width, jsonObj.height, 20, 20);
+
+                //Put all the renderable tiles into the tiled maps renderable so that they are rendered correctly
+                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.BLACK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.BLACK));
+                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.BLACK_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.BLACK_DARK));
+                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.CLOUDS, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.CLOUDS));
+                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.CLOUDS_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.CLOUDS_DARK));
+                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.GRASS, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.GRASS));
+                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.GRASS_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.GRASS_DARK));
+                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.GREY, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.GREY));
+                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.GREY_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.GREY_DARK));
+                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.ORANGE, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.ORANGE));
+                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.ORANGE_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.ORANGE_DARK));
+                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.PURPLE, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.PURPLE));
+                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.PURPLE_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.PURPLE_DARK));
+                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.RED, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.RED));
+                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.RED_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.RED_DARK));
+                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.SKY, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.SKY));
+                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.SKY_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.SKY_DARK));
+                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.TURQUOISE, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.TURQUOISE));
+                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.TURQUOISE_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.TURQUOISE_DARK));
+                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.YELLOW, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.YELLOW));
+                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.YELLOW_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.YELLOW_DARK));
+
                 //Set all the background tiles
                 for (i = 0; i < tiles.length; i += 1) {
 
                     //Set the correct row and column to the value that is at that tile
-                    tiledMap.setTileAt(Math.floor(i / 50), i % 50, tiles[i]);
+                    tiledMap.setTileAt(Math.floor(i / jsonObj.width), i % jsonObj.width, tiles[i]);
                 }
 
                 //Loop over every object defined in the second layer
@@ -89,31 +114,9 @@ Zamboni.World.GameWorld = {
             };
 
 
-        //Put all the renderable tiles into the tiled maps renderable so that they are rendered correctly
-        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.BLACK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.BLACK));
-        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.BLACK_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.BLACK_DARK));
-        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.CLOUDS, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.CLOUDS));
-        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.CLOUDS_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.CLOUDS_DARK));
-        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.GRASS, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.GRASS));
-        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.GRASS_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.GRASS_DARK));
-        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.GREY, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.GREY));
-        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.GREY_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.GREY_DARK));
-        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.ORANGE, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.ORANGE));
-        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.ORANGE_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.ORANGE_DARK));
-        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.PURPLE, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.PURPLE));
-        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.PURPLE_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.PURPLE_DARK));
-        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.RED, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.RED));
-        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.RED_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.RED_DARK));
-        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.SKY, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.SKY));
-        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.SKY_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.SKY_DARK));
-        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.TURQUOISE, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.TURQUOISE));
-        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.TURQUOISE_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.TURQUOISE_DARK));
-        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.YELLOW, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.YELLOW));
-        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.YELLOW_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.YELLOW_DARK));
-
 
         //Parse the level - TODO
-        parseLevel(Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.levels.TEST));
+        parseLevel(Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.levels.TEST2));
 
         //Return all the public methods and variables
         return {
