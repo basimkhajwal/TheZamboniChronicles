@@ -25,11 +25,24 @@ Zamboni.World.GameWorld = {
         //The tiled map for the background
         var tiledMap,
 
+            //Clamp utility function
+            clamp = function (val, min, max) {
+                return Math.min(max, Math.max(val, min));
+            },
+
             //The tiled maps collision function
             tiledCollision,
 
             //The camera for viewing the world (in the eyes of the player)
             camera = Engine.Camera.create(0, 0, 0),
+
+            //The settings for the camera
+            minCameraX = 0,
+            minCameraY = 0,
+
+            //To be set when the tiled map is created
+            maxCameraX,
+            maxCameraY,
 
             //The player entity
             player,
@@ -91,6 +104,10 @@ Zamboni.World.GameWorld = {
                 tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.YELLOW, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.YELLOW));
                 tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.YELLOW_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.YELLOW_DARK));
 
+                //Set the camera variables
+                maxCameraX = tiledMap.getWidth() * tiledMap.getTileWidth() - 1000;
+                maxCameraY = tiledMap.getHeight() * tiledMap.getTileHeight() - 600;
+
                 //Set all the background tiles
                 for (i = 0; i < tiles.length; i += 1) {
 
@@ -111,6 +128,32 @@ Zamboni.World.GameWorld = {
 
                 //Get the collision function
                 tiledCollision = tiledMap.isCellBlocked;
+            },
+
+
+            //The updating stuff
+            updatePlayer = function (delta) {
+
+            },
+
+            updateCamera = function (delta) {
+
+                if (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("Q"))) {
+                    camera.rotate(10 * delta);
+                }
+
+                if (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("W"))) {
+                    camera.rotate(-10 * delta);
+                }
+
+
+                //Update the camera position
+                camera.setX((player.x + player.width / 2) - Zamboni.Utils.GameSettings.playerScreenX);
+                camera.setY((player.y + player.height / 2) - Zamboni.Utils.GameSettings.playerScreenY);
+
+                //Clamp the values
+                camera.setX(clamp(camera.getX(), minCameraX, maxCameraX));
+                camera.setY(clamp(camera.getY(), minCameraY, maxCameraY));
             };
 
 
@@ -140,24 +183,9 @@ Zamboni.World.GameWorld = {
             update: function (delta) {
 
 
-                //Test movement code
-                player.moveRight = (Engine.KeyboardInput.isKeyDown(Engine.Keys.RIGHT));
-                player.moveLeft = (Engine.KeyboardInput.isKeyDown(Engine.Keys.LEFT));
-                player.jump = (Engine.KeyboardInput.isKeyDown(Engine.Keys.UP));
+                updatePlayer(delta);
+                updateCamera(delta);
 
-                if (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("Q"))) {
-                    camera.rotate(10 * delta);
-                }
-
-                if (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("W"))) {
-                    camera.rotate(-10 * delta);
-                }
-
-                player.update(delta, tiledCollision);
-
-                //Update the camera position
-                camera.setX((player.x + player.width / 2) - Zamboni.Utils.GameSettings.playerScreenX);
-                camera.setY((player.y + player.height / 2) - Zamboni.Utils.GameSettings.playerScreenY);
             }
 
 
