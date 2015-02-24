@@ -21,7 +21,11 @@ Zamboni.Utils.GameSettings = {
 
     //The font for all the buttons, titles etc.
     gameFont: "Lato",
-
+    
+    //Player settings
+    playerScreenX: 500,
+    playerScreenY: 300,
+    
     //The levels
     levels: {
         TEST: "levels/test.json"
