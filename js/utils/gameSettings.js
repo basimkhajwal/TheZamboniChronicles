@@ -26,6 +26,9 @@ Zamboni.Utils.GameSettings = {
     playerScreenX: 500,
     playerScreenY: 300,
     
+    //The number of clouds in the background
+    backgroundCloudNumber: 5,
+
     //The levels
     levels: {
         TEST: "levels/test.json",
