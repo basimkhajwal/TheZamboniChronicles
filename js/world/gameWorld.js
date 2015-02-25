@@ -153,6 +153,7 @@ Zamboni.World.GameWorld = {
 
             updateCamera = function (delta) {
 
+                //Rotation just for fun
                 if (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("Q"))) {
                     camera.rotate(10 * delta);
                 }
