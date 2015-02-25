@@ -44,6 +44,9 @@ Zamboni.World.GameWorld = {
             maxCameraX,
             maxCameraY,
 
+            //An array to hold all the lava objects
+            lavaObjects = [],
+
             //The player entity
             player,
 
@@ -64,10 +67,38 @@ Zamboni.World.GameWorld = {
 
             },
 
-            //Parse a lava area from an object
-            parseLava = function (lavaObj) {
+            //Create a new lava area from an object, use a closure for extended abilities
+            parseLava = (function () {
 
-            },
+                //The beauty of javascript, this will be bound to whatever object inherits it
+                var updateLava = function (delta) {
+
+                    },
+
+                    renderLava = function (ctx) {
+
+                        ctx.fillStyle = Zamboni.Utils.ColourScheme.PUMPKIN;
+                        ctx.fillRect(this.x, this.y, this.width, this.height);
+
+                    };
+
+                //Return a generator function
+                return function (lavaObj) {
+
+                    lavaObjects.push({
+                        x: lavaObj.x,
+                        y: lavaObj.y,
+
+                        width: lavaObj.width,
+                        height: lavaObj.height,
+
+                        update: updateLava,
+                        render: renderLava
+                    });
+
+
+                };
+            }()),
 
             //Parse a new level from a given string
             parseLevel = function (fileText) {
@@ -91,32 +122,13 @@ Zamboni.World.GameWorld = {
                 tiledMap = Engine.TiledMap.create(jsonObj.width, jsonObj.height, 20, 20);
 
                 //Put all the renderable tiles into the tiled maps renderable so that they are rendered correctly
+
+                //Use a loop for less lines of code
                 for (tile in Zamboni.Utils.GameSettings.tiles) {
                     if (Zamboni.Utils.GameSettings.tiles.hasOwnProperty(tile) && Zamboni.Utils.Assets.hasOwnProperty(tile)) {
                         tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles[tile], Engine.AssetManager.getAsset(Zamboni.Utils.Assets[tile]));
                     }
                 }
-                /*
-                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.BLACK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.BLACK));
-                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.BLACK_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.BLACK_DARK));
-                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.CLOUDS, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.CLOUDS));
-                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.CLOUDS_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.CLOUDS_DARK));
-                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.GRASS, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.GRASS));
-                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.GRASS_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.GRASS_DARK));
-                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.GREY, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.GREY));
-                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.GREY_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.GREY_DARK));
-                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.ORANGE, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.ORANGE));
-                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.ORANGE_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.ORANGE_DARK));
-                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.PURPLE, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.PURPLE));
-                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.PURPLE_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.PURPLE_DARK));
-                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.RED, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.RED));
-                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.RED_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.RED_DARK));
-                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.SKY, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.SKY));
-                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.SKY_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.SKY_DARK));
-                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.TURQUOISE, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.TURQUOISE));
-                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.TURQUOISE_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.TURQUOISE_DARK));
-                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.YELLOW, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.YELLOW));
-                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.YELLOW_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.YELLOW_DARK)); */
 
                 //Set the camera variables
                 maxCameraX = tiledMap.getWidth() * tiledMap.getTileWidth() - 1000;
@@ -179,9 +191,31 @@ Zamboni.World.GameWorld = {
                 //Clamp the values
                 camera.setX(clamp(camera.getX(), minCameraX, maxCameraX));
                 camera.setY(clamp(camera.getY(), minCameraY, maxCameraY));
+            },
+
+            updateObjects = function (delta) {
+
+                //The counter
+                var i;
+
+                //Update all the lava
+                for (i = 0; i < lavaObjects.length; i += 1) {
+                    lavaObjects[i].update(delta);
+                }
+
+            },
+
+            renderObjects = function (ctx) {
+
+                //The counter
+                var i;
+
+                //Render all the lava
+                for (i = 0; i < lavaObjects.length; i += 1) {
+                    lavaObjects[i].render(ctx);
+                }
+
             };
-
-
 
         //Parse the level - TODO
         parseLevel(Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.levels.TEST2));
@@ -199,7 +233,9 @@ Zamboni.World.GameWorld = {
                 camera.projectContext(ctx);
 
                 tiledMap.render(ctx);
+
                 player.render(ctx);
+                renderObjects(ctx);
 
                 camera.unProjectContext(ctx);
             },
@@ -207,7 +243,7 @@ Zamboni.World.GameWorld = {
             //Update the world with time delta
             update: function (delta) {
 
-
+                updateObjects(delta);
                 updatePlayer(delta);
                 updateCamera(delta);
 
