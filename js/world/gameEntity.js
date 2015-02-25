@@ -75,6 +75,10 @@ Zamboni.World.GameEntity = {
             collidedRight: false,
             collidedLeft: false,
 
+            //The amount it changed in a tick
+            xChange: 0,
+            yChange: 0,
+
             //Change the position by a certain amount
             translate: function (dx, dy) {
                 this.x += dx;
@@ -220,7 +224,9 @@ Zamboni.World.GameEntity = {
                     }
                 }
 
-
+                //Update change variables
+                this.xChange = this.x - oldX;
+                this.yChange = this.y - oldY;
             },
 
             //Draw the image or a solid colour at the entity's position
