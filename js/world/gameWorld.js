@@ -44,11 +44,95 @@ Zamboni.World.GameWorld = {
             maxCameraX,
             maxCameraY,
 
+            //How much the camera moved
+            cameraChangeX,
+            cameraChangeY,
+
             //An array to hold all the lava objects
             lavaObjects = [],
 
             //The player entity
             player,
+
+            //Manage the background stuff
+            backgroundManager = (function () {
+
+                //Generate a random number between the two stated values
+                var getRan = function (min, max) {
+                    return Math.random() * (max - min) + min;
+                },
+
+                    //Variables for easy access
+                    cloudImg = Engine.AssetManager.getAsset(Zamboni.Utils.Assets.CLOUD_FUZZY),
+                    cloudWidth = Zamboni.Utils.GameSettings.fuzzyCloudWidth,
+                    cloudHeight = Zamboni.Utils.GameSettings.fuzzyCloudHeight,
+
+                    //Generate a new random cloud
+                    genCloud = function (genAnywhere) {
+                        var vx,
+
+                            width = cloudWidth * getRan(0.2, 0.5),
+                            height = cloudHeight * getRan(0.2, 0.5),
+
+                            x = 0,
+                            y = 0;
+
+                        do {
+                            vx = getRan(-40, 40);
+                        } while (Math.abs(vx) < 10);
+
+                        if (genAnywhere) {
+                            x = getRan(0, 1000 - width);
+                            y = getRan(20 - height, 600);
+                        } else {
+                            x = (vx > 0) ? getRan(-400, -1 * (width + 10)) : getRan(1010, 1200);
+                            y = getRan(20 - height, 200 - height);
+                        }
+
+                        return [x + camera.getX(), y + camera.getY(), width, height, vx];
+                    },
+
+                    //The clouds each have an x,y,width,height and vx
+                    clouds = [],
+
+                    //The amount to test whether a section is off the screen
+                    offscreenAmount = 20,
+
+                    //The counter variable
+                    i;
+
+                return {
+
+                    create: function () {
+                        //Add the initial clouds
+                        for (i = 0; i < Zamboni.Utils.GameSettings.backgroundCloudNumber; i += 1) {
+                            clouds.push(genCloud(true));
+                        }
+                    },
+
+                    update: function (delta) {
+                        for (i = 0; i < clouds.length; i += 1) {
+                            clouds[i][0] += (clouds[i][4] * delta) + (cameraChangeX * 0.6);
+
+                            if ((clouds[i][4] < 0 && clouds[i][0] + clouds[i][2] < offscreenAmount) || (clouds[i][4] > 0 && clouds[i][0] > 1000 + offscreenAmount)) {
+                                clouds[i] = genCloud(false);
+                            }
+                        }
+                    },
+
+                    render: function (ctx) {
+                        ctx.imageSmoothingEnabled = false;
+
+                        for (i = 0; i < clouds.length; i += 1) {
+                            ctx.drawImage(cloudImg, clouds[i][0], clouds[i][1], clouds[i][2], clouds[i][3]);
+                        }
+
+                        ctx.imageSmoothingEnabled = true;
+                    }
+
+                };
+
+            }()),
 
             //Parse a new player from the JSON object
             parsePlayer = function (playerObj) {
@@ -136,10 +220,12 @@ Zamboni.World.GameWorld = {
                     }
                 }
 
+                //Generate the background
+                backgroundManager.create();
+
                 //Get the collision function
                 tiledCollision = tiledMap.isCellBlocked;
             },
-
 
             //The updating stuff
             updatePlayer = function (delta) {
@@ -203,11 +289,10 @@ Zamboni.World.GameWorld = {
                 ctx.fillStyle = Zamboni.Utils.ColourScheme.BACKGROUND_COLOUR;
                 ctx.fillRect(0, 0, 1000, 600);
 
-
                 camera.projectContext(ctx);
 
+                backgroundManager.render(ctx);
                 tiledMap.render(ctx);
-
                 player.render(ctx);
                 renderObjects(ctx);
 
@@ -219,8 +304,16 @@ Zamboni.World.GameWorld = {
 
                 updateObjects(delta);
                 updatePlayer(delta);
+
+                var oldCameraX = camera.getX(),
+                    oldCameraY = camera.getY();
+
                 updateCamera(delta);
 
+                cameraChangeX = camera.getX() - oldCameraX;
+                cameraChangeY = camera.getY() - oldCameraY;
+
+                backgroundManager.update(delta);
             }
 
 
