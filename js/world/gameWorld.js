@@ -67,38 +67,18 @@ Zamboni.World.GameWorld = {
 
             },
 
-            //Create a new lava area from an object, use a closure for extended abilities
-            parseLava = (function () {
+            //Create a new lava area from an object
+            parseLava = function (lavaObj) {
 
-                //The beauty of javascript, this will be bound to whatever object inherits it
-                var updateLava = function (delta) {
+                lavaObjects.push({
+                    x: lavaObj.x,
+                    y: lavaObj.y,
 
-                    },
+                    width: lavaObj.width,
+                    height: lavaObj.height
+                });
 
-                    renderLava = function (ctx) {
-
-                        ctx.fillStyle = Zamboni.Utils.ColourScheme.PUMPKIN;
-                        ctx.fillRect(this.x, this.y, this.width, this.height);
-
-                    };
-
-                //Return a generator function
-                return function (lavaObj) {
-
-                    lavaObjects.push({
-                        x: lavaObj.x,
-                        y: lavaObj.y,
-
-                        width: lavaObj.width,
-                        height: lavaObj.height,
-
-                        update: updateLava,
-                        render: renderLava
-                    });
-
-
-                };
-            }()),
+            },
 
             //Parse a new level from a given string
             parseLevel = function (fileText) {
@@ -193,27 +173,21 @@ Zamboni.World.GameWorld = {
                 camera.setY(clamp(camera.getY(), minCameraY, maxCameraY));
             },
 
+            //Update the static objects in the level
             updateObjects = function (delta) {
 
-                //The counter
-                var i;
 
-                //Update all the lava
-                for (i = 0; i < lavaObjects.length; i += 1) {
-                    lavaObjects[i].update(delta);
-                }
 
             },
 
+            //Render the static objects
             renderObjects = function (ctx) {
 
-                //The counter
-                var i;
-
                 //Render all the lava
-                for (i = 0; i < lavaObjects.length; i += 1) {
-                    lavaObjects[i].render(ctx);
-                }
+                lavaObjects.forEach(function (lava) {
+                    ctx.fillStyle = Zamboni.Utils.ColourScheme.PUMPKIN;
+                    ctx.fillRect(lava.x, lava.y, lava.width, lava.height);
+                });
 
             };
 
