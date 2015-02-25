@@ -1,15 +1,30 @@
 # TheZamboniChronicles
 A javascript game made using the HTML5 canvas, still in development but comes with (hopefully) a useful underlying engine self-made ( that probably still has a lot of errors but never mind :P), the game idea is a simple 2d platformer, the full details are still under development but will hopefully come into shape soon and the game will progress from therein. 
 
+######Live preview
+https://rawgit.com/basimkhajwal/TheZamboniChronicles/master/index.html
+
+-Note this is not very accurate, updates may not be on there 100% of the time. For best results download the game, it will be hosted fully when it is complete.
+
 ######Current List Of Tasks To Do:
-- FIX FUNCTION POINTER ERROR IN COLLISION
-- Particle Effects (Add when needed)
-- Physics Engine and collision detection
-- MAKE COLLISION BETTER *sigh*
-- Make it side scrolling with bigger levels
-- Parallax scrolling and background effects
-
-
+- [x] Prevent pause movement
+- [x] Finish game states and managers
+- [x] Manage asset loading (images, sounds etc)
+- [x] Keyboard Input
+- [x] Mouse input
+- [x] Make a JSON level parser
+- [x] Make a 2d scene graph for GUI and base classes for rendering (Minimalistic at first, improve later)
+- [x] Tile map manager
+- [x] Make a physics engine & collision manager with gravity
+- [x] Fix function pointer collisions
+- [x] Make it side scrolling with bigger levels
+- [ ] Parallax scrolling and background effects
+- [ ] Clouds in the background
+- [ ] Particle Effects
+- [ ] Make better player textures
+- [ ] Add animation to the player movement
+- [ ] Make moving platforms
+- [ ] Add dumb enemies that move from side to side
 
 ###The Game Ideas
 The game still needs to be planned ..
@@ -42,22 +57,6 @@ The game still needs to be planned ..
 - level select map
 - parallax scrolling
 - shooting
-
-######Tasks done:
-- ADD ONBLUR AND ONFOCUS EVENT LISTENERS TO PREVENT PAUSE MOVEMENT - DONE
-- Finish game states and managers - DONE
-- Manage asset loading (images, sounds etc) - DONE
-- Keyboard Input - DONE
-- Mouse input - DONE
-- Make a JSON level parser (Maybe leave it till later) - DONE (kind of cheating, already implemented by browser!)
-- Make a 2d scene graph for GUI and base classes for rendering (Minimalistic at first, improve later) - DONE (basic stuff)
-- Tile map manager - DONE (yaay! works with Tiled !!)
-
-
-######Live preview
-https://rawgit.com/basimkhajwal/TheZamboniChronicles/master/index.html
-
--Note this is not very accurate, updates may not be on there 100% of the time. For best results download the game, it will be hosted fully when it is complete.
 
 ###Credits, add if you feel neccecary
 ##Credits:
