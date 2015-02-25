@@ -18,6 +18,7 @@ https://rawgit.com/basimkhajwal/TheZamboniChronicles/master/index.html
 - [x] Make a physics engine & collision manager with gravity
 - [x] Fix function pointer collisions
 - [x] Make it side scrolling with bigger levels
+- [ ] Fix residual error in the pause thing
 - [ ] Parallax scrolling and background effects
 - [ ] Clouds in the background
 - [ ] Particle Effects
