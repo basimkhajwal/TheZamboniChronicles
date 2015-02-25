@@ -76,6 +76,9 @@ Zamboni.World.GameWorld = {
                     //The tile layer from the JSON
                     tiles = jsonObj.layers[0].data,
 
+                    //The tile to enumerate over
+                    tile,
+
                     //Get all the objects
                     objects = jsonObj.layers[1].objects;
 
@@ -83,6 +86,12 @@ Zamboni.World.GameWorld = {
                 tiledMap = Engine.TiledMap.create(jsonObj.width, jsonObj.height, 20, 20);
 
                 //Put all the renderable tiles into the tiled maps renderable so that they are rendered correctly
+                for (tile in Zamboni.Utils.GameSettings.tiles) {
+                    if (Zamboni.Utils.GameSettings.tiles.hasOwnProperty(tile) && Zamboni.Utils.Assets.hasOwnProperty(tile)) {
+                        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles[tile], Engine.AssetManager.getAsset(Zamboni.Utils.Assets[tile]));
+                    }
+                }
+                /*
                 tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.BLACK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.BLACK));
                 tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.BLACK_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.BLACK_DARK));
                 tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.CLOUDS, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.CLOUDS));
@@ -102,7 +111,7 @@ Zamboni.World.GameWorld = {
                 tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.TURQUOISE, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.TURQUOISE));
                 tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.TURQUOISE_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.TURQUOISE_DARK));
                 tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.YELLOW, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.YELLOW));
-                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.YELLOW_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.YELLOW_DARK));
+                tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles.YELLOW_DARK, Engine.AssetManager.getAsset(Zamboni.Utils.Assets.YELLOW_DARK)); */
 
                 //Set the camera variables
                 maxCameraX = tiledMap.getWidth() * tiledMap.getTileWidth() - 1000;
@@ -133,6 +142,12 @@ Zamboni.World.GameWorld = {
 
             //The updating stuff
             updatePlayer = function (delta) {
+
+                player.moveRight = (Engine.KeyboardInput.isKeyDown(Engine.Keys.RIGHT));
+                player.moveLeft = (Engine.KeyboardInput.isKeyDown(Engine.Keys.LEFT));
+                player.jump = (Engine.KeyboardInput.isKeyDown(Engine.Keys.UP));
+
+                player.update(delta, tiledCollision);
 
             },
 
