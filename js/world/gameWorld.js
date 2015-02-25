@@ -64,6 +64,11 @@ Zamboni.World.GameWorld = {
 
             },
 
+            //Parse a lava area from an object
+            parseLava = function (lavaObj) {
+
+            },
+
             //Parse a new level from a given string
             parseLevel = function (fileText) {
 
@@ -131,6 +136,10 @@ Zamboni.World.GameWorld = {
 
                     case "player":
                         parsePlayer(objects[i]);
+                        break;
+
+                    case "lava":
+                        parseLava(objects[i]);
                         break;
                     }
                 }

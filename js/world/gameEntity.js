@@ -44,8 +44,8 @@ Zamboni.World.GameEntity = {
             collisionRes: 4,
 
             //The acceleration and frictional force in the horizontal directions
-            accelForce: 30,
-            frictionForce: 20,
+            accelForce: 80,
+            frictionForce: 60,
 
             //Acceleration when jumping
             jumpForce: 1500,
@@ -60,7 +60,7 @@ Zamboni.World.GameEntity = {
 
             //Forces to apply on it
             applyGravity: false,
-            gravityForce: 30,
+            gravityForce: 50,
 
             //States
             moveLeft: false,
