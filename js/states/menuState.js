@@ -76,6 +76,8 @@ Zamboni.States.MenuState = {
                         for (i = 0; i < clouds.length; i += 1) {
                             ctx.drawImage(cloudImg, clouds[i][0], clouds[i][1], clouds[i][2], clouds[i][3]);
                         }
+
+                        ctx.imageSmoothingEnabled = true;
                     }
 
                 };
