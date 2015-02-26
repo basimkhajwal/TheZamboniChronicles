@@ -49,7 +49,6 @@ The game still needs to be planned ..
 - Will there be any puzzle / strategy involved or will it be a simple get-to-the-end type game?
 - How will the player be scored (num coins collected, challenges done, time taken etc)?
 - Will it be persistent (scores are saved for when you come back) or a one-time play?
-
 - 2d platformer
 - ~5 levels (10 is a bit far at the moment, we could improve later)
 - single player
@@ -64,6 +63,7 @@ The game still needs to be planned ..
 - Basim Khajwal; main coder person 
 - Matthew Bullock; music provider (I can run in 13 swegz per minute)
 - Cameron Hargreaves; the one with illustrator at home (the swegmaester)
+- Alex Smith - background music / sound effects
 - Jamie Stirling; Rival (basis for main villain) 
 - Jaymie; Um… Don’t care
 - The Illuminati; father of code
