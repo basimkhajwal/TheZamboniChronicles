@@ -112,6 +112,14 @@ Zamboni.World.GameEntity = {
                     accel = this.accelForce * (this.falling ? 0.5 : 1.0),
                     friction = this.frictionForce * (this.falling ? 1.0 : 0.5);
 
+                //If the frame rate is less than 56 then recursively update to avoid collision problems
+                if (delta > 0.018) {
+                    delta /= 3;
+
+                    this.update(delta, collisionFunction);
+                    this.update(delta, collisionFunction);
+                }
+
                 //If gravity is enabled for the sprite and it is falling apply it initially
                 if (this.applyGravity && this.falling) {
                     ddy += this.gravityForce;

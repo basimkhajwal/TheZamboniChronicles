@@ -48,6 +48,10 @@ Zamboni.World.GameWorld = {
             cameraChangeX,
             cameraChangeY,
 
+            //The size of the world in pixels
+            worldWidth,
+            worldHeight,
+
             //An array to hold all the lava objects
             lavaObjects = [],
 
@@ -82,11 +86,11 @@ Zamboni.World.GameWorld = {
                         } while (Math.abs(vx) < 10);
 
                         if (genAnywhere) {
-                            x = getRan(0, 1000 - width);
-                            y = getRan(20 - height, 600);
+                            x = getRan(0, worldWidth - width);
+                            y = getRan(50, worldHeight - height);
                         } else {
-                            x = (vx > 0) ? getRan(-400, -1 * (width + 10)) : getRan(1010, 1200);
-                            y = getRan(20 - height, 200 - height);
+                            x = (vx > 0) ? getRan(-400, -1 * (worldWidth + 10)) : getRan(worldWidth + 10, worldWidth + 200);
+                            y = getRan(50, 200 - worldHeight);
                         }
 
                         return [x + camera.getX(), y + camera.getY(), width, height, vx];
@@ -111,10 +115,11 @@ Zamboni.World.GameWorld = {
                     },
 
                     update: function (delta) {
-                        for (i = 0; i < clouds.length; i += 1) {
-                            clouds[i][0] += (clouds[i][4] * delta) + (cameraChangeX * 0.6);
 
-                            if ((clouds[i][4] < 0 && clouds[i][0] + clouds[i][2] < offscreenAmount) || (clouds[i][4] > 0 && clouds[i][0] > 1000 + offscreenAmount)) {
+                        for (i = 0; i < clouds.length; i += 1) {
+                            clouds[i][0] += (clouds[i][4] * delta) - (cameraChangeX * 0.1);
+
+                            if ((clouds[i][4] < 0 && clouds[i][0] + clouds[i][2] < offscreenAmount) || (clouds[i][4] > 0 && clouds[i][0] > worldWidth + offscreenAmount)) {
                                 clouds[i] = genCloud(false);
                             }
                         }
@@ -123,9 +128,11 @@ Zamboni.World.GameWorld = {
                     render: function (ctx) {
                         ctx.imageSmoothingEnabled = false;
 
+                        ctx.globalAlpha = 0.8;
                         for (i = 0; i < clouds.length; i += 1) {
                             ctx.drawImage(cloudImg, clouds[i][0], clouds[i][1], clouds[i][2], clouds[i][3]);
                         }
+                        ctx.globalAlpha = 1.0;
 
                         ctx.imageSmoothingEnabled = true;
                     }
@@ -195,8 +202,13 @@ Zamboni.World.GameWorld = {
                 }
 
                 //Set the camera variables
-                maxCameraX = tiledMap.getWidth() * tiledMap.getTileWidth() - 1000;
-                maxCameraY = tiledMap.getHeight() * tiledMap.getTileHeight() - 600;
+                worldWidth = tiledMap.getWidth() * tiledMap.getTileWidth();
+                worldHeight = tiledMap.getHeight() * tiledMap.getTileHeight();
+
+                maxCameraX = worldWidth - 1000;
+                maxCameraY = worldHeight - 600;
+
+
 
                 //Set all the background tiles
                 for (i = 0; i < tiles.length; i += 1) {
