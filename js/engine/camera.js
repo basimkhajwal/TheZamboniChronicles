@@ -23,11 +23,15 @@ Engine.Camera = {
 
             projectContext: function (ctx) {
                 ctx.translate(-x, -y);
-                ctx.rotate(angleInRad);
+                if (angleInRad !== 0) {
+                    ctx.rotate(angleInRad);
+                }
             },
 
             unProjectContext: function (ctx) {
-                ctx.rotate(-angleInRad);
+                if (angleInRad !== 0) {
+                    ctx.rotate(-angleInRad);
+                }
                 ctx.translate(x, y);
             },
 
@@ -35,8 +39,10 @@ Engine.Camera = {
                 pX -= x;
                 pY -= y;
 
-                pX = pX * Math.cos(angleInRad) - y * Math.sin(angleInRad);
-                pY = pX * Math.sin(angleInRad) + y * Math.cos(angleInRad);
+                if (angleInRad !== 0) {
+                    pX = pX * Math.cos(angleInRad) - y * Math.sin(angleInRad);
+                    pY = pX * Math.sin(angleInRad) + y * Math.cos(angleInRad);
+                }
 
                 return {
                     x: pX,
@@ -45,8 +51,10 @@ Engine.Camera = {
             },
 
             unProjectPoint: function (pX, pY) {
-                pX = pX * Math.cos(-angleInRad) - y * Math.sin(-angleInRad);
-                pY = pX * Math.sin(-angleInRad) + y * Math.cos(-angleInRad);
+                if (angleInRad !== 0) {
+                    pX = pX * Math.cos(-angleInRad) - y * Math.sin(-angleInRad);
+                    pY = pX * Math.sin(-angleInRad) + y * Math.cos(-angleInRad);
+                }
 
                 pX += x;
                 pY += y;
