@@ -158,6 +158,13 @@ Zamboni.World.GameWorld = {
 
             },
 
+            //Create a new enemy from the object
+            parseEnemy = function (enemyObj) {
+
+
+
+            },
+
             //Create a new lava area from an object
             parseLava = function (lavaObj) {
 
