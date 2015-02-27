@@ -211,7 +211,7 @@ Zamboni.World.GameEntity = {
                                     this.x += 1;
                                 }
                             } else {
-                                while (this.collidedRight(collisionFunction)) {
+                                while (this.collidesRight(collisionFunction)) {
                                     this.x -= 1;
                                 }
                             }
