@@ -99,8 +99,18 @@ Zamboni.World.GameWorld = {
                     //The clouds each have an x,y,width,height and vx
                     clouds = [],
 
+                    //The position of the background mountains
+                    backgroundMountains = {
+                        x: 0,
+                        y: 0,
+                        width: 1000,
+                        height: 600,
+
+                        img: Engine.AssetManager.getAsset(Zamboni.Utils.Assets.BACKGROUND_MOUNTAINS)
+                    },
+
                     //The amount to test whether a section is off the screen
-                    offscreenAmount = 20,
+                    offscreenAmount = 50,
 
                     //The counter variable
                     i;
@@ -112,6 +122,10 @@ Zamboni.World.GameWorld = {
                         for (i = 0; i < Zamboni.Utils.GameSettings.backgroundCloudNumber; i += 1) {
                             clouds.push(genCloud(true));
                         }
+
+                        //Set the initial background position
+                        backgroundMountains.x = camera.getX();
+                        backgroundMountains.y = worldHeight - 600;
                     },
 
                     update: function (delta) {
@@ -123,17 +137,26 @@ Zamboni.World.GameWorld = {
                                 clouds[i] = genCloud(false);
                             }
                         }
+
+                        //backgroundMountains.x += cameraChangeX;
+                        //backgroundMountains.y += cameraChangeY;
                     },
 
                     render: function (ctx) {
+                        //No image smoothing to keep pixelated effect
                         ctx.imageSmoothingEnabled = false;
 
+                        //Draw the clouds with a bit of transparency and no image smoothing
                         ctx.globalAlpha = 0.8;
                         for (i = 0; i < clouds.length; i += 1) {
                             ctx.drawImage(cloudImg, clouds[i][0], clouds[i][1], clouds[i][2], clouds[i][3]);
                         }
                         ctx.globalAlpha = 1.0;
 
+                        //Draw 3 background images, one to its left, one at the position and one to the right
+                        ctx.drawImage(backgroundMountains.img, backgroundMountains.x, backgroundMountains.y, backgroundMountains.width, backgroundMountains.height);
+
+                        //Set back to default
                         ctx.imageSmoothingEnabled = true;
                     }
 
