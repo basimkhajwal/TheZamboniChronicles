@@ -6,13 +6,14 @@ Engine.Canvas = {
 
     //The create method implements most of it
     create: function (width, height) {
+        "use strict";
 
         //Get the main canvas
-        "use strict";
         var canvas = document.getElementById("canvas"),
 
-        //Get the context to draw on
-            canvasContext = canvas.getContext("2d"),
+            //Get the context to draw on
+            canvasContext = canvas.getContext("2d");
+
         //Return a closure with all the public methods
         return {
 

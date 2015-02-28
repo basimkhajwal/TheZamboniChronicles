@@ -16,7 +16,12 @@ Engine.TiledMap = {
 
             //The offsets from the origin
             xOffset = 0,
-            yOffset = 0;
+            yOffset = 0,
+
+            //Utility function to clamp within a certain range
+            clamp = function (val, min, max) {
+                return Math.min(max, Math.max(min, val));
+            };
 
         (function () {
             var row, col;
@@ -33,11 +38,17 @@ Engine.TiledMap = {
 
         return {
 
-            render: function (ctx) {
-                var row, col, val;
+            render: function (ctx, startX, endX, startY, endY) {
+                var row, col, val,
 
-                for (row = 0; row < mapHeight; row += 1) {
-                    for (col = 0; col < mapWidth; col += 1) {
+                    startCol = clamp(Math.floor(startX / tileWidth) - 1, 0, mapWidth - 1),
+                    endCol = clamp(Math.floor(endX / tileWidth) + 1, 0, mapWidth - 1),
+
+                    startRow = clamp(Math.floor(startY / tileHeight) - 1, 0, mapHeight - 1),
+                    endRow = clamp(Math.floor(endY / tileHeight) + 1, 0, mapHeight - 1);
+
+                for (row = startRow; row <= endRow; row += 1) {
+                    for (col = startCol; col <= endCol; col += 1) {
                         val = tiles[row][col];
 
                         if (typeof renderMap[val] !== "undefined" && renderMap[val] instanceof Image) {

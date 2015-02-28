@@ -334,7 +334,7 @@ Zamboni.World.GameWorld = {
                 camera.projectContext(ctx);
 
                 backgroundManager.render(ctx);
-                tiledMap.render(ctx);
+                tiledMap.render(ctx, camera.getX(), camera.getX() + 1000, camera.getY(), camera.getY() + 600);
                 player.render(ctx);
                 renderObjects(ctx);
 
