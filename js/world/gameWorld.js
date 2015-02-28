@@ -187,17 +187,17 @@ Zamboni.World.GameWorld = {
             //Create a new enemy from the object
             parseEnemy = function (enemyObj) {
 
-                enemyObjects.push({
+                var enemy = Zamboni.World.GameEntity.createEmpty();
 
-                    x: enemyObj.x,
-                    y: enemyObj.y,
+                enemy.x = enemyObj.x;
+                enemy.y = enemyObj.y;
 
-                    width: enemyObj.width,
-                    height: enemyObj.height,
+                enemy.width = enemyObj.width;
+                enemy.height = enemyObj.height;
 
-                    applyGravity: true
+                enemy.applyGravity = true;
 
-                });
+                enemyObjects.push(enemy);
 
             },
 
