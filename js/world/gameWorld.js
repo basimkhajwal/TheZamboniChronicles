@@ -378,6 +378,14 @@ Zamboni.World.GameWorld = {
                 //Update enemies
                 enemyObjects.forEach(function (enemy) {
                     enemy.update(delta, tiledCollision);
+
+                    if (enemy.collidedRight) {
+                        enemy.moveRight = false;
+                        enemy.moveLeft = true;
+                    } else if (enemy.collidedLeft) {
+                        enemy.moveRight = true;
+                        enemy.moveLeft = false;
+                    }
                 });
 
                 var oldCameraX = camera.getX(),
