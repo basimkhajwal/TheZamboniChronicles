@@ -52,11 +52,14 @@ Zamboni.World.GameWorld = {
             worldWidth,
             worldHeight,
 
-            //An array to hold all the lava objects
-            lavaObjects = [],
-
             //The player entity
             player,
+
+            //An array to hold all the lava objects
+            enemyObjects = [],
+
+            //An array to hold all the lava objects
+            lavaObjects = [],
 
             //Manage the background stuff
             backgroundManager = (function () {
@@ -184,7 +187,17 @@ Zamboni.World.GameWorld = {
             //Create a new enemy from the object
             parseEnemy = function (enemyObj) {
 
+                enemyObjects.push({
 
+                    x: enemyObj.x,
+                    y: enemyObj.y,
+
+                    width: enemyObj.width,
+                    height: enemyObj.height,
+
+                    applyGravity: true
+
+                });
 
             },
 
@@ -258,6 +271,10 @@ Zamboni.World.GameWorld = {
 
                     case "lava":
                         parseLava(objects[i]);
+                        break;
+
+                    case "enemy":
+                        parseEnemy(objects[i]);
                         break;
                     }
                 }
