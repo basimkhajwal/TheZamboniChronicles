@@ -198,10 +198,10 @@ Zamboni.World.GameWorld = {
                 enemy.width = enemyObj.width;
                 enemy.height = enemyObj.height;
 
-                enemy.gravityForce = 10;
+                enemy.gravityForce = 50;
                 enemy.applyGravity = true;
 
-                enemy.moveRight = true;
+                enemy.moveLeft = true;
 
                 enemyObjects.push(enemy);
 
@@ -380,12 +380,13 @@ Zamboni.World.GameWorld = {
                     enemy.update(delta, tiledCollision);
 
                     if (enemy.collidedRight) {
-                        enemy.moveRight = false;
-                        enemy.moveLeft = true;
+                        enemy.jump = true;
                     } else if (enemy.collidedLeft) {
-                        enemy.moveRight = true;
-                        enemy.moveLeft = false;
+                        enemy.jump = true;
+                    } else {
+                        enemy.jump = false;
                     }
+
                 });
 
                 var oldCameraX = camera.getX(),
