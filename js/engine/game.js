@@ -47,7 +47,9 @@ Engine.Game = {
                     },
 
                     render =  function () {
-                        canvas.begin();
+
+                        canvas.clear();
+
                         gameStateManager.render(canvas.getContext());
 
                         if (pause) {
@@ -64,7 +66,7 @@ Engine.Game = {
                             }
                         }
 
-                        canvas.end();
+
                     };
                 
                 window.addEventListener('focus', function () {
