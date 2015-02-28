@@ -17,21 +17,8 @@
          "name":"objects",
          "objects":[
                 {
-                 "height":36,
-                 "name":"player",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"player",
-                 "visible":true,
-                 "width":12,
-                 "x":2225.33333333333,
-                 "y":569.333333333333
-                },
-                {
                  "height":38,
+                 "id":2,
                  "name":"lava",
                  "properties":
                     {
@@ -45,21 +32,8 @@
                  "y":842
                 },
                 {
-                 "height":20,
-                 "name":"enemy",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"enemy",
-                 "visible":true,
-                 "width":20,
-                 "x":2682.86665844332,
-                 "y":709.263599358579
-                },
-                {
                  "height":40,
+                 "id":4,
                  "name":"lava2",
                  "properties":
                     {
@@ -71,6 +45,36 @@
                  "width":280,
                  "x":2200,
                  "y":840
+                },
+                {
+                 "height":20,
+                 "id":19,
+                 "name":"enemy",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"enemy",
+                 "visible":true,
+                 "width":20,
+                 "x":3200,
+                 "y":520
+                },
+                {
+                 "height":35,
+                 "id":29,
+                 "name":"player",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"player",
+                 "visible":true,
+                 "width":15,
+                 "x":2120,
+                 "y":745
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -79,6 +83,7 @@
          "x":0,
          "y":0
         }],
+ "nextobjectid":35,
  "orientation":"orthogonal",
  "properties":
     {

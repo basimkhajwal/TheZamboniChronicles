@@ -13,10 +13,10 @@ Engine.Keys = {
 
     SPACE: 32,
 
-    LEFT: 37,
-    UP: 38,
-    RIGHT: 39,
-    DOWN: 40,
+    LEFT: 83,
+    UP: 69,
+    RIGHT: 70,
+    DOWN: 68,
 
     getAlphabet: function (c) {
         "use strict";

@@ -198,7 +198,6 @@ Zamboni.World.GameWorld = {
                 enemy.width = enemyObj.width;
                 enemy.height = enemyObj.height;
 
-                enemy.gravityForce = 50;
                 enemy.applyGravity = true;
 
                 enemy.moveLeft = true;
@@ -379,9 +378,7 @@ Zamboni.World.GameWorld = {
                 enemyObjects.forEach(function (enemy) {
                     enemy.update(delta, tiledCollision);
 
-                    if (enemy.collidedRight) {
-                        enemy.jump = true;
-                    } else if (enemy.collidedLeft) {
+                    if (enemy.collidedRight || enemy.collidedLeft) {
                         enemy.jump = true;
                     } else {
                         enemy.jump = false;
