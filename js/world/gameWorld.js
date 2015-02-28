@@ -55,7 +55,7 @@ Zamboni.World.GameWorld = {
             //The player entity
             player,
 
-            //An array to hold all the lava objects
+            //An array to hold all the enemy objects
             enemyObjects = [],
 
             //An array to hold all the lava objects
@@ -198,7 +198,10 @@ Zamboni.World.GameWorld = {
                 enemy.width = enemyObj.width;
                 enemy.height = enemyObj.height;
 
+                enemy.gravityForce = 10;
                 enemy.applyGravity = true;
+
+                enemy.moveRight = true;
 
                 enemyObjects.push(enemy);
 
@@ -358,6 +361,11 @@ Zamboni.World.GameWorld = {
                 player.render(ctx);
                 renderObjects(ctx);
 
+                //Draw all the enemies
+                enemyObjects.forEach(function (enemy) {
+                    enemy.render(ctx);
+                });
+
                 camera.unProjectContext(ctx);
             },
 
@@ -366,6 +374,11 @@ Zamboni.World.GameWorld = {
 
                 updateObjects(delta);
                 updatePlayer(delta);
+
+                //Update enemies
+                enemyObjects.forEach(function (enemy) {
+                    enemy.update(delta, tiledCollision);
+                });
 
                 var oldCameraX = camera.getX(),
                     oldCameraY = camera.getY();
