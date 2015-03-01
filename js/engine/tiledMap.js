@@ -70,6 +70,16 @@ Engine.TiledMap = {
                 return tiles[y][x] !== 0;
             },
 
+            //Generate a collision function that can be used in an array
+            generateCollisionFunction: function () {
+                var that = this;
+
+                return function (x, y) {
+                    return that.isCellBlocked(x, y);
+                };
+
+            },
+
             getTileAt: function (row, col) {
                 return tiles[row][col];
             },
