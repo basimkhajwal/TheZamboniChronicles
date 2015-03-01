@@ -13,6 +13,8 @@ Zamboni.Utils.Assets = {
     MENU_BG_FUZZY: "img/menu-bg-fuzzy.png",
 
     BACKGROUND_MOUNTAINS: "img/background-mountains.png",
+    BACKGROUND_MOUNTAINS_LIGHT: "img/background-mountains-1.png",
+    BACKGROUND_MOUNTAINS_LIGHTER: "img/background-mountains-2.png",
 
     //The tiles
     BLACK: "img/tiles/black.png",
