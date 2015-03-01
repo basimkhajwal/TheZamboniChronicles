@@ -106,10 +106,14 @@ Zamboni.World.GameWorld = {
                     backgroundMountains = [],
 
                     //The image to draw for the background
-                    mountainImg = Engine.AssetManager.getAsset(Zamboni.Utils.Assets.BACKGROUND_MOUNTAINS),
+                    mountainImg = [
+                        Engine.AssetManager.getAsset(Zamboni.Utils.Assets.BACKGROUND_MOUNTAINS_LIGHTER),
+                        Engine.AssetManager.getAsset(Zamboni.Utils.Assets.BACKGROUND_MOUNTAINS_LIGHT),
+                        Engine.AssetManager.getAsset(Zamboni.Utils.Assets.BACKGROUND_MOUNTAINS)
+                    ],
 
                     //The amount to test whether a section is off the screen
-                    offscreenAmount = 50,
+                    offscreenAmount = 100,
 
                     //The counter variable
                     i;
@@ -126,7 +130,7 @@ Zamboni.World.GameWorld = {
                         for (i = 0; i < 3; i += 1) {
                             backgroundMountains.push({
                                 x: camera.getX(),
-                                y: worldHeight - 500 - i * 100
+                                y: worldHeight - 700 + i * 125
                             });
                         }
                     },
@@ -141,8 +145,21 @@ Zamboni.World.GameWorld = {
                             }
                         }
 
-                        //backgroundMountains.x += cameraChangeX;
-                        //backgroundMountains.y += cameraChangeY;
+                        var point;
+
+                        i = 0;
+                        backgroundMountains.forEach(function (mountain) {
+                            mountain.x += cameraChangeX * (1 - (i * 0.2));
+                            point = mountain.x - camera.getX();
+
+                            if (point < -offscreenAmount) {
+                                mountain.x += 1000;
+                            } else if (point > 1000 + offscreenAmount) {
+                                mountain.x -= 1000;
+                            }
+
+                            i += 1;
+                        });
                     },
 
                     render: function (ctx) {
@@ -150,9 +167,13 @@ Zamboni.World.GameWorld = {
                         ctx.imageSmoothingEnabled = false;
 
                         //Draw 3 background images, one to its left, one at the position and one to the right
-                        ctx.globalAlpha = 0.3;
+                        i = 0;
                         backgroundMountains.forEach(function (mountain) {
-                            ctx.drawImage(mountainImg, mountain.x, mountain.y, 1000, 600);
+                            ctx.drawImage(mountainImg[i], mountain.x, mountain.y, 1000, 600);
+                            ctx.drawImage(mountainImg[i], mountain.x - 1000, mountain.y, 1000, 600);
+                            ctx.drawImage(mountainImg[i], mountain.x + 1000, mountain.y, 1000, 600);
+
+                            i += 1;
                         });
 
                         //Draw the clouds with a bit of transparency and no image smoothing
