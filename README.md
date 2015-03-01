@@ -19,13 +19,13 @@ https://rawgit.com/basimkhajwal/TheZamboniChronicles/master/index.html
 - [x] Fix function pointer collisions
 - [x] Make it side scrolling with bigger levels
 - [ ] Fix residual error in the pause thing
-- [ ] Parallax scrolling and background effects
-- [ ] Clouds in the background
+- [x] Parallax scrolling and background effects
+- [x] Clouds in the background
 - [ ] Particle Effects
 - [ ] Make better player textures
 - [ ] Add animation to the player movement
 - [ ] Make moving platforms
-- [ ] Add dumb enemies that move from side to side
+- [x] Add dumb enemies that move from side to side
 
 ###The Game Ideas
 The game still needs to be planned ..
