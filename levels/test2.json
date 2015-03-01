@@ -88,17 +88,17 @@
                 },
                 {
                  "height":20,
-                 "name":"platform",
+                 "name":"paddle",
                  "properties":
                     {
                      "xMove":"50"
                     },
                  "rotation":0,
-                 "type":"platform",
+                 "type":"paddle",
                  "visible":true,
                  "width":100,
-                 "x":80,
-                 "y":620
+                 "x":280,
+                 "y":740
                 }],
          "opacity":1,
          "type":"objectgroup",

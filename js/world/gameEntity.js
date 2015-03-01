@@ -248,7 +248,7 @@ Zamboni.World.GameEntity = {
             },
 
             //Returns a function that checks whether a point is within this entity
-            getCollisionFunction: function () {
+            generateCollisionFunction: function () {
                 //Keep a variable for the outer object to be used as a closure
                 var that = this;
 

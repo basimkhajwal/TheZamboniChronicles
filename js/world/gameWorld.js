@@ -30,6 +30,39 @@ Zamboni.World.GameWorld = {
                 return Math.min(max, Math.max(val, min));
             },
 
+            //Takes a pair of collision functions and returns OR of them
+            mergeCollisions = function (functionA, functionB) {
+                return function (x, y) {
+                    return functionA(x, y) || functionB(x, y);
+                };
+            },
+
+            //Takes a list of collision functions and returns OR of them
+            mergeAllCollisions = function (collisions) {
+
+                return function (x, y) {
+                    var i;
+
+                    for (i = 0; i < collisions.length; i += 1) {
+                        if (collisions[i](x, y)) {
+                            return true;
+                        }
+                    }
+
+                    return false;
+
+                };
+
+            },
+
+            //The total collision functions for entities, the array of the functions and the final one
+            entityCollisions = [],
+            entityCollision,
+
+            recomputeCollisions = function () {
+                entityCollision = mergeAllCollisions(entityCollisions);
+            },
+
             //The tiled maps collision function
             tiledCollision,
 
@@ -55,19 +88,18 @@ Zamboni.World.GameWorld = {
             //The player entity
             player,
 
-            //An array to hold all the enemy objects
+            //An array to hold all their respective objects
             enemyObjects = [],
-
-            //An array to hold all the lava objects
             lavaObjects = [],
+            paddleObjects = [],
 
             //Manage the background stuff
             backgroundManager = (function () {
 
                 //Generate a random number between the two stated values
                 var getRan = function (min, max) {
-                    return Math.random() * (max - min) + min;
-                },
+                        return Math.random() * (max - min) + min;
+                    },
 
                     //Variables for easy access
                     cloudImg = Engine.AssetManager.getAsset(Zamboni.Utils.Assets.CLOUD_FUZZY),
@@ -105,7 +137,7 @@ Zamboni.World.GameWorld = {
                     //The position of the background mountains
                     backgroundMountains = [],
 
-                    //The image to draw for the background
+                    //The images to draw for the background
                     mountainImg = [
                         Engine.AssetManager.getAsset(Zamboni.Utils.Assets.BACKGROUND_MOUNTAINS_LIGHTER),
                         Engine.AssetManager.getAsset(Zamboni.Utils.Assets.BACKGROUND_MOUNTAINS_LIGHT),
@@ -220,7 +252,6 @@ Zamboni.World.GameWorld = {
                 enemy.height = enemyObj.height;
 
                 enemy.applyGravity = true;
-
                 enemy.moveLeft = true;
 
                 enemyObjects.push(enemy);
@@ -238,6 +269,27 @@ Zamboni.World.GameWorld = {
                     height: lavaObj.height
                 });
 
+            },
+
+            //Take the object of a platfrom from the JSON and creat a paddle from it
+            parsePaddle = function (paddleObj) {
+
+                var paddle = Zamboni.World.GameEntity.createEmpty();
+
+                paddle.x = paddleObj.x;
+                paddle.y = paddleObj.y;
+                paddle.width = paddleObj.width;
+                paddle.height = paddleObj.height;
+
+                paddle.applyGravity = false;
+                paddle.colour = Zamboni.Utils.ColourScheme.WET_ASPHALT;
+
+                paddleObjects.push(paddle);
+                entityCollisions.push(paddle.generateCollisionFunction());
+
+                console.log("PARSED PADDLE");
+
+                recomputeCollisions();
             },
 
             //Parse a new level from a given string
@@ -302,6 +354,10 @@ Zamboni.World.GameWorld = {
                     case "enemy":
                         parseEnemy(objects[i]);
                         break;
+
+                    case "paddle":
+                        parsePaddle(objects[i]);
+                        break;
                     }
                 }
 
@@ -310,6 +366,9 @@ Zamboni.World.GameWorld = {
 
                 //Get the collision function
                 tiledCollision = tiledMap.isCellBlocked;
+                entityCollisions.push(tiledMap.generateCollisionFunction());
+
+                recomputeCollisions();
             },
 
             //The updating stuff
@@ -319,7 +378,7 @@ Zamboni.World.GameWorld = {
                 player.moveLeft = (Engine.KeyboardInput.isKeyDown(Engine.Keys.LEFT));
                 player.jump = (Engine.KeyboardInput.isKeyDown(Engine.Keys.UP));
 
-                player.update(delta, tiledCollision);
+                player.update(delta, entityCollision);
 
             },
 
@@ -360,6 +419,11 @@ Zamboni.World.GameWorld = {
                     ctx.fillRect(lava.x, lava.y, lava.width, lava.height);
                 });
 
+                //Render all the paddles
+                paddleObjects.forEach(function (paddle) {
+                    paddle.render(ctx);
+                });
+
             };
 
         //Parse the level - TODO
@@ -397,7 +461,7 @@ Zamboni.World.GameWorld = {
 
                 //Update enemies
                 enemyObjects.forEach(function (enemy) {
-                    enemy.update(delta, tiledCollision);
+                    enemy.update(delta, entityCollision);
 
                     if (enemy.collidedRight || enemy.collidedLeft) {
                         enemy.jump = true;
