@@ -60,6 +60,7 @@ Zamboni.World.GameEntity = {
 
             //Forces to apply on it
             applyGravity: false,
+            applyFriction: true,
             gravityForce: 50,
 
             //States
@@ -128,13 +129,13 @@ Zamboni.World.GameEntity = {
                 //Add appropritate friction to the sides depending on which direction you are moving
                 if (this.moveLeft) {
                     ddx -= accel;
-                } else if (wasLeft) {
+                } else if (wasLeft && this.applyFriction) {
                     ddx += friction;
                 }
 
                 if (this.moveRight) {
                     ddx += accel;
-                } else if (wasRight) {
+                } else if (wasRight && this.applyFriction) {
                     ddx -= friction;
                 }
 
