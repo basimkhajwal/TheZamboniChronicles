@@ -267,6 +267,8 @@ Zamboni.World.GameWorld = {
 
                 enemyObjects.push(enemy);
 
+                entityCollisions.push(enemy.generateCollisionFunction());
+                recomputeCollisions();
             },
 
             //Create a new lava area from an object
