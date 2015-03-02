@@ -30,6 +30,17 @@ Zamboni.World.GameWorld = {
                 return Math.min(max, Math.max(val, min));
             },
 
+            //Utility function that returns -1 if less than 0, 0 if 0, 1 if more than 0
+            sign = function (val) {
+                if (val === 0) {
+                    return 0;
+                } else if (val < 0) {
+                    return -1;
+                } else {
+                    return 1;
+                }
+            },
+
             //Takes a pair of collision functions and returns OR of them
             mergeCollisions = function (functionA, functionB) {
                 return function (x, y) {
@@ -281,14 +292,26 @@ Zamboni.World.GameWorld = {
                 platform.width = platformObj.width;
                 platform.height = platformObj.height;
 
+                platform.startX = platformObj.x;
+                platform.startY = platformObj.y;
+                platform.endX = parseInt(platformObj.properties.endX, 10);
+                platform.endY = parseInt(platformObj.properties.endY, 10);
+
+                platform.directionX = sign(platform.endX - platform.x);
+                platform.directionY = sign(platform.endY - platform.y);
+
+                platform.vx = 10 * platform.directionX;
+                platform.vy = 10 * platform.directionY;
+
+                platform.movingToEnd = true;
+
                 platform.applyGravity = false;
+                platform.applyFriction = false;
                 platform.colour = Zamboni.Utils.ColourScheme.WET_ASPHALT;
 
                 platformObjects.push(platform);
+
                 entityCollisions.push(platform.generateCollisionFunction());
-
-                console.log("PARSED platform");
-
                 recomputeCollisions();
             },
 
@@ -406,7 +429,34 @@ Zamboni.World.GameWorld = {
             //Update the static objects in the level
             updateObjects = function (delta) {
 
+                //Update all the platforms
+                platformObjects.forEach(function (platform) {
 
+                    //Apply the physics
+                    platform.update(delta);
+
+
+                    if (platform.movingToEnd) {
+
+                        if ((platform.directionX > 0 && platform.x >= platform.endX) || (platform.directionX < 0 && platform.x <= platform.endX)) {
+                            platform.x = platform.endX;
+                            platform.vx *= -1;
+                            platform.movingToEnd = false;
+                        }
+
+                    } else {
+
+                        if ((platform.directionX > 0 && platform.x <= platform.startX) || (platform.directionX < 0 && platform.x >= platform.startX)) {
+                            platform.x = platform.startX;
+                            platform.vx *= -1;
+                            platform.movingToEnd = false;
+                        }
+
+                    }
+
+                    //console.log(platform.vx + ", " + platform.vy);
+
+                });
 
             },
 

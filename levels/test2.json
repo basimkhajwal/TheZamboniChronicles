@@ -69,8 +69,8 @@
                  "type":"player",
                  "visible":true,
                  "width":15,
-                 "x":2120,
-                 "y":745
+                 "x":100,
+                 "y":800
                 },
                 {
                  "height":20,
@@ -91,7 +91,8 @@
                  "name":"platform",
                  "properties":
                     {
-                     "xMove":"50"
+                     "endX":"230.00",
+                     "endY":"740.00"
                     },
                  "rotation":0,
                  "type":"platform",

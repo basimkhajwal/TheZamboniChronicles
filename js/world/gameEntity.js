@@ -115,9 +115,8 @@ Zamboni.World.GameEntity = {
 
                 //If the frame rate is less than 56 then recursively update to avoid collision problems
                 if (delta > 0.018) {
-                    delta /= 3;
+                    delta /= 2;
 
-                    this.update(delta, collisionFunction);
                     this.update(delta, collisionFunction);
                 }
 
