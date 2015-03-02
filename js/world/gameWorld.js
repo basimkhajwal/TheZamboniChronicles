@@ -91,7 +91,7 @@ Zamboni.World.GameWorld = {
             //An array to hold all their respective objects
             enemyObjects = [],
             lavaObjects = [],
-            paddleObjects = [],
+            platformObjects = [],
 
             //Manage the background stuff
             backgroundManager = (function () {
@@ -271,23 +271,23 @@ Zamboni.World.GameWorld = {
 
             },
 
-            //Take the object of a platfrom from the JSON and creat a paddle from it
-            parsePaddle = function (paddleObj) {
+            //Take the object of a platfrom from the JSON and creat a platform from it
+            parsePlatform = function (platformObj) {
 
-                var paddle = Zamboni.World.GameEntity.createEmpty();
+                var platform = Zamboni.World.GameEntity.createEmpty();
 
-                paddle.x = paddleObj.x;
-                paddle.y = paddleObj.y;
-                paddle.width = paddleObj.width;
-                paddle.height = paddleObj.height;
+                platform.x = platformObj.x;
+                platform.y = platformObj.y;
+                platform.width = platformObj.width;
+                platform.height = platformObj.height;
 
-                paddle.applyGravity = false;
-                paddle.colour = Zamboni.Utils.ColourScheme.WET_ASPHALT;
+                platform.applyGravity = false;
+                platform.colour = Zamboni.Utils.ColourScheme.WET_ASPHALT;
 
-                paddleObjects.push(paddle);
-                entityCollisions.push(paddle.generateCollisionFunction());
+                platformObjects.push(platform);
+                entityCollisions.push(platform.generateCollisionFunction());
 
-                console.log("PARSED PADDLE");
+                console.log("PARSED platform");
 
                 recomputeCollisions();
             },
@@ -355,8 +355,8 @@ Zamboni.World.GameWorld = {
                         parseEnemy(objects[i]);
                         break;
 
-                    case "paddle":
-                        parsePaddle(objects[i]);
+                    case "platform":
+                        parsePlatform(objects[i]);
                         break;
                     }
                 }
@@ -419,9 +419,9 @@ Zamboni.World.GameWorld = {
                     ctx.fillRect(lava.x, lava.y, lava.width, lava.height);
                 });
 
-                //Render all the paddles
-                paddleObjects.forEach(function (paddle) {
-                    paddle.render(ctx);
+                //Render all the platforms
+                platformObjects.forEach(function (platform) {
+                    platform.render(ctx);
                 });
 
             };
