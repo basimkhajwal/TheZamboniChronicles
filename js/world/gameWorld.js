@@ -267,8 +267,11 @@ Zamboni.World.GameWorld = {
 
                 enemyObjects.push(enemy);
 
-                entityCollisions.push(enemy.generateCollisionFunction());
-                recomputeCollisions();
+                console.log("GOT HERE");
+
+                //var fn = enemy.generateCollisionFunction();
+                //console.log(fn(enemy.x, enemy.y));
+                //entityCollisions.push(fn);
             },
 
             //Create a new lava area from an object
@@ -314,7 +317,6 @@ Zamboni.World.GameWorld = {
                 platformObjects.push(platform);
 
                 entityCollisions.push(platform.generateCollisionFunction());
-                recomputeCollisions();
             },
 
             //Parse a new level from a given string
