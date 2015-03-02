@@ -91,8 +91,8 @@
                  "name":"platform",
                  "properties":
                     {
-                     "endX":"230.00",
-                     "endY":"740.00"
+                     "endX":"230",
+                     "endY":"740"
                     },
                  "rotation":0,
                  "type":"platform",
@@ -100,6 +100,21 @@
                  "width":100,
                  "x":280,
                  "y":740
+                },
+                {
+                 "height":20,
+                 "name":"platform",
+                 "properties":
+                    {
+                     "endX":"480",
+                     "endY":"580"
+                    },
+                 "rotation":0,
+                 "type":"platform",
+                 "visible":true,
+                 "width":100,
+                 "x":40,
+                 "y":580
                 }],
          "opacity":1,
          "type":"objectgroup",

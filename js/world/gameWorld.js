@@ -300,8 +300,8 @@ Zamboni.World.GameWorld = {
                 platform.directionX = sign(platform.endX - platform.x);
                 platform.directionY = sign(platform.endY - platform.y);
 
-                platform.vx = 10 * platform.directionX;
-                platform.vy = 10 * platform.directionY;
+                platform.vx = 60 * platform.directionX;
+                platform.vy = 60 * platform.directionY;
 
                 platform.movingToEnd = true;
 
@@ -449,7 +449,7 @@ Zamboni.World.GameWorld = {
                         if ((platform.directionX > 0 && platform.x <= platform.startX) || (platform.directionX < 0 && platform.x >= platform.startX)) {
                             platform.x = platform.startX;
                             platform.vx *= -1;
-                            platform.movingToEnd = false;
+                            platform.movingToEnd = true;
                         }
 
                     }
@@ -511,6 +511,18 @@ Zamboni.World.GameWorld = {
 
                 //Update enemies
                 enemyObjects.forEach(function (enemy) {
+
+                    if (enemy.x > player.x + 20) {
+                        enemy.moveLeft = true;
+                        enemy.moveRight = false;
+                    } else if (enemy.x < player.x - 20) {
+                        enemy.moveLeft = false;
+                        enemy.moveRight = true;
+                    } else {
+                        enemy.moveLeft = false;
+                        enemy.moveRight = false;
+                    }
+
                     enemy.update(delta, entityCollision);
 
                     if (enemy.collidedRight || enemy.collidedLeft) {
