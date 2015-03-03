@@ -92,7 +92,8 @@
                  "properties":
                     {
                      "endX":"230",
-                     "endY":"740"
+                     "endY":"740",
+                     "speed":"40"
                     },
                  "rotation":0,
                  "type":"platform",
@@ -107,7 +108,8 @@
                  "properties":
                     {
                      "endX":"480",
-                     "endY":"580"
+                     "endY":"580",
+                     "speed":"80"
                     },
                  "rotation":0,
                  "type":"platform",
