@@ -267,8 +267,6 @@ Zamboni.World.GameWorld = {
 
                 enemyObjects.push(enemy);
 
-                console.log("GOT HERE");
-
                 //var fn = enemy.generateCollisionFunction();
                 //console.log(fn(enemy.x, enemy.y));
                 //entityCollisions.push(fn);
@@ -290,7 +288,12 @@ Zamboni.World.GameWorld = {
             //Take the object of a platfrom from the JSON and creat a platform from it
             parsePlatform = function (platformObj) {
 
-                var platform = Zamboni.World.GameEntity.createEmpty();
+                var platform = Zamboni.World.GameEntity.createEmpty(),
+                    speed = parseInt(platformObj.properties.speed, 10) || 60,
+                    changeX,
+                    changeY,
+                    lengthChange;
+
 
                 platform.x = platformObj.x;
                 platform.y = platformObj.y;
@@ -302,11 +305,15 @@ Zamboni.World.GameWorld = {
                 platform.endX = parseInt(platformObj.properties.endX, 10);
                 platform.endY = parseInt(platformObj.properties.endY, 10);
 
-                platform.directionX = sign(platform.endX - platform.x);
-                platform.directionY = sign(platform.endY - platform.y);
+                changeX = platform.endX - platform.x;
+                changeY = platform.endY - platform.y;
+                lengthChange = Math.sqrt(changeX * changeX + changeY * changeY);
 
-                platform.vx = 60 * platform.directionX;
-                platform.vy = 60 * platform.directionY;
+                platform.directionX = sign(changeX);
+                platform.directionY = sign(changeY);
+
+                platform.vx = speed * platform.directionX * (changeX / lengthChange);
+                platform.vy = speed * platform.directionY * (changeY / lengthChange);
 
                 platform.movingToEnd = true;
 
@@ -448,11 +455,23 @@ Zamboni.World.GameWorld = {
                             platform.movingToEnd = false;
                         }
 
+                        if ((platform.directionY > 0 && platform.y >= platform.endY) || (platform.directionY < 0 && platform.y <= platform.endY)) {
+                            platform.y = platform.endY;
+                            platform.vy *= -1;
+                            platform.movingToEnd = false;
+                        }
+
                     } else {
 
                         if ((platform.directionX > 0 && platform.x <= platform.startX) || (platform.directionX < 0 && platform.x >= platform.startX)) {
                             platform.x = platform.startX;
                             platform.vx *= -1;
+                            platform.movingToEnd = true;
+                        }
+
+                        if ((platform.directionY > 0 && platform.y <= platform.startY) || (platform.directionY < 0 && platform.y >= platform.startY)) {
+                            platform.y = platform.startY;
+                            platform.vy *= -1;
                             platform.movingToEnd = true;
                         }
 
