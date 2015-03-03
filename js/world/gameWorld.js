@@ -312,8 +312,8 @@ Zamboni.World.GameWorld = {
                 platform.directionX = sign(changeX);
                 platform.directionY = sign(changeY);
 
-                platform.vx = speed * platform.directionX * (changeX / lengthChange);
-                platform.vy = speed * platform.directionY * (changeY / lengthChange);
+                platform.vx = speed * /*platform.directionX */ (changeX / lengthChange);
+                platform.vy = speed * /*platform.directionY */ (changeY / lengthChange);
 
                 platform.movingToEnd = true;
 
