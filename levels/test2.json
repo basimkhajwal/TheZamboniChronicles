@@ -117,6 +117,21 @@
                  "width":100,
                  "x":40,
                  "y":580
+                },
+                {
+                 "height":40,
+                 "name":"platform",
+                 "properties":
+                    {
+                     "endX":"40",
+                     "endY":"260"
+                    },
+                 "rotation":0,
+                 "type":"platform",
+                 "visible":true,
+                 "width":100,
+                 "x":40,
+                 "y":520
                 }],
          "opacity":1,
          "type":"objectgroup",
