@@ -140,6 +140,36 @@
                  "width":100,
                  "x":40,
                  "y":520
+                },
+                {
+                 "height":20,
+                 "id":13,
+                 "name":"sign",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"move",
+                 "visible":true,
+                 "width":20,
+                 "x":120,
+                 "y":860
+                },
+                {
+                 "height":0,
+                 "id":14,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":940,
+                 "y":620
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -148,7 +178,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":9,
+ "nextobjectid":15,
  "orientation":"orthogonal",
  "properties":
     {
