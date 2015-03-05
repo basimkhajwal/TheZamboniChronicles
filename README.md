@@ -18,14 +18,22 @@ https://rawgit.com/basimkhajwal/TheZamboniChronicles/master/index.html
 - [x] Make a physics engine & collision manager with gravity
 - [x] Fix function pointer collisions
 - [x] Make it side scrolling with bigger levels
-- [ ] Fix residual error in the pause thing
+- [x] Add dumb enemies that move from side to side
 - [x] Parallax scrolling and background effects
 - [x] Clouds in the background
+- [x] Make moving platforms
+- [ ] Make side-checking enemies
+- [ ] Add force application to platforms
+- [ ] Fix residual error in the pause thing
 - [ ] Particle Effects
+- [ ] Spikes to stand on
+- [ ] Tutorial areas which show a text info
+- [ ] Boss enemies
+- [ ] Shooting enemies
 - [ ] Make better player textures
 - [ ] Add animation to the player movement
-- [ ] Make moving platforms
-- [x] Add dumb enemies that move from side to side
+
+
 
 ###The Game Ideas
 The game still needs to be planned ..
