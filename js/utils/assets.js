@@ -39,5 +39,6 @@ Zamboni.Utils.Assets = {
     YELLOW_DARK: "img/tiles/yellow_dark.png",
 
     //The sprites
-    PLAYER: "img/sprites/player.png"
+    PLAYER: "img/sprites/player.png",
+    JAGO: "img/sprites/jago.png"
 };

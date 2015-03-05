@@ -245,7 +245,7 @@ Zamboni.World.GameWorld = {
                 player.width = playerObj.width;
                 player.height = playerObj.height;
 
-                player.img = Engine.AssetManager.getAsset(Zamboni.Utils.Assets.PLAYER);
+                player.img = Engine.AssetManager.getAsset(Zamboni.Utils.Assets.JAGO);
 
                 player.applyGravity = true;
 

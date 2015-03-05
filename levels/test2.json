@@ -18,6 +18,7 @@
          "objects":[
                 {
                  "height":38,
+                 "id":1,
                  "name":"lava",
                  "properties":
                     {
@@ -32,6 +33,7 @@
                 },
                 {
                  "height":40,
+                 "id":2,
                  "name":"lava2",
                  "properties":
                     {
@@ -46,6 +48,7 @@
                 },
                 {
                  "height":20,
+                 "id":3,
                  "name":"enemy",
                  "properties":
                     {
@@ -59,7 +62,8 @@
                  "y":520
                 },
                 {
-                 "height":35,
+                 "height":24,
+                 "id":4,
                  "name":"player",
                  "properties":
                     {
@@ -68,12 +72,13 @@
                  "rotation":0,
                  "type":"player",
                  "visible":true,
-                 "width":15,
+                 "width":13,
                  "x":100,
                  "y":800
                 },
                 {
                  "height":20,
+                 "id":5,
                  "name":"bob",
                  "properties":
                     {
@@ -88,6 +93,7 @@
                 },
                 {
                  "height":20,
+                 "id":6,
                  "name":"platform",
                  "properties":
                     {
@@ -104,6 +110,7 @@
                 },
                 {
                  "height":20,
+                 "id":7,
                  "name":"platform",
                  "properties":
                     {
@@ -120,6 +127,7 @@
                 },
                 {
                  "height":40,
+                 "id":8,
                  "name":"platform",
                  "properties":
                     {
@@ -140,6 +148,7 @@
          "x":0,
          "y":0
         }],
+ "nextobjectid":9,
  "orientation":"orthogonal",
  "properties":
     {
