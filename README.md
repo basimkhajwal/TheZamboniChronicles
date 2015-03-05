@@ -33,6 +33,13 @@ https://rawgit.com/basimkhajwal/TheZamboniChronicles/master/index.html
 - [ ] Make better player textures
 - [ ] Add animation to the player movement
 
+###Things for Cameron to make:
+- Enemy, o maybe a few types/different colours
+- Signs for tutorial hints
+- Pop up for tutorial hints, maybe text for them
+- Moving platform
+- Maybe lava
+- Maybe more player designs to choose from
 
 
 ###The Game Ideas
