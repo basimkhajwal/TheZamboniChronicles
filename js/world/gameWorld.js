@@ -183,7 +183,7 @@ Zamboni.World.GameWorld = {
                         for (i = 0; i < clouds.length; i += 1) {
                             clouds[i][0] += (clouds[i][4] * delta) - (cameraChangeX * 0.1);
 
-                            if ((clouds[i][4] < 0 && clouds[i][0] + clouds[i][2] < offscreenAmount) || (clouds[i][4] > 0 && clouds[i][0] > worldWidth + offscreenAmount)) {
+                            if ((clouds[i][4] < 0 && clouds[i][0] + clouds[i][2] < -offscreenAmount) || (clouds[i][4] > 0 && clouds[i][0] > worldWidth + offscreenAmount)) {
                                 clouds[i] = genCloud(false);
                             }
                         }
