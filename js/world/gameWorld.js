@@ -411,16 +411,18 @@ Zamboni.World.GameWorld = {
                 player.jump = (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("W")));
 
                 player.update(delta, entityCollision);
-
+                player.y += 5;
                 //Check collisions with platforms and apply a force if it is
                 platformObjects.forEach(function (platform) {
 
                     if (player.collidesBottom(platform.generateCollisionFunction())) {
+                        console.log("Checking...");
                         player.x += platform.xChange;
                         player.y += platform.yChange;
                     }
 
                 });
+                player.y -= 5;
             },
 
             updateCamera = function (delta) {
