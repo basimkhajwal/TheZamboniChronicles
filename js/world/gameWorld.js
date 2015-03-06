@@ -408,25 +408,15 @@ Zamboni.World.GameWorld = {
             //The updating stuff
             updatePlayer = function (delta) {
 
-                player.moveRight = (Engine.KeyboardInput.isKeyDown(Engine.Keys.RIGHT));
-                player.moveLeft = (Engine.KeyboardInput.isKeyDown(Engine.Keys.LEFT));
-                player.jump = (Engine.KeyboardInput.isKeyDown(Engine.Keys.UP));
+                player.moveRight = (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("D")));
+                player.moveLeft = (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("A")));
+                player.jump = (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("W")));
 
                 player.update(delta, entityCollision);
 
             },
 
             updateCamera = function (delta) {
-
-                //Rotation just for fun
-                if (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("Q"))) {
-                    camera.rotate(10 * delta);
-                }
-
-                if (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("W"))) {
-                    camera.rotate(-10 * delta);
-                }
-
 
                 //Update the camera position
                 camera.setX((player.x + player.width / 2) - Zamboni.Utils.GameSettings.playerScreenX);
@@ -445,7 +435,6 @@ Zamboni.World.GameWorld = {
 
                     //Apply the physics
                     platform.update(delta);
-
 
                     if (platform.movingToEnd) {
 
@@ -476,8 +465,6 @@ Zamboni.World.GameWorld = {
                         }
 
                     }
-
-                    //console.log(platform.vx + ", " + platform.vy);
 
                 });
 
