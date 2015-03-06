@@ -34,7 +34,7 @@ https://rawgit.com/basimkhajwal/TheZamboniChronicles/master/index.html
 - [ ] Add animation to the player movement
 
 ###Things for Cameron to make:
-- Enemy, o maybe a few types/different colours
+- Enemy, maybe a few types/different colours
 - Signs for tutorial hints
 - Pop up for tutorial hints, maybe text for them
 - Moving platform
