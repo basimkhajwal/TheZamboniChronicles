@@ -13,6 +13,7 @@ Engine.Keys = {
 
     SPACE: 32,
 
+    //The arrow key keys
     LEFT: 37,
     UP: 40,
     RIGHT: 39,
