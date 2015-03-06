@@ -363,8 +363,6 @@ Zamboni.World.GameWorld = {
                 maxCameraX = worldWidth - 1000;
                 maxCameraY = worldHeight - 600;
 
-
-
                 //Set all the background tiles
                 for (i = 0; i < tiles.length; i += 1) {
 
@@ -414,6 +412,15 @@ Zamboni.World.GameWorld = {
 
                 player.update(delta, entityCollision);
 
+                //Check collisions with platforms and apply a force if it is
+                platformObjects.forEach(function (platform) {
+
+                    if (player.collidesBottom(platform.generateCollisionFunction())) {
+                        player.x += platform.xChange;
+                        player.y += platform.yChange;
+                    }
+
+                });
             },
 
             updateCamera = function (delta) {
