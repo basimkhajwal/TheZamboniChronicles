@@ -3,31 +3,6 @@
 
 //^ Some JS Lint stuff
 
-/*** Console modifications so that we can see that is happening***/
-if (typeof console !== "undefined") {
-    if (typeof console.log !== "undefined") {
-        console.olog = console.log;
-    } else {
-        console.olog = function () {"use strict"; };
-    }
-}
-
-console.log = function (message) {
-    "use strict";
-    console.olog(message);
-    document.getElementById("debugDiv").innerHTML += message + "<br>";
-};
-
-console.error = console.debug = console.info =  console.log;
-
-window.setInterval(function () {
-    "use strict";
-    var elem = document.getElementById('debugDiv');
-    elem.scrollTop = elem.scrollHeight;
-}, 1000);
-
-//End console stuff
-
 //The modules
 var Engine = Engine || {};
 var Zamboni = Zamboni || {};
@@ -36,6 +11,7 @@ var Zamboni = Zamboni || {};
 Zamboni.States = Zamboni.States || {};
 Zamboni.Utils = Zamboni.Utils || {};
 
+//Call back to start a new game
 var startGame = function () {
     "use strict";
 
@@ -50,4 +26,5 @@ var startGame = function () {
 
 };
 
+//When the page loads, start the game
 window.addEventListener("load", startGame, false);
