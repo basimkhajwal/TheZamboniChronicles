@@ -166,6 +166,12 @@ Zamboni.World.GameEntity = {
                     this.translate(this.vx * delta, this.vy * delta);
 
                 } else {
+
+                    //Check if we have already collided then move along until we don't
+                    while (this.collidesBottom(collisionFunction)) {
+                        this.y -= 1;
+                    }
+
                     //Otherwise if we do have a collision function do a collision check update
                     //we assume that the previous position is free from collision
 
