@@ -406,22 +406,29 @@ Zamboni.World.GameWorld = {
             //The updating stuff
             updatePlayer = function (delta) {
 
+                //If any movement keys have been pressed set the movement pace
                 player.moveRight = (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("D")));
                 player.moveLeft = (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("A")));
                 player.jump = (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("W")));
 
+                //Update the player physics
                 player.update(delta, entityCollision);
+
+                //Move player down by 5 because no collisions normally occur
                 player.y += 5;
+
                 //Check collisions with platforms and apply a force if it is
                 platformObjects.forEach(function (platform) {
 
+                    //If the player is on a platform then move along with it
                     if (player.collidesBottom(platform.generateCollisionFunction())) {
-                        console.log("Checking...");
                         player.x += platform.xChange;
                         player.y += platform.yChange;
                     }
 
                 });
+
+                //Return the player back to its original y value
                 player.y -= 5;
             },
 
