@@ -96,8 +96,21 @@ Zamboni.World.GameEntity = {
                 this.vy = clamp(this.vy, -this.maxVy, this.maxVy);
             },
 
-            //Update the x and y based on the velocity and the delta
+            //Iterative update approach
             update: function (delta, collisionFunction) {
+
+                //If frame rate is less than specified amount then update at intervals instead
+                while (delta > 0.018) {
+                    this.updatePure(0.018, collisionFunction);
+                    delta -= 0.018;
+                }
+
+                //Update remaining delta
+                this.updatePure(delta, collisionFunction);
+            },
+
+            //Update the x and y based on the velocity and the delta
+            updatePure: function (delta, collisionFunction) {
 
                 //The initial values for the sprite to check for collisions
                 var oldX = this.x,
@@ -112,13 +125,6 @@ Zamboni.World.GameEntity = {
                     //The default forces to apply for movement
                     accel = this.accelForce * (this.falling ? 0.5 : 1.0),
                     friction = this.frictionForce * (this.falling ? 1.0 : 0.5);
-
-                //If the frame rate is less than 56 then recursively update to avoid collision problems
-                if (delta > 0.018) {
-                    delta /= 2;
-
-                    this.update(delta, collisionFunction);
-                }
 
                 //If gravity is enabled for the sprite and it is falling apply it initially
                 if (this.applyGravity && this.falling) {
@@ -180,7 +186,7 @@ Zamboni.World.GameEntity = {
                         }
 
                         //If it collides then move up until it doesn't collide
-                        if (this.vy !== 0 && Math.abs(oldY - this.y) > 10) {
+                        if (this.vy !== 0 && Math.abs(oldY - this.y) > 5) {
 
 
                             if (this.collidedDown) {
@@ -205,15 +211,20 @@ Zamboni.World.GameEntity = {
                         this.falling = true;
                     }
                     
+                    //Move along x by vx and delta
                     this.x += delta * this.vx;
 
+                    //Check for horizontal collisions
                     this.collidedLeft = this.collidesLeft(collisionFunction);
                     this.collidedRight = this.collidesRight(collisionFunction);
 
+                    //If any did occure
                     if (this.collidedLeft || this.collidedRight) {
 
-                        if (this.vx !== 0 && (Math.abs(this.x - oldX) > 10)) {
+                        //To prevent wobbling at collision boundaries
+                        if (this.vx !== 0 && (Math.abs(this.x - oldX) > 5)) {
 
+                            //Move the specified direction that we collided
                             if (this.collidedLeft) {
                                 while (this.collidesLeft(collisionFunction)) {
                                     this.x += 1;
@@ -228,6 +239,7 @@ Zamboni.World.GameEntity = {
                             this.x = oldX;
                         }
 
+                        //Now don't move along anymore
                         this.vx = 0;
                     }
                 }
