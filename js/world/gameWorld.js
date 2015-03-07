@@ -321,6 +321,8 @@ Zamboni.World.GameWorld = {
                 platform.applyFriction = false;
                 platform.colour = Zamboni.Utils.ColourScheme.WET_ASPHALT;
 
+                platform.collisionFunction = platform.generateCollisionFunction();
+
                 platformObjects.push(platform);
 
                 entityCollisions.push(platform.generateCollisionFunction());
@@ -421,7 +423,7 @@ Zamboni.World.GameWorld = {
                 platformObjects.forEach(function (platform) {
 
                     //If the player is on a platform then move along with it
-                    if (player.collidesBottom(platform.generateCollisionFunction())) {
+                    if (player.collidesBottom(platform.collisionFunction)) {
                         player.x += platform.xChange;
                         player.y += platform.yChange;
                     }
