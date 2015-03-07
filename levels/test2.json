@@ -59,7 +59,7 @@
                  "y":520
                 },
                 {
-                 "height":48,
+                 "height":24,
                  "name":"player",
                  "properties":
                     {
@@ -68,7 +68,7 @@
                  "rotation":0,
                  "type":"player",
                  "visible":true,
-                 "width":26,
+                 "width":13,
                  "x":100,
                  "y":800
                 },
