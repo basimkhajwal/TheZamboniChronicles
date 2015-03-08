@@ -20,7 +20,7 @@ Engine.GameEntity = {
 
         return {
 
-            //The variables for an entity
+            //-------------------------------- The variables for an entity ---------------------------------
             //The position
             x: 0,
             y: 0,
@@ -73,6 +73,8 @@ Engine.GameEntity = {
             xChange: 0,
             yChange: 0,
 
+            // -------------------------------- Util Functions ---------------------------------------
+
             //Change the position by a certain amount
             translate: function (dx, dy) {
                 this.x += dx;
@@ -88,6 +90,8 @@ Engine.GameEntity = {
                 this.vx = clamp(this.vx, -this.maxVx, this.maxVx);
                 this.vy = clamp(this.vy, -this.maxVy, this.maxVy);
             },
+
+            // ------------------------------ Updating & Rendering ---------------------------------------
 
             //Iterative update approach
             update: function (delta, collisionFunction) {
