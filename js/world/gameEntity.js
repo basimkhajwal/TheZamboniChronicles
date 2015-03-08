@@ -228,7 +228,7 @@ Zamboni.World.GameEntity = {
                     if (this.collidedLeft || this.collidedRight) {
 
                         //To prevent wobbling at collision boundaries
-                        if (this.vx !== 0 && (Math.abs(this.x - oldX) > 5)) {
+                        if (this.vx !== 0 && (Math.abs(this.x - oldX) > 10)) {
 
                             //Move the specified direction that we collided
                             if (this.collidedLeft) {
