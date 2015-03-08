@@ -51,7 +51,7 @@ Zamboni.World.GameWorld = {
 
             //Takes a list of collision functions and returns OR of them
             mergeAllCollisions = function (collisions) {
-
+                console.log(collisions.length);
                 return function (x, y) {
                     var i;
 
@@ -64,7 +64,6 @@ Zamboni.World.GameWorld = {
                     return false;
 
                 };
-
             },
 
             //The total collision functions for entities, the array of the functions and the final one
@@ -105,7 +104,7 @@ Zamboni.World.GameWorld = {
             lavaObjects = [],
             platformObjects = [],
 
-            //Manage the background stuff
+            //Manage the background stuff (clouds and parallax scrolling etc)
             backgroundManager = (function () {
 
                 //Generate a random number between the two stated values
@@ -267,10 +266,6 @@ Zamboni.World.GameWorld = {
                 enemy.moveLeft = true;
 
                 enemyObjects.push(enemy);
-
-                //var fn = enemy.generateCollisionFunction();
-                //console.log(fn(enemy.x, enemy.y));
-                //entityCollisions.push(fn);
             },
 
             //Create a new lava area from an object
@@ -313,8 +308,8 @@ Zamboni.World.GameWorld = {
                 platform.directionX = sign(changeX);
                 platform.directionY = sign(changeY);
 
-                platform.vx = speed * /*platform.directionX */ (changeX / lengthChange);
-                platform.vy = speed * /*platform.directionY */ (changeY / lengthChange);
+                platform.vx = speed * (changeX / lengthChange);
+                platform.vy = speed * (changeY / lengthChange);
 
                 platform.movingToEnd = true;
 
@@ -418,7 +413,7 @@ Zamboni.World.GameWorld = {
                 player.update(delta, entityCollision);
 
                 //Move player down by 5 because no collisions normally occur
-                player.y += 5;
+                player.y += 10;
 
                 //Check collisions with platforms and apply a force if it is
                 platformObjects.forEach(function (platform) {
@@ -432,7 +427,7 @@ Zamboni.World.GameWorld = {
                 });
 
                 //Return the player back to its original y value
-                player.y -= 5;
+                player.y -= 10;
             },
 
             updateCamera = function (delta) {
