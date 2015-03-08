@@ -49,6 +49,9 @@ Zamboni.States.LoadingState = {
                 }
             }
 
+            /// TEST SOUND
+            //Engine.AssetManager.queueSound("sounds/test.mp3");
+
             //The level loading stuff
 
             for (level in levels) {

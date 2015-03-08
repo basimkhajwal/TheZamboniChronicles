@@ -20,7 +20,8 @@ Zamboni.World.GameWorld = {
     create: function () {
         "use strict";
 
-        //All the private methods and variables
+
+        // ------------------ All the private methods and variables --------------------------
 
         //The tiled map for the background
         var tiledMap,
