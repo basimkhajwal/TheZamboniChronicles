@@ -12,6 +12,9 @@ Engine.AssetManager = (function () {
         //The ajax request queue
         ajaxQueue = [],
 
+        //The sound/music request queue
+        soundQueue = [],
+
         //The stored assets
         cache = {},
 
@@ -24,16 +27,28 @@ Engine.AssetManager = (function () {
     //Add the public methods
     return {
 
-        //Add a new item to be downloaded
+        // -------------- The Request Utility Functions ---------------------------
+
+        //Add a new image to be downloaded
         queueDownload: function (path) {
             console.log("Queued: " + path);
             downloadQueue.push(path);
         },
 
+        //Add a new AJAX request
         queueRequest: function (path) {
             console.log("Requested: " + path);
             ajaxQueue.push(path);
         },
+
+        //Add a new sound load effect
+        queueSound: function (path) {
+            console.log("Requested: " + path);
+            soundQueue.push(path);
+        },
+
+
+        // ------------------ The Downloading Functions -----------------------------
 
         //Downlaod all the assets in the current download queue, calls the callback once done
         downloadAll: function (downloadCallback) {
@@ -51,6 +66,8 @@ Engine.AssetManager = (function () {
 
                 //The counter variable
                 i,
+
+                // ----------- Callbacks -------
 
                 //The success callback for when the image has been loaded
                 successCallback = function () {
@@ -74,6 +91,7 @@ Engine.AssetManager = (function () {
                 //The request callback
                 requestCallback = function (req, url) {
 
+                    //If the request if valid
                     if (req !== null) {
                         console.log(url + " successfully loaded");
 
@@ -81,15 +99,35 @@ Engine.AssetManager = (function () {
                         cache[url] = req.responseText;
                     }
 
+
+                    //Check if we have finished
                     if (that.isDone()) {
                         downloadCallback();
                     }
 
                 },
 
+                //The callback for sounds when done
+                soundCallback = function () {
+
+                    //Notify of the sound load
+                    console.log(this.src + " is loaded");
+
+                    //Add another count to success
+                    successCount += 1;
+
+                    //Check if we have finished
+                    if (that.isDone()) {
+                        downloadCallback();
+                    }
+                },
+
+                // ------------- End Callbacks -----------
+
                 //The original paths and images
                 path = null,
                 img = null,
+                snd = null,
                 url = null;
 
             //Load the asset using the Image class for every download in the queue
@@ -109,16 +147,51 @@ Engine.AssetManager = (function () {
                 cache[path] = img;
             }
 
+            //Request all the sounds
+            for (i = 0; i < soundQueue.length; i += 1) {
+
+                //Get the paths and make a new sound
+                path = soundQueue[i];
+                snd = new Audio();
+
+                //Set the callbacks and settings
+                snd.addEventListener("canplaythrough", soundCallback, false);
+                snd.src = path;
+
+                //Add it to the cache
+                cache[path] = snd;
+            }
+
             //Request all the ajax requests
             for (i = 0; i < ajaxQueue.length; i += 1) {
                 //Get the request
                 url = ajaxQueue[i];
 
                 //Set the callback and request it
-                Engine.Ajax.get(url, requestCallback);
+                this.getAjax(url, requestCallback);
             }
 
         },
+
+        //An AJAX request function
+        getAjax: function (url, onchange) {
+            var request = new XMLHttpRequest();
+
+            //The request handler
+            request.onreadystatechange = function () {
+                if ((request.readyState === 4) && (request.status === 200)) {
+                    onchange(request, url);
+                } else {
+                    onchange(null, url);
+                }
+            };
+
+            //Send the request
+            request.open("GET", url, true);
+            request.send();
+        },
+
+        // -------------- External Util Functions --------------------------
 
         //Get an asset from the cache
         getAsset: function (path) {
@@ -127,12 +200,12 @@ Engine.AssetManager = (function () {
 
         //If all the items have been downloaded
         isDone: function () {
-            return (downloadQueue.length + ajaxQueue.length) === (successCount + errorCount);
+            return (downloadQueue.length + ajaxQueue.length + soundQueue.length) === (successCount + errorCount);
         },
 
         //Return the percentage of items that have been loaded (between  0 and 1)
         getProgress: function () {
-            return (successCount + errorCount) / (downloadQueue.length + ajaxQueue.length);
+            return (successCount + errorCount) / (downloadQueue.length + ajaxQueue.length + soundQueue.length);
         }
 
     };
