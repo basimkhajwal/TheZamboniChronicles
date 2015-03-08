@@ -258,6 +258,9 @@ Engine.GameEntity = {
                 }
             },
 
+
+            // ----------------------- The collision section ----------------------------
+
             //Returns a function that checks whether a point is within this entity
             generateCollisionFunction: function () {
                 //Keep a variable for the outer object to be used as a closure

@@ -58,6 +58,8 @@ Engine.TiledMap = {
                 }
             },
             
+            // ----------------------- The collision section ----------------------------
+
              //Check if a cell isn't zero at an x, y (not cell co-ordinates)
             isCellBlocked: function (x, y) {
                 x = Math.floor(x / tileWidth);
@@ -79,6 +81,8 @@ Engine.TiledMap = {
                 };
 
             },
+
+            // ---------------------- The Getters and Setters -----------------------------------
 
             getTileAt: function (row, col) {
                 return tiles[row][col];
