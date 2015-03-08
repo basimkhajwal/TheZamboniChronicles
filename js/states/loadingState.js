@@ -38,7 +38,7 @@ Zamboni.States.LoadingState = {
 
             //The image loading stuff
             var asset,
-                assets = Zamboni.Utils.Assets, //Save for quick reference
+                assets = Zamboni.Utils.GameSettings.assets, //Save for quick reference
 
                 levels = Zamboni.Utils.GameSettings.levels,
                 level;
@@ -48,9 +48,6 @@ Zamboni.States.LoadingState = {
                     Engine.AssetManager.queueDownload(assets[asset]);
                 }
             }
-
-            /// TEST SOUND
-            //Engine.AssetManager.queueSound("sounds/test.mp3");
 
             //The level loading stuff
 

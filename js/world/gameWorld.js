@@ -114,7 +114,7 @@ Zamboni.World.GameWorld = {
                     },
 
                     //Variables for easy access
-                    cloudImg = Engine.AssetManager.getAsset(Zamboni.Utils.Assets.CLOUD_FUZZY),
+                    cloudImg = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.CLOUD_FUZZY),
                     cloudWidth = Zamboni.Utils.GameSettings.fuzzyCloudWidth,
                     cloudHeight = Zamboni.Utils.GameSettings.fuzzyCloudHeight,
 
@@ -151,9 +151,9 @@ Zamboni.World.GameWorld = {
 
                     //The images to draw for the background
                     mountainImg = [
-                        Engine.AssetManager.getAsset(Zamboni.Utils.Assets.BACKGROUND_MOUNTAINS_LIGHTER),
-                        Engine.AssetManager.getAsset(Zamboni.Utils.Assets.BACKGROUND_MOUNTAINS_LIGHT),
-                        Engine.AssetManager.getAsset(Zamboni.Utils.Assets.BACKGROUND_MOUNTAINS)
+                        Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.BACKGROUND_MOUNTAINS_LIGHTER),
+                        Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.BACKGROUND_MOUNTAINS_LIGHT),
+                        Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.BACKGROUND_MOUNTAINS)
                     ],
 
                     //The amount to test whether a section is off the screen
@@ -246,7 +246,7 @@ Zamboni.World.GameWorld = {
                 player.width = playerObj.width;
                 player.height = playerObj.height;
 
-                player.img = Engine.AssetManager.getAsset(Zamboni.Utils.Assets.JAGO);
+                player.img = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.JAGO);
 
                 player.applyGravity = true;
 
@@ -354,8 +354,8 @@ Zamboni.World.GameWorld = {
 
                 //Use a loop for less lines of code
                 for (tile in Zamboni.Utils.GameSettings.tiles) {
-                    if (Zamboni.Utils.GameSettings.tiles.hasOwnProperty(tile) && Zamboni.Utils.Assets.hasOwnProperty(tile)) {
-                        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles[tile], Engine.AssetManager.getAsset(Zamboni.Utils.Assets[tile]));
+                    if (Zamboni.Utils.GameSettings.tiles.hasOwnProperty(tile) && Zamboni.Utils.GameSettings.assets.hasOwnProperty(tile)) {
+                        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles[tile], Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets[tile]));
                     }
                 }
 

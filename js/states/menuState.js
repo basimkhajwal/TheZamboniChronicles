@@ -109,8 +109,8 @@ Zamboni.States.MenuState = {
         state.onCreate = function (g) {
             game = g;
 
-            background = Engine.AssetManager.getAsset(Zamboni.Utils.Assets.MENU_BG_FUZZY);
-            cloudImg = Engine.AssetManager.getAsset(Zamboni.Utils.Assets.CLOUD_FUZZY);
+            background = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.MENU_BG_FUZZY);
+            cloudImg = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.CLOUD_FUZZY);
         };
 
         state.render = function (ctx) {
