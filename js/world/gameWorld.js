@@ -237,7 +237,7 @@ Zamboni.World.GameWorld = {
             //Parse a new player from the JSON object
             parsePlayer = function (playerObj) {
 
-                player = Zamboni.World.GameEntity.createEmpty();
+                player = Engine.GameEntity.createEmpty();
 
                 player.x = playerObj.x;
                 player.y = playerObj.y;
@@ -254,7 +254,7 @@ Zamboni.World.GameWorld = {
             //Create a new enemy from the object
             parseEnemy = function (enemyObj) {
 
-                var enemy = Zamboni.World.GameEntity.createEmpty();
+                var enemy = Engine.GameEntity.createEmpty();
 
                 enemy.x = enemyObj.x;
                 enemy.y = enemyObj.y;
@@ -288,7 +288,7 @@ Zamboni.World.GameWorld = {
             //Take the object of a platfrom from the JSON and creat a platform from it
             parsePlatform = function (platformObj) {
 
-                var platform = Zamboni.World.GameEntity.createEmpty(),
+                var platform = Engine.GameEntity.createEmpty(),
                     speed = parseInt(platformObj.properties.speed, 10) || 60,
                     changeX,
                     changeY,

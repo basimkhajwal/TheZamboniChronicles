@@ -119,7 +119,7 @@
                  "y":580
                 },
                 {
-                 "height":40,
+                 "height":20,
                  "name":"platform",
                  "properties":
                     {
@@ -146,20 +146,6 @@
                  "width":20,
                  "x":120,
                  "y":860
-                },
-                {
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":940,
-                 "y":620
                 }],
          "opacity":1,
          "type":"objectgroup",
