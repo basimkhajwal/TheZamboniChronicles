@@ -70,9 +70,9 @@ Zamboni.World.GameWorld = {
             entityCollisions = [],
             entityCollision,
 
-            recomputeCollisions = function () {
-                entityCollision = mergeAllCollisions(entityCollisions);
-            },
+            //Like wise for enemy
+            enemyCollisions = [],
+            enemyCollision,
 
             //The tiled maps collision function
             tiledCollision,
@@ -266,6 +266,8 @@ Zamboni.World.GameWorld = {
                 enemy.moveLeft = true;
 
                 enemyObjects.push(enemy);
+
+                enemyCollisions.push(enemy.generateCollisionFunction());
             },
 
             //Create a new lava area from an object
@@ -358,6 +360,7 @@ Zamboni.World.GameWorld = {
                 worldWidth = tiledMap.getWidth() * tiledMap.getTileWidth();
                 worldHeight = tiledMap.getHeight() * tiledMap.getTileHeight();
 
+                //Where the camera could end up at max to prevent dodgy camera movement off the tiled map
                 maxCameraX = worldWidth - 1000;
                 maxCameraY = worldHeight - 600;
 
@@ -398,7 +401,9 @@ Zamboni.World.GameWorld = {
                 tiledCollision = tiledMap.isCellBlocked;
                 entityCollisions.push(tiledMap.generateCollisionFunction());
 
-                recomputeCollisions();
+                entityCollision = mergeAllCollisions(entityCollisions);
+                enemyCollision = mergeAllCollisions(enemyCollisions);
+
             },
 
             //The updating stuff
