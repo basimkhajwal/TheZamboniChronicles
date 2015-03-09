@@ -93,51 +93,8 @@ Engine.GameEntity = {
 
             // ------------------------------ Updating & Rendering ---------------------------------------
 
-            //Iterative update approach
-            update: function (delta, collisionFunction) {
-
-                //Keep the total change(s) and the collisions
-                var oldX = this.x,
-                    oldY = this.y,
-
-                    //The collision markers
-                    anyCollisionLeft = false,
-                    anyCollisionRight = false,
-                    anyCollisionTop = false,
-                    anyCollisionBottom = false;
-
-
-                //If frame rate is less than specified amount then update at intervals instead
-                while (delta > 0.018) {
-                    //Update normally
-                    this.updatePure(0.018, collisionFunction);
-
-                    //Add to collisions
-                    anyCollisionLeft = anyCollisionLeft || this.collidedLeft;
-                    anyCollisionRight = anyCollisionRight || this.collidedRight;
-                    anyCollisionTop = anyCollisionTop || this.collidedUp;
-                    anyCollisionBottom = anyCollisionBottom || this.collidedDown;
-
-                    //Min 0.018 from delta (what we just updated) and iterate if theres more left
-                    delta -= 0.018;
-                }
-
-                //Update remaining delta
-                this.updatePure(delta, collisionFunction);
-
-                //Update change variables
-                this.xChange = this.x - oldX;
-                this.yChange = this.y - oldY;
-
-                //Update collision markers
-                this.collidedDown = anyCollisionBottom;
-                this.collidedLeft = anyCollisionLeft;
-                this.collidedRight = anyCollisionRight;
-                this.collidedLeft = anyCollisionLeft;
-            },
-
             //Update the x and y based on the velocity and the delta
-            updatePure: function (delta, collisionFunction) {
+            update: function (delta, collisionFunction) {
 
                 //The initial values for the sprite to check for collisions
                 var oldX = this.x,
@@ -152,6 +109,12 @@ Engine.GameEntity = {
                     //The default forces to apply for movement
                     accel = this.accelForce * (this.falling ? 0.5 : 1.0),
                     friction = this.frictionForce * (this.falling ? 1.0 : 0.5);
+
+                //If the frame rate is less than 56 then recursively update to avoid collision problems
+                if (delta > 0.018) {
+                    delta /= 2;
+                    this.update(delta, collisionFunction);
+                }
 
                 //If gravity is enabled for the sprite and it is falling apply it initially
                 if (this.applyGravity && this.falling) {
