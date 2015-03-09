@@ -442,8 +442,8 @@ Zamboni.World.GameWorld = {
                 //Update the player physics
                 player.update(delta, entityCollision);
 
-                //Move player down by 5 because no collisions normally occur
-                player.y += 10;
+                //Move player down by 10 because no collisions normally occur
+                player.y += 5;
 
                 //Check collisions with platforms and apply a force if it is
                 platformObjects.forEach(function (platform) {
@@ -457,7 +457,7 @@ Zamboni.World.GameWorld = {
                 });
 
                 //Return the player back to its original y value
-                player.y -= 10;
+                player.y -= 5;
             },
 
             updateCamera = function (delta) {
