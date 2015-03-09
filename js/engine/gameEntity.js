@@ -239,6 +239,10 @@ Engine.GameEntity = {
                         this.vx = 0;
                     }
                 }
+
+                //Update the change variables
+                this.xChange = this.x - oldX;
+                this.yChange = this.y - oldY;
             },
 
             //Draw the image or a solid colour at the entity's position
