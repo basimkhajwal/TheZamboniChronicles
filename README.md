@@ -22,6 +22,7 @@ https://rawgit.com/basimkhajwal/TheZamboniChronicles/master/index.html
 - [x] Parallax scrolling and background effects
 - [x] Clouds in the background
 - [x] Make moving platforms
+- [ ] Fix platform force error
 - [ ] Make side-checking enemies
 - [ ] Add force application to platforms
 - [ ] Fix residual error in the pause thing
