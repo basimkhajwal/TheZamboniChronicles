@@ -23,11 +23,11 @@ https://rawgit.com/basimkhajwal/TheZamboniChronicles/master/index.html
 - [x] Clouds in the background
 - [x] Make moving platforms
 - [x] Fix platform force error
-- [ ] Make side-checking enemies
+- [x] Spikes to stand on
 - [x] Add force application to platforms
 - [x] Fix residual error in the pause thing
 - [ ] Particle Effects
-- [x] Spikes to stand on
+- [ ] Make side-checking enemies
 - [ ] Tutorial areas which show a text info
 - [ ] Boss enemies
 - [ ] Shooting enemies
