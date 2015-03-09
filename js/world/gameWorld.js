@@ -26,6 +26,9 @@ Zamboni.World.GameWorld = {
         //The tiled map for the background
         var tiledMap,
 
+            //The counter variable
+            i,
+
             //Clamp utility function
             clamp = function (val, min, max) {
                 return Math.min(max, Math.max(val, min));
@@ -51,7 +54,6 @@ Zamboni.World.GameWorld = {
 
             //Takes a list of collision functions and returns OR of them
             mergeAllCollisions = function (collisions) {
-                console.log(collisions.length);
                 return function (x, y) {
                     var i;
 
@@ -103,6 +105,10 @@ Zamboni.World.GameWorld = {
             enemyObjects = [],
             lavaObjects = [],
             platformObjects = [],
+            spikeObjects = [],
+
+            //The images for quick access
+            spikeImg = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.SPIKES),
 
             //Manage the background stuff (clouds and parallax scrolling etc)
             backgroundManager = (function () {
@@ -156,10 +162,7 @@ Zamboni.World.GameWorld = {
                     ],
 
                     //The amount to test whether a section is off the screen
-                    offscreenAmount = 100,
-
-                    //The counter variable
-                    i;
+                    offscreenAmount = 100;
 
                 return {
 
@@ -283,6 +286,24 @@ Zamboni.World.GameWorld = {
 
             },
 
+            //Add a new spike object
+            parseSpikes = function (spikeObj) {
+                var spike = {};
+
+                spike.x = spikeObj.x;
+                spike.y = spikeObj.y;
+                spike.width = spikeObj.width;
+                spike.height = spikeObj.height;
+
+                spike.tileWidth = Math.floor(spike.width / tiledMap.getTileWidth());
+
+                spike.collisionFunction = function (x, y) {
+                    return (x >= spike.x && x <= spike.x + spike.width) && (y >= spike.y && y <= spike.y + spike.height);
+                };
+
+                spikeObjects.push(spike);
+            },
+
             //Take the object of a platfrom from the JSON and creat a platform from it
             parsePlatform = function (platformObj) {
 
@@ -391,6 +412,10 @@ Zamboni.World.GameWorld = {
                     case "platform":
                         parsePlatform(objects[i]);
                         break;
+
+                    case "spikes":
+                        parseSpikes(objects[i]);
+                        break;
                     }
                 }
 
@@ -491,6 +516,14 @@ Zamboni.World.GameWorld = {
 
             //Render the static objects
             renderObjects = function (ctx) {
+
+                //Render all spikes
+                spikeObjects.forEach(function (spike) {
+                    for (i = 0; i < spike.tileWidth; i += 1) {
+                        ctx.drawImage(spikeImg, spike.x + (tiledMap.getTileWidth() * i), spike.y, tiledMap.getTileWidth(), spike.height);
+                    }
+
+                });
 
                 //Render all the lava
                 lavaObjects.forEach(function (lava) {
