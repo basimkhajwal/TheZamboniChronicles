@@ -10,3 +10,21 @@ var Engine = Engine || {};
 *   2. Manager - holds a group of particle effects and renders them
 *
 */
+var Particle = {
+
+    /*
+    *   Make a new particle effect with the settings as given
+    */
+    create: function (x, y, width, height, image) {
+        "use strict";
+
+
+
+        return {
+
+
+
+        };
+    }
+
+};
