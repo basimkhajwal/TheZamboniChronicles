@@ -15,7 +15,7 @@ Engine.Particle = {
     /*
     *   Make a new particle effect with the settings as given
     */
-    create: function (x, y, width, height, image) {
+    create: function (x, y, width, height) {
         "use strict";
 
 
@@ -28,3 +28,5 @@ Engine.Particle = {
     }
 
 };
+
+
