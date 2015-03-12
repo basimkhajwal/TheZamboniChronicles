@@ -64,6 +64,13 @@ Engine.Colour = {
                 return Engine.Colour.create(newR, newG, newB, newA);
             },
             
+            quadraticInterpolation: function (otherColour, value) {
+                return this.linearInterpolation(otherColour, value * value);
+            },
+
+            inverseQuadraticInterpolation: function (otherColour, value) {
+                return this.quadraticInterpolation(otherColour, 1 - value);
+            },
             
             // ---------------------- Getters & Setters -------------------------------
             
