@@ -33,6 +33,69 @@ Engine.Canvas = {
 
 };
 
+/*
+*   A utility colour class for support of RGBA colours
+*/
+Engine.Colour = {
+    
+    /*
+    *   Create a new colour with the R,G,B,A values provided
+    */
+    create: function (r, g, b, a) {
+        
+        //Return a clousure although no private methods are needed (as of yet...)
+        return {
+            
+            
+            // --------------------- Interpolation Methods --------------------------
+            // Where 0 is this colour and 1 is the other colour
+            
+            linearInterpolation: function (otherColour, value) {
+                
+                // Calculate the linear Interpolation using the formula
+                var newR = Math.floor(r + (otherColour.getR() - r) * value),
+                    newG = Math.floor(g + (otherColour.getG() - g) * value),
+                    newB = Math.floor(b + (otherColour.getB() - b) * value),
+                    newA = Math.floor(a + (otherColour.getA() - a) * value);
+                
+                
+                //Return a new Colour with the settings
+                return Engine.Colour.create(newR, newG, newB, newA);
+            },
+            
+            
+            // ---------------------- Getters & Setters -------------------------------
+            
+            getR: function () {
+                return r;
+            },
+            
+            getG: function () {
+                return g;
+            },
+            
+            getB: function () {
+                return b;  
+            },
+            
+            getA: function () {
+                return a;
+            },
+            
+            getCanvasColour: function () {
+                return "rbg(" + r + "," + g + "," + b + "," + a + ")";
+            }
+        };
+        
+    }
+    
+}
+
+
+/*
+*   A set of drawing tools that can be added to as the game progreses
+*   for long or commonly used functions tghat could be used again
+*/
 Engine.DrawTools = {
 
 
