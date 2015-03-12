@@ -117,3 +117,10 @@ The game still needs to be planned ..
 - Oliver walkers crisps’ sister; for screaming at him while we play GTA
 - Thomas Weatherhill; oh wait I cant.
 - Thomas Wetherhill; motivating many peoples lives.
+- Adam Loonat; for doing no stuff
+- Declan Robinson; more stuff not done
+- Jeymei; For making a stereo with some oxygen bonding thing
+- Jama; For hurting peoples feelings
+- James; \('0')>
+- Owen; asked to be in the credits, happy birthday
+- Spam rods; For pointing out something once, i think
