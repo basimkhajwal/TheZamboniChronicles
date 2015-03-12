@@ -30,3 +30,8 @@ Engine.Particle = {
 };
 
 
+/*
+*   A manager that holds an array of particle effects and updats them
+*
+*/
+
