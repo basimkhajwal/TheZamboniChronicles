@@ -42,6 +42,7 @@ Engine.Colour = {
     *   Create a new colour with the R,G,B,A values provided
     */
     create: function (r, g, b, a) {
+        "use strict";
         
         //Return a clousure although no private methods are needed (as of yet...)
         return {
@@ -75,7 +76,7 @@ Engine.Colour = {
             },
             
             getB: function () {
-                return b;  
+                return b;
             },
             
             getA: function () {
@@ -89,7 +90,7 @@ Engine.Colour = {
         
     }
     
-}
+};
 
 
 /*
