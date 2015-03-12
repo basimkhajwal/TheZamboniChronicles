@@ -35,11 +35,28 @@ Engine.Particle = {
 /*
 *   An emmitter that holds an array of particle effects and updats them
 *
+
+
+Things that it will have:
+- Position (x,y)
+- Type of particle (square, circle or image)
+- More than one type of particle?
+- Particle dimensions
+- Angle
+- Angle Variance from given angle
+- The particle life span
+- The duration to emit for
+- Start and End colours / saturations
+
+
 */
 Engine.ParticleEmitter = {
 
-    create: function () {
+    create: function (params) {
         "use strict";
+
+
+
     }
 
 };
