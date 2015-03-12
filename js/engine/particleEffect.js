@@ -14,8 +14,10 @@ Engine.Particle = {
 
     /*
     *   Make a new particle effect with the settings as given
+    *   - x, y, vx, vy, ax, ay
+    *
     */
-    create: function (x, y, width, height) {
+    create: function (params) {
         "use strict";
 
 
@@ -31,7 +33,13 @@ Engine.Particle = {
 
 
 /*
-*   A manager that holds an array of particle effects and updats them
+*   An emmitter that holds an array of particle effects and updats them
 *
 */
+Engine.ParticleEmitter = {
 
+    create: function () {
+        "use strict";
+    }
+
+};
