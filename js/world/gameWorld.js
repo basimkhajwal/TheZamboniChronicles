@@ -462,6 +462,10 @@ Zamboni.World.GameWorld = {
 
             updateCamera = function (delta) {
 
+                //Save the old position
+                var oldCameraX = camera.getX(),
+                    oldCameraY = camera.getY();
+
                 //Update the camera position
                 camera.setX((player.x + player.width / 2) - Zamboni.Utils.GameSettings.playerScreenX);
                 camera.setY((player.y + player.height / 2) - Zamboni.Utils.GameSettings.playerScreenY);
@@ -469,6 +473,10 @@ Zamboni.World.GameWorld = {
                 //Clamp the values
                 camera.setX(clamp(camera.getX(), minCameraX, maxCameraX));
                 camera.setY(clamp(camera.getY(), minCameraY, maxCameraY));
+
+                //Update the change variables
+                cameraChangeX = camera.getX() - oldCameraX;
+                cameraChangeY = camera.getY() - oldCameraY;
             },
 
             //Update the static objects in the level
@@ -517,6 +525,30 @@ Zamboni.World.GameWorld = {
 
                 });
 
+                //Update all the enemies
+                //Update enemies
+                enemyObjects.forEach(function (enemy) {
+
+                    if (enemy.x > player.x + 20) {
+                        enemy.moveLeft = true;
+                        enemy.moveRight = false;
+                    } else if (enemy.x < player.x - 20) {
+                        enemy.moveLeft = false;
+                        enemy.moveRight = true;
+                    } else {
+                        enemy.moveLeft = false;
+                        enemy.moveRight = false;
+                    }
+
+                    enemy.update(delta, entityCollision);
+
+                    if (enemy.collidedRight || enemy.collidedLeft) {
+                        enemy.jump = true;
+                    } else {
+                        enemy.jump = false;
+                    }
+
+                });
             },
 
             //Render the static objects
@@ -578,37 +610,7 @@ Zamboni.World.GameWorld = {
                 updateObjects(delta);
                 updatePlayer(delta);
 
-                //Update enemies
-                enemyObjects.forEach(function (enemy) {
-
-                    if (enemy.x > player.x + 20) {
-                        enemy.moveLeft = true;
-                        enemy.moveRight = false;
-                    } else if (enemy.x < player.x - 20) {
-                        enemy.moveLeft = false;
-                        enemy.moveRight = true;
-                    } else {
-                        enemy.moveLeft = false;
-                        enemy.moveRight = false;
-                    }
-
-                    enemy.update(delta, entityCollision);
-
-                    if (enemy.collidedRight || enemy.collidedLeft) {
-                        enemy.jump = true;
-                    } else {
-                        enemy.jump = false;
-                    }
-
-                });
-
-                var oldCameraX = camera.getX(),
-                    oldCameraY = camera.getY();
-
                 updateCamera(delta);
-
-                cameraChangeX = camera.getX() - oldCameraX;
-                cameraChangeY = camera.getY() - oldCameraY;
 
                 backgroundManager.update(delta);
             }
