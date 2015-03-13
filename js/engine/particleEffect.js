@@ -55,7 +55,23 @@ Engine.ParticleEmitter = {
     create: function (params) {
         "use strict";
 
+        //The private methods and stuff
+        var spawnParticle = function () {
 
+
+            //Return the particle object
+            return {
+
+            };
+        };
+
+
+
+
+        //Return a closure with all the public methods
+        return {
+
+        };
 
     }
 
