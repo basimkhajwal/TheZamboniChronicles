@@ -29,6 +29,11 @@ Engine.ParticleEmitter = {
         //Holds all the particle objects
         var particleObjects = [],
 
+            //Utility function for generating random bounded values
+            ranRange = function (min, max) {
+                return min + (Math.random() * (max - min));
+            },
+
             //Create a new random particle that fits the specification
             spawnParticle = function () {
 
@@ -37,6 +42,9 @@ Engine.ParticleEmitter = {
                 return {
 
                     //The initial position (with the random variance)
+                    x: (function () {
+
+                    }())
 
                 };
             },
