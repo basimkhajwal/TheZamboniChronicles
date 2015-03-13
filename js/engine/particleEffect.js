@@ -54,8 +54,10 @@ Engine.ParticleEmitter = {
     create: function (params) {
         "use strict";
 
-        //The private methods and stuff
-        var particles = [],
+        // ------------------------ The private methods and stuff ----------------------
+
+        //Holds all the particle objects
+        var particleObjects = [],
 
             //Create a new random particle that fits the specification
             spawnParticle = function () {
@@ -67,19 +69,31 @@ Engine.ParticleEmitter = {
                 };
             },
 
-            updateParticle = function (particle) {
+            //Update a particular particles settings and the delta time
+            updateParticle = function (particle, delta) {
 
             },
 
-            renderParticle = function (particle) {
+            //Render the given particle to the canvas context provided
+            renderParticle = function (particle, ctx) {
 
             };
 
 
 
 
-        //Return a closure with all the public methods
+        //----------------------- Closure with all the public methods ------------------------------
         return {
+
+            update: function (delta) {
+
+            },
+
+
+            render: function (ctx) {
+
+            }
+
 
         };
 
