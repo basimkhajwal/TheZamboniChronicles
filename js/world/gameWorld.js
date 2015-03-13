@@ -517,6 +517,9 @@ Zamboni.World.GameWorld = {
             //Render the static objects
             renderObjects = function (ctx) {
 
+                //Draw the player
+                player.render(ctx);
+
                 //Draw all the enemies
                 enemyObjects.forEach(function (enemy) {
                     enemy.render(ctx);
@@ -559,7 +562,6 @@ Zamboni.World.GameWorld = {
 
                 backgroundManager.render(ctx);
                 tiledMap.render(ctx, camera.getX(), camera.getX() + 1000, camera.getY(), camera.getY() + 600);
-                player.render(ctx);
                 renderObjects(ctx);
 
                 camera.unProjectContext(ctx);
