@@ -11,6 +11,7 @@ Engine.ParticleEmitter = {
     *
     *   - Position (x,y)
     *   - Position variance (xVariance, yVariance)
+    *   - Initial velocity (vx, vy) and the variance (vxVariance, vyVariance)
     *   - Type of particle e.g. square, circle or image
     *   - More than one type of particle?
     *   - Particle dimensions (particleWidth, particleHeight)
@@ -41,10 +42,22 @@ Engine.ParticleEmitter = {
                 //Return the particle object
                 return {
 
-                    //The initial position (with the random variance)
-                    x: (function () {
+                    //The initial positions and angle (with the random variance)
+                    x: ranRange(params.x - params.xVariance, params.x + params.xVariance),
+                    y: ranRange(params.y - params.yVariance, params.y + params.yVariance),
+                    angle: ranRange(params.angle - params.angleVariance, params.angle + params.angleVariance),
 
-                    }())
+                    //The movement settings
+                    vx: ranRange(params.vx - params.vxVariance, params.vx + params.vxVariance),
+                    vy: ranRange(params.vy - params.vyVariance, params.vy + params.vyVariance),
+                    ax: "THIS IS TEMP ILL FINISH THIS LATER :P",
+
+
+                    //The colour settings
+                    startColour: params.startColour,
+                    endColour: params.endColour,
+                    currentColour: params.startColour
+
 
                 };
             },
