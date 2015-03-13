@@ -33,37 +33,47 @@ Engine.Particle = {
 
 
 /*
-*   An emmitter that holds an array of particle effects and updats them
-*
-
-
-Things that it will have:
-- Position (x,y)
-- Type of particle (square, circle or image)
-- More than one type of particle?
-- Particle dimensions
-- Angle
-- Angle Variance from given angle
-- The particle life span
-- The duration to emit for
-- Start and End colours / saturations
-
-
+*   An emmitter that holds an array of particle effects and updates and renders them
 */
 Engine.ParticleEmitter = {
 
+    /*
+    *   Create a new particle emitter with the 'params' argument defined with the following properties:
+    *
+    *   - Position (x,y)
+    *   - Type of particle (square, circle or image)
+    *   - More than one type of particle?
+    *   - Particle dimensions
+    *   - Angle
+    *   - Angle Variance from given angle
+    *   - The particle life span
+    *   - The duration to emit for
+    *   - Start and End colours / saturations
+    *
+    */
     create: function (params) {
         "use strict";
 
         //The private methods and stuff
-        var spawnParticle = function () {
+        var particles = [],
+
+            //Create a new random particle that fits the specification
+            spawnParticle = function () {
 
 
-            //Return the particle object
-            return {
+                //Return the particle object
+                return {
+
+                };
+            },
+
+            updateParticle = function (particle) {
+
+            },
+
+            renderParticle = function (particle) {
 
             };
-        };
 
 
 
