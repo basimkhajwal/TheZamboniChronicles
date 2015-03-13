@@ -41,13 +41,14 @@ Engine.ParticleEmitter = {
     *   Create a new particle emitter with the 'params' argument defined with the following properties:
     *
     *   - Position (x,y)
-    *   - Type of particle (square, circle or image)
+    *   - Position variance (xVariance, yVariance)
+    *   - Type of particle e.g. square, circle or image
     *   - More than one type of particle?
-    *   - Particle dimensions
-    *   - Angle
-    *   - Angle Variance from given angle
-    *   - The particle life span
-    *   - The duration to emit for
+    *   - Particle dimensions (particleWidth, particleHeight)
+    *   - Angle (angle)
+    *   - Angle Variance from given angle (angleVariance)
+    *   - The particle life span (particleLife)
+    *   - The duration to emit for (emitLife)
     *   - Start and End colours / saturations
     *
     */
@@ -65,6 +66,8 @@ Engine.ParticleEmitter = {
 
                 //Return the particle object
                 return {
+
+                    //The initial
 
                 };
             },
@@ -85,11 +88,13 @@ Engine.ParticleEmitter = {
         //----------------------- Closure with all the public methods ------------------------------
         return {
 
+
+            //Update this emitter with the delta time provided
             update: function (delta) {
 
             },
 
-
+            //Render the particles in this emitter onto the canvas context given
             render: function (ctx) {
 
             }
