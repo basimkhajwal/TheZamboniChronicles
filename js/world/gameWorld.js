@@ -517,6 +517,11 @@ Zamboni.World.GameWorld = {
             //Render the static objects
             renderObjects = function (ctx) {
 
+                //Draw all the enemies
+                enemyObjects.forEach(function (enemy) {
+                    enemy.render(ctx);
+                });
+
                 //Render all spikes
                 spikeObjects.forEach(function (spike) {
                     for (i = 0; i < spike.tileWidth; i += 1) {
@@ -556,11 +561,6 @@ Zamboni.World.GameWorld = {
                 tiledMap.render(ctx, camera.getX(), camera.getX() + 1000, camera.getY(), camera.getY() + 600);
                 player.render(ctx);
                 renderObjects(ctx);
-
-                //Draw all the enemies
-                enemyObjects.forEach(function (enemy) {
-                    enemy.render(ctx);
-                });
 
                 camera.unProjectContext(ctx);
             },
