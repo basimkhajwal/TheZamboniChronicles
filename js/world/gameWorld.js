@@ -480,14 +480,17 @@ Zamboni.World.GameWorld = {
                     //Apply the physics
                     platform.update(delta);
 
+                    //If the platform is moving in the original direction
                     if (platform.movingToEnd) {
 
+                        //Check if it has reached the end if it is moving left or right, then switch direction
                         if ((platform.directionX > 0 && platform.x >= platform.endX) || (platform.directionX < 0 && platform.x <= platform.endX)) {
                             platform.x = platform.endX;
                             platform.vx *= -1;
                             platform.movingToEnd = false;
                         }
 
+                        //If the it has reached the end either up or down then switch direction
                         if ((platform.directionY > 0 && platform.y >= platform.endY) || (platform.directionY < 0 && platform.y <= platform.endY)) {
                             platform.y = platform.endY;
                             platform.vy *= -1;
@@ -496,12 +499,14 @@ Zamboni.World.GameWorld = {
 
                     } else {
 
+                        //If it has gone back to the start either left or right then switch direction
                         if ((platform.directionX > 0 && platform.x <= platform.startX) || (platform.directionX < 0 && platform.x >= platform.startX)) {
                             platform.x = platform.startX;
                             platform.vx *= -1;
                             platform.movingToEnd = true;
                         }
 
+                        //If it has reached the start again either upwards or below then switch direction again
                         if ((platform.directionY > 0 && platform.y <= platform.startY) || (platform.directionY < 0 && platform.y >= platform.startY)) {
                             platform.y = platform.startY;
                             platform.vy *= -1;
