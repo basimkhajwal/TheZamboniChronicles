@@ -96,8 +96,26 @@ Engine.Colour = {
         };
         
     }
-    
 };
+
+//Add some default colours
+(function () {
+    "use strict";
+
+    //THe default colours to add
+    var colours = [
+        ["BLACK", 0, 0, 0],
+        ["RED", 255, 0, 0],
+        ["GREEN", 0, 255, 0],
+        ["BLUE", 0, 0, 255]
+    ];
+
+    //Set the values for all the list by iterating over and creating a new colour
+    colours.forEach(function (colour) {
+        Engine.Colour[colour[0]] = Engine.Colour.create(colour[1], colour[2], colour[3]);
+    });
+
+}());
 
 
 /*
