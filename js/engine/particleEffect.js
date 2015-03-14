@@ -27,6 +27,8 @@ Engine.ParticleEmitter = {
 
         // ------------------------ The private methods and stuff ----------------------
 
+        //The default colour settings
+        params.startColour = params.startColour || params.colour || Engine.Colour.BLACK || Engine.Colour.create(0, 0, 0);
 
         //The default variance values
         params.xVariance = params.xVariance || 0;
@@ -85,6 +87,19 @@ Engine.ParticleEmitter = {
             //Update a particular particles settings and the delta time
             updateParticle = function (particle, delta) {
 
+                //Move it by the time
+                particle.currentTime += delta;
+
+                //Update the velocity by the acceleration
+                particle.vx += particle.ax * delta;
+                particle.vy += particle.ay * delta;
+
+                //Move by the particle by the velocity
+                particle.x += particle.vx * delta;
+                particle.y += particle.vy * delta;
+
+                //Set the colour
+                particle.currentColour = particle.startColour.linearInterpolation(particle.endColour, (particle.currentTime / particle.lifeSpan));
             },
 
             //Render the given particle to the canvas context provided
