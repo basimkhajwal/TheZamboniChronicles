@@ -17,7 +17,7 @@ Engine.ParticleEmitter = {
     *   - Angle (angle)
     *   - Angle Variance from given angle (angleVariance)
     *   - The speed of the particle and its variance
-    *   - The particle life span (particleLife)
+    *   - The particle life span (particleLife) and its variance
     *   - The duration to emit for (emitLife)
     *   - Start and End colours / saturations
     *
