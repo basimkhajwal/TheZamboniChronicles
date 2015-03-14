@@ -35,6 +35,8 @@ Engine.ParticleEmitter = {
         params.vyVariance = params.vyVariance || 0;
         params.axVariance = params.axVariance || 0;
         params.ayVariance = params.ayVariance || 0;
+        params.angleVariance = params.angleVariance || 0;
+        params.speedVariance = params.speedVariance || 0;
 
         //Holds all the particle objects
         var particleObjects = [],
