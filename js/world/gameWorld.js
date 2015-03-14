@@ -336,44 +336,60 @@ Zamboni.World.GameWorld = {
             //Take the object of a platfrom from the JSON and creat a platform from it
             parsePlatform = function (platformObj) {
 
+                //Create a new game entity for this platform
                 var platform = Engine.GameEntity.createEmpty(),
+
+                    //Set the default speed value or get one
                     speed = parseInt(platformObj.properties.speed, 10) || 60,
+
+                    //The movement variables for later use
                     changeX,
                     changeY,
                     lengthChange;
 
-
+                //Set the position and dimensions
                 platform.x = platformObj.x;
                 platform.y = platformObj.y;
                 platform.width = platformObj.width;
                 platform.height = platformObj.height;
 
+                //Set the movement positions
                 platform.startX = platformObj.x;
                 platform.startY = platformObj.y;
                 platform.endX = parseInt(platformObj.properties.endX, 10);
                 platform.endY = parseInt(platformObj.properties.endY, 10);
 
+                //Calculate which way to move
                 changeX = platform.endX - platform.x;
                 changeY = platform.endY - platform.y;
                 lengthChange = Math.sqrt(changeX * changeX + changeY * changeY);
 
+                //Set the direction
                 platform.directionX = sign(changeX);
                 platform.directionY = sign(changeY);
 
+                //Set the velocity
                 platform.vx = speed * (changeX / lengthChange);
                 platform.vy = speed * (changeY / lengthChange);
 
+                //Whether or not the platform is moving to its start position or end (see above)
                 platform.movingToEnd = true;
 
+                //The forces to apply to the platform (which are none)
                 platform.applyGravity = false;
                 platform.applyFriction = false;
+
+                //The default platform colour (to be changed)
                 platform.colour = Zamboni.Utils.ColourScheme.WET_ASPHALT;
 
+                //Get the collsion function because it will be used a lot
                 platform.collisionFunction = platform.generateCollisionFunction();
 
+                //Add the platform to the global platofrm array
                 platformObjects.push(platform);
 
-                entityCollisions.push(platform.generateCollisionFunction());
+                //Add the collision function for entities to collide with
+                entityCollisions.push(platform.collisionFunction);
             },
 
             //Parse a new level from a given string
