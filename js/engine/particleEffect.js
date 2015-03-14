@@ -33,10 +33,9 @@ Engine.ParticleEmitter = {
         //The default variance values
         params.xVariance = params.xVariance || 0;
         params.yVariance = params.yVariance || 0;
-        params.vxVariance = params.vxVariance || 0;
-        params.vyVariance = params.vyVariance || 0;
         params.axVariance = params.axVariance || 0;
         params.ayVariance = params.ayVariance || 0;
+
         params.angleVariance = params.angleVariance || 0;
         params.speedVariance = params.speedVariance || 0;
         params.timeVariance = params.timeVariance || 0;
@@ -110,6 +109,8 @@ Engine.ParticleEmitter = {
 
             //Render the given particle to the canvas context provided
             renderParticle = function (particle, ctx) {
+
+                ctx.fillStyle = particle.currentColour.getCanvasColour();
 
             };
 
