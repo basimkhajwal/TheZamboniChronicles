@@ -11,12 +11,12 @@ Engine.ParticleEmitter = {
     *
     *   - Position (x,y)
     *   - Position variance (xVariance, yVariance)
-    *   - Initial velocity (vx, vy) and the variance (vxVariance, vyVariance)
     *   - Type of particle e.g. square, circle or image
     *   - More than one type of particle?
     *   - Particle dimensions (particleWidth, particleHeight)
     *   - Angle (angle)
     *   - Angle Variance from given angle (angleVariance)
+    *   - The speed of the particle and its variance
     *   - The particle life span (particleLife)
     *   - The duration to emit for (emitLife)
     *   - Start and End colours / saturations
@@ -38,20 +38,26 @@ Engine.ParticleEmitter = {
             //Create a new random particle that fits the specification
             spawnParticle = function () {
 
+                //Calculate the angle
+                var angle = ranRange(params.angle - params.angleVariance, params.angle + params.angleVariance),
+
+                    //Calculate the speed
+                    speed = ranRange(params.speed - params.speedVariance, params.speed + params.speedVariance);
 
                 //Return the particle object
                 return {
 
-                    //The initial positions and angle (with the random variance)
+                    //The initial positions
                     x: ranRange(params.x - params.xVariance, params.x + params.xVariance),
                     y: ranRange(params.y - params.yVariance, params.y + params.yVariance),
-                    angle: ranRange(params.angle - params.angleVariance, params.angle + params.angleVariance),
 
-                    //The movement settings
-                    vx: ranRange(params.vx - params.vxVariance, params.vx + params.vxVariance),
-                    vy: ranRange(params.vy - params.vyVariance, params.vy + params.vyVariance),
-                    ax: "THIS IS TEMP ILL FINISH THIS LATER :P",
+                    //Calculate the velocity from the angle using trig functions
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed,
 
+                    //Set the acceleration variables with their respective variances
+                    ax: ranRange(params.ax - params.axVariance, params.ax + params.axVariance),
+                    ay: ranRange(params.ay - params.ayVariance, params.ay + params.ayVariance),
 
                     //The colour settings
                     startColour: params.startColour,
