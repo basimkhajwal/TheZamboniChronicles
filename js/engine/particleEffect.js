@@ -78,6 +78,9 @@ Engine.ParticleEmitter = {
                     endColour: params.endColour,
                     currentColour: params.startColour,
 
+                    //Whether or not to remove the particle
+                    dead: false,
+
                     //The time settings
                     currentTime: 0,
                     lifeSpan: ranRange(params.lifeSpan - params.lifeSpanVariance, params.lifeSpan + params.lifeSpanVariance)
@@ -100,6 +103,9 @@ Engine.ParticleEmitter = {
 
                 //Set the colour
                 particle.currentColour = particle.startColour.linearInterpolation(particle.endColour, (particle.currentTime / particle.lifeSpan));
+
+                //Check if the life span of the particle is over and set the dead variable
+                particle.dead = particle.currentTime > particle.lifeSpan;
             },
 
             //Render the given particle to the canvas context provided
