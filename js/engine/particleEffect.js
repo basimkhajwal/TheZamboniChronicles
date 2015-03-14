@@ -27,6 +27,15 @@ Engine.ParticleEmitter = {
 
         // ------------------------ The private methods and stuff ----------------------
 
+
+        //The default variance values
+        params.xVariance = params.xVariance || 0;
+        params.yVariance = params.yVariance || 0;
+        params.vxVariance = params.vxVariance || 0;
+        params.vyVariance = params.vyVariance || 0;
+        params.axVariance = params.axVariance || 0;
+        params.ayVariance = params.ayVariance || 0;
+
         //Holds all the particle objects
         var particleObjects = [],
 
