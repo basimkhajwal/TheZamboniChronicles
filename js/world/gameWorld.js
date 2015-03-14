@@ -529,8 +529,21 @@ Zamboni.World.GameWorld = {
                 //Update enemies
                 enemyObjects.forEach(function (enemy) {
 
+
+
+                    //Update the physics built in to a game entity
                     enemy.update(delta, entityCollision);
 
+                    //Check collisions with platforms and apply a force if it is
+                    platformObjects.forEach(function (platform) {
+
+                        //If the player is on a platform then move along with it
+                        if (enemy.collidesBottom(platform.collisionFunction)) {
+                            enemy.x += platform.xChange;
+                            enemy.y += platform.yChange;
+                        }
+
+                    });
                 });
             },
 
