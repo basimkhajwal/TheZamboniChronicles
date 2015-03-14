@@ -37,6 +37,7 @@ Engine.ParticleEmitter = {
         params.ayVariance = params.ayVariance || 0;
         params.angleVariance = params.angleVariance || 0;
         params.speedVariance = params.speedVariance || 0;
+        params.timeVariance = params.timeVariance || 0;
 
         //Holds all the particle objects
         var particleObjects = [],
@@ -73,9 +74,11 @@ Engine.ParticleEmitter = {
                     //The colour settings
                     startColour: params.startColour,
                     endColour: params.endColour,
-                    currentColour: params.startColour
+                    currentColour: params.startColour,
 
-
+                    //The time settings
+                    currentTime: 0,
+                    lifeSpan: ranRange(params.lifeSpan - params.lifeSpanVariance, params.lifeSpan + params.lifeSpanVariance)
                 };
             },
 
