@@ -125,18 +125,24 @@ Zamboni.World.GameWorld = {
 
                     //Generate a new random cloud
                     genCloud = function (genAnywhere) {
+                        //The speed of the cloud in the x direction
                         var vx,
 
+                            //A random size
                             width = cloudWidth * getRan(0.2, 0.5),
                             height = cloudHeight * getRan(0.2, 0.5),
 
-                            x = 0,
-                            y = 0;
+                            //The position (to be set)
+                            x,
+                            y;
 
+                        //Get a random velocity of a magnitude atleast 10
                         do {
                             vx = getRan(-40, 40);
                         } while (Math.abs(vx) < 10);
 
+                        //If generating anywhere on screen then do so
+                        //otherwise generate clouds only off the screen so they move in
                         if (genAnywhere) {
                             x = getRan(0, worldWidth - width);
                             y = getRan(50, worldHeight - height);
@@ -145,6 +151,7 @@ Zamboni.World.GameWorld = {
                             y = getRan(50, 200 - worldHeight);
                         }
 
+                        //Return the array of the cloud details
                         return [x + camera.getX(), y + camera.getY(), width, height, vx];
                     },
 
@@ -166,6 +173,7 @@ Zamboni.World.GameWorld = {
 
                 return {
 
+                    //Reset the background manager
                     create: function () {
                         //Add the initial clouds
                         for (i = 0; i < Zamboni.Utils.GameSettings.backgroundCloudNumber; i += 1) {
@@ -183,27 +191,36 @@ Zamboni.World.GameWorld = {
 
                     update: function (delta) {
 
+                        //Iterate over all the clouds
                         for (i = 0; i < clouds.length; i += 1) {
+                            //Move them by their x velocity
                             clouds[i][0] += (clouds[i][4] * delta) - (cameraChangeX * 0.1);
 
+                            //Check if they are off the screen, if so then reset it to a new cloud
                             if ((clouds[i][4] < 0 && clouds[i][0] + clouds[i][2] < -offscreenAmount) || (clouds[i][4] > 0 && clouds[i][0] > worldWidth + offscreenAmount)) {
                                 clouds[i] = genCloud(false);
                             }
                         }
 
-                        var point;
-
+                        //Set the initial counter variable
                         i = 0;
-                        backgroundMountains.forEach(function (mountain) {
-                            mountain.x += cameraChangeX * (1 - (i * 0.2));
-                            point = mountain.x - camera.getX();
 
-                            if (point < -offscreenAmount) {
+                        //Iterate over each mountain that we are drawing
+                        backgroundMountains.forEach(function (mountain) {
+                            //Move mountains further away by less than the closer ones
+                            mountain.x += cameraChangeX * (1 - (i * 0.2));
+
+                            //Get the point on the screen of the mountain relative to the camera
+                            var point = mountain.x - camera.getX();
+
+                            //Check if the mountain goes off the screen and move it so that it doesn't
+                            if (point < 0) {
                                 mountain.x += 1000;
-                            } else if (point > 1000 + offscreenAmount) {
+                            } else if (point > 1000) {
                                 mountain.x -= 1000;
                             }
 
+                            //Increment i for the next mountain
                             i += 1;
                         });
                     },
@@ -240,16 +257,19 @@ Zamboni.World.GameWorld = {
             //Parse a new player from the JSON object
             parsePlayer = function (playerObj) {
 
+                //Create a new game entity for the player
                 player = Engine.GameEntity.createEmpty();
 
+                //Set the positions and the dimension
                 player.x = playerObj.x;
                 player.y = playerObj.y;
-
                 player.width = playerObj.width;
                 player.height = playerObj.height;
 
+                //Set the sprite image as loaded, will be an animation later
                 player.img = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.JAGO);
 
+                //Set the forces (only gravity for now)
                 player.applyGravity = true;
 
             },
@@ -257,25 +277,30 @@ Zamboni.World.GameWorld = {
             //Create a new enemy from the object
             parseEnemy = function (enemyObj) {
 
+                //Create a new game entity for this enemy
                 var enemy = Engine.GameEntity.createEmpty();
 
+                //Set the position and dimensions
                 enemy.x = enemyObj.x;
                 enemy.y = enemyObj.y;
-
                 enemy.width = enemyObj.width;
                 enemy.height = enemyObj.height;
 
+                //The settings for the enemy for forces
                 enemy.applyGravity = true;
                 enemy.moveLeft = true;
 
+                //Add it to the global enemy array
                 enemyObjects.push(enemy);
 
+                //Add the collision function to the enemy object list
                 enemyCollisions.push(enemy.generateCollisionFunction());
             },
 
             //Create a new lava area from an object
             parseLava = function (lavaObj) {
 
+                //Add a new lava object with the position and dimensions to the lava object list
                 lavaObjects.push({
                     x: lavaObj.x,
                     y: lavaObj.y,
@@ -290,17 +315,21 @@ Zamboni.World.GameWorld = {
             parseSpikes = function (spikeObj) {
                 var spike = {};
 
+                //Set the position and dimensions
                 spike.x = spikeObj.x;
                 spike.y = spikeObj.y;
                 spike.width = spikeObj.width;
                 spike.height = spikeObj.height;
 
+                //How many tiles wide the spikes are
                 spike.tileWidth = Math.floor(spike.width / tiledMap.getTileWidth());
 
+                //Add a simple collision function
                 spike.collisionFunction = function (x, y) {
                     return (x >= spike.x && x <= spike.x + spike.width) && (y >= spike.y && y <= spike.y + spike.height);
                 };
 
+                //Add it to the global spike list
                 spikeObjects.push(spike);
             },
 
@@ -353,9 +382,6 @@ Zamboni.World.GameWorld = {
                 //Parse the actual JSOn Object first
                 var jsonObj = JSON.parse(fileText),
 
-                    //Counter variable
-                    i,
-
                     //The tile layer from the JSON
                     tiles = jsonObj.layers[0].data,
 
@@ -392,7 +418,7 @@ Zamboni.World.GameWorld = {
                     tiledMap.setTileAt(Math.floor(i / jsonObj.width), i % jsonObj.width, tiles[i]);
                 }
 
-                //Loop over every object defined in the second layer
+                //Loop over every object defined in the second layer and call the correct function to parse it
                 for (i = 0; i < objects.length; i += 1) {
 
                     switch (objects[i].type) {
@@ -426,9 +452,9 @@ Zamboni.World.GameWorld = {
                 tiledCollision = tiledMap.isCellBlocked;
                 entityCollisions.push(tiledMap.generateCollisionFunction());
 
+                //Merge the collision functions all into one
                 entityCollision = mergeAllCollisions(entityCollisions);
                 enemyCollision = mergeAllCollisions(enemyCollisions);
-
             },
 
             //The updating stuff
