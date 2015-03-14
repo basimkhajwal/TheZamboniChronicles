@@ -110,8 +110,11 @@ Engine.ParticleEmitter = {
             //Render the given particle to the canvas context provided
             renderParticle = function (particle, ctx) {
 
+                //Set the colour
                 ctx.fillStyle = particle.currentColour.getCanvasColour();
 
+                //Draw a rect for the particle ---- TEMPORARY
+                ctx.fillRect(particle.x, particle.y, 5, 5);
             };
 
 
