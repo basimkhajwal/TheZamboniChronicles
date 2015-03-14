@@ -529,24 +529,7 @@ Zamboni.World.GameWorld = {
                 //Update enemies
                 enemyObjects.forEach(function (enemy) {
 
-                    if (enemy.x > player.x + 20) {
-                        enemy.moveLeft = true;
-                        enemy.moveRight = false;
-                    } else if (enemy.x < player.x - 20) {
-                        enemy.moveLeft = false;
-                        enemy.moveRight = true;
-                    } else {
-                        enemy.moveLeft = false;
-                        enemy.moveRight = false;
-                    }
-
                     enemy.update(delta, entityCollision);
-
-                    if (enemy.collidedRight || enemy.collidedLeft) {
-                        enemy.jump = true;
-                    } else {
-                        enemy.jump = false;
-                    }
 
                 });
             },
