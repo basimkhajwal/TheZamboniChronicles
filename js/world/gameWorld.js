@@ -290,8 +290,8 @@ Zamboni.World.GameWorld = {
                 enemy.applyGravity = true;
                 enemy.moveLeft = true;
 
-                //Set the type of the enemy
-                enemy.type = enemyObj.properties.type;
+                //Set the type of the enemy, the default is type a
+                enemy.type = (enemyObj.properties.type || "a").toLowerCase();
 
                 //Add it to the global enemy array
                 enemyObjects.push(enemy);
@@ -574,6 +574,41 @@ Zamboni.World.GameWorld = {
                 //Update enemies
                 enemyObjects.forEach(function (enemy) {
 
+                    //Move differently for different enemies
+                    switch (enemy.type) {
+
+                    //A simple enemy that changes direction on a side collision
+                    case "a":
+
+                        //If it collided on the left side and are moving left or the opposite way
+                        if ((enemy.collidedLeft && enemy.moveLeft) || (enemy.collidedRight && enemy.moveRight)) {
+
+                            //Reverse the direction
+                            enemy.moveLeft = !enemy.moveLeft;
+                            enemy.moveRight = !enemy.moveRight;
+
+                        }
+
+
+                        break;
+
+                    //An enemy that only moves side to side and doesn't fall off edges
+                    case "b":
+
+                        //If it collided on the left side and are moving left or the opposite way
+                        if ((enemy.collidedLeft && enemy.moveLeft) || (enemy.collidedRight && enemy.moveRight)) {
+
+                            //Reverse the direction
+                            enemy.moveLeft = !enemy.moveLeft;
+                            enemy.moveRight = !enemy.moveRight;
+
+                        }
+
+                        //Check if it would fall off
+
+                        break;
+
+                    }
 
 
                     //Update the physics built in to a game entity
