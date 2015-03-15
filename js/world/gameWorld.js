@@ -290,13 +290,11 @@ Zamboni.World.GameWorld = {
                 enemy.applyGravity = true;
                 enemy.moveLeft = true;
 
+                //Set the type of the enemy
+                enemy.type = enemyObj.properties.type;
+
                 //Add it to the global enemy array
                 enemyObjects.push(enemy);
-
-
-
-
-
 
                 //Add the collision function to the enemy object list
                 enemyCollisions.push(enemy.generateCollisionFunction());
