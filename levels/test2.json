@@ -160,6 +160,34 @@
                  "width":100,
                  "x":680,
                  "y":520
+                },
+                {
+                 "height":20,
+                 "name":"another one",
+                 "properties":
+                    {
+                     "type":"b"
+                    },
+                 "rotation":0,
+                 "type":"enemy",
+                 "visible":true,
+                 "width":20,
+                 "x":2560,
+                 "y":600
+                },
+                {
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2840,
+                 "y":540
                 }],
          "opacity":1,
          "type":"objectgroup",
