@@ -29,6 +29,32 @@ Zamboni.World.GameWorld = {
             //The counter variable
             i,
 
+            //Utility clone for objects
+            cloneObj = function (obj) {
+                //Check to see if it is the correct type
+                if (null === obj || "object" !== typeof obj) {
+                    return obj;
+                }
+
+                //Get a copy of an empty object to use
+                var copy = obj.constructor(),
+
+                    //Attribute to enumerate over
+                    attr;
+
+                //Go over each property in the initial object
+                for (attr in obj) {
+
+                    //Copy the attribute if possible
+                    if (obj.hasOwnProperty(attr)) {
+                        copy[attr] = obj[attr];
+                    }
+                }
+
+                //Return the generated copy
+                return copy;
+            },
+
             //Clamp utility function
             clamp = function (val, min, max) {
                 return Math.min(max, Math.max(val, min));
