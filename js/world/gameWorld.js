@@ -600,6 +600,9 @@ Zamboni.World.GameWorld = {
                 //Update enemies
                 enemyObjects.forEach(function (enemy) {
 
+                    //Temporary variable for the side-checking enemy
+                    var change;
+
                     //Move differently for different enemies
                     switch (enemy.type) {
 
@@ -631,6 +634,31 @@ Zamboni.World.GameWorld = {
                         }
 
                         //Check if it would fall off
+                        if (!enemy.falling) {
+
+                            //Store the amount that it will move on the x-direction
+                            change = enemy.vx * (3 * delta);
+
+                            //Temporarily move it three deltas ahead
+                            enemy.x += change;
+
+                            //Move it down slightly
+                            enemy.y += 5;
+
+                            //See if it has gone off the edge, if so then reverse direction
+                            if (!enemy.collidesBottom(entityCollision)) {
+
+                                //Reverse the direction
+                                enemy.moveLeft = !enemy.moveLeft;
+                                enemy.moveRight = !enemy.moveRight;
+
+                            }
+
+                            //Reset to the initial position
+                            enemy.y -= 5;
+                            enemy.x -= change;
+
+                        }
 
                         break;
 
