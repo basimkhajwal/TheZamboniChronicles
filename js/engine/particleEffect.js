@@ -123,9 +123,23 @@ Engine.ParticleEmitter = {
         //----------------------- Closure with all the public methods ------------------------------
         return {
 
-
             //Update this emitter with the delta time provided
             update: function (delta) {
+                //Counter variable and iterative variable
+                var i, particle;
+
+                for (i = 0; i < particleObjects.length; i += 1) {
+                    particle = particleObjects[i];
+
+                    //Call the update movement method
+                    updateParticle(particle);
+
+                    //Check if it is dead
+                    if (particle.dead) {
+
+                    }
+
+                }
 
             },
 
