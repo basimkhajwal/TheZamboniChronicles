@@ -293,6 +293,11 @@ Zamboni.World.GameWorld = {
                 //Add it to the global enemy array
                 enemyObjects.push(enemy);
 
+
+
+
+
+
                 //Add the collision function to the enemy object list
                 enemyCollisions.push(enemy.generateCollisionFunction());
             },
