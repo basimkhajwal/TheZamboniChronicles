@@ -711,7 +711,29 @@ Zamboni.World.GameWorld = {
                     platform.render(ctx);
                 });
 
-            };
+            },
+
+            //TEMP
+            emitter = Engine.ParticleEmitter.create({
+                x: 300,
+                y: 700,
+
+                ax: 5,
+                ay: 20,
+
+                angle: 10,
+                angleVariance: 100,
+
+                speed: 30,
+
+                lifeSpan: 8,
+
+                startColour: Engine.Colour.create(255, 0, 0, 255),
+                endColour: Engine.Colour.create(255, 255, 0, 255),
+
+                maxParticles: 30,
+                particlesPerSecond: 5
+            });
 
         //Parse the level - TODO
         parseLevel(Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.levels.TEST2));
@@ -731,6 +753,8 @@ Zamboni.World.GameWorld = {
                 tiledMap.render(ctx, camera.getX(), camera.getX() + 1000, camera.getY(), camera.getY() + 600);
                 renderObjects(ctx);
 
+                emitter.render(ctx);
+
                 camera.unProjectContext(ctx);
             },
 
@@ -741,6 +765,8 @@ Zamboni.World.GameWorld = {
                 updatePlayer(delta);
 
                 updateCamera(delta);
+
+                emitter.update(delta);
 
                 backgroundManager.update(delta);
             }
