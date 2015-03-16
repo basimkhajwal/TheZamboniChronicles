@@ -136,7 +136,8 @@ Engine.ParticleEmitter = {
 
                     //Check if it is dead
                     if (particle.dead) {
-
+                        particleObjects.splice(i, 1);
+                        i -= 1;
                     }
 
                 }
