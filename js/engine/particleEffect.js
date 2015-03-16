@@ -128,6 +128,7 @@ Engine.ParticleEmitter = {
                 //Counter variable and iterative variable
                 var i, particle;
 
+                //Iterate over all the particles
                 for (i = 0; i < particleObjects.length; i += 1) {
                     particle = particleObjects[i];
 
@@ -136,6 +137,7 @@ Engine.ParticleEmitter = {
 
                     //Check if it is dead
                     if (particle.dead) {
+                        //Remove the particle, add decrement so we don't skip a particle
                         particleObjects.splice(i, 1);
                         i -= 1;
                     }
@@ -146,6 +148,11 @@ Engine.ParticleEmitter = {
 
             //Render the particles in this emitter onto the canvas context given
             render: function (ctx) {
+
+                //Render all the particles one by one
+                particleObjects.forEach(function (particle) {
+                    renderParticle(particle, ctx);
+                });
 
             }
 
