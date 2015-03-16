@@ -91,7 +91,7 @@ Engine.Colour = {
             },
             
             getCanvasColour: function () {
-                return "rbg(" + r + "," + g + "," + b + "," + a + ")";
+                return "rbg(" + r + "," + g + "," + b + ")";
             }
         };
         
