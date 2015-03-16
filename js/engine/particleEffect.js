@@ -66,39 +66,35 @@ Engine.ParticleEmitter = {
                 var angle = ranRange(params.angle - params.angleVariance, params.angle + params.angleVariance),
 
                     //Calculate the speed
-                    speed = ranRange(params.speed - params.speedVariance, params.speed + params.speedVariance),
+                    speed = ranRange(params.speed - params.speedVariance, params.speed + params.speedVariance);
 
-                    //Return the particle object
-                    obj = {
+                //Return the particle object
+                return {
 
-                        //The initial positions
-                        x: ranRange(params.x - params.xVariance, params.x + params.xVariance),
-                        y: ranRange(params.y - params.yVariance, params.y + params.yVariance),
+                    //The initial positions
+                    x: ranRange(params.x - params.xVariance, params.x + params.xVariance),
+                    y: ranRange(params.y - params.yVariance, params.y + params.yVariance),
 
-                        //Calculate the velocity from the angle using trig functions
-                        vx: Math.cos(angle) * speed,
-                        vy: Math.sin(angle) * speed,
+                    //Calculate the velocity from the angle using trig functions
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed,
 
-                        //Set the acceleration variables with their respective variances
-                        ax: ranRange(params.ax - params.axVariance, params.ax + params.axVariance),
-                        ay: ranRange(params.ay - params.ayVariance, params.ay + params.ayVariance),
+                    //Set the acceleration variables with their respective variances
+                    ax: ranRange(params.ax - params.axVariance, params.ax + params.axVariance),
+                    ay: ranRange(params.ay - params.ayVariance, params.ay + params.ayVariance),
 
-                        //The colour settings
-                        startColour: params.startColour,
-                        endColour: params.endColour,
-                        currentColour: params.startColour,
+                    //The colour settings
+                    startColour: params.startColour,
+                    endColour: params.endColour,
+                    currentColour: params.startColour,
 
-                        //Whether or not to remove the particle
-                        dead: false,
+                    //Whether or not to remove the particle
+                    dead: false,
 
-                        //The time settings
-                        currentTime: 0,
-                        lifeSpan: ranRange(params.lifeSpan - params.lifeSpanVariance, params.lifeSpan + params.lifeSpanVariance)
-                    };
-
-                //console.log(obj.vy);
-
-                return obj;
+                    //The time settings
+                    currentTime: 0,
+                    lifeSpan: ranRange(params.lifeSpan - params.lifeSpanVariance, params.lifeSpan + params.lifeSpanVariance)
+                };
             },
 
             //Update a particular particles settings and the delta time
@@ -168,10 +164,8 @@ Engine.ParticleEmitter = {
                 //While we have particles to emit we add a new particle, and no more than the maximum
                 while (particlesToEmit > 1 && particleObjects.length < params.maxParticles) {
 
-                    particle = spawnParticle();
-
                     //Spawn and add a new particle
-                    particleObjects.push(particle);
+                    particleObjects.push(spawnParticle());
 
                     //Decrement it because we have just emitted one
                     particlesToEmit -= 1;
