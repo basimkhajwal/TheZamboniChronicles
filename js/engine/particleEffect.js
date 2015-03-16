@@ -22,6 +22,11 @@ Engine.ParticleEmitter = {
     *   - Start and End colours / saturations
     *   - The minimum and maximum number of particles
     *   - The number of particles emmited per second
+
+    Actual properties needed:
+    x, y, startColour, endColour, speed, lifeSpan, particlesPerSecond, maxParticles
+
+
     */
     create: function (params) {
         "use strict";
@@ -30,6 +35,7 @@ Engine.ParticleEmitter = {
 
         //The default colour settings
         params.startColour = params.startColour || params.colour || Engine.Colour.BLACK || Engine.Colour.create(0, 0, 0);
+        params.endColour = params.endColour || params.startColour;
 
         //The default variance values
         params.xVariance = params.xVariance || 0;
@@ -39,6 +45,7 @@ Engine.ParticleEmitter = {
 
         params.angleVariance = params.angleVariance || 0;
         params.speedVariance = params.speedVariance || 0;
+        params.lifeSpanVariance = params.lifeSpanVariance || 0;
         params.timeVariance = params.timeVariance || 0;
 
         //Holds all the particle objects
@@ -59,35 +66,39 @@ Engine.ParticleEmitter = {
                 var angle = ranRange(params.angle - params.angleVariance, params.angle + params.angleVariance),
 
                     //Calculate the speed
-                    speed = ranRange(params.speed - params.speedVariance, params.speed + params.speedVariance);
+                    speed = ranRange(params.speed - params.speedVariance, params.speed + params.speedVariance),
 
-                //Return the particle object
-                return {
+                    //Return the particle object
+                    obj = {
 
-                    //The initial positions
-                    x: ranRange(params.x - params.xVariance, params.x + params.xVariance),
-                    y: ranRange(params.y - params.yVariance, params.y + params.yVariance),
+                        //The initial positions
+                        x: ranRange(params.x - params.xVariance, params.x + params.xVariance),
+                        y: ranRange(params.y - params.yVariance, params.y + params.yVariance),
 
-                    //Calculate the velocity from the angle using trig functions
-                    vx: Math.cos(angle) * speed,
-                    vy: Math.sin(angle) * speed,
+                        //Calculate the velocity from the angle using trig functions
+                        vx: Math.cos(angle) * speed,
+                        vy: Math.sin(angle) * speed,
 
-                    //Set the acceleration variables with their respective variances
-                    ax: ranRange(params.ax - params.axVariance, params.ax + params.axVariance),
-                    ay: ranRange(params.ay - params.ayVariance, params.ay + params.ayVariance),
+                        //Set the acceleration variables with their respective variances
+                        ax: ranRange(params.ax - params.axVariance, params.ax + params.axVariance),
+                        ay: ranRange(params.ay - params.ayVariance, params.ay + params.ayVariance),
 
-                    //The colour settings
-                    startColour: params.startColour,
-                    endColour: params.endColour,
-                    currentColour: params.startColour,
+                        //The colour settings
+                        startColour: params.startColour,
+                        endColour: params.endColour,
+                        currentColour: params.startColour,
 
-                    //Whether or not to remove the particle
-                    dead: false,
+                        //Whether or not to remove the particle
+                        dead: false,
 
-                    //The time settings
-                    currentTime: 0,
-                    lifeSpan: ranRange(params.lifeSpan - params.lifeSpanVariance, params.lifeSpan + params.lifeSpanVariance)
-                };
+                        //The time settings
+                        currentTime: 0,
+                        lifeSpan: ranRange(params.lifeSpan - params.lifeSpanVariance, params.lifeSpan + params.lifeSpanVariance)
+                    };
+
+                //console.log(obj.vy);
+
+                return obj;
             },
 
             //Update a particular particles settings and the delta time
@@ -109,6 +120,8 @@ Engine.ParticleEmitter = {
 
                 //Check if the life span of the particle is over and set the dead variable
                 particle.dead = particle.currentTime > particle.lifeSpan;
+
+
             },
 
             //Render the given particle to the canvas context provided
@@ -118,7 +131,7 @@ Engine.ParticleEmitter = {
                 ctx.fillStyle = particle.currentColour.getCanvasColour();
 
                 //Draw a rect for the particle ---- TEMPORARY
-                ctx.fillRect(particle.x, particle.y, 5, 5);
+                ctx.fillRect(particle.x, particle.y, 10, 10);
             };
 
 
@@ -141,7 +154,7 @@ Engine.ParticleEmitter = {
                     particle = particleObjects[i];
 
                     //Call the update movement method
-                    updateParticle(particle);
+                    updateParticle(particle, delta);
 
                     //Check if it is dead
                     if (particle.dead) {
@@ -155,8 +168,10 @@ Engine.ParticleEmitter = {
                 //While we have particles to emit we add a new particle, and no more than the maximum
                 while (particlesToEmit > 1 && particleObjects.length < params.maxParticles) {
 
+                    particle = spawnParticle();
+
                     //Spawn and add a new particle
-                    particleObjects.push(spawnParticle());
+                    particleObjects.push(particle);
 
                     //Decrement it because we have just emitted one
                     particlesToEmit -= 1;
