@@ -20,7 +20,8 @@ Engine.ParticleEmitter = {
     *   - The particle life span (particleLife) and its variance
     *   - The duration to emit for (emitLife)
     *   - Start and End colours / saturations
-    *
+    *   - The minimum and maximum number of particles
+    *   - The number of particles emmited per second
     */
     create: function (params) {
         "use strict";
@@ -42,6 +43,9 @@ Engine.ParticleEmitter = {
 
         //Holds all the particle objects
         var particleObjects = [],
+
+            //Keep track of how many particles need to be emitted
+            particlesToEmit = 0,
 
             //Utility function for generating random bounded values
             ranRange = function (min, max) {
@@ -125,6 +129,10 @@ Engine.ParticleEmitter = {
 
             //Update this emitter with the delta time provided
             update: function (delta) {
+
+                //Update how many particles are needed to be emmited
+                particlesToEmit += delta * params.particlesPerSecond;
+
                 //Counter variable and iterative variable
                 var i, particle;
 
@@ -144,6 +152,18 @@ Engine.ParticleEmitter = {
 
                 }
 
+                //While we have particles to emit we add a new particle, and no more than the maximum
+                while (particlesToEmit > 1 && particleObjects.length < params.maxParticles) {
+
+                    //Spawn and add a new particle
+                    particleObjects.push(spawnParticle());
+
+                    //Decrement it because we have just emitted one
+                    particlesToEmit -= 1;
+                }
+
+                //Make sure that we have no negative particles to spawn
+                particlesToEmit = Math.max(0, particlesToEmit);
             },
 
             //Render the particles in this emitter onto the canvas context given
