@@ -40,6 +40,7 @@ https://rawgit.com/basimkhajwal/TheZamboniChronicles/master/index.html
 ###Research Sites:
 http://www.wildbunny.co.uk/blog/2011/12/11/how-to-make-a-2d-platform-game-part-1/
 http://www.raywenderlich.com/15230/how-to-make-a-platform-game-like-super-mario-brothers-part-1
+http://higherorderfun.com/blog/2012/05/20/the-guide-to-implementing-2d-platformers/
 
 ###Things for Cameron to make:
 - Enemy, maybe a few types/different colours
