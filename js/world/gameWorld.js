@@ -132,6 +132,7 @@ Zamboni.World.GameWorld = {
             lavaObjects = [],
             platformObjects = [],
             spikeObjects = [],
+            ladderObjects = [],
 
             //The images for quick access
             spikeImg = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.SPIKES),
@@ -360,6 +361,14 @@ Zamboni.World.GameWorld = {
 
                 //Add it to the global spike list
                 spikeObjects.push(spike);
+            },
+
+            //Make a ladder from the JSON obj
+            parseLadder = function (ladderObj) {
+
+
+
+
             },
 
             //Take the object of a platfrom from the JSON and creat a platform from it
@@ -731,8 +740,8 @@ Zamboni.World.GameWorld = {
                 startColour: Engine.Colour.create(255, 0, 0, 255),
                 endColour: Engine.Colour.create(255, 255, 0, 255),
 
-                maxParticles: 30,
-                particlesPerSecond: 5
+                maxParticles: 60,
+                particlesPerSecond: 20
             });
 
         //Parse the level - TODO
