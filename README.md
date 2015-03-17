@@ -26,13 +26,20 @@ https://rawgit.com/basimkhajwal/TheZamboniChronicles/master/index.html
 - [x] Spikes to stand on
 - [x] Add force application to platforms
 - [x] Fix residual error in the pause thing
-- [ ] Particle Effects
-- [ ] Make side-checking enemies
+- [x] Particle Effects
+- [x] Make side-checking enemies
+- [ ] Make particle effects more editable
 - [ ] Tutorial areas which show a text info
 - [ ] Boss enemies
 - [ ] Shooting enemies
 - [ ] Make better player textures
 - [ ] Add animation to the player movement
+- [ ] Add animation to enemy movement
+- [ ] Add coins
+
+###Research Sites:
+http://www.wildbunny.co.uk/blog/2011/12/11/how-to-make-a-2d-platform-game-part-1/
+http://www.raywenderlich.com/15230/how-to-make-a-platform-game-like-super-mario-brothers-part-1
 
 ###Things for Cameron to make:
 - Enemy, maybe a few types/different colours
