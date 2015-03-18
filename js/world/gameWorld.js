@@ -171,7 +171,7 @@ Zamboni.World.GameWorld = {
                         //otherwise generate clouds only off the screen so they move in
                         if (genAnywhere) {
                             x = getRan(0, worldWidth - width);
-                            y = getRan(50, worldHeight - height);
+                            y = getRan(50, (worldHeight - height) - 200);
                         } else {
                             x = (vx > 0) ? getRan(-400, -1 * (worldWidth + 10)) : getRan(worldWidth + 10, worldWidth + 200);
                             y = getRan(50, 200 - worldHeight);
@@ -403,7 +403,7 @@ Zamboni.World.GameWorld = {
 
                 //Whether or not the platform is moving to its start position or end (see above)
                 platform.movingToEnd = true;
-
+                
                 //The forces to apply to the platform (which are none)
                 platform.applyGravity = false;
                 platform.applyFriction = false;
