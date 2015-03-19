@@ -102,6 +102,10 @@ Zamboni.World.GameWorld = {
             enemyCollisions = [],
             enemyCollision,
 
+            //Ladder collisions
+            ladderCollisions = [],
+            ladderCollision,
+
             //The tiled maps collision function
             tiledCollision,
 
@@ -370,8 +374,8 @@ Zamboni.World.GameWorld = {
             //Make a ladder from the JSON obj
             parseLadder = function (ladderObj) {
 
-                //Push a new ladder to the current ladder list
-                ladderObjects.push({
+                //Create the ladder object
+                var ladder = {
 
                     //Set the position and dimensions
                     x: ladderObj.x,
@@ -382,8 +386,15 @@ Zamboni.World.GameWorld = {
                     //Tile height for easier rendering and easing the computations
                     tileHeight: Math.floor(ladderObj.height / tiledMap.getTileHeight()) + 1
 
-                });
+                };
 
+                //Push a new ladder to the current ladder list
+                ladderObjects.push(ladder);
+
+                //Add the collision function for this ladder
+                ladderCollisions.push(function (x, y) {
+                    return x >= ladder.x && x <= ladder.x + tiledMap.getTileWidth() && y >= ladder.y && y <= ladder.y + tiledMap.getTileWidth();
+                });
             },
 
             //Take the object of a platfrom from the JSON and creat a platform from it
@@ -527,6 +538,7 @@ Zamboni.World.GameWorld = {
 
                 //Merge the collision functions all into one
                 entityCollision = mergeAllCollisions(entityCollisions);
+                ladderCollision = mergeAllCollisions(ladderCollisions);
                 enemyCollision = mergeAllCollisions(enemyCollisions);
             },
 
