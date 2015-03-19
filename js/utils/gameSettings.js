@@ -73,7 +73,11 @@ Zamboni.Utils.GameSettings = {
         JAGO: "img/sprites/jago.png",
 
         //The objects
-        SPIKES: "img/objects/spikes.png"
+        SPIKES: "img/objects/spikes.png",
+
+        LADDER_TOP: "img/objects/ladder-top.png",
+        LADDER_MIDDLE: "img/objects/ladder-middle.png",
+        LADDER_BOTTOM: "img/objects/ladder-bottom.png"
 
     },
 
