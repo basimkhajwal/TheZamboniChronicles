@@ -384,7 +384,7 @@ Zamboni.World.GameWorld = {
                     height: ladderObj.height,
 
                     //Tile height for easier rendering and easing the computations
-                    tileHeight: Math.floor(ladderObj.height / tiledMap.getTileHeight()) + 1
+                    tileHeight: Math.ceil(ladderObj.height / tiledMap.getTileHeight())
 
                 };
 
@@ -393,7 +393,7 @@ Zamboni.World.GameWorld = {
 
                 //Add the collision function for this ladder
                 ladderCollisions.push(function (x, y) {
-                    return x >= ladder.x && x <= ladder.x + tiledMap.getTileWidth() && y >= ladder.y && y <= ladder.y + tiledMap.getTileWidth();
+                    return x >= ladder.x && x <= ladder.x + ladder.width && y >= ladder.y && y <= ladder.y + ladder.height;
                 });
             },
 
@@ -550,9 +550,6 @@ Zamboni.World.GameWorld = {
                 player.moveLeft = (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("A")));
                 player.jump = (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("W")));
 
-                //Update the player physics
-                player.update(delta, entityCollision);
-
                 //Move player down by 10 because no collisions normally occur
                 player.y += 5;
 
@@ -569,6 +566,39 @@ Zamboni.World.GameWorld = {
 
                 //Return the player back to its original y value
                 player.y -= 5;
+
+                //Check collisions with ladders only on left and right so the player can jump on ladders
+                if (player.collidesLeft(ladderCollision) || player.collidesRight(ladderCollision)) {
+
+                    //Stop forces
+                    player.applyGravity = false;
+
+                    //Dont allow the player to jump if the head hits the ladder
+                    if (player.collidesTop(ladderCollision)) {
+                        player.jump = false;
+                    }
+
+                    //Set the initial velocity to 0 because the friction is very high
+                    player.vy = 0;
+
+                    //Move up if up is pressed
+                    if (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("W"))) {
+                        player.applyForce(0, -100);
+                    }
+
+                    //Move down if down is pressed
+                    if (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("S"))) {
+                        player.applyForce(0, 100);
+                    }
+
+                } else {
+
+                    //Reset to default settings
+                    player.applyGravity = true;
+                }
+
+                //Update the player physics
+                player.update(delta, entityCollision);
             },
 
             updateCamera = function (delta) {
