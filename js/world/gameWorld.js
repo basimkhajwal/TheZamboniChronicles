@@ -646,21 +646,26 @@ Zamboni.World.GameWorld = {
                         if (!enemy.falling) {
 
                             //Store the amount that it will move on the x-direction
-                            change = enemy.vx * (3 * delta);
-
-                            //Temporarily move it three deltas ahead
-                            enemy.x += change;
+                            change = 0;
 
                             //Move it down slightly
                             enemy.y += 5;
 
-                            //See if it has gone off the edge, if so then reverse direction
-                            if (!enemy.collidesBottom(entityCollision)) {
+                            for (i = 0; i < 4; i += 1) {
+                                change += delta * enemy.vx;
+                                enemy.x += delta * enemy.vx;
 
-                                //Reverse the direction
-                                enemy.moveLeft = !enemy.moveLeft;
-                                enemy.moveRight = !enemy.moveRight;
+                                //See if it has gone off the edge, if so then reverse direction
+                                if (!enemy.collidesBottom(entityCollision)) {
 
+                                    //Reverse the direction
+                                    enemy.moveLeft = !enemy.moveLeft;
+                                    enemy.moveRight = !enemy.moveRight;
+
+                                    //Stop updating
+                                    break;
+
+                                }
                             }
 
                             //Reset to the initial position
