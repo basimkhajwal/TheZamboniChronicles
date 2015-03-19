@@ -137,6 +137,10 @@ Zamboni.World.GameWorld = {
             //The images for quick access
             spikeImg = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.SPIKES),
 
+            ladderBottom = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.LADDER_BOTTOM),
+            ladderMiddle = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.LADDER_MIDDLE),
+            ladderTop = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.LADDER_TOP),
+
             //Manage the background stuff (clouds and parallax scrolling etc)
             backgroundManager = (function () {
 
@@ -374,8 +378,8 @@ Zamboni.World.GameWorld = {
                     width: ladderObj.width,
                     height: ladderObj.height,
 
-                    tileWidth: Math.floor(ladderObj.width / tiledMap.getTileWidth()),
-                    tileHeight: Math.floor(ladderObj.height / tiledMap.getTileHeight())
+                    tileWidth: Math.floor(ladderObj.width / tiledMap.getTileWidth()) + 1,
+                    tileHeight: Math.floor(ladderObj.height / tiledMap.getTileHeight()) + 1
 
                 });
 
@@ -707,6 +711,17 @@ Zamboni.World.GameWorld = {
 
             //Render the static objects
             renderObjects = function (ctx) {
+
+                //The laddrs
+                ladderObjects.forEach(function (ladder) {
+                    var r, c;
+
+                    for (r = 0; r < ladder.tileHeight; r += 1) {
+                        for (c = 0; c < ladder.tileWidth; c += 1) {
+                            ctx.drawImage();
+                        }
+                    }
+                });
 
                 //Draw the player
                 player.render(ctx);
