@@ -176,18 +176,18 @@
                  "y":600
                 },
                 {
-                 "height":0,
-                 "name":"",
+                 "height":140,
+                 "name":"ladder",
                  "properties":
                     {
 
                     },
                  "rotation":0,
-                 "type":"",
+                 "type":"ladder",
                  "visible":true,
-                 "width":0,
-                 "x":2840,
-                 "y":540
+                 "width":20,
+                 "x":1580,
+                 "y":660
                 }],
          "opacity":1,
          "type":"objectgroup",
