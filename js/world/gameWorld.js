@@ -370,15 +370,16 @@ Zamboni.World.GameWorld = {
             //Make a ladder from the JSON obj
             parseLadder = function (ladderObj) {
 
+                //Push a new ladder to the current ladder list
                 ladderObjects.push({
 
+                    //Set the position and dimensions
                     x: ladderObj.x,
                     y: ladderObj.y,
-
-                    width: ladderObj.width,
+                    width: tiledMap.getTileWidth(),
                     height: ladderObj.height,
 
-                    tileWidth: Math.floor(ladderObj.width / tiledMap.getTileWidth()) + 1,
+                    //Tile height for easier rendering and easing the computations
                     tileHeight: Math.floor(ladderObj.height / tiledMap.getTileHeight()) + 1
 
                 });
@@ -509,6 +510,10 @@ Zamboni.World.GameWorld = {
 
                     case "spikes":
                         parseSpikes(objects[i]);
+                        break;
+
+                    case "ladder":
+                        parseLadder(objects[i]);
                         break;
                     }
                 }
@@ -714,12 +719,21 @@ Zamboni.World.GameWorld = {
 
                 //The laddrs
                 ladderObjects.forEach(function (ladder) {
-                    var r, c;
 
-                    for (r = 0; r < ladder.tileHeight; r += 1) {
-                        for (c = 0; c < ladder.tileWidth; c += 1) {
-                            ctx.drawImage();
+                    if (ladder.tileHeight > 1) {
+                        //Draw the top ladder
+                        ctx.drawImage(ladderTop, ladder.x, ladder.y, tiledMap.getTileWidth(), tiledMap.getTileHeight());
+
+                        //Draw the middle ladders
+                        for (i = 1; i < ladder.tileHeight - 1; i += 1) {
+                            ctx.drawImage(ladderMiddle, ladder.x, ladder.y + tiledMap.getTileHeight() * i, tiledMap.getTileWidth(), tiledMap.getTileHeight());
                         }
+
+                        //Draw the bottom ladder
+                        ctx.drawImage(ladderBottom, ladder.x, ladder.y + ladder.height - tiledMap.getTileHeight(), tiledMap.getTileWidth(), tiledMap.getTileHeight());
+
+                    } else {
+                        ctx.drawImage(ladderMiddle, ladder.x, ladder.y, tiledMap.getTileWidth(), tiledMap.getTileHeight());
                     }
                 });
 
