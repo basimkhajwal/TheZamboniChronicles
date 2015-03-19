@@ -366,8 +366,18 @@ Zamboni.World.GameWorld = {
             //Make a ladder from the JSON obj
             parseLadder = function (ladderObj) {
 
+                ladderObjects.push({
 
+                    x: ladderObj.x,
+                    y: ladderObj.y,
 
+                    width: ladderObj.width,
+                    height: ladderObj.height,
+
+                    tileWidth: Math.floor(ladderObj.width / tiledMap.getTileWidth()),
+                    tileHeight: Math.floor(ladderObj.height / tiledMap.getTileHeight())
+
+                });
 
             },
 
