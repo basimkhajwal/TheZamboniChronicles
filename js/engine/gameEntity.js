@@ -69,6 +69,11 @@ Engine.GameEntity = {
             collidedRight: false,
             collidedLeft: false,
 
+            //The force to apply in a tick
+            impulseX: 0,
+            impulseY: 0,
+
+
             //The amount it changed in a tick
             xChange: 0,
             yChange: 0,
@@ -91,6 +96,12 @@ Engine.GameEntity = {
                 this.vy = clamp(this.vy, -this.maxVy, this.maxVy);
             },
 
+            //Apply a force
+            applyForce: function (fx, fy) {
+                this.impulseX += fx;
+                this.impulseY += fy;
+            },
+
             // ------------------------------ Updating & Rendering ---------------------------------------
 
             //Update the x and y based on the velocity and the delta
@@ -103,8 +114,8 @@ Engine.GameEntity = {
                     wasRight = this.vx > 0,
 
                     //The change in velocity (acceleration)
-                    ddx = 0,
-                    ddy = 0,
+                    ddx = this.impulseX,
+                    ddy = this.impulseY,
 
                     //The default forces to apply for movement
                     accel = this.accelForce * (this.falling ? 0.5 : 1.0),
@@ -113,6 +124,7 @@ Engine.GameEntity = {
                 //If the frame rate is less than 56 then recursively update to avoid collision problems
                 if (delta > 0.018) {
                     delta /= 2;
+
                     this.update(delta, collisionFunction);
                 }
 
@@ -239,6 +251,10 @@ Engine.GameEntity = {
                         this.vx = 0;
                     }
                 }
+
+                //Set the impulse to 0 after using it
+                this.impulseX = 0;
+                this.impulseY = 0;
 
                 //Update the change variables
                 this.xChange = this.x - oldX;
