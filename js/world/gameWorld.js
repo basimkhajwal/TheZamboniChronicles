@@ -576,10 +576,13 @@ Zamboni.World.GameWorld = {
                     //Dont allow the player to jump if the head hits the ladder
                     if (player.collidesTop(ladderCollision)) {
                         player.jump = false;
-                    }
 
-                    //Set the initial velocity to 0 because the friction is very high
-                    player.vy = 0;
+                        //Set the initial velocity to 0 because the friction is very high
+                        player.vy = 0;
+                    } else if (!player.jumping) {
+                        //Set the initial velocity to 0 because the friction is very high
+                        player.vy = 0;
+                    }
 
                     //Move up if up is pressed
                     if (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("W"))) {
