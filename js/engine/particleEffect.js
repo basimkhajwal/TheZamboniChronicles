@@ -140,6 +140,14 @@ Engine.ParticleEmitter = {
         //----------------------- Closure with all the public methods ------------------------------
         return {
 
+            //Allow manual particle emission
+            emitParticle: function () {
+
+                //Spawn a new particle and add it to the list, regardless of max values
+                particleObjects.push(spawnParticle());
+
+            },
+
             //Update this emitter with the delta time provided
             update: function (delta) {
 
@@ -169,7 +177,7 @@ Engine.ParticleEmitter = {
                 while (particlesToEmit > 1 && particleObjects.length < params.maxParticles) {
 
                     //Spawn and add a new particle
-                    particleObjects.push(spawnParticle());
+                    this.emitParticle();
 
                     //Decrement it because we have just emitted one
                     particlesToEmit -= 1;
