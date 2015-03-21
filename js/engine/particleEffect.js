@@ -195,9 +195,12 @@ Engine.ParticleEmitter = {
                     renderParticle(particle, ctx);
                 });
 
+            },
+
+            //Get the params so that they can be changed
+            getParams: function () {
+                return params;
             }
-
-
         };
 
     }
