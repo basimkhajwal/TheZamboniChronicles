@@ -145,6 +145,36 @@ Zamboni.World.GameWorld = {
             ladderMiddle = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.LADDER_MIDDLE),
             ladderTop = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.LADDER_TOP),
 
+            //A particle emitter for ground particles when an entity moves
+            groundEmitter = Engine.ParticleEmitter.create({
+
+                //The default position (will be changed as rendered / updated)
+                x: 0,
+                y: 0,
+
+                //The gravity is high but no side accel
+                ax: 0,
+                ay: 40,
+
+                //An angle between 0 and 180
+                angle: 90,
+                angleVariance: 90,
+
+                //How fast different particles will go
+                speed: 30,
+                speedVariance: 10,
+
+                //A short life span (in seconds)
+                lifeSpan: 2,
+
+
+                startColour: Engine.Colour.create(255, 0, 0, 255),
+                endColour: Engine.Colour.create(255, 255, 0, 255),
+
+                maxParticles: 60,
+                particlesPerSecond: 0
+            }),
+
             //Manage the background stuff (clouds and parallax scrolling etc)
             backgroundManager = (function () {
 
