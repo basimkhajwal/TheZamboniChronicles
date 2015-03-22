@@ -154,22 +154,25 @@ Zamboni.World.GameWorld = {
 
                 //The gravity is high but no side accel
                 ax: 0,
-                ay: 40,
+                ay: 30,
 
                 //An angle between 0 and 180
                 angle: 90,
-                angleVariance: 90,
+                angleVariance: 150,
 
                 //How fast different particles will go
-                speed: 30,
+                speed: 40,
                 speedVariance: 10,
 
+                //Small particles
+                particleWidth: 3,
+                particleHeight: 3,
+
                 //A short life span (in seconds)
-                lifeSpan: 2,
+                lifeSpan: 0.3,
 
-
-                startColour: Engine.Colour.create(255, 0, 0, 255),
-                endColour: Engine.Colour.create(255, 255, 0, 255),
+                startColour: Engine.Colour.create(160, 120, 0, 255),
+                endColour: Engine.Colour.create(110, 80, 0, 0),
 
                 maxParticles: 60,
                 particlesPerSecond: 0
@@ -630,17 +633,31 @@ Zamboni.World.GameWorld = {
                     player.applyGravity = true;
                 }
 
+                var fallingBefore = player.falling,
+                    params;
+
                 //Update the player physics
                 player.update(delta, entityCollision);
 
-                //If the player moved enough and a random chance then emit some particles
-                if (player.xChange > 20 * delta && Math.random() > 0.9) {
+                //If the player moved enough and isnt falling and a random chance then emit some particles
+                if (!player.falling && player.xChange > 20 * delta && Math.random() > 0.9) {
 
-                    var params = groundEmitter.getParams();
+                    params = groundEmitter.getParams();
 
                     params.x = player.x + (player.width / 2);
                     params.y = player.y + player.height;
 
+                    groundEmitter.emitParticle();
+                }
+
+                if (fallingBefore && !player.falling) {
+                    params = groundEmitter.getParams();
+
+                    params.x = player.x + (player.width / 2);
+                    params.y = player.y + player.height;
+
+                    groundEmitter.emitParticle();
+                    groundEmitter.emitParticle();
                     groundEmitter.emitParticle();
                 }
 
