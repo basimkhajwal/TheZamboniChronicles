@@ -91,7 +91,7 @@ Engine.Colour = {
             },
             
             getCanvasColour: function () {
-                return "rgb(" + r + "," + g + "," + b + ")";
+                return "rgba(" + r + "," + g + "," + b + "," + (a / 255) + ")";
             }
         };
         
@@ -112,7 +112,7 @@ Engine.Colour = {
 
     //Set the values for all the list by iterating over and creating a new colour
     colours.forEach(function (colour) {
-        Engine.Colour[colour[0]] = Engine.Colour.create(colour[1], colour[2], colour[3]);
+        Engine.Colour[colour[0]] = Engine.Colour.create(colour[1], colour[2], colour[3], 255);
     });
 
 }());
