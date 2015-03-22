@@ -632,6 +632,20 @@ Zamboni.World.GameWorld = {
 
                 //Update the player physics
                 player.update(delta, entityCollision);
+
+                //If the player moved enough and a random chance then emit some particles
+                if (player.xChange > 20 * delta && Math.random() > 0.9) {
+
+                    var params = groundEmitter.getParams();
+
+                    params.x = player.x + (player.width / 2);
+                    params.y = player.y + player.height;
+
+                    groundEmitter.emitParticle();
+                }
+
+                //Update the emitter
+                groundEmitter.update(delta);
             },
 
             updateCamera = function (delta) {
@@ -814,6 +828,9 @@ Zamboni.World.GameWorld = {
 
                 //Draw the player
                 player.render(ctx);
+
+                //Draw the particles for the player
+                groundEmitter.render(ctx);
 
                 //Draw all the enemies
                 enemyObjects.forEach(function (enemy) {
