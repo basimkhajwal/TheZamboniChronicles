@@ -165,14 +165,14 @@ Zamboni.World.GameWorld = {
                 speedVariance: 10,
 
                 //Small particles
-                particleWidth: 3,
-                particleHeight: 3,
+                particleWidth: 4,
+                particleHeight: 4,
 
                 //A short life span (in seconds)
                 lifeSpan: 0.3,
 
                 startColour: Engine.Colour.create(160, 120, 0, 255),
-                endColour: Engine.Colour.create(110, 80, 0, 0),
+                endColour: Engine.Colour.create(110, 80, 0, 125),
 
                 maxParticles: 60,
                 particlesPerSecond: 0
@@ -650,7 +650,7 @@ Zamboni.World.GameWorld = {
                     groundEmitter.emitParticle();
                 }
 
-                if (fallingBefore && !player.falling) {
+                if (fallingBefore && !player.falling && player.yChange > 10 * delta) {
                     params = groundEmitter.getParams();
 
                     params.x = player.x + (player.width / 2);
