@@ -34,7 +34,7 @@ Engine.ParticleEmitter = {
         // ------------------------ The private methods and stuff ----------------------
 
         //The default colour settings
-        params.startColour = params.startColour || params.colour || Engine.Colour.BLACK || Engine.Colour.create(0, 0, 0);
+        params.startColour = params.startColour || params.colour || Engine.Colour.BLACK || Engine.Colour.create(0, 0, 0, 0);
         params.endColour = params.endColour || params.startColour;
 
         //The default variance values
