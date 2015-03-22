@@ -48,6 +48,10 @@ Engine.ParticleEmitter = {
         params.lifeSpanVariance = params.lifeSpanVariance || 0;
         params.timeVariance = params.timeVariance || 0;
 
+        //The dimensions for rendering
+        params.particleWidth = params.particleWidth || 10;
+        params.particleHeight = params.particleHeight || 10;
+
         //Take angle and the variance in degrees but change them to radians for processing
         params.angle = params.angle * (Math.PI / 180);
         params.angleVariance = params.angleVariance * (Math.PI / 180);
@@ -131,7 +135,7 @@ Engine.ParticleEmitter = {
                 ctx.fillStyle = particle.currentColour.getCanvasColour();
 
                 //Draw a rect for the particle ---- TEMPORARY
-                ctx.fillRect(particle.x, particle.y, 10, 10);
+                ctx.fillRect(particle.x, particle.y, params.particleWidth, params.particleHeight);
             };
 
 
