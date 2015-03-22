@@ -125,7 +125,7 @@ Engine.ParticleEmitter = {
             },
 
             //Render the given particle to the canvas context provided
-            renderParticle = function (particle, ctx) {
+            renderParticle = params.renderPaticle || function (particle, ctx) {
 
                 //Set the colour
                 ctx.fillStyle = particle.currentColour.getCanvasColour();
