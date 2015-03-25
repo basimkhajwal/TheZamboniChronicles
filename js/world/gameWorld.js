@@ -808,8 +808,8 @@ Zamboni.World.GameWorld = {
                             //Move it down slightly
                             enemy.y += 5;
 
-                            for (i = 0; i < 10; i += 1) {
-                                enemy.x += delta * enemy.vx;
+                            for (i = 0; i < 5; i += 1) {
+                                enemy.x += 2 * delta * enemy.vx;
 
                                 //See if it has gone off the edge, if so then reverse direction
                                 if (!enemy.collidesBottom(entityCollision)) {
