@@ -767,7 +767,7 @@ Zamboni.World.GameWorld = {
                 enemyObjects.forEach(function (enemy) {
 
                     //Temporary variable for the side-checking enemy
-                    var change;
+                    var oldX;
 
                     //Move differently for different enemies
                     switch (enemy.type) {
@@ -803,13 +803,12 @@ Zamboni.World.GameWorld = {
                         if (!enemy.falling) {
 
                             //Store the amount that it will move on the x-direction
-                            change = 0;
+                            oldX = enemy.x;
 
                             //Move it down slightly
                             enemy.y += 5;
 
-                            for (i = 0; i < 4; i += 1) {
-                                change += delta * enemy.vx;
+                            for (i = 0; i < 10; i += 1) {
                                 enemy.x += delta * enemy.vx;
 
                                 //See if it has gone off the edge, if so then reverse direction
@@ -827,7 +826,7 @@ Zamboni.World.GameWorld = {
 
                             //Reset to the initial position
                             enemy.y -= 5;
-                            enemy.x -= change;
+                            enemy.x = oldX;
 
                         }
 
@@ -849,6 +848,15 @@ Zamboni.World.GameWorld = {
                         }
 
                     });
+                });
+
+
+                //Update all the lava objects and the emitter used for them
+                lavaObjects.forEach(function (lava) {
+
+
+
+
                 });
             },
 
