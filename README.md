@@ -28,6 +28,7 @@ https://rawgit.com/basimkhajwal/TheZamboniChronicles/master/index.html
 - [x] Fix residual error in the pause thing
 - [x] Particle Effects
 - [x] Make side-checking enemies
+- [ ] Refactor the world code and make smaller files
 - [ ] Make particle effects more editable
 - [ ] Tutorial areas which show a text info
 - [ ] Boss enemies
