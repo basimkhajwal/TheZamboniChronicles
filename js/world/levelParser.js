@@ -12,12 +12,22 @@ Zamboni.World = Zamboni.World || {};
 Zamboni.World.LevelParser = (function () {
 
     "use strict";
+    //Utility function that returns -1 if less than 0, 0 if 0, 1 if more than 0
+    var sign = function (val) {
+            if (val === 0) {
+                return 0;
+            } else if (val < 0) {
+                return -1;
+            } else {
+                return 1;
+            }
+        },
 
-    //Parse a new player from the JSON object
-    var parsePlayer = function (playerObj, worldDescriptor) {
+        //Parse a new player from the JSON object
+        parsePlayer = function (playerObj, worldDescriptor) {
 
             //Create a new game entity for the player
-            player = Engine.GameEntity.createEmpty();
+            var player = Engine.GameEntity.createEmpty();
 
             //Set the positions and the dimension
             player.x = playerObj.x;
@@ -31,10 +41,13 @@ Zamboni.World.LevelParser = (function () {
             //Set the forces (only gravity for now)
             player.applyGravity = true;
 
+
+            //Set the world descriptor player
+            worldDescriptor.player = player;
         },
 
         //Create a new enemy from the object
-        parseEnemy = function (enemyObj) {
+        parseEnemy = function (enemyObj, worldDescriptor) {
 
             //Create a new game entity for this enemy
             var enemy = Engine.GameEntity.createEmpty();
@@ -53,17 +66,17 @@ Zamboni.World.LevelParser = (function () {
             enemy.type = (enemyObj.properties.type || "a").toLowerCase();
 
             //Add it to the global enemy array
-            enemyObjects.push(enemy);
+            worldDescriptor.enemyObjects.push(enemy);
 
             //Add the collision function to the enemy object list
-            enemyCollisions.push(enemy.generateCollisionFunction());
+            worldDescriptor.enemyCollisions.push(enemy.generateCollisionFunction());
         },
 
         //Create a new lava area from an object
-        parseLava = function (lavaObj) {
+        parseLava = function (lavaObj, worldDescriptor) {
 
             //Add a new lava object with the position and dimensions to the lava object list
-            lavaObjects.push({
+            worldDescriptor.lavaObjects.push({
                 x: lavaObj.x,
                 y: lavaObj.y,
 
@@ -74,7 +87,7 @@ Zamboni.World.LevelParser = (function () {
         },
 
         //Add a new spike object
-        parseSpikes = function (spikeObj) {
+        parseSpikes = function (spikeObj, worldDescriptor) {
             var spike = {};
 
             //Set the position and dimensions
@@ -84,7 +97,7 @@ Zamboni.World.LevelParser = (function () {
             spike.height = spikeObj.height;
 
             //How many tiles wide the spikes are
-            spike.tileWidth = Math.floor(spike.width / tiledMap.getTileWidth());
+            spike.tileWidth = Math.floor(spike.width / worldDescriptor.tiledMap.getTileWidth());
 
             //Add a simple collision function
             spike.collisionFunction = function (x, y) {
@@ -92,11 +105,11 @@ Zamboni.World.LevelParser = (function () {
             };
 
             //Add it to the global spike list
-            spikeObjects.push(spike);
+            worldDescriptor.spikeObjects.push(spike);
         },
 
         //Make a ladder from the JSON obj
-        parseLadder = function (ladderObj) {
+        parseLadder = function (ladderObj, worldDescriptor) {
 
             //Create the ladder object
             var ladder = {
@@ -104,25 +117,25 @@ Zamboni.World.LevelParser = (function () {
                 //Set the position and dimensions
                 x: ladderObj.x,
                 y: ladderObj.y,
-                width: tiledMap.getTileWidth(),
+                width: worldDescriptor.tiledMap.getTileWidth(),
                 height: ladderObj.height,
 
                 //Tile height for easier rendering and easing the computations
-                tileHeight: Math.ceil(ladderObj.height / tiledMap.getTileHeight())
+                tileHeight: Math.ceil(ladderObj.height / worldDescriptor.tiledMap.getTileHeight())
 
             };
 
             //Push a new ladder to the current ladder list
-            ladderObjects.push(ladder);
+            worldDescriptor.ladderObjects.push(ladder);
 
             //Add the collision function for this ladder
-            ladderCollisions.push(function (x, y) {
+            worldDescriptor.ladderCollisions.push(function (x, y) {
                 return x >= ladder.x && x <= ladder.x + ladder.width && y >= ladder.y && y <= ladder.y + ladder.height;
             });
         },
 
         //Take the object of a platfrom from the JSON and creat a platform from it
-        parsePlatform = function (platformObj) {
+        parsePlatform = function (platformObj, worldDescriptor) {
 
             //Create a new game entity for this platform
             var platform = Engine.GameEntity.createEmpty(),
@@ -174,10 +187,10 @@ Zamboni.World.LevelParser = (function () {
             platform.collisionFunction = platform.generateCollisionFunction();
 
             //Add the platform to the global platofrm array
-            platformObjects.push(platform);
+            worldDescriptor.platformObjects.push(platform);
 
             //Add the collision function for entities to collide with
-            entityCollisions.push(platform.collisionFunction);
+            worldDescriptor.entityCollisions.push(platform.collisionFunction);
         };
 
 
@@ -235,27 +248,27 @@ Zamboni.World.LevelParser = (function () {
                 switch (objects[i].type) {
 
                 case "player":
-                    parsePlayer(objects[i]);
+                    parsePlayer(objects[i], worldDescriptor);
                     break;
 
                 case "lava":
-                    parseLava(objects[i]);
+                    parseLava(objects[i], worldDescriptor);
                     break;
 
                 case "enemy":
-                    parseEnemy(objects[i]);
+                    parseEnemy(objects[i], worldDescriptor);
                     break;
 
                 case "platform":
-                    parsePlatform(objects[i]);
+                    parsePlatform(objects[i], worldDescriptor);
                     break;
 
                 case "spikes":
-                    parseSpikes(objects[i]);
+                    parseSpikes(objects[i], worldDescriptor);
                     break;
 
                 case "ladder":
-                    parseLadder(objects[i]);
+                    parseLadder(objects[i], worldDescriptor);
                     break;
                 }
             }
