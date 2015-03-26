@@ -13,6 +13,172 @@ Zamboni.World.LevelParser = (function () {
 
     "use strict";
 
+    //Parse a new player from the JSON object
+    var parsePlayer = function (playerObj, worldDescriptor) {
+
+            //Create a new game entity for the player
+            player = Engine.GameEntity.createEmpty();
+
+            //Set the positions and the dimension
+            player.x = playerObj.x;
+            player.y = playerObj.y;
+            player.width = playerObj.width;
+            player.height = playerObj.height;
+
+            //Set the sprite image as loaded, will be an animation later
+            player.img = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.JAGO);
+
+            //Set the forces (only gravity for now)
+            player.applyGravity = true;
+
+        },
+
+        //Create a new enemy from the object
+        parseEnemy = function (enemyObj) {
+
+            //Create a new game entity for this enemy
+            var enemy = Engine.GameEntity.createEmpty();
+
+            //Set the position and dimensions
+            enemy.x = enemyObj.x;
+            enemy.y = enemyObj.y;
+            enemy.width = enemyObj.width;
+            enemy.height = enemyObj.height;
+
+            //The settings for the enemy for forces
+            enemy.applyGravity = true;
+            enemy.moveLeft = true;
+
+            //Set the type of the enemy, the default is type a
+            enemy.type = (enemyObj.properties.type || "a").toLowerCase();
+
+            //Add it to the global enemy array
+            enemyObjects.push(enemy);
+
+            //Add the collision function to the enemy object list
+            enemyCollisions.push(enemy.generateCollisionFunction());
+        },
+
+        //Create a new lava area from an object
+        parseLava = function (lavaObj) {
+
+            //Add a new lava object with the position and dimensions to the lava object list
+            lavaObjects.push({
+                x: lavaObj.x,
+                y: lavaObj.y,
+
+                width: lavaObj.width,
+                height: lavaObj.height
+            });
+
+        },
+
+        //Add a new spike object
+        parseSpikes = function (spikeObj) {
+            var spike = {};
+
+            //Set the position and dimensions
+            spike.x = spikeObj.x;
+            spike.y = spikeObj.y;
+            spike.width = spikeObj.width;
+            spike.height = spikeObj.height;
+
+            //How many tiles wide the spikes are
+            spike.tileWidth = Math.floor(spike.width / tiledMap.getTileWidth());
+
+            //Add a simple collision function
+            spike.collisionFunction = function (x, y) {
+                return (x >= spike.x && x <= spike.x + spike.width) && (y >= spike.y && y <= spike.y + spike.height);
+            };
+
+            //Add it to the global spike list
+            spikeObjects.push(spike);
+        },
+
+        //Make a ladder from the JSON obj
+        parseLadder = function (ladderObj) {
+
+            //Create the ladder object
+            var ladder = {
+
+                //Set the position and dimensions
+                x: ladderObj.x,
+                y: ladderObj.y,
+                width: tiledMap.getTileWidth(),
+                height: ladderObj.height,
+
+                //Tile height for easier rendering and easing the computations
+                tileHeight: Math.ceil(ladderObj.height / tiledMap.getTileHeight())
+
+            };
+
+            //Push a new ladder to the current ladder list
+            ladderObjects.push(ladder);
+
+            //Add the collision function for this ladder
+            ladderCollisions.push(function (x, y) {
+                return x >= ladder.x && x <= ladder.x + ladder.width && y >= ladder.y && y <= ladder.y + ladder.height;
+            });
+        },
+
+        //Take the object of a platfrom from the JSON and creat a platform from it
+        parsePlatform = function (platformObj) {
+
+            //Create a new game entity for this platform
+            var platform = Engine.GameEntity.createEmpty(),
+
+                //Set the default speed value or get one
+                speed = parseInt(platformObj.properties.speed, 10) || 60,
+
+                //The movement variables for later use
+                changeX,
+                changeY,
+                lengthChange;
+
+            //Set the position and dimensions
+            platform.x = platformObj.x;
+            platform.y = platformObj.y;
+            platform.width = platformObj.width;
+            platform.height = platformObj.height;
+
+            //Set the movement positions
+            platform.startX = platformObj.x;
+            platform.startY = platformObj.y;
+            platform.endX = parseInt(platformObj.properties.endX, 10);
+            platform.endY = parseInt(platformObj.properties.endY, 10);
+
+            //Calculate which way to move
+            changeX = platform.endX - platform.x;
+            changeY = platform.endY - platform.y;
+            lengthChange = Math.sqrt(changeX * changeX + changeY * changeY);
+
+            //Set the direction
+            platform.directionX = sign(changeX);
+            platform.directionY = sign(changeY);
+
+            //Set the velocity
+            platform.vx = speed * (changeX / lengthChange);
+            platform.vy = speed * (changeY / lengthChange);
+
+            //Whether or not the platform is moving to its start position or end (see above)
+            platform.movingToEnd = true;
+
+            //The forces to apply to the platform (which are none)
+            platform.applyGravity = false;
+            platform.applyFriction = false;
+
+            //The default platform colour (to be changed)
+            platform.colour = Zamboni.Utils.ColourScheme.WET_ASPHALT;
+
+            //Get the collsion function because it will be used a lot
+            platform.collisionFunction = platform.generateCollisionFunction();
+
+            //Add the platform to the global platofrm array
+            platformObjects.push(platform);
+
+            //Add the collision function for entities to collide with
+            entityCollisions.push(platform.collisionFunction);
+        };
 
 
     //Return a closure
