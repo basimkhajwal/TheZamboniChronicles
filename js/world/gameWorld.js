@@ -134,6 +134,14 @@ Zamboni.World.GameWorld = {
             //Holds the details about the world
             worldDescriptor = {
 
+
+                //An array to hold all their respective objects
+                enemyObjects: [],
+                lavaObjects: [],
+                platformObjects: [],
+                spikeObjects: [],
+                ladderObjects: []
+
             },
 
             //An array to hold all their respective objects
