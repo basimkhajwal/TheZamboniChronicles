@@ -131,6 +131,11 @@ Zamboni.World.GameWorld = {
             //The player entity
             player,
 
+            //Holds the details about the world
+            worldDescriptor = {
+
+            },
+
             //An array to hold all their respective objects
             enemyObjects = [],
             lavaObjects = [],
