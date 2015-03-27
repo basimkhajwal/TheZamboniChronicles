@@ -242,6 +242,7 @@ Zamboni.World.LevelParser = (function () {
                 worldDescriptor.tiledMap.setTileAt(Math.floor(i / jsonObj.width), i % jsonObj.width, tiles[i]);
             }
 
+
             //Loop over every object defined in the second layer and call the correct function to parse it
             for (i = 0; i < objects.length; i += 1) {
 
