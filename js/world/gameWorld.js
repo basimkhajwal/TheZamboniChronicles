@@ -649,6 +649,9 @@ Zamboni.World.GameWorld = {
                 entityCollision = mergeAllCollisions(entityCollisions);
                 ladderCollision = mergeAllCollisions(ladderCollisions);
                 enemyCollision = mergeAllCollisions(enemyCollisions);
+
+                //Parse into the world descriptor
+                Zamboni.World.LevelParser.parseLevel(fileText, worldDescriptor);
             },
 
             //The updating stuff
