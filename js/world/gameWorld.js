@@ -134,10 +134,37 @@ Zamboni.World.GameWorld = {
             //Holds the details about the world
             worldDescriptor = {
 
+                //The tiled map for the background
+                tiledMap: null,
 
+                //The settings for the camera
+                minCameraX: 0,
+                minCameraY: 0,
+
+                //To be set when the tiled map is created
+                maxCameraX: null,
+                maxCameraY: null,
+
+                //The total collision functions for entities, the array of the functions and the final one
+                entityCollisions: [],
+                entityCollision: null,
+
+                //Like wise for enemy
+                enemyCollisions: [],
+                enemyCollision: null,
+
+                //Ladder collisions
+                ladderCollisions: [],
+                ladderCollision: null,
+
+                //The tiled maps collision function
+                tiledCollision: null,
+
+                //The camera for viewing the world (in the eyes of the player)
+                camera: Engine.Camera.create(0, 0, 0),
 
                 //The player entity
-                player,
+                player: null,
 
                 //An array to hold all their respective objects
                 enemyObjects: [],
