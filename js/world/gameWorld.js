@@ -93,7 +93,7 @@ Zamboni.World.GameWorld = {
 
                 };
             },
-
+            /*
             //The total collision functions for entities, the array of the functions and the final one
             entityCollisions = [],
             entityCollision,
@@ -129,7 +129,7 @@ Zamboni.World.GameWorld = {
             worldHeight,
 
             //The player entity
-            player,
+            player,*/
 
             //Holds the details about the world
             worldDescriptor = {
@@ -288,15 +288,15 @@ Zamboni.World.GameWorld = {
                         //If generating anywhere on screen then do so
                         //otherwise generate clouds only off the screen so they move in
                         if (genAnywhere) {
-                            x = getRan(0, worldWidth - width);
-                            y = getRan(50, (worldHeight - height) - 200);
+                            x = getRan(0, worldDescriptor.worldWidth - width);
+                            y = getRan(50, (worldDescriptor.worldHeight - height) - 200);
                         } else {
-                            x = (vx > 0) ? getRan(-400, -1 * (worldWidth + 10)) : getRan(worldWidth + 10, worldWidth + 200);
-                            y = getRan(50, 200 - worldHeight);
+                            x = (vx > 0) ? getRan(-400, -1 * (worldDescriptor.worldWidth + 10)) : getRan(worldDescriptor.worldWidth + 10, worldDescriptor.worldWidth + 200);
+                            y = getRan(50, 200 - worldDescriptor.worldHeight);
                         }
 
                         //Return the array of the cloud details
-                        return [x + camera.getX(), y + camera.getY(), width, height, vx];
+                        return [x + worldDescriptor.camera.getX(), y + worldDescriptor.camera.getY(), width, height, vx];
                     },
 
                     //The clouds each have an x,y,width,height and vx
@@ -327,8 +327,8 @@ Zamboni.World.GameWorld = {
                         //Set the initial background positions
                         for (i = 0; i < 3; i += 1) {
                             backgroundMountains.push({
-                                x: camera.getX(),
-                                y: worldHeight - 700 + i * 125
+                                x: worldDescriptor.camera.getX(),
+                                y: worldDescriptor.worldHeight - 700 + i * 125
                             });
                         }
                     },
@@ -338,10 +338,10 @@ Zamboni.World.GameWorld = {
                         //Iterate over all the clouds
                         for (i = 0; i < clouds.length; i += 1) {
                             //Move them by their x velocity
-                            clouds[i][0] += (clouds[i][4] * delta) - (cameraChangeX * 0.1);
+                            clouds[i][0] += (clouds[i][4] * delta) - (worldDescriptor.cameraChangeX * 0.1);
 
                             //Check if they are off the screen, if so then reset it to a new cloud
-                            if ((clouds[i][4] < 0 && clouds[i][0] + clouds[i][2] < -offscreenAmount) || (clouds[i][4] > 0 && clouds[i][0] > worldWidth + offscreenAmount)) {
+                            if ((clouds[i][4] < 0 && clouds[i][0] + clouds[i][2] < -offscreenAmount) || (clouds[i][4] > 0 && clouds[i][0] > worldDescriptor.worldWidth + offscreenAmount)) {
                                 clouds[i] = genCloud(false);
                             }
                         }
@@ -352,10 +352,10 @@ Zamboni.World.GameWorld = {
                         //Iterate over each mountain that we are drawing
                         backgroundMountains.forEach(function (mountain) {
                             //Move mountains further away by less than the closer ones
-                            mountain.x += cameraChangeX * (1 - (i * 0.2));
+                            mountain.x += worldDescriptor.cameraChangeX * (1 - (i * 0.2));
 
                             //Get the point on the screen of the mountain relative to the camera
-                            var point = mountain.x - camera.getX();
+                            var point = mountain.x - worldDescriptor.camera.getX();
 
                             //Check if the mountain goes off the screen and move it so that it doesn't
                             if (point < 0) {
@@ -370,6 +370,7 @@ Zamboni.World.GameWorld = {
                     },
 
                     render: function (ctx) {
+
                         //No image smoothing to keep pixelated effect
                         ctx.imageSmoothingEnabled = false;
 
@@ -565,8 +566,8 @@ Zamboni.World.GameWorld = {
 
                     params = groundEmitter.getParams();
 
-                    params.x = player.x + (player.width / 2);
-                    params.y = player.y + player.height;
+                    params.x = worldDescriptor.player.x + (worldDescriptor.player.width / 2);
+                    params.y = worldDescriptor.player.y + worldDescriptor.player.height;
 
                     groundEmitter.emitParticle();
                 }
@@ -757,18 +758,18 @@ Zamboni.World.GameWorld = {
 
                     if (ladder.tileHeight > 1) {
                         //Draw the top ladder
-                        ctx.drawImage(ladderTop, ladder.x, ladder.y, tiledMap.getTileWidth(), tiledMap.getTileHeight());
+                        ctx.drawImage(ladderTop, ladder.x, ladder.y, worldDescriptor.tiledMap.getTileWidth(), worldDescriptor.tiledMap.getTileHeight());
 
                         //Draw the middle ladders
                         for (i = 1; i < ladder.tileHeight - 1; i += 1) {
-                            ctx.drawImage(ladderMiddle, ladder.x, ladder.y + tiledMap.getTileHeight() * i, tiledMap.getTileWidth(), tiledMap.getTileHeight());
+                            ctx.drawImage(ladderMiddle, ladder.x, ladder.y + worldDescriptor.tiledMap.getTileHeight() * i, worldDescriptor.tiledMap.getTileWidth(), worldDescriptor.tiledMap.getTileHeight());
                         }
 
                         //Draw the bottom ladder
-                        ctx.drawImage(ladderBottom, ladder.x, ladder.y + ladder.height - tiledMap.getTileHeight(), tiledMap.getTileWidth(), tiledMap.getTileHeight());
+                        ctx.drawImage(ladderBottom, ladder.x, ladder.y + ladder.height - worldDescriptor.tiledMap.getTileHeight(), worldDescriptor.tiledMap.getTileWidth(), worldDescriptor.tiledMap.getTileHeight());
 
                     } else {
-                        ctx.drawImage(ladderMiddle, ladder.x, ladder.y, tiledMap.getTileWidth(), tiledMap.getTileHeight());
+                        ctx.drawImage(ladderMiddle, ladder.x, ladder.y, worldDescriptor.tiledMap.getTileWidth(), worldDescriptor.tiledMap.getTileHeight());
                     }
                 });
 
@@ -776,7 +777,7 @@ Zamboni.World.GameWorld = {
                 worldDescriptor.player.render(ctx);
 
                 //Draw the particles for the player
-                worldDescriptor.groundEmitter.render(ctx);
+                groundEmitter.render(ctx);
 
                 //Draw all the enemies
                 worldDescriptor.enemyObjects.forEach(function (enemy) {
