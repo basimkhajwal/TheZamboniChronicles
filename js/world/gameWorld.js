@@ -93,7 +93,7 @@ Zamboni.World.GameWorld = {
 
                 };
             },
-
+            /*
             //The total collision functions for entities, the array of the functions and the final one
             entityCollisions = [],
             entityCollision,
@@ -129,14 +129,58 @@ Zamboni.World.GameWorld = {
             worldHeight,
 
             //The player entity
-            player,
+            player,*/
+
+            //Holds the details about the world
+            worldDescriptor = {
+
+                //The tiled map for the background
+                tiledMap: null,
+
+                //The settings for the camera
+                minCameraX: 0,
+                minCameraY: 0,
+
+                //To be set when the tiled map is created
+                maxCameraX: null,
+                maxCameraY: null,
+
+                //The total collision functions for entities, the array of the functions and the final one
+                entityCollisions: [],
+                entityCollision: null,
+
+                //Like wise for enemy
+                enemyCollisions: [],
+                enemyCollision: null,
+
+                //Ladder collisions
+                ladderCollisions: [],
+                ladderCollision: null,
+
+                //The tiled maps collision function
+                tiledCollision: null,
+
+                //The camera for viewing the world (in the eyes of the player)
+                camera: Engine.Camera.create(0, 0, 0),
+
+                //The player entity
+                player: null,
+
+                //An array to hold all their respective objects
+                enemyObjects: [],
+                lavaObjects: [],
+                platformObjects: [],
+                spikeObjects: [],
+                ladderObjects: []
+
+            },
 
             //An array to hold all their respective objects
-            enemyObjects = [],
-            lavaObjects = [],
-            platformObjects = [],
-            spikeObjects = [],
-            ladderObjects = [],
+            //enemyObjects = [],
+            //lavaObjects = [],
+            //platformObjects = [],
+            //spikeObjects = [],
+            //ladderObjects = [],
 
             //The images for quick access
             spikeImg = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.SPIKES),
@@ -178,6 +222,38 @@ Zamboni.World.GameWorld = {
                 particlesPerSecond: 0
             }),
 
+            //A particle emitter for lava areas
+            lavaEmitter = Engine.ParticleEmitter.create({
+
+                //The default position (will be changed as rendered / updated)
+                x: 0,
+                y: 0,
+
+                //The gravity is high but no side accel
+                ax: 0,
+                ay: 30,
+
+                //An angle between 0 and 180 (negate it)
+                angle: -90,
+                angleVariance: 70,
+
+                //How fast different particles will go
+                speed: 60,
+                speedVariance: 10,
+
+                particleWidth: 6,
+                particleHeight: 6,
+
+                //A short life span (in seconds)
+                lifeSpan: 1,
+
+                startColour: Engine.Colour.create(211, 84, 0, 255),
+                endColour: Engine.Colour.create(243, 156, 18, 255),
+
+                maxParticles: 60,
+                particlesPerSecond: 0
+            }),
+
             //Manage the background stuff (clouds and parallax scrolling etc)
             backgroundManager = (function () {
 
@@ -212,15 +288,15 @@ Zamboni.World.GameWorld = {
                         //If generating anywhere on screen then do so
                         //otherwise generate clouds only off the screen so they move in
                         if (genAnywhere) {
-                            x = getRan(0, worldWidth - width);
-                            y = getRan(50, (worldHeight - height) - 200);
+                            x = getRan(0, worldDescriptor.worldWidth - width);
+                            y = getRan(50, (worldDescriptor.worldHeight - height) - 200);
                         } else {
-                            x = (vx > 0) ? getRan(-400, -1 * (worldWidth + 10)) : getRan(worldWidth + 10, worldWidth + 200);
-                            y = getRan(50, 200 - worldHeight);
+                            x = (vx > 0) ? getRan(-400, -1 * (worldDescriptor.worldWidth + 10)) : getRan(worldDescriptor.worldWidth + 10, worldDescriptor.worldWidth + 200);
+                            y = getRan(50, 200 - worldDescriptor.worldHeight);
                         }
 
                         //Return the array of the cloud details
-                        return [x + camera.getX(), y + camera.getY(), width, height, vx];
+                        return [x + worldDescriptor.camera.getX(), y + worldDescriptor.camera.getY(), width, height, vx];
                     },
 
                     //The clouds each have an x,y,width,height and vx
@@ -251,8 +327,8 @@ Zamboni.World.GameWorld = {
                         //Set the initial background positions
                         for (i = 0; i < 3; i += 1) {
                             backgroundMountains.push({
-                                x: camera.getX(),
-                                y: worldHeight - 700 + i * 125
+                                x: worldDescriptor.camera.getX(),
+                                y: worldDescriptor.worldHeight - 700 + i * 125
                             });
                         }
                     },
@@ -262,10 +338,10 @@ Zamboni.World.GameWorld = {
                         //Iterate over all the clouds
                         for (i = 0; i < clouds.length; i += 1) {
                             //Move them by their x velocity
-                            clouds[i][0] += (clouds[i][4] * delta) - (cameraChangeX * 0.1);
+                            clouds[i][0] += (clouds[i][4] * delta) - (worldDescriptor.cameraChangeX * 0.1);
 
                             //Check if they are off the screen, if so then reset it to a new cloud
-                            if ((clouds[i][4] < 0 && clouds[i][0] + clouds[i][2] < -offscreenAmount) || (clouds[i][4] > 0 && clouds[i][0] > worldWidth + offscreenAmount)) {
+                            if ((clouds[i][4] < 0 && clouds[i][0] + clouds[i][2] < -offscreenAmount) || (clouds[i][4] > 0 && clouds[i][0] > worldDescriptor.worldWidth + offscreenAmount)) {
                                 clouds[i] = genCloud(false);
                             }
                         }
@@ -276,10 +352,10 @@ Zamboni.World.GameWorld = {
                         //Iterate over each mountain that we are drawing
                         backgroundMountains.forEach(function (mountain) {
                             //Move mountains further away by less than the closer ones
-                            mountain.x += cameraChangeX * (1 - (i * 0.2));
+                            mountain.x += worldDescriptor.cameraChangeX * (1 - (i * 0.2));
 
                             //Get the point on the screen of the mountain relative to the camera
-                            var point = mountain.x - camera.getX();
+                            var point = mountain.x - worldDescriptor.camera.getX();
 
                             //Check if the mountain goes off the screen and move it so that it doesn't
                             if (point < 0) {
@@ -294,6 +370,7 @@ Zamboni.World.GameWorld = {
                     },
 
                     render: function (ctx) {
+
                         //No image smoothing to keep pixelated effect
                         ctx.imageSmoothingEnabled = false;
 
@@ -322,173 +399,6 @@ Zamboni.World.GameWorld = {
 
             }()),
 
-            //Parse a new player from the JSON object
-            parsePlayer = function (playerObj) {
-
-                //Create a new game entity for the player
-                player = Engine.GameEntity.createEmpty();
-
-                //Set the positions and the dimension
-                player.x = playerObj.x;
-                player.y = playerObj.y;
-                player.width = playerObj.width;
-                player.height = playerObj.height;
-
-                //Set the sprite image as loaded, will be an animation later
-                player.img = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.JAGO);
-
-                //Set the forces (only gravity for now)
-                player.applyGravity = true;
-
-            },
-
-            //Create a new enemy from the object
-            parseEnemy = function (enemyObj) {
-
-                //Create a new game entity for this enemy
-                var enemy = Engine.GameEntity.createEmpty();
-
-                //Set the position and dimensions
-                enemy.x = enemyObj.x;
-                enemy.y = enemyObj.y;
-                enemy.width = enemyObj.width;
-                enemy.height = enemyObj.height;
-
-                //The settings for the enemy for forces
-                enemy.applyGravity = true;
-                enemy.moveLeft = true;
-
-                //Set the type of the enemy, the default is type a
-                enemy.type = (enemyObj.properties.type || "a").toLowerCase();
-
-                //Add it to the global enemy array
-                enemyObjects.push(enemy);
-
-                //Add the collision function to the enemy object list
-                enemyCollisions.push(enemy.generateCollisionFunction());
-            },
-
-            //Create a new lava area from an object
-            parseLava = function (lavaObj) {
-
-                //Add a new lava object with the position and dimensions to the lava object list
-                lavaObjects.push({
-                    x: lavaObj.x,
-                    y: lavaObj.y,
-
-                    width: lavaObj.width,
-                    height: lavaObj.height
-                });
-
-            },
-
-            //Add a new spike object
-            parseSpikes = function (spikeObj) {
-                var spike = {};
-
-                //Set the position and dimensions
-                spike.x = spikeObj.x;
-                spike.y = spikeObj.y;
-                spike.width = spikeObj.width;
-                spike.height = spikeObj.height;
-
-                //How many tiles wide the spikes are
-                spike.tileWidth = Math.floor(spike.width / tiledMap.getTileWidth());
-
-                //Add a simple collision function
-                spike.collisionFunction = function (x, y) {
-                    return (x >= spike.x && x <= spike.x + spike.width) && (y >= spike.y && y <= spike.y + spike.height);
-                };
-
-                //Add it to the global spike list
-                spikeObjects.push(spike);
-            },
-
-            //Make a ladder from the JSON obj
-            parseLadder = function (ladderObj) {
-
-                //Create the ladder object
-                var ladder = {
-
-                    //Set the position and dimensions
-                    x: ladderObj.x,
-                    y: ladderObj.y,
-                    width: tiledMap.getTileWidth(),
-                    height: ladderObj.height,
-
-                    //Tile height for easier rendering and easing the computations
-                    tileHeight: Math.ceil(ladderObj.height / tiledMap.getTileHeight())
-
-                };
-
-                //Push a new ladder to the current ladder list
-                ladderObjects.push(ladder);
-
-                //Add the collision function for this ladder
-                ladderCollisions.push(function (x, y) {
-                    return x >= ladder.x && x <= ladder.x + ladder.width && y >= ladder.y && y <= ladder.y + ladder.height;
-                });
-            },
-
-            //Take the object of a platfrom from the JSON and creat a platform from it
-            parsePlatform = function (platformObj) {
-
-                //Create a new game entity for this platform
-                var platform = Engine.GameEntity.createEmpty(),
-
-                    //Set the default speed value or get one
-                    speed = parseInt(platformObj.properties.speed, 10) || 60,
-
-                    //The movement variables for later use
-                    changeX,
-                    changeY,
-                    lengthChange;
-
-                //Set the position and dimensions
-                platform.x = platformObj.x;
-                platform.y = platformObj.y;
-                platform.width = platformObj.width;
-                platform.height = platformObj.height;
-
-                //Set the movement positions
-                platform.startX = platformObj.x;
-                platform.startY = platformObj.y;
-                platform.endX = parseInt(platformObj.properties.endX, 10);
-                platform.endY = parseInt(platformObj.properties.endY, 10);
-
-                //Calculate which way to move
-                changeX = platform.endX - platform.x;
-                changeY = platform.endY - platform.y;
-                lengthChange = Math.sqrt(changeX * changeX + changeY * changeY);
-
-                //Set the direction
-                platform.directionX = sign(changeX);
-                platform.directionY = sign(changeY);
-
-                //Set the velocity
-                platform.vx = speed * (changeX / lengthChange);
-                platform.vy = speed * (changeY / lengthChange);
-
-                //Whether or not the platform is moving to its start position or end (see above)
-                platform.movingToEnd = true;
-                
-                //The forces to apply to the platform (which are none)
-                platform.applyGravity = false;
-                platform.applyFriction = false;
-
-                //The default platform colour (to be changed)
-                platform.colour = Zamboni.Utils.ColourScheme.WET_ASPHALT;
-
-                //Get the collsion function because it will be used a lot
-                platform.collisionFunction = platform.generateCollisionFunction();
-
-                //Add the platform to the global platofrm array
-                platformObjects.push(platform);
-
-                //Add the collision function for entities to collide with
-                entityCollisions.push(platform.collisionFunction);
-            },
-
             //Parse a new level from a given string
             parseLevel = function (fileText) {
 
@@ -504,7 +414,7 @@ Zamboni.World.GameWorld = {
                     //Get all the objects
                     objects = jsonObj.layers[1].objects;
 
-                //Create a new tiled map for the level
+                /*Create a new tiled map for the level
                 tiledMap = Engine.TiledMap.create(jsonObj.width, jsonObj.height, 20, 20);
 
                 //Put all the renderable tiles into the tiled maps renderable so that they are rendered correctly
@@ -560,101 +470,113 @@ Zamboni.World.GameWorld = {
                         parseLadder(objects[i]);
                         break;
                     }
-                }
+                }*/
 
                 //Generate the background
                 backgroundManager.create();
 
-                //Get the collision function
+                /*Get the collision function
                 tiledCollision = tiledMap.isCellBlocked;
                 entityCollisions.push(tiledMap.generateCollisionFunction());
 
                 //Merge the collision functions all into one
                 entityCollision = mergeAllCollisions(entityCollisions);
                 ladderCollision = mergeAllCollisions(ladderCollisions);
-                enemyCollision = mergeAllCollisions(enemyCollisions);
+                enemyCollision = mergeAllCollisions(enemyCollisions);*/
+
+                //Parse into the world descriptor
+                Zamboni.World.LevelParser.parseLevel(fileText, worldDescriptor);
+
+                //Get the collision function
+                worldDescriptor.tiledCollision = worldDescriptor.tiledMap.isCellBlocked;
+                worldDescriptor.entityCollisions.push(worldDescriptor.tiledMap.generateCollisionFunction());
+
+                //Merge the collision functions all into one
+                worldDescriptor.entityCollision = mergeAllCollisions(worldDescriptor.entityCollisions);
+                worldDescriptor.ladderCollision = mergeAllCollisions(worldDescriptor.ladderCollisions);
+                worldDescriptor.enemyCollision = mergeAllCollisions(worldDescriptor.enemyCollisions);
             },
 
             //The updating stuff
             updatePlayer = function (delta) {
 
                 //If any movement keys have been pressed set the movement pace
-                player.moveRight = (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("D")));
-                player.moveLeft = (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("A")));
-                player.jump = (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("W")));
+                worldDescriptor.player.moveRight = (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("D")));
+                worldDescriptor.player.moveLeft = (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("A")));
+                worldDescriptor.player.jump = (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("W")));
 
                 //Move player down by 10 because no collisions normally occur
-                player.y += 5;
+                worldDescriptor.player.y += 5;
 
                 //Check collisions with platforms and apply a force if it is
-                platformObjects.forEach(function (platform) {
+                worldDescriptor.platformObjects.forEach(function (platform) {
 
                     //If the player is on a platform then move along with it
-                    if (player.collidesBottom(platform.collisionFunction)) {
-                        player.x += platform.xChange;
-                        player.y += platform.yChange;
+                    if (worldDescriptor.player.collidesBottom(platform.collisionFunction)) {
+                        worldDescriptor.player.x += platform.xChange;
+                        worldDescriptor.player.y += platform.yChange;
                     }
 
                 });
 
                 //Return the player back to its original y value
-                player.y -= 5;
+                worldDescriptor.player.y -= 5;
 
                 //Check collisions with ladders only on left and right so the player can jump on ladders
-                if (player.collidesLeft(ladderCollision) || player.collidesRight(ladderCollision)) {
+                if (worldDescriptor.player.collidesLeft(worldDescriptor.ladderCollision) || worldDescriptor.player.collidesRight(worldDescriptor.ladderCollision)) {
 
                     //Stop forces
-                    player.applyGravity = false;
+                    worldDescriptor.player.applyGravity = false;
 
                     //Dont allow the player to jump if the head hits the ladder
-                    if (player.collidesTop(ladderCollision)) {
-                        player.jump = false;
+                    if (worldDescriptor.player.collidesTop(worldDescriptor.ladderCollision)) {
+                        worldDescriptor.player.jump = false;
 
                         //Set the initial velocity to 0 because the friction is very high
-                        player.vy = 0;
-                    } else if (!player.jumping) {
+                        worldDescriptor.player.vy = 0;
+                    } else if (!worldDescriptor.player.jumping) {
                         //Set the initial velocity to 0 because the friction is very high
-                        player.vy = 0;
+                        worldDescriptor.player.vy = 0;
                     }
 
                     //Move up if up is pressed
                     if (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("W"))) {
-                        player.applyForce(0, -100);
+                        worldDescriptor.player.applyForce(0, -100);
                     }
 
                     //Move down if down is pressed
                     if (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("S"))) {
-                        player.applyForce(0, 100);
+                        worldDescriptor.player.applyForce(0, 100);
                     }
 
                 } else {
 
                     //Reset to default settings
-                    player.applyGravity = true;
+                    worldDescriptor.player.applyGravity = true;
                 }
 
-                var fallingBefore = player.falling,
+                var fallingBefore = worldDescriptor.player.falling,
                     params;
 
                 //Update the player physics
-                player.update(delta, entityCollision);
+                worldDescriptor.player.update(delta, worldDescriptor.entityCollision);
 
                 //If the player moved enough and isnt falling and a random chance then emit some particles
-                if (!player.falling && player.xChange > 20 * delta && Math.random() > 0.9) {
+                if (!worldDescriptor.player.falling && worldDescriptor.player.xChange > 20 * delta && Math.random() > 0.9) {
 
                     params = groundEmitter.getParams();
 
-                    params.x = player.x + (player.width / 2);
-                    params.y = player.y + player.height;
+                    params.x = worldDescriptor.player.x + (worldDescriptor.player.width / 2);
+                    params.y = worldDescriptor.player.y + worldDescriptor.player.height;
 
                     groundEmitter.emitParticle();
                 }
 
-                if (fallingBefore && !player.falling && player.yChange > 10 * delta) {
+                if (fallingBefore && !worldDescriptor.player.falling && worldDescriptor.player.yChange > 10 * delta) {
                     params = groundEmitter.getParams();
 
-                    params.x = player.x + (player.width / 2);
-                    params.y = player.y + player.height;
+                    params.x = worldDescriptor.player.x + (worldDescriptor.player.width / 2);
+                    params.y = worldDescriptor.player.y + worldDescriptor.player.height;
 
                     groundEmitter.emitParticle();
                     groundEmitter.emitParticle();
@@ -668,27 +590,27 @@ Zamboni.World.GameWorld = {
             updateCamera = function (delta) {
 
                 //Save the old position
-                var oldCameraX = camera.getX(),
-                    oldCameraY = camera.getY();
+                var oldCameraX = worldDescriptor.camera.getX(),
+                    oldCameraY = worldDescriptor.camera.getY();
 
                 //Update the camera position
-                camera.setX((player.x + player.width / 2) - Zamboni.Utils.GameSettings.playerScreenX);
-                camera.setY((player.y + player.height / 2) - Zamboni.Utils.GameSettings.playerScreenY);
+                worldDescriptor.camera.setX((worldDescriptor.player.x + worldDescriptor.player.width / 2) - Zamboni.Utils.GameSettings.playerScreenX);
+                worldDescriptor.camera.setY((worldDescriptor.player.y + worldDescriptor.player.height / 2) - Zamboni.Utils.GameSettings.playerScreenY);
 
                 //Clamp the values
-                camera.setX(clamp(camera.getX(), minCameraX, maxCameraX));
-                camera.setY(clamp(camera.getY(), minCameraY, maxCameraY));
+                worldDescriptor.camera.setX(clamp(worldDescriptor.camera.getX(), worldDescriptor.minCameraX, worldDescriptor.maxCameraX));
+                worldDescriptor.camera.setY(clamp(worldDescriptor.camera.getY(), worldDescriptor.minCameraY, worldDescriptor.maxCameraY));
 
                 //Update the change variables
-                cameraChangeX = camera.getX() - oldCameraX;
-                cameraChangeY = camera.getY() - oldCameraY;
+                worldDescriptor.cameraChangeX = worldDescriptor.camera.getX() - oldCameraX;
+                worldDescriptor.cameraChangeY = worldDescriptor.camera.getY() - oldCameraY;
             },
 
             //Update the static objects in the level
             updateObjects = function (delta) {
 
                 //Update all the platforms
-                platformObjects.forEach(function (platform) {
+                worldDescriptor.platformObjects.forEach(function (platform) {
 
                     //Apply the physics
                     platform.update(delta);
@@ -732,10 +654,10 @@ Zamboni.World.GameWorld = {
 
                 //Update all the enemies
                 //Update enemies
-                enemyObjects.forEach(function (enemy) {
+                worldDescriptor.enemyObjects.forEach(function (enemy) {
 
                     //Temporary variable for the side-checking enemy
-                    var change;
+                    var oldX;
 
                     //Move differently for different enemies
                     switch (enemy.type) {
@@ -771,17 +693,16 @@ Zamboni.World.GameWorld = {
                         if (!enemy.falling) {
 
                             //Store the amount that it will move on the x-direction
-                            change = 0;
+                            oldX = enemy.x;
 
                             //Move it down slightly
                             enemy.y += 5;
 
-                            for (i = 0; i < 4; i += 1) {
-                                change += delta * enemy.vx;
-                                enemy.x += delta * enemy.vx;
+                            for (i = 0; i < 5; i += 1) {
+                                enemy.x += 2 * delta * enemy.vx;
 
                                 //See if it has gone off the edge, if so then reverse direction
-                                if (!enemy.collidesBottom(entityCollision)) {
+                                if (!enemy.collidesBottom(worldDescriptor.entityCollision)) {
 
                                     //Reverse the direction
                                     enemy.moveLeft = !enemy.moveLeft;
@@ -795,7 +716,7 @@ Zamboni.World.GameWorld = {
 
                             //Reset to the initial position
                             enemy.y -= 5;
-                            enemy.x -= change;
+                            enemy.x = oldX;
 
                         }
 
@@ -805,10 +726,10 @@ Zamboni.World.GameWorld = {
 
 
                     //Update the physics built in to a game entity
-                    enemy.update(delta, entityCollision);
+                    enemy.update(delta, worldDescriptor.entityCollision);
 
                     //Check collisions with platforms and apply a force if it is
-                    platformObjects.forEach(function (platform) {
+                    worldDescriptor.platformObjects.forEach(function (platform) {
 
                         //If the player is on a platform then move along with it
                         if (enemy.collidesBottom(platform.collisionFunction)) {
@@ -818,58 +739,67 @@ Zamboni.World.GameWorld = {
 
                     });
                 });
+
+
+                //Update all the lava objects and the emitter used for them
+                worldDescriptor.lavaObjects.forEach(function (lava) {
+
+
+
+
+                });
             },
 
             //Render the static objects
             renderObjects = function (ctx) {
 
                 //The laddrs
-                ladderObjects.forEach(function (ladder) {
+                worldDescriptor.ladderObjects.forEach(function (ladder) {
 
                     if (ladder.tileHeight > 1) {
                         //Draw the top ladder
-                        ctx.drawImage(ladderTop, ladder.x, ladder.y, tiledMap.getTileWidth(), tiledMap.getTileHeight());
+                        ctx.drawImage(ladderTop, ladder.x, ladder.y, worldDescriptor.tiledMap.getTileWidth(), worldDescriptor.tiledMap.getTileHeight());
 
                         //Draw the middle ladders
                         for (i = 1; i < ladder.tileHeight - 1; i += 1) {
-                            ctx.drawImage(ladderMiddle, ladder.x, ladder.y + tiledMap.getTileHeight() * i, tiledMap.getTileWidth(), tiledMap.getTileHeight());
+                            ctx.drawImage(ladderMiddle, ladder.x, ladder.y + worldDescriptor.tiledMap.getTileHeight() * i, worldDescriptor.tiledMap.getTileWidth(), worldDescriptor.tiledMap.getTileHeight());
                         }
 
                         //Draw the bottom ladder
-                        ctx.drawImage(ladderBottom, ladder.x, ladder.y + ladder.height - tiledMap.getTileHeight(), tiledMap.getTileWidth(), tiledMap.getTileHeight());
+                        ctx.drawImage(ladderBottom, ladder.x, ladder.y + ladder.height - worldDescriptor.tiledMap.getTileHeight(), worldDescriptor.tiledMap.getTileWidth(), worldDescriptor.tiledMap.getTileHeight());
 
                     } else {
-                        ctx.drawImage(ladderMiddle, ladder.x, ladder.y, tiledMap.getTileWidth(), tiledMap.getTileHeight());
+                        ctx.drawImage(ladderMiddle, ladder.x, ladder.y, worldDescriptor.tiledMap.getTileWidth(), worldDescriptor.tiledMap.getTileHeight());
                     }
                 });
 
                 //Draw the player
-                player.render(ctx);
+                worldDescriptor.player.render(ctx);
 
                 //Draw the particles for the player
                 groundEmitter.render(ctx);
 
                 //Draw all the enemies
-                enemyObjects.forEach(function (enemy) {
+                worldDescriptor.enemyObjects.forEach(function (enemy) {
                     enemy.render(ctx);
                 });
 
                 //Render all spikes
-                spikeObjects.forEach(function (spike) {
+                worldDescriptor.spikeObjects.forEach(function (spike) {
                     for (i = 0; i < spike.tileWidth; i += 1) {
-                        ctx.drawImage(spikeImg, spike.x + (tiledMap.getTileWidth() * i), spike.y, tiledMap.getTileWidth(), spike.height);
+                        ctx.drawImage(spikeImg, spike.x + (worldDescriptor.tiledMap.getTileWidth() * i), spike.y, worldDescriptor.tiledMap.getTileWidth(), spike.height);
                     }
 
                 });
 
                 //Render all the lava
-                lavaObjects.forEach(function (lava) {
+                worldDescriptor.lavaObjects.forEach(function (lava) {
                     ctx.fillStyle = Zamboni.Utils.ColourScheme.PUMPKIN;
                     ctx.fillRect(lava.x, lava.y, lava.width, lava.height);
                 });
 
                 //Render all the platforms
-                platformObjects.forEach(function (platform) {
+                worldDescriptor.platformObjects.forEach(function (platform) {
                     platform.render(ctx);
                 });
 
@@ -887,14 +817,14 @@ Zamboni.World.GameWorld = {
                 ctx.fillStyle = Zamboni.Utils.ColourScheme.BACKGROUND_COLOUR;
                 ctx.fillRect(0, 0, 1000, 600);
 
-                camera.projectContext(ctx);
+                worldDescriptor.camera.projectContext(ctx);
 
                 backgroundManager.render(ctx);
-                tiledMap.render(ctx, camera.getX(), camera.getX() + 1000, camera.getY(), camera.getY() + 600);
+                worldDescriptor.tiledMap.render(ctx, worldDescriptor.camera.getX(), worldDescriptor.camera.getX() + 1000, worldDescriptor.camera.getY(), worldDescriptor.camera.getY() + 600);
 
                 renderObjects(ctx);
 
-                camera.unProjectContext(ctx);
+                worldDescriptor.camera.unProjectContext(ctx);
             },
 
             //Update the world with time delta
