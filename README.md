@@ -134,4 +134,6 @@ The game still needs to be planned ..
 - Owen; asked to be in the credits, happy birthday
 - Spam rods; For pointing out something once, i think
 
-Test
+###Basim Chronicles
+- Day 1: Basim has gone, i creid every tim
+- Day 2: Turned out Basim was in 2 groups in business and the spirit of Basim won in maths, we creid every tim
