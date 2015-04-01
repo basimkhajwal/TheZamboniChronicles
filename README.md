@@ -130,10 +130,11 @@ The game still needs to be planned ..
 - Declan Robinson; more stuff not done
 - Jeymei; For making a stereo with some oxygen bonding thing
 - Jama; For hurting peoples feelings
-- James; \('0')>
+- James; <('0')/
 - Owen; asked to be in the credits, happy birthday
 - Spam rods; For pointing out something once, i think
 
 ###Basim Chronicles
 - Day 1; Basim has gone, i creid every tim
 - Day 2; Turned out Basim was in 2 groups in business and the spirit of Basim won in maths, we creid every tim
+- Day 3; 22 Jump street in skills and pacman in cs, productive morning, creid every tim
