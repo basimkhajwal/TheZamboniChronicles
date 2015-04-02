@@ -138,3 +138,4 @@ The game still needs to be planned ..
 - Day 1; Basim has gone, i creid every tim
 - Day 2; Turned out Basim was in 2 groups in business and the spirit of Basim won in maths, we creid every tim
 - Day 3; 22 Jump street in skills and pacman in cs, productive morning, creid every tim
+- Day 4; Banana slip, exploding bag and chem 'test', we creid evey tim
