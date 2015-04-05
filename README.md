@@ -141,3 +141,4 @@ The game still needs to be planned ..
 - Day 4; Banana slip, exploding bag and chem 'test', we creid evey tim
 - Day 5; Nothing happened, i creid every tim
 - Day 6; 6 is a nice numbe, creid every tim
+- Day 7; No creing, jk, i creid every tim
