@@ -142,3 +142,4 @@ The game still needs to be planned ..
 - Day 5; Nothing happened, i creid every tim
 - Day 6; 6 is a nice numbe, creid every tim
 - Day 7; No creing, jk, i creid every tim
+- Day 8; Last day, creid every tim
