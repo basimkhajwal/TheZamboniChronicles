@@ -409,27 +409,27 @@ Zamboni.World.GameWorld = {
                 //If the player moved enough and isnt falling and a random chance then emit some particles
                 if (!worldDescriptor.player.falling && worldDescriptor.player.xChange > 20 * delta && Math.random() > 0.9) {
 
-                    params = groundEmitter.getParams();
+                    params = Zamboni.World.ParticleEmitters.groundEmitter.getParams();
 
                     params.x = worldDescriptor.player.x + (worldDescriptor.player.width / 2);
                     params.y = worldDescriptor.player.y + worldDescriptor.player.height;
 
-                    groundEmitter.emitParticle();
+                    Zamboni.World.ParticleEmitters.groundEmitter.emitParticle();
                 }
 
                 if (fallingBefore && !worldDescriptor.player.falling && worldDescriptor.player.yChange > 10 * delta) {
-                    params = groundEmitter.getParams();
+                    params = Zamboni.World.ParticleEmitters.groundEmitter.getParams();
 
                     params.x = worldDescriptor.player.x + (worldDescriptor.player.width / 2);
                     params.y = worldDescriptor.player.y + worldDescriptor.player.height;
 
-                    groundEmitter.emitParticle();
-                    groundEmitter.emitParticle();
-                    groundEmitter.emitParticle();
+                    Zamboni.World.ParticleEmitters.groundEmitter.emitParticle();
+                    Zamboni.World.ParticleEmitters.groundEmitter.emitParticle();
+                    Zamboni.World.ParticleEmitters.groundEmitter.emitParticle();
                 }
 
                 //Update the emitter
-                groundEmitter.update(delta);
+                Zamboni.World.ParticleEmitters.groundEmitter.update(delta);
             },
 
             updateCamera = function (delta) {
@@ -622,7 +622,7 @@ Zamboni.World.GameWorld = {
                 worldDescriptor.player.render(ctx);
 
                 //Draw the particles for the player
-                groundEmitter.render(ctx);
+                Zamboni.World.ParticleEmitters.groundEmitter.render(ctx);
 
                 //Draw all the enemies
                 worldDescriptor.enemyObjects.forEach(function (enemy) {
