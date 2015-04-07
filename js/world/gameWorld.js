@@ -97,12 +97,20 @@ Zamboni.World.GameWorld = {
             //Holds the details about the world
             worldDescriptor = {
 
+                //The dimensions of the world (to be set)
+                worldWidth: 0,
+                worldHeight: 0,
+
                 //The tiled map for the background
                 tiledMap: null,
 
                 //The settings for the camera
                 minCameraX: 0,
                 minCameraY: 0,
+
+                //How much the camera moved in an update
+                cameraChangeX: 0,
+                cameraChangeY: 0,
 
                 //To be set when the tiled map is created
                 maxCameraX: null,
@@ -372,8 +380,7 @@ Zamboni.World.GameWorld = {
 
 
 
-                //Generate the background
-                backgroundManager.create();
+
 
                 /*Get the collision function
                 tiledCollision = tiledMap.isCellBlocked;
@@ -386,6 +393,9 @@ Zamboni.World.GameWorld = {
 
                 //Parse into the world descriptor
                 Zamboni.World.LevelParser.parseLevel(fileText, worldDescriptor);
+
+                //Generate the background
+                backgroundManager.create();
 
                 //Get the collision function
                 worldDescriptor.tiledCollision = worldDescriptor.tiledMap.isCellBlocked;
