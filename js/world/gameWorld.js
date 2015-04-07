@@ -29,46 +29,9 @@ Zamboni.World.GameWorld = {
             //The counter variable
             i,
 
-            //Utility clone for objects
-            cloneObj = function (obj) {
-                //Check to see if it is the correct type
-                if (null === obj || "object" !== typeof obj) {
-                    return obj;
-                }
-
-                //Get a copy of an empty object to use
-                var copy = obj.constructor(),
-
-                    //Attribute to enumerate over
-                    attr;
-
-                //Go over each property in the initial object
-                for (attr in obj) {
-
-                    //Copy the attribute if possible
-                    if (obj.hasOwnProperty(attr)) {
-                        copy[attr] = obj[attr];
-                    }
-                }
-
-                //Return the generated copy
-                return copy;
-            },
-
             //Clamp utility function
             clamp = function (val, min, max) {
                 return Math.min(max, Math.max(val, min));
-            },
-
-            //Utility function that returns -1 if less than 0, 0 if 0, 1 if more than 0
-            sign = function (val) {
-                if (val === 0) {
-                    return 0;
-                } else if (val < 0) {
-                    return -1;
-                } else {
-                    return 1;
-                }
             },
 
             //Takes a pair of collision functions and returns OR of them
@@ -155,31 +118,6 @@ Zamboni.World.GameWorld = {
 
             //Parse a new level from a given string
             parseLevel = function (fileText) {
-
-                //Parse the actual JSOn Object first
-                var jsonObj = JSON.parse(fileText),
-
-                    //The tile layer from the JSON
-                    tiles = jsonObj.layers[0].data,
-
-                    //The tile to enumerate over
-                    tile,
-
-                    //Get all the objects
-                    objects = jsonObj.layers[1].objects;
-
-
-
-
-
-                /*Get the collision function
-                tiledCollision = tiledMap.isCellBlocked;
-                entityCollisions.push(tiledMap.generateCollisionFunction());
-
-                //Merge the collision functions all into one
-                entityCollision = mergeAllCollisions(entityCollisions);
-                ladderCollision = mergeAllCollisions(ladderCollisions);
-                enemyCollision = mergeAllCollisions(enemyCollisions);*/
 
                 //Parse into the world descriptor
                 Zamboni.World.LevelParser.parseLevel(fileText, worldDescriptor);
