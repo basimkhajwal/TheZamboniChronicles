@@ -185,7 +185,7 @@ Zamboni.World.GameWorld = {
                 Zamboni.World.LevelParser.parseLevel(fileText, worldDescriptor);
 
                 //Generate the background
-                backgroundManager.create();
+                Zamboni.World.BackgroundManager.create(worldDescriptor);
 
                 //Get the collision function
                 worldDescriptor.tiledCollision = worldDescriptor.tiledMap.isCellBlocked;
@@ -519,7 +519,7 @@ Zamboni.World.GameWorld = {
 
                 worldDescriptor.camera.projectContext(ctx);
 
-                backgroundManager.render(ctx);
+                Zamboni.World.BackgroundManager.render(ctx);
                 worldDescriptor.tiledMap.render(ctx, worldDescriptor.camera.getX(), worldDescriptor.camera.getX() + 1000, worldDescriptor.camera.getY(), worldDescriptor.camera.getY() + 600);
 
                 renderObjects(ctx);
@@ -535,7 +535,7 @@ Zamboni.World.GameWorld = {
 
                 updateCamera(delta);
 
-                backgroundManager.update(delta);
+                Zamboni.World.BackgroundManager.update(delta);
             }
 
 
