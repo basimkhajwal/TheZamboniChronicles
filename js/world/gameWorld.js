@@ -93,43 +93,6 @@ Zamboni.World.GameWorld = {
 
                 };
             },
-            /*
-            //The total collision functions for entities, the array of the functions and the final one
-            entityCollisions = [],
-            entityCollision,
-
-            //Like wise for enemy
-            enemyCollisions = [],
-            enemyCollision,
-
-            //Ladder collisions
-            ladderCollisions = [],
-            ladderCollision,
-
-            //The tiled maps collision function
-            tiledCollision,
-
-            //The camera for viewing the world (in the eyes of the player)
-            camera = Engine.Camera.create(0, 0, 0),
-
-            //The settings for the camera
-            minCameraX = 0,
-            minCameraY = 0,
-
-            //To be set when the tiled map is created
-            maxCameraX,
-            maxCameraY,
-
-            //How much the camera moved
-            cameraChangeX,
-            cameraChangeY,
-
-            //The size of the world in pixels
-            worldWidth,
-            worldHeight,
-
-            //The player entity
-            player,*/
 
             //Holds the details about the world
             worldDescriptor = {
@@ -174,13 +137,6 @@ Zamboni.World.GameWorld = {
                 ladderObjects: []
 
             },
-
-            //An array to hold all their respective objects
-            //enemyObjects = [],
-            //lavaObjects = [],
-            //platformObjects = [],
-            //spikeObjects = [],
-            //ladderObjects = [],
 
             //The images for quick access
             spikeImg = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.SPIKES),
@@ -414,63 +370,7 @@ Zamboni.World.GameWorld = {
                     //Get all the objects
                     objects = jsonObj.layers[1].objects;
 
-                /*Create a new tiled map for the level
-                tiledMap = Engine.TiledMap.create(jsonObj.width, jsonObj.height, 20, 20);
 
-                //Put all the renderable tiles into the tiled maps renderable so that they are rendered correctly
-
-                //Use a loop for less lines of code
-                for (tile in Zamboni.Utils.GameSettings.tiles) {
-                    if (Zamboni.Utils.GameSettings.tiles.hasOwnProperty(tile) && Zamboni.Utils.GameSettings.assets.hasOwnProperty(tile)) {
-                        tiledMap.putRenderable(Zamboni.Utils.GameSettings.tiles[tile], Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets[tile]));
-                    }
-                }
-
-                //Set the camera variables
-                worldWidth = tiledMap.getWidth() * tiledMap.getTileWidth();
-                worldHeight = tiledMap.getHeight() * tiledMap.getTileHeight();
-
-                //Where the camera could end up at max to prevent dodgy camera movement off the tiled map
-                maxCameraX = worldWidth - 1000;
-                maxCameraY = worldHeight - 600;
-
-                //Set all the background tiles
-                for (i = 0; i < tiles.length; i += 1) {
-
-                    //Set the correct row and column to the value that is at that tile
-                    tiledMap.setTileAt(Math.floor(i / jsonObj.width), i % jsonObj.width, tiles[i]);
-                }
-
-                //Loop over every object defined in the second layer and call the correct function to parse it
-                for (i = 0; i < objects.length; i += 1) {
-
-                    switch (objects[i].type) {
-
-                    case "player":
-                        parsePlayer(objects[i]);
-                        break;
-
-                    case "lava":
-                        parseLava(objects[i]);
-                        break;
-
-                    case "enemy":
-                        parseEnemy(objects[i]);
-                        break;
-
-                    case "platform":
-                        parsePlatform(objects[i]);
-                        break;
-
-                    case "spikes":
-                        parseSpikes(objects[i]);
-                        break;
-
-                    case "ladder":
-                        parseLadder(objects[i]);
-                        break;
-                    }
-                }*/
 
                 //Generate the background
                 backgroundManager.create();
