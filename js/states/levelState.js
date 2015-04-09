@@ -17,10 +17,23 @@ Zamboni.States.LevelState = {
         "use strict";
 
         //Create an empty state object
-        var state = Engine.GameState.create();
+        var state = Engine.GameState.create(),
 
+            //The global game object
+            game;
 
+        //When the state is created with a new game
+        state.onCreate = function (g) {
+            game = g;
+        };
 
+        state.render = function (ctx) {
+
+        };
+
+        state.update = function (delta) {
+
+        };
 
         //Return the state with all the changed methods
         return state;
