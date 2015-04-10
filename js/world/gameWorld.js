@@ -109,6 +109,16 @@ Zamboni.World.GameWorld = {
 
             },
 
+            //A player descriptor to hold values about the player
+            playerDescriptor = {
+
+                coinsCollected: 0,
+
+                isDead: 0
+
+
+            },
+
             //The images for quick access
             spikeImg = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.SPIKES),
 
