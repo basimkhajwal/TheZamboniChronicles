@@ -19,7 +19,7 @@ Zamboni.World.BackgroundManager = (function () {
         worldDescriptor,
 
         //Variables for easy access
-        cloudImg = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.CLOUD_FUZZY),
+        cloudImg,
         cloudWidth = Zamboni.Utils.GameSettings.fuzzyCloudWidth,
         cloudHeight = Zamboni.Utils.GameSettings.fuzzyCloudHeight,
 
@@ -78,6 +78,8 @@ Zamboni.World.BackgroundManager = (function () {
                 Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.BACKGROUND_MOUNTAINS_LIGHT),
                 Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.BACKGROUND_MOUNTAINS)
             ];
+
+            cloudImg = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.CLOUD_FUZZY);
 
             //Set the world descriptor
             worldDescriptor = worldDesc;
