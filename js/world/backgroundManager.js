@@ -62,11 +62,7 @@ Zamboni.World.BackgroundManager = (function () {
         backgroundMountains = [],
 
         //The images to draw for the background
-        mountainImg = [
-            Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.BACKGROUND_MOUNTAINS_LIGHTER),
-            Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.BACKGROUND_MOUNTAINS_LIGHT),
-            Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.BACKGROUND_MOUNTAINS)
-        ],
+        mountainImg,
 
         //The amount to test whether a section is off the screen
         offscreenAmount = 100;
@@ -75,6 +71,13 @@ Zamboni.World.BackgroundManager = (function () {
 
         //Reset the background manager
         create: function (worldDesc) {
+
+            //Get the assets needed
+            mountainImg = [
+                Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.BACKGROUND_MOUNTAINS_LIGHTER),
+                Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.BACKGROUND_MOUNTAINS_LIGHT),
+                Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.BACKGROUND_MOUNTAINS)
+            ];
 
             //Set the world descriptor
             worldDescriptor = worldDesc;
