@@ -122,10 +122,21 @@ Zamboni.World.GameWorld = {
 
             //The images for quick access
             spikeImg = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.SPIKES),
-
             ladderBottom = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.LADDER_BOTTOM),
             ladderMiddle = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.LADDER_MIDDLE),
             ladderTop = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.LADDER_TOP),
+
+            //Animations
+            coinAnimation = Engine.Animation.create([
+                Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.COIN),
+                Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.COIN_1),
+                Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.COIN_2),
+                Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.COIN_3),
+                Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.COIN_4),
+                Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.COIN_5),
+                Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.COIN_6),
+                Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.COIN_7)
+            ]),
 
             //Parse a new level from a given string
             parseLevel = function (fileText) {
