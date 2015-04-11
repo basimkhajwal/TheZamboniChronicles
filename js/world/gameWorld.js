@@ -102,6 +102,7 @@ Zamboni.World.GameWorld = {
 
                 //An array to hold all their respective objects
                 enemyObjects: [],
+                coinObjects: [],
                 lavaObjects: [],
                 platformObjects: [],
                 spikeObjects: [],
