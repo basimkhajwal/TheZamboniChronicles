@@ -77,8 +77,16 @@ Zamboni.Utils.GameSettings = {
 
         LADDER_TOP: "img/objects/ladder-top.png",
         LADDER_MIDDLE: "img/objects/ladder-middle.png",
-        LADDER_BOTTOM: "img/objects/ladder-bottom.png"
+        LADDER_BOTTOM: "img/objects/ladder-bottom.png",
 
+        COIN: "img/objects/coin.png",
+        COIN_1: "img/objects/coin-1.png",
+        COIN_2: "img/objects/coin-2.png",
+        COIN_3: "img/objects/coin-3.png",
+        COIN_4: "img/objects/coin-4.png",
+        COIN_5: "img/objects/coin-5.png",
+        COIN_6: "img/objects/coin-6.png",
+        COIN_7: "img/objects/coin-7.png"
     },
 
     //The numbers for all the tiles (for use with tiled maps)
