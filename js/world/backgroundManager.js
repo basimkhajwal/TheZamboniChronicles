@@ -29,8 +29,8 @@ Zamboni.World.BackgroundManager = (function () {
             var vx,
 
                 //A random size
-                width = cloudWidth * getRan(0.2, 0.5),
-                height = cloudHeight * getRan(0.2, 0.5),
+                width = cloudWidth * getRan(0.3, 0.5),
+                height = cloudHeight * getRan(0.3, 0.5),
 
                 //The position (to be set)
                 x,
@@ -150,7 +150,7 @@ Zamboni.World.BackgroundManager = (function () {
             });
 
             //Draw the clouds with a bit of transparency and no image smoothing
-            ctx.globalAlpha = 0.8;
+            ctx.globalAlpha = 0.7;
             for (i = 0; i < clouds.length; i += 1) {
                 ctx.drawImage(cloudImg, clouds[i][0], clouds[i][1], clouds[i][2], clouds[i][3]);
             }
