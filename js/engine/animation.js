@@ -22,7 +22,7 @@ Engine.Animation = {
             //The index of the frame that we are at
             frameIndex = 0,
 
-            //Whether or not this animation is finished
+            //Whether or not this animation is running
             stopped = false,
 
             //The current time (in seconds) of the animation that we are in
@@ -57,7 +57,7 @@ Engine.Animation = {
 
                         //If we are looping then reset
                         if (onLoop) {
-                            frameIndex = 0;
+                            this.restart();
                         } else {
                             //Otherwise animation has ended
                             frameIndex = numFrames - 1;
@@ -69,6 +69,28 @@ Engine.Animation = {
 
                     }
                 }
+            },
+
+            //Reset the animation but don't start it again
+            reset: function () {
+                frameIndex = 0;
+                currentTime = 0;
+            },
+
+            //Start the animation from the frame it left at
+            start: function () {
+                stopped = false;
+            },
+
+            //Pause the animation at the current frame
+            pause: function () {
+                stopped = true;
+            },
+
+            //Restart the animation
+            restart: function () {
+                this.reset();
+                this.start();
             },
 
             // ------------------ Getters & Setters -------------------
