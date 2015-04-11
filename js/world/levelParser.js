@@ -134,6 +134,29 @@ Zamboni.World.LevelParser = (function () {
             });
         },
 
+        //Parse a coin from the json object
+        parseCoin = function (coinObj, worldDescriptor) {
+
+            //The coin object to create
+            var coin = {};
+
+            //Set the position according to the JSON object
+            coin.x = coinObj.x;
+            coin.y = coinObj.y;
+
+            //The dimensions according to the JSON object
+            coin.width = coinObj.width;
+            coin.height = coinObj.height;
+
+            //Make a collision function for it
+            coin.collisionFunction = function (x, y) {
+                return x >= coin.x && x <= coin.x + coin.width && y >= coin.y && y <= coin.y + coin.height;
+            };
+
+            //Add it to the global coins list
+            worldDescriptor.coins.append(coin);
+        },
+
         //Take the object of a platfrom from the JSON and creat a platform from it
         parsePlatform = function (platformObj, worldDescriptor) {
 
