@@ -188,6 +188,48 @@
                  "width":20,
                  "x":1580,
                  "y":660
+                },
+                {
+                 "height":15,
+                 "name":"coin",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"coin",
+                 "visible":true,
+                 "width":15,
+                 "x":440,
+                 "y":600
+                },
+                {
+                 "height":15,
+                 "name":"coin",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"coin",
+                 "visible":true,
+                 "width":15,
+                 "x":470,
+                 "y":600
+                },
+                {
+                 "height":15,
+                 "name":"coin",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"coin",
+                 "visible":true,
+                 "width":15,
+                 "x":500,
+                 "y":600
                 }],
          "opacity":1,
          "type":"objectgroup",
