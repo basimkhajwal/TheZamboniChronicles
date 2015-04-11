@@ -444,6 +444,11 @@ Zamboni.World.GameWorld = {
                     enemy.render(ctx);
                 });
 
+                //Draw all the coins
+                worldDescriptor.coinObjects.forEach(function (coin) {
+                    ctx.drawImage(coinAnimation.getCurrentFrame(), coin.x, coin.y, coin.width, coin.height);
+                });
+
                 //Render all spikes
                 worldDescriptor.spikeObjects.forEach(function (spike) {
                     for (i = 0; i < spike.tileWidth; i += 1) {
