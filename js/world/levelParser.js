@@ -154,7 +154,7 @@ Zamboni.World.LevelParser = (function () {
             };
 
             //Add it to the global coins list
-            worldDescriptor.coins.append(coin);
+            worldDescriptor.coinObjects.append(coin);
         },
 
         //Take the object of a platfrom from the JSON and creat a platform from it
