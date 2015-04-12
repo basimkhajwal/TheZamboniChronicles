@@ -400,6 +400,12 @@ Zamboni.World.GameWorld = {
                     });
                 });
 
+                //Update the animations for the coins
+                if (coinAnimation.isFinished() && Math.random() > 0.1) {
+                    coinAnimation.restart();
+                }
+
+                coinAnimation.update(delta);
 
                 //Update all the lava objects and the emitter used for them
                 worldDescriptor.lavaObjects.forEach(function (lava) {
