@@ -201,6 +201,12 @@ Engine.ParticleEmitter = {
 
             },
 
+            //Set the position to move emitter, doesn't affect already emitted particles
+            setPosition: function (x, y) {
+                params.x = x;
+                params.y = y;
+            },
+
             //Get the params so that they can be changed
             getParams: function () {
                 return params;
