@@ -136,7 +136,7 @@ Zamboni.World.GameWorld = {
                 Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.COIN_5),
                 Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.COIN_6),
                 Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.COIN_7)
-            ], 0.1, false),
+            ], 0.07, false),
 
             //Parse a new level from a given string
             parseLevel = function (fileText) {
@@ -401,7 +401,7 @@ Zamboni.World.GameWorld = {
                 });
 
                 //Update the animations for the coins
-                if (coinAnimation.isFinished() && Math.random() > 0.1) {
+                if (coinAnimation.isFinished() && Math.random() < 0.015) {
                     coinAnimation.restart();
                 }
 
