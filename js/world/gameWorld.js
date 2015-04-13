@@ -407,9 +407,6 @@ Zamboni.World.GameWorld = {
 
 
                 });
-
-                //Update the particle emitters
-                Zamboni.World.ParticleEmitters.update(delta);
             },
 
             //Render the static objects
@@ -479,7 +476,7 @@ Zamboni.World.GameWorld = {
 
             //Render the world on the context ctx
             render: function (ctx) {
-                //Set the background colour
+                //Set and clear the background colour
                 ctx.fillStyle = Zamboni.Utils.ColourScheme.BACKGROUND_COLOUR;
                 ctx.fillRect(0, 0, 1000, 600);
 
@@ -502,6 +499,7 @@ Zamboni.World.GameWorld = {
                 updateCamera(delta);
 
                 Zamboni.World.BackgroundManager.update(delta);
+                Zamboni.World.ParticleEmitters.update(delta);
             }
 
 
