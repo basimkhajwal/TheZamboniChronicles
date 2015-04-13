@@ -71,6 +71,27 @@ Zamboni.World.ParticleEmitters = {
 
         maxParticles: 60,
         particlesPerSecond: 0
-    })
+    }),
+
+    //Function to update all the particle emitters in this object
+    update: function (delta) {
+
+        "use strict";
+
+        //Iteration var for the emitter
+        var emitter;
+
+        //Loop through any possible emitters
+        for (emitter in this) {
+
+            //Check to see if it is a valid emitter
+            if (this.hasOwnProperty(emitter) && this[emitter].hasOwnProperty("update")) {
+
+                //If so, then update it
+                this[emitter].update(delta);
+            }
+        }
+
+    }
 
 };

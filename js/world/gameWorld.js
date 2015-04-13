@@ -238,9 +238,6 @@ Zamboni.World.GameWorld = {
                         Zamboni.World.ParticleEmitters.groundEmitter.emitParticle();
                     }
                 }
-
-                //Update the emitter
-                Zamboni.World.ParticleEmitters.groundEmitter.update(delta);
             },
 
             updateCamera = function (delta) {
@@ -410,6 +407,9 @@ Zamboni.World.GameWorld = {
 
 
                 });
+
+                //Update the particle emitters
+                Zamboni.World.ParticleEmitters.update(delta);
             },
 
             //Render the static objects
