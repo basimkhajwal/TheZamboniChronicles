@@ -28,7 +28,7 @@ https://rawgit.com/basimkhajwal/TheZamboniChronicles/master/index.html
 - [x] Fix residual error in the pause thing
 - [x] Particle Effects
 - [x] Make side-checking enemies
-- [ ] Refactor the world code and make smaller files
+- [x] Refactor the world code and make smaller files
 - [ ] Make particle effects more editable
 - [ ] Tutorial areas which show a text info
 - [ ] Boss enemies
@@ -36,7 +36,7 @@ https://rawgit.com/basimkhajwal/TheZamboniChronicles/master/index.html
 - [ ] Make better player textures
 - [ ] Add animation to the player movement
 - [ ] Add animation to enemy movement
-- [ ] Add coins
+- [x] Add coins
 
 ###Research Sites:
 http://www.wildbunny.co.uk/blog/2011/12/11/how-to-make-a-2d-platform-game-part-1/
