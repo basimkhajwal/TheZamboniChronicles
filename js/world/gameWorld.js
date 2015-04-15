@@ -455,6 +455,15 @@ Zamboni.World.GameWorld = {
                 worldDescriptor.lavaObjects.forEach(function (lava) {
                     ctx.fillStyle = Zamboni.Utils.ColourScheme.PUMPKIN;
                     ctx.fillRect(lava.x, lava.y, lava.width, lava.height);
+
+                    ctx.strokeStyle = Zamboni.Utils.ColourScheme.ORANGE;
+                    ctx.lineWidth = 3;
+
+                    ctx.beginPath();
+                    ctx.moveTo(lava.x, lava.y);
+                    ctx.lineTo(lava.x + lava.width, lava.y);
+                    ctx.closePath();
+                    ctx.stroke();
                 });
 
                 //Render all the platforms
@@ -495,7 +504,6 @@ Zamboni.World.GameWorld = {
 
                 updateObjects(delta);
                 updatePlayer(delta);
-
                 updateCamera(delta);
 
                 Zamboni.World.BackgroundManager.update(delta);
