@@ -106,6 +106,7 @@ Zamboni.World.GameWorld = {
                 lavaObjects: [],
                 platformObjects: [],
                 spikeObjects: [],
+                brickObjects: [],
                 ladderObjects: []
 
             },
