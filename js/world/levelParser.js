@@ -23,6 +23,12 @@ Zamboni.World.LevelParser = (function () {
             }
         },
 
+        generateCollision = function (x, y, width, height) {
+            return function (nx, ny) {
+                return nx >= x && nx <= x + width && ny >= y && ny <= y + height;
+            };
+        },
+
         //The iterating variables
         i,
         j,
