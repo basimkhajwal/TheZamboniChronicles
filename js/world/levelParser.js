@@ -335,6 +335,10 @@ Zamboni.World.LevelParser = (function () {
                     parseCoin(objects[i], worldDescriptor);
                     break;
 
+                case "brick":
+                    parseBrick(objects[i], worldDescriptor);
+                    break;
+
                 }
             }
 
