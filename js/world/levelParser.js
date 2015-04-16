@@ -23,6 +23,10 @@ Zamboni.World.LevelParser = (function () {
             }
         },
 
+        //The iterating variables
+        i,
+        j,
+
         //Parse a new player from the JSON object
         parsePlayer = function (playerObj, worldDescriptor) {
 
@@ -106,6 +110,36 @@ Zamboni.World.LevelParser = (function () {
 
             //Add it to the global spike list
             worldDescriptor.spikeObjects.push(spike);
+        },
+
+
+        //Parse a breakable brick block from an object
+        parseBrick = function (brickObj, worldDescriptor) {
+
+            //How many bricks wide and high the object is
+            var bricksWidth = brickObj.width / worldDescriptor.tiledMap.getTileWidth(),
+                bricksHeight = brickObj.height / worldDescriptor.tiledMap.getTileHeight(),
+
+                //An object for iterating
+                brick;
+
+            //Add the appropriate number of bricks at the positions
+            for (i = 0; i < bricksWidth; i += 1) {
+                for (j = 0; j < bricksHeight; j += 1) {
+
+                    brick = {
+                        x: brickObj.x + worldDescriptor.tiledMap.getTileWidth() * i,
+                        y: brickObj.y + worldDescriptor.tiledMap.getTileHeight() * j,
+
+                        width: worldDescriptor.tiledMap.getTileWidth(),
+                        height: worldDescriptor.tiledMap.getTileHeight()
+                    };
+
+                    worldDescriptor.brickObjects.push(brick);
+                }
+            }
+
+
         },
 
         //Make a ladder from the JSON obj
