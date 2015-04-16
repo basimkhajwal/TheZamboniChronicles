@@ -139,6 +139,8 @@ Zamboni.World.LevelParser = (function () {
                         height: worldDescriptor.tiledMap.getTileHeight()
                     };
 
+                    brick.collisionFunction = generateCollision(brick.x, brick.y, brick.width, brick.height);
+
                     worldDescriptor.brickObjects.push(brick);
                 }
             }
