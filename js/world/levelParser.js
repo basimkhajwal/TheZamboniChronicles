@@ -110,9 +110,7 @@ Zamboni.World.LevelParser = (function () {
             spike.tileWidth = Math.floor(spike.width / worldDescriptor.tiledMap.getTileWidth());
 
             //Add a simple collision function
-            spike.collisionFunction = function (x, y) {
-                return (x >= spike.x && x <= spike.x + spike.width) && (y >= spike.y && y <= spike.y + spike.height);
-            };
+            spike.collisionFunction = generateCollision(spike.x, spike.y, spike.width, spike.height);
 
             //Add it to the global spike list
             worldDescriptor.spikeObjects.push(spike);
@@ -169,9 +167,7 @@ Zamboni.World.LevelParser = (function () {
             worldDescriptor.ladderObjects.push(ladder);
 
             //Add the collision function for this ladder
-            worldDescriptor.ladderCollisions.push(function (x, y) {
-                return x >= ladder.x && x <= ladder.x + ladder.width && y >= ladder.y && y <= ladder.y + ladder.height;
-            });
+            worldDescriptor.ladderCollisions.push(generateCollision(ladder.x, ladder.y, ladder.width, ladder.height));
         },
 
         //Parse a coin from the json object
@@ -189,9 +185,7 @@ Zamboni.World.LevelParser = (function () {
             coin.height = coinObj.height;
 
             //Make a collision function for it
-            coin.collisionFunction = function (x, y) {
-                return x >= coin.x && x <= coin.x + coin.width && y >= coin.y && y <= coin.y + coin.height;
-            };
+            coin.collisionFunction = generateCollision(coin.x, coin.y, coin.width, coin.height);
 
             //Add it to the global coins list
             worldDescriptor.coinObjects.push(coin);
