@@ -101,20 +101,10 @@ Zamboni.World.LevelParser = (function () {
                 sign = 1,
 
                 //The biggest amplitude (up or down) of a wave
-                maxHeight = 10,
-
-                //The number of waves (depending on width)
-                waveWidth = worldDescriptor.tiledMap.getTileWidth(),
-                numWaves = Math.floor(lava.width / waveWidth),
-
-                offsetX = waveWidth / 2,
-
-                currentX = 0;
+                maxHeight = 10;
 
             //Create the waves
-            for (i = 0; i < numWaves; i += 1) {
-                //Calculate the current position
-                currentX = (lava.x + offsetX) + (waveWidth * i);
+            for (i = 0; i < Math.floor(lava.width / worldDescriptor.tiledMap.getTileWidth()); i += 1) {
 
                 //Make a random height for it
                 lava.waves.push(Math.random() * maxHeight * sign);
