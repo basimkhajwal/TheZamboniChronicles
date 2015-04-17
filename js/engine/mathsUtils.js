@@ -37,7 +37,11 @@ Engine.MathsUtils = {
 
             return (a0 * d * mid + a1 * mid +  a2 * d + a3);
         }
+    },
+
+    // ------------------------- Spline / Curve Methods -----------------------------
+
+    Spline: {
+
     }
-
-
 };
