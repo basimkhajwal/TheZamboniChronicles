@@ -39,9 +39,53 @@ Engine.MathsUtils = {
         }
     },
 
-    // ------------------------- Spline / Curve Methods -----------------------------
+    // ------------------------- Spline / Curve Methods (one dimensional) -----------------------------
 
     Spline: {
+
+
+
+
+        /*
+        *   Create an array approximation between evenly spaces y-values with a difference specified
+        *
+        *   The curve is linearly estimated using the number of points given (default 16)
+        */
+        cubicToPoints: function (yValues, startX, xChange, numPoints) {
+            "use strict";
+
+            //Set the default value to be sixteen if not set
+            numPoints = numPoints || 16;
+
+            //Repeat the first and last values so cubic can work better (no tailing ends)
+            yValues.unshift(yValues[0]);
+            yValues.push(yValues[yValues.length - 1]);
+
+            var curvePoints = [],
+
+                //The difference between each linear interpolation
+                pointDiff = xChange / numPoints,
+
+                //Iteration variables
+                i = 0,
+                j = 0;
+
+            //Iterate over all but first and last (repeated)
+            for (i = 1; i < yValues.length - 2; i += 1) {
+
+                //Iterate over the curve estimation
+                for (j = 0; j < numPoints; j += 1) {
+                    curvePoints.push([
+                        startX + (xChange * (i - 1)) + (pointDiff * j),
+                        Engine.MathsUtils.Interpolation.cubic(yValues[i - 1], yValues[i], yValues[i + 1], yValues[i + 2], j / numPoints)
+                    ]);
+                }
+
+            }
+
+            //Return the points generated
+            return curvePoints;
+        }
 
     }
 };
