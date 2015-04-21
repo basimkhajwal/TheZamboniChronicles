@@ -455,12 +455,17 @@ Zamboni.World.GameWorld = {
                 //Render all the lava
                 worldDescriptor.lavaObjects.forEach(function (lava) {
                     ctx.fillStyle = Zamboni.Utils.ColourScheme.PUMPKIN;
-                    ctx.fillRect(lava.x, lava.y, lava.width, lava.height);
-
                     ctx.strokeStyle = Zamboni.Utils.ColourScheme.ORANGE;
                     ctx.lineWidth = 3;
 
-
+                    ctx.beginPath();
+                    Engine.MathsUtils.Spline.curve(ctx, lava.waves);
+                    ctx.stroke();
+                    ctx.lineTo(lava.x + lava.width, lava.y + lava.height);
+                    ctx.lineTo(lava.x, lava.y + lava.height);
+                    ctx.lineTo(lava.x, lava.y);
+                    ctx.fill();
+                    ctx.closePath();
                 });
 
                 //Render all the platforms
