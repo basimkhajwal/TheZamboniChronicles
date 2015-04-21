@@ -185,8 +185,11 @@ Engine.DrawTools = {
 
         ctx.beginPath();
 
+        //Start at the first point
+        ctx.moveTo(lines[0][0], lines[0][1]);
+
         //Iterate over each line apart from the first
-        lines.forEach(function (line) {
+        lines.splice(1).forEach(function (line) {
             //Draw the line
             ctx.lineTo(line[0], line[1]);
         });
