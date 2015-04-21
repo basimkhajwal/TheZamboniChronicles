@@ -97,21 +97,35 @@ Zamboni.World.LevelParser = (function () {
                     waves: []
                 },
 
+                //How much to step by
+                stepWidth = worldDescriptor.tiledMap.getTileWidth() / 2,
+
                 //For generating alternate direction waves
                 sign = 1,
 
                 //The biggest amplitude (up or down) of a wave
-                maxHeight = 10;
+                maxHeight = 5;
+
+            //Add the first point (beginning)
+            lava.waves.push(lava.x);
+            lava.waves.push(lava.y);
 
             //Create the waves
-            for (i = 0; i < Math.floor(lava.width / worldDescriptor.tiledMap.getTileWidth()); i += 1) {
+            for (i = 1; i < Math.floor(lava.width / stepWidth); i += 1) {
+
+                //Put the x co-ord in
+                lava.waves.push(lava.x + stepWidth * i);
 
                 //Make a random height for it
-                lava.waves.push(Math.random() * maxHeight * sign);
+                lava.waves.push(lava.y + Math.random() * maxHeight * sign);
 
                 //Flip the sign to make it wavy
                 sign *= -1;
             }
+
+            //Add the last point
+            lava.waves.push(lava.x + lava.width);
+            lava.waves.push(lava.y);
 
             //Add a new lava object with the position and dimensions to the lava object list
             worldDescriptor.lavaObjects.push(lava);
