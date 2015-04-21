@@ -104,7 +104,7 @@ Zamboni.World.LevelParser = (function () {
                 sign = 1,
 
                 //The biggest amplitude (up or down) of a wave
-                maxHeight = 5;
+                maxHeight = 4;
 
             //Add the first point (beginning)
             lava.waves.push(lava.x);
