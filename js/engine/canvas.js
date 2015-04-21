@@ -194,6 +194,9 @@ Engine.DrawTools = {
             ctx.lineTo(line[0], line[1]);
         });
 
+        //Stroke the path
+        ctx.stroke();
+
         //If closing then close the path
         if (endPath) {
             ctx.closePath();
