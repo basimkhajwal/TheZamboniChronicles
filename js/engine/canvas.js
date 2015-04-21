@@ -168,5 +168,35 @@ Engine.DrawTools = {
         if (fill) {
             ctx.fill();
         }
+    },
+
+
+
+    /*
+    *   Given an array of arrays containing each containing an x and a y, this draws a line between
+    *   all of them
+    */
+    drawLines: function (ctx, lines, endPath) {
+
+        "use strict";
+
+        //Set the default value if a parameter isn't supplied
+        endPath = (endPath === "undefined") ? false : endPath;
+
+        ctx.beginPath();
+
+        //Start at the first line
+        ctx.moveTo(lines[0][0], lines[0][1]);
+
+        //Iterate over each line apart from the first
+        lines.slice(1).forEach(function (line) {
+            //Draw the line
+            ctx.lineTo(line[0], line[1]);
+        });
+
+        //If closing then close the path
+        if (endPath) {
+            ctx.closePath();
+        }
     }
 };
