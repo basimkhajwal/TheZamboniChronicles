@@ -460,11 +460,7 @@ Zamboni.World.GameWorld = {
                     ctx.strokeStyle = Zamboni.Utils.ColourScheme.ORANGE;
                     ctx.lineWidth = 3;
 
-                    ctx.beginPath();
-                    ctx.moveTo(lava.x, lava.y);
-                    ctx.lineTo(lava.x + lava.width, lava.y);
-                    ctx.closePath();
-                    ctx.stroke();
+
                 });
 
                 //Render all the platforms
