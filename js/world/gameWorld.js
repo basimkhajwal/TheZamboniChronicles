@@ -399,6 +399,7 @@ Zamboni.World.GameWorld = {
                     coinAnimation.restart();
                 }
 
+                //Update coins
                 coinAnimation.update(delta);
 
                 //Update all the lava objects and the emitter used for them
