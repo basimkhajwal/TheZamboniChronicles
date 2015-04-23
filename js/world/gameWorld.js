@@ -405,7 +405,11 @@ Zamboni.World.GameWorld = {
                 //Update all the lava objects and the emitter used for them
                 worldDescriptor.lavaObjects.forEach(function (lava) {
 
+                    var lavaHeight;
 
+                    for (i =  5; i < lava.waves.length; i += 4) {
+                        lavaHeight = lava.waves[i] - lava.y;
+                    }
 
 
                 });
