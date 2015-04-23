@@ -405,10 +405,22 @@ Zamboni.World.GameWorld = {
                 //Update all the lava objects and the emitter used for them
                 worldDescriptor.lavaObjects.forEach(function (lava) {
 
-                    var lavaHeight;
+                    var lavaHeight,
+                        lavaSpeed = 30,
+                        speed;
 
                     for (i =  5; i < lava.waves.length; i += 4) {
-                        lavaHeight = lava.waves[i] - lava.y;
+                        lavaHeight = lava.y - lava.waves[i];
+
+                        if (lavaHeight > 5) {
+                            speed = lavaSpeed;
+                        } else if (lavaHeight <= 0) {
+                            speed = -lavaSpeed;
+                        } else {
+                            speed = (Math.random() * 2 - 1) * lavaSpeed;
+                        }
+
+                        lava.waves[i] += speed * delta;
                     }
 
 
