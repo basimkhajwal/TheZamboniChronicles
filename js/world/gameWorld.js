@@ -409,7 +409,7 @@ Zamboni.World.GameWorld = {
                         lavaSpeed = 30,
                         speed;
 
-                    for (i =  5; i < lava.waves.length; i += 4) {
+                    for (i =  5; i < lava.waves.length - 1; i += 4) {
                         lavaHeight = lava.y - lava.waves[i];
 
                         if (lavaHeight > 5) {

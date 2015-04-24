@@ -43,9 +43,6 @@ Engine.MathsUtils = {
 
     Spline: {
 
-
-
-
         /*
         *   Create an array approximation between evenly spaces y-values with a difference specified
         *
