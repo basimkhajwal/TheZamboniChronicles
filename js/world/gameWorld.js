@@ -126,6 +126,7 @@ Zamboni.World.GameWorld = {
             ladderBottom = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.LADDER_BOTTOM),
             ladderMiddle = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.LADDER_MIDDLE),
             ladderTop = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.LADDER_TOP),
+            brickImg = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.BRICKS),
 
             //Animations
             coinAnimation = Engine.Animation.create([
@@ -429,6 +430,11 @@ Zamboni.World.GameWorld = {
 
             //Render the static objects
             renderObjects = function (ctx) {
+
+                //The bricks
+                worldDescriptor.brickObjects.forEach(function (brick) {
+                    ctx.drawImage(brickImg, brick.x, brick.y, brick.width, brick.height);
+                });
 
                 //The laddrs
                 worldDescriptor.ladderObjects.forEach(function (ladder) {

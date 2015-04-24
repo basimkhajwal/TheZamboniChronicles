@@ -46,6 +46,8 @@ Zamboni.Utils.GameSettings = {
         BACKGROUND_MOUNTAINS_LIGHT: "img/background-mountains-1.png",
         BACKGROUND_MOUNTAINS_LIGHTER: "img/background-mountains-2.png",
 
+        BRICKS: "img/objects/bricks.png",
+
         //The tiles
         BLACK: "img/tiles/black.png",
         BLACK_DARK: "img/tiles/black_dark.png",
