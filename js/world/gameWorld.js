@@ -91,6 +91,10 @@ Zamboni.World.GameWorld = {
                 ladderCollisions: [],
                 ladderCollision: null,
 
+                //Collisions with bricks
+                brickCollisions: [],
+                brickCollision: null,
+
                 //The tiled maps collision function
                 tiledCollision: null,
 
@@ -157,6 +161,7 @@ Zamboni.World.GameWorld = {
                 worldDescriptor.entityCollision = mergeAllCollisions(worldDescriptor.entityCollisions);
                 worldDescriptor.ladderCollision = mergeAllCollisions(worldDescriptor.ladderCollisions);
                 worldDescriptor.enemyCollision = mergeAllCollisions(worldDescriptor.enemyCollisions);
+                worldDescriptor.brickCollision = mergeAllCollisions(worldDescriptor.brickCollisions);
             },
 
             //The updating stuff
