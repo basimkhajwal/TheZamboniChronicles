@@ -240,6 +240,8 @@ Zamboni.World.GameWorld = {
 
                             worldDescriptor.brickCollision = mergeAllCollisions(worldDescriptor.brickCollisions);
                             worldDescriptor.entityCollision = mergeCollisions(worldDescriptor.fixedCollision, worldDescriptor.brickCollision);
+
+                            break;
                         }
                     }
                     worldDescriptor.player.y += 5;
