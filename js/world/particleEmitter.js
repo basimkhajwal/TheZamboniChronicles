@@ -41,6 +41,41 @@ Zamboni.World.ParticleEmitters = {
         particlesPerSecond: 0
     }),
 
+    //A particle emitter for brick breaks
+    brickEmitter: Engine.ParticleEmitter.create({
+
+        //The default position (will be changed as rendered / updated)
+        x: 0,
+        y: 0,
+
+        //The gravity is high but no side accel
+        ax: 0,
+        ay: 30,
+
+        xVariance: 10,
+        yVariance: 10,
+
+        //An angle between 0 and 180 (negate it)
+        angle: -90,
+        angleVariance: 70,
+
+        //How fast different particles will go
+        speed: 60,
+        speedVariance: 10,
+
+        particleWidth: 6,
+        particleHeight: 6,
+
+        //A short life span (in seconds)
+        lifeSpan: 1,
+
+        startColour: Engine.Colour.create(211, 84, 0, 255),
+        endColour: Engine.Colour.create(243, 156, 18, 255),
+
+        maxParticles: 60,
+        particlesPerSecond: 0
+    }),
+
     //A particle emitter for lava areas
     lavaEmitter: Engine.ParticleEmitter.create({
 
