@@ -170,6 +170,12 @@ Zamboni.World.GameWorld = {
             //The updating stuff
             updatePlayer = function (delta) {
 
+                //Brick for brick stuff
+                var brick,
+
+                    //If the player was falling in the previous time step
+                    fallingBefore = worldDescriptor.player.falling;
+
                 //If any movement keys have been pressed set the movement pace
                 worldDescriptor.player.moveRight = (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("D")));
                 worldDescriptor.player.moveLeft = (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("A")));
@@ -235,9 +241,11 @@ Zamboni.World.GameWorld = {
                     //Loop over all bricks
                     for (j = 0; j < worldDescriptor.brickObjects.length; j += 1) {
 
+                        brick = worldDescriptor.brickObjects[j];
+
                         //Check if it collided with that brick
-                        if (worldDescriptor.player.collidesTop(worldDescriptor.brickObjects[j].collisionFunction)) {
-                            i = worldDescriptor.brickCollisions.indexOf(worldDescriptor.brickObjects[j].collisionFunction);
+                        if (worldDescriptor.player.collidesTop(brick.collisionFunction)) {
+                            i = worldDescriptor.brickCollisions.indexOf(brick.collisionFunction);
 
                             //Remove the brick and its respective collision function
                             worldDescriptor.brickCollisions.splice(i, 1);
@@ -245,6 +253,12 @@ Zamboni.World.GameWorld = {
                             worldDescriptor.brickCollision = mergeAllCollisions(worldDescriptor.brickCollisions);
                             worldDescriptor.entityCollision = mergeCollisions(worldDescriptor.fixedCollision, worldDescriptor.brickCollision);
 
+                            Zamboni.World.ParticleEmitters.brickEmitter.setPosition(brick.x + brick.width / 2, brick.y + brick.height / 2);
+                            for (i = 0; i < 10; i += 1) {
+                                Zamboni.World.ParticleEmitters.brickEmitter.emitParticle();
+                            }
+
+                            //Prevent more bricks from being destroyed
                             worldDescriptor.player.collidedUp = false;
                             break;
                         }
@@ -253,8 +267,6 @@ Zamboni.World.GameWorld = {
                     //Go back to previous height
                     worldDescriptor.player.y += 5;
                 }
-
-                var fallingBefore = worldDescriptor.player.falling;
 
                 //Update the player physics
                 worldDescriptor.player.update(delta, worldDescriptor.entityCollision);
@@ -498,6 +510,8 @@ Zamboni.World.GameWorld = {
 
                 //Draw the particles for the player
                 Zamboni.World.ParticleEmitters.groundEmitter.render(ctx);
+                Zamboni.World.ParticleEmitters.brickEmitter.render(ctx);
+                Zamboni.World.ParticleEmitters.lavaEmitter.render(ctx);
 
                 //Draw all the enemies
                 worldDescriptor.enemyObjects.forEach(function (enemy) {
