@@ -229,21 +229,30 @@ Zamboni.World.GameWorld = {
                 //Check for collisions with bricks
                 if (worldDescriptor.player.collidedUp) {
 
+                    //Move up slightly to make collision possible
                     worldDescriptor.player.y -= 5;
+
+                    //Loop over all bricks
                     for (j = 0; j < worldDescriptor.brickObjects.length; j += 1) {
 
+                        //Check if it collided with that brick
                         if (worldDescriptor.player.collidesTop(worldDescriptor.brickObjects[j].collisionFunction)) {
-                            worldDescriptor.brickObjects.splice(j);
+                            i = worldDescriptor.brickCollisions.indexOf(worldDescriptor.brickObjects[j].collisionFunction);
 
-                            i = worldDescriptor.brickCollisions.indexOf(brick.collisionFunction);
-                            worldDescriptor.brickCollisions.splice(i);
-
+                            //Remove the brick and its respective collision function
+                            worldDescriptor.brickCollisions.splice(i, 1);
+                            worldDescriptor.brickObjects.splice(j, 1);
                             worldDescriptor.brickCollision = mergeAllCollisions(worldDescriptor.brickCollisions);
                             worldDescriptor.entityCollision = mergeCollisions(worldDescriptor.fixedCollision, worldDescriptor.brickCollision);
 
+                            console.log("Removed");
+
+                            worldDescriptor.player.collidedUp = false;
                             break;
                         }
                     }
+
+                    //Go back to previous height
                     worldDescriptor.player.y += 5;
                 }
 
