@@ -245,8 +245,6 @@ Zamboni.World.GameWorld = {
                             worldDescriptor.brickCollision = mergeAllCollisions(worldDescriptor.brickCollisions);
                             worldDescriptor.entityCollision = mergeCollisions(worldDescriptor.fixedCollision, worldDescriptor.brickCollision);
 
-                            console.log("Removed");
-
                             worldDescriptor.player.collidedUp = false;
                             break;
                         }
