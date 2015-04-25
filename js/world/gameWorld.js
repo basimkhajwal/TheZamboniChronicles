@@ -26,8 +26,9 @@ Zamboni.World.GameWorld = {
         //The tiled map for the background
         var tiledMap,
 
-            //The counter variable
+            //The counter variables
             i,
+            j,
 
             //Clamp utility function
             clamp = function (val, min, max) {
@@ -82,6 +83,7 @@ Zamboni.World.GameWorld = {
                 //The total collision functions for entities, the array of the functions and the final one
                 entityCollisions: [],
                 entityCollision: null,
+                fixedCollision: null,
 
                 //Like wise for enemy
                 enemyCollisions: [],
@@ -158,10 +160,11 @@ Zamboni.World.GameWorld = {
                 worldDescriptor.entityCollisions.push(worldDescriptor.tiledMap.generateCollisionFunction());
 
                 //Merge the collision functions all into one
-                worldDescriptor.entityCollision = mergeAllCollisions(worldDescriptor.entityCollisions);
                 worldDescriptor.ladderCollision = mergeAllCollisions(worldDescriptor.ladderCollisions);
                 worldDescriptor.enemyCollision = mergeAllCollisions(worldDescriptor.enemyCollisions);
                 worldDescriptor.brickCollision = mergeAllCollisions(worldDescriptor.brickCollisions);
+                worldDescriptor.fixedCollision = mergeAllCollisions(worldDescriptor.entityCollisions);
+                worldDescriptor.entityCollision = mergeCollisions(worldDescriptor.fixedCollision, worldDescriptor.brickCollision);
             },
 
             //The updating stuff
@@ -172,7 +175,7 @@ Zamboni.World.GameWorld = {
                 worldDescriptor.player.moveLeft = (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("A")));
                 worldDescriptor.player.jump = (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("W")));
 
-                //Move player down by 10 because no collisions normally occur
+                //Move player down by 5 because no collisions normally occur
                 worldDescriptor.player.y += 5;
 
                 //Check collisions with platforms and apply a force if it is
@@ -220,6 +223,26 @@ Zamboni.World.GameWorld = {
 
                     //Reset to default settings
                     worldDescriptor.player.applyGravity = true;
+                }
+
+
+                //Check for collisions with bricks
+                if (worldDescriptor.player.collidedUp) {
+
+                    worldDescriptor.player.y -= 5;
+                    for (j = 0; j < worldDescriptor.brickObjects.length; j += 1) {
+
+                        if (worldDescriptor.player.collidesTop(worldDescriptor.brickObjects[j].collisionFunction)) {
+                            worldDescriptor.brickObjects.splice(j);
+
+                            i = worldDescriptor.brickCollisions.indexOf(brick.collisionFunction);
+                            worldDescriptor.brickCollisions.splice(i);
+
+                            worldDescriptor.brickCollision = mergeAllCollisions(worldDescriptor.brickCollisions);
+                            worldDescriptor.entityCollision = mergeCollisions(worldDescriptor.fixedCollision, worldDescriptor.brickCollision);
+                        }
+                    }
+                    worldDescriptor.player.y += 5;
                 }
 
                 var fallingBefore = worldDescriptor.player.falling;
