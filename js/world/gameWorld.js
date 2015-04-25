@@ -254,12 +254,11 @@ Zamboni.World.GameWorld = {
                             worldDescriptor.entityCollision = mergeCollisions(worldDescriptor.fixedCollision, worldDescriptor.brickCollision);
 
                             Zamboni.World.ParticleEmitters.brickEmitter.setPosition(brick.x + brick.width / 2, brick.y + brick.height / 2);
-                            for (i = 0; i < 10; i += 1) {
+                            for (i = 0; i < 7; i += 1) {
                                 Zamboni.World.ParticleEmitters.brickEmitter.emitParticle();
                             }
 
                             //Prevent more bricks from being destroyed
-                            worldDescriptor.player.collidedUp = false;
                             break;
                         }
                     }

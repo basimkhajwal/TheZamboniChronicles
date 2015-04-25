@@ -50,27 +50,27 @@ Zamboni.World.ParticleEmitters = {
 
         //The gravity is high but no side accel
         ax: 0,
-        ay: 30,
+        ay: 800,
 
         xVariance: 10,
         yVariance: 10,
 
-        //An angle between 0 and 180 (negate it)
-        angle: -90,
-        angleVariance: 70,
+        //An angle between 0 and 360
+        angle: 0,
+        angleVariance: 180,
 
         //How fast different particles will go
-        speed: 60,
-        speedVariance: 10,
+        speed: 40,
+        speedVariance: 20,
 
-        particleWidth: 6,
-        particleHeight: 6,
+        particleWidth: 8,
+        particleHeight: 8,
 
         //A short life span (in seconds)
-        lifeSpan: 1,
+        lifeSpan: 0.5,
 
-        startColour: Engine.Colour.create(211, 84, 0, 255),
-        endColour: Engine.Colour.create(243, 156, 18, 255),
+        startColour: Engine.Colour.create(149, 165, 166, 255),
+        endColour: Engine.Colour.create(149, 165, 166, 150),
 
         maxParticles: 60,
         particlesPerSecond: 0
