@@ -30,6 +30,7 @@ https://rawgit.com/basimkhajwal/TheZamboniChronicles/master/index.html
 - [x] Make side-checking enemies
 - [x] Refactor the world code and make smaller files
 - [ ] Make particle effects more editable
+- [ ] Add a HUD and make coins collectable
 - [ ] Tutorial areas which show a text info
 - [ ] Boss enemies
 - [ ] Shooting enemies
