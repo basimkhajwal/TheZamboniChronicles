@@ -52,7 +52,6 @@ http://higherorderfun.com/blog/2012/05/20/the-guide-to-implementing-2d-platforme
 - Maybe lava
 - Maybe more player designs to choose from
 
-
 ###The Game Ideas
 The game still needs to be planned ..
 
