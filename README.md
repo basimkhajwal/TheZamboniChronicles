@@ -68,7 +68,7 @@ The game still needs to be planned ..
 - How big should the player be?
 - Will there be any puzzle / strategy involved or will it be a simple get-to-the-end type game?
 - How will the player be scored (num coins collected, challenges done, time taken etc)?
-- Will it be persistent (scores are saved for when you come back) or a one-time play?
+- Will it be persistent (scores are saved for when you come back) or a one-time play? Yes
 - 2d platformer
 - ~5 levels (10 is a bit far at the moment, we could improve later)
 - single player
