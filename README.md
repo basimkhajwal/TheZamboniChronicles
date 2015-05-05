@@ -1,5 +1,5 @@
 # TheZamboniChronicles
-A javascript game made using the HTML5 canvas, still in development but comes with (hopefully) a useful underlying engine self-made ( that probably still has a lot of errors but never mind :P), the game idea is a simple 2d platformer, the full details are still under development but will hopefully come into shape soon and the game will progress from therein. Hopefully I can finish it :P
+A javascript game made using the HTML5 canvas, still in development but comes with (hopefully) a useful underlying engine self-made ( that probably still has a lot of errors but never mind :P), the game idea is a simple 2d platformer, the full details are still under development but will hopefully come into shape soon and the game will progress from therein. Hopefully I can finish it :P, I'll try
 
 ######Live preview
 https://rawgit.com/basimkhajwal/TheZamboniChronicles/master/index.html
