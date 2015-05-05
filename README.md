@@ -48,7 +48,7 @@ https://rawgit.com/basimkhajwal/TheZamboniChronicles/master/index.html
 - Maybe more player designs to choose from
 
 ###The Game Ideas
-The game still needs to be planned ..
+The game still needs to be planned .. need an idea soon
 
 ###Possible Additions
 - Lava that kills the player
