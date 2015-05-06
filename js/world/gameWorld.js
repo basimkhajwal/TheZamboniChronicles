@@ -174,7 +174,10 @@ Zamboni.World.GameWorld = {
                 var brick,
 
                     //If the player was falling in the previous time step
-                    fallingBefore = worldDescriptor.player.falling;
+                    fallingBefore = worldDescriptor.player.falling,
+
+                    //Coins that will be removed (if collided)
+                    coinsToRemove = [];
 
                 //If any movement keys have been pressed set the movement pace
                 worldDescriptor.player.moveRight = (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("D")));
@@ -288,6 +291,18 @@ Zamboni.World.GameWorld = {
                         Zamboni.World.ParticleEmitters.groundEmitter.emitParticle();
                     }
                 }
+
+                //Check collisions with coins and remove then
+                worldDescriptor.coinObjects.forEach(function (coin) {
+                    if (worldDescriptor.player.collides(coin.collisionFunction)) {
+                        coinsToRemove.push(coin);
+                    }
+                });
+
+                //Remove all the appropriate coins
+                coinsToRemove.forEach(function (coin) {
+                    worldDescriptor.coinObjects.splice(worldDescriptor.coinObjects.indexOf(coin),1);
+                });
             },
 
             updateCamera = function (delta) {
