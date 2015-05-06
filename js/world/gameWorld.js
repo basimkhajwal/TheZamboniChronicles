@@ -121,9 +121,7 @@ Zamboni.World.GameWorld = {
             playerDescriptor = {
 
                 coinsCollected: 0,
-
-                isDead: 0
-
+                isDead: false
 
             },
 
@@ -296,6 +294,8 @@ Zamboni.World.GameWorld = {
                 worldDescriptor.coinObjects.forEach(function (coin) {
                     if (worldDescriptor.player.collides(coin.collisionFunction)) {
                         coinsToRemove.push(coin);
+
+                        playerDescriptor.coinsCollected += 1;
                     }
                 });
 

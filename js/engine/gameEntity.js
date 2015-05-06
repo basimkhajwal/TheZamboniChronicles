@@ -125,41 +125,43 @@ Engine.GameEntity = {
                     currentDelta = deltaRaw,
                     delta = 0.018;
 
-                //If gravity is enabled for the sprite and it is falling apply it initially
-                if (this.applyGravity && this.falling) {
-                    ddy += this.gravityForce;
-                }
 
-                //Add appropritate friction to the sides depending on which direction you are moving
-                if (this.moveLeft) {
-                    ddx -= accel;
-                } else if (wasLeft && this.applyFriction) {
-                    ddx += friction;
-                }
-
-                if (this.moveRight) {
-                    ddx += accel;
-                } else if (wasRight && this.applyFriction) {
-                    ddx -= friction;
-                }
-
-                //If the jump command has just been called then apply a single large impulse
-                if (this.jump && !this.jumping) {
-                    ddy -= this.jumpForce;
-
-                    this.jumping = true;
-                }
-
-                //Accelerate by delta * 60 so that we dont have to change other values
-                this.accelerate(ddx * deltaRaw * 60, ddy * deltaRaw * 60);
-
-                //To prevent the sprite from moving backwards from friction
-                if ((wasLeft  && (this.vx > 0)) || (wasRight && (this.vx < 0))) {
-                    this.vx = 0;
-                }
 
                 //If there is no collision function then just do a simple update
                 if (typeof collisionFunction === "undefined") {
+
+                    //If gravity is enabled for the sprite and it is falling apply it initially
+                    if (this.applyGravity && this.falling) {
+                        ddy += this.gravityForce;
+                    }
+
+                    //Add appropritate friction to the sides depending on which direction you are moving
+                    if (this.moveLeft) {
+                        ddx -= accel;
+                    } else if (wasLeft && this.applyFriction) {
+                        ddx += friction;
+                    }
+
+                    if (this.moveRight) {
+                        ddx += accel;
+                    } else if (wasRight && this.applyFriction) {
+                        ddx -= friction;
+                    }
+
+                    //If the jump command has just been called then apply a single large impulse
+                    if (this.jump && !this.jumping) {
+                        ddy -= this.jumpForce;
+
+                        this.jumping = true;
+                    }
+
+                    //Accelerate by delta * 60 so that we dont have to change other values
+                    this.accelerate(ddx * deltaRaw * 60, ddy * deltaRaw * 60);
+
+                    //To prevent the sprite from moving backwards from friction
+                    if ((wasLeft  && (this.vx > 0)) || (wasRight && (this.vx < 0))) {
+                        this.vx = 0;
+                    }
 
                     //Just move by velocity * delta
                     this.translate(this.vx * deltaRaw, this.vy * deltaRaw);
@@ -167,6 +169,41 @@ Engine.GameEntity = {
                 } else {
 
                     while (currentDelta > 0) {
+                        delta  = Math.min(delta, currentDelta);
+
+                        //If gravity is enabled for the sprite and it is falling apply it initially
+                        if (this.applyGravity && this.falling) {
+                            ddy += this.gravityForce;
+                        }
+
+                        //Add appropritate friction to the sides depending on which direction you are moving
+                        if (this.moveLeft) {
+                            ddx -= accel;
+                        } else if (wasLeft && this.applyFriction) {
+                            ddx += friction;
+                        }
+
+                        if (this.moveRight) {
+                            ddx += accel;
+                        } else if (wasRight && this.applyFriction) {
+                            ddx -= friction;
+                        }
+
+                        //If the jump command has just been called then apply a single large impulse
+                        if (this.jump && !this.jumping) {
+                            ddy -= this.jumpForce;
+
+                            this.jumping = true;
+                        }
+
+                        //Accelerate by delta * 60 so that we dont have to change other values
+                        this.accelerate(ddx * delta * 60, ddy * delta * 60);
+
+                        //To prevent the sprite from moving backwards from friction
+                        if ((wasLeft  && (this.vx > 0)) || (wasRight && (this.vx < 0))) {
+                            this.vx = 0;
+                        }
+
                         //Check if we have already collided then move along until we don't
                         while (this.collidesBottom(collisionFunction)) {
                             this.y -= 1;
