@@ -301,7 +301,7 @@ Zamboni.World.GameWorld = {
 
                 //Remove all the appropriate coins
                 coinsToRemove.forEach(function (coin) {
-                    worldDescriptor.coinObjects.splice(worldDescriptor.coinObjects.indexOf(coin),1);
+                    worldDescriptor.coinObjects.splice(worldDescriptor.coinObjects.indexOf(coin), 1);
                 });
             },
 
