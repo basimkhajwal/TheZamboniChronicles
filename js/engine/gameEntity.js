@@ -105,7 +105,7 @@ Engine.GameEntity = {
             // ------------------------------ Updating & Rendering ---------------------------------------
 
             //Update the x and y based on the velocity and the delta
-            update: function (delta, collisionFunction) {
+            update: function (deltaRaw, collisionFunction) {
 
                 //The initial values for the sprite to check for collisions
                 var oldX = this.x,
@@ -119,13 +119,11 @@ Engine.GameEntity = {
 
                     //The default forces to apply for movement
                     accel = this.accelForce * (this.falling ? 0.5 : 1.0),
-                    friction = this.frictionForce * (this.falling ? 1.0 : 0.5);
+                    friction = this.frictionForce * (this.falling ? 1.0 : 0.5),
 
-                //If the frame rate is less than 56 then recursively update to avoid collision problems
-                while (delta > 0.018) {
-                    this.update(0.018, collisionFunction);
-                    delta -= 0.018;
-                }
+                    //Iterative move to avoid falling through tiles
+                    currentDelta = deltaRaw,
+                    delta = 0.018;
 
                 //If gravity is enabled for the sprite and it is falling apply it initially
                 if (this.applyGravity && this.falling) {
@@ -153,7 +151,7 @@ Engine.GameEntity = {
                 }
 
                 //Accelerate by delta * 60 so that we dont have to change other values
-                this.accelerate(ddx * delta * 60, ddy * delta * 60);
+                this.accelerate(ddx * deltaRaw * 60, ddy * deltaRaw * 60);
 
                 //To prevent the sprite from moving backwards from friction
                 if ((wasLeft  && (this.vx > 0)) || (wasRight && (this.vx < 0))) {
@@ -164,90 +162,94 @@ Engine.GameEntity = {
                 if (typeof collisionFunction === "undefined") {
 
                     //Just move by velocity * delta
-                    this.translate(this.vx * delta, this.vy * delta);
+                    this.translate(this.vx * deltaRaw, this.vy * deltaRaw);
 
                 } else {
 
-                    //Check if we have already collided then move along until we don't
-                    while (this.collidesBottom(collisionFunction)) {
-                        this.y -= 1;
-                    }
-
-                    //Otherwise if we do have a collision function do a collision check update
-                    //we assume that the previous position is free from collision
-
-                    //First move the y by the current velocity
-                    this.y += delta * this.vy;
-
-                    //Check if a collision occured vertically and set the flags
-                    this.collidedUp = this.collidesTop(collisionFunction);
-                    this.collidedDown = this.collidesBottom(collisionFunction);
-
-                    //Check if either side collided
-                    if (this.collidedDown || this.collidedUp) {
-
-                        if (this.collidedDown) {
-                            //If it collided on the bottom then set the states
-                            this.jumping = false;
-                            this.falling = false;
+                    while (currentDelta > 0) {
+                        //Check if we have already collided then move along until we don't
+                        while (this.collidesBottom(collisionFunction)) {
+                            this.y -= 1;
                         }
 
-                        //If it collides then move up until it doesn't collide
-                        if (this.vy !== 0 && Math.abs(oldY - this.y) > 5) {
+                        //Otherwise if we do have a collision function do a collision check update
+                        //we assume that the previous position is free from collision
 
+                        //First move the y by the current velocity
+                        this.y += delta * this.vy;
+
+                        //Check if a collision occured vertically and set the flags
+                        this.collidedUp = this.collidesTop(collisionFunction);
+                        this.collidedDown = this.collidesBottom(collisionFunction);
+
+                        //Check if either side collided
+                        if (this.collidedDown || this.collidedUp) {
 
                             if (this.collidedDown) {
-                                while (this.collidesBottom(collisionFunction)) {
-                                    this.y -= 1;
-                                }
-                            } else {
-                                while (this.collidesTop(collisionFunction)) {
-                                    this.y += 1;
-                                }
+                                //If it collided on the bottom then set the states
+                                this.jumping = false;
+                                this.falling = false;
                             }
 
-                        } else {
-                            this.y = oldY;
-                        }
+                            //If it collides then move up until it doesn't collide
+                            if (this.vy !== 0 && Math.abs(oldY - this.y) > 5) {
 
-                        //Now set the velocity to 0
-                        this.vy = 0;
 
-                    } else {
-                        //If it didn't collide on top or bottom then the sprite is falling
-                        this.falling = true;
-                    }
-
-                    //Move along x by vx and delta
-                    this.x += delta * this.vx;
-
-                    //Check for horizontal collisions
-                    this.collidedLeft = this.collidesLeft(collisionFunction);
-                    this.collidedRight = this.collidesRight(collisionFunction);
-
-                    //If any did occure
-                    if (this.collidedLeft || this.collidedRight) {
-
-                        //To prevent wobbling at collision boundaries
-                        if (this.vx !== 0 && (Math.abs(this.x - oldX) > 10)) {
-
-                            //Move the specified direction that we collided
-                            if (this.collidedLeft) {
-                                while (this.collidesLeft(collisionFunction)) {
-                                    this.x += 1;
+                                if (this.collidedDown) {
+                                    while (this.collidesBottom(collisionFunction)) {
+                                        this.y -= 1;
+                                    }
+                                } else {
+                                    while (this.collidesTop(collisionFunction)) {
+                                        this.y += 1;
+                                    }
                                 }
+
                             } else {
-                                while (this.collidesRight(collisionFunction)) {
-                                    this.x -= 1;
-                                }
+                                this.y = oldY;
                             }
 
+                            //Now set the velocity to 0
+                            this.vy = 0;
+
                         } else {
-                            this.x = oldX;
+                            //If it didn't collide on top or bottom then the sprite is falling
+                            this.falling = true;
                         }
 
-                        //Now don't move along anymore
-                        this.vx = 0;
+                        //Move along x by vx and delta
+                        this.x += delta * this.vx;
+
+                        //Check for horizontal collisions
+                        this.collidedLeft = this.collidesLeft(collisionFunction);
+                        this.collidedRight = this.collidesRight(collisionFunction);
+
+                        //If any did occure
+                        if (this.collidedLeft || this.collidedRight) {
+
+                            //To prevent wobbling at collision boundaries
+                            if (this.vx !== 0 && (Math.abs(this.x - oldX) > 10)) {
+
+                                //Move the specified direction that we collided
+                                if (this.collidedLeft) {
+                                    while (this.collidesLeft(collisionFunction)) {
+                                        this.x += 1;
+                                    }
+                                } else {
+                                    while (this.collidesRight(collisionFunction)) {
+                                        this.x -= 1;
+                                    }
+                                }
+
+                            } else {
+                                this.x = oldX;
+                            }
+
+                            //Now don't move along anymore
+                            this.vx = 0;
+                        }
+
+                        currentDelta -= delta;
                     }
                 }
 
