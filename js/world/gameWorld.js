@@ -120,6 +120,8 @@ Zamboni.World.GameWorld = {
             //A player descriptor to hold values about the player
             playerDescriptor = {
 
+                direction: 1, //1 = Right, 0 = Left
+
                 coinsCollected: 0,
                 isDead: false
 
@@ -131,6 +133,8 @@ Zamboni.World.GameWorld = {
             ladderMiddle = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.LADDER_MIDDLE),
             ladderTop = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.LADDER_TOP),
             brickImg = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.BRICKS),
+            playerRight = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.JAGO_RIGHT),
+            playerLeft = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.JAGO_LEFT),
 
             //Animations
             coinAnimation = Engine.Animation.create([
@@ -181,6 +185,9 @@ Zamboni.World.GameWorld = {
                 worldDescriptor.player.moveRight = (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("D")));
                 worldDescriptor.player.moveLeft = (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("A")));
                 worldDescriptor.player.jump = (Engine.KeyboardInput.isKeyDown(Engine.Keys.getAlphabet("W")));
+
+                //Set the direction to draw in
+                playerDescriptor.direction = worldDescriptor.player.moveRight ? 1 : (worldDescriptor.player.moveLeft ? 0 : playerDescriptor.direction);
 
                 //Move player down by 5 because no collisions normally occur
                 worldDescriptor.player.y += 5;
@@ -519,7 +526,8 @@ Zamboni.World.GameWorld = {
                     }
                 });
 
-                //Draw the player
+                //Draw the player and set the direction
+                worldDescriptor.player.img = (playerDescriptor.direction === 1) ? playerRight : playerLeft;
                 worldDescriptor.player.render(ctx);
 
                 //Draw the particles for the player
