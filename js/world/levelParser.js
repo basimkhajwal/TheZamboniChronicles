@@ -46,7 +46,7 @@ Zamboni.World.LevelParser = (function () {
             player.height = playerObj.height;
 
             //Set the sprite image as loaded, will be an animation later
-            player.img = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.JAGO);
+            player.img = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.JAGO_RIGHT);
 
             //Set the forces (only gravity for now)
             player.applyGravity = true;
