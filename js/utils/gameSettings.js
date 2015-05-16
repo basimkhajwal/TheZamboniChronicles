@@ -72,7 +72,8 @@ Zamboni.Utils.GameSettings = {
 
         //The sprites
         PLAYER: "img/sprites/player.png",
-        JAGO: "img/sprites/jago.png",
+        JAGO_RIGHT: "img/sprites/jago.png",
+        JAGO_LEFT: "img/sprites/jago-left.png",
 
         //The objects
         SPIKES: "img/objects/spikes.png",
