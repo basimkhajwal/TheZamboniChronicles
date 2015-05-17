@@ -581,6 +581,10 @@ Zamboni.World.GameWorld = {
         //Return all the public methods and variables
         return {
 
+            //Publicly accessible properties
+            worldDescriptor: worldDescriptor,
+            playerDescriptor: playerDescriptor,
+
             //Render the world on the context ctx
             render: function (ctx) {
                 //Set and clear the background colour
