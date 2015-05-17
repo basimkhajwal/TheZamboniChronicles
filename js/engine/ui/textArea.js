@@ -40,6 +40,14 @@ Engine.UI.TextArea = {
             },
 
             //All the getter and setter functions, self documenting
+            setText: function (newText) {
+                text = newText;
+            },
+
+            getText: function () {
+                return text;
+            },
+
             setBaseline: function (newBaseline) {
                 baseline = newBaseline;
             },
