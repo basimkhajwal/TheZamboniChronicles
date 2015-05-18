@@ -15,6 +15,8 @@ Zamboni.States.GameState = {
 
         var state = Engine.GameState.create(),
             game = null,
+
+            //The game world
             world = Zamboni.World.GameWorld.create(),
 
             //GUI
