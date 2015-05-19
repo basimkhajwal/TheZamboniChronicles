@@ -89,7 +89,11 @@ Zamboni.Utils.GameSettings = {
         COIN_4: "img/objects/coin-4.png",
         COIN_5: "img/objects/coin-5.png",
         COIN_6: "img/objects/coin-6.png",
-        COIN_7: "img/objects/coin-7.png"
+        COIN_7: "img/objects/coin-7.png",
+
+        PAUSE_UP: "img/pause-up.png",
+        PAUSE_DOWN: "img/pause-down.png",
+        PAUSE_HOVER: "img/pause-hover.png"
     },
 
     //The numbers for all the tiles (for use with tiled maps)
