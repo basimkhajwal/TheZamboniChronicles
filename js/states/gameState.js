@@ -21,7 +21,13 @@ Zamboni.States.GameState = {
 
             //GUI
             coinText = Engine.UI.TextArea.create(35, 13, ""),
-            coinImg = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.COIN_1);
+            coinImg = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.COIN_1),
+
+            pauseImg = [
+                Zamboni.Utils.GameSettings.assets.PAUSE_UP,
+                Zamboni.Utils.GameSettings.assets.PAUSE_DOWN,
+                Zamboni.Utils.GameSettings.assets.PAUSE_HOVER
+            ].map(Engine.AssetManager.getAsset);
 
         coinText.setFamily(Zamboni.Utils.GameSettings.gameFont);
         coinText.setBaseline("top");
