@@ -23,6 +23,7 @@ Zamboni.States.GameState = {
             coinText = Engine.UI.TextArea.create(35, 13, ""),
             coinImg = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.COIN_1),
 
+            //Get the pause images
             pauseImg = [
                 Zamboni.Utils.GameSettings.assets.PAUSE_UP,
                 Zamboni.Utils.GameSettings.assets.PAUSE_DOWN,
