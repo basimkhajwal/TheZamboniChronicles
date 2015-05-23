@@ -58,6 +58,7 @@ Zamboni.States.GameState = {
             coinText.setText(world.playerDescriptor.coinsCollected);
         };
 
+
         return state;
     }
 
