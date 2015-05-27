@@ -23,12 +23,34 @@ Zamboni.States.GameState = {
             coinText = Engine.UI.TextArea.create(35, 13, ""),
             coinImg = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.COIN_1),
 
-            //Get the pause images
-            pauseImg = [
-                Zamboni.Utils.GameSettings.assets.PAUSE_UP,
-                Zamboni.Utils.GameSettings.assets.PAUSE_DOWN,
-                Zamboni.Utils.GameSettings.assets.PAUSE_HOVER
-            ].map(Engine.AssetManager.getAsset);
+            pauseButton = {
+                state: 0, //0 = UP, 1 = DOWN, 2 = HOVER
+
+                //The rendering images
+                img: [
+                    Zamboni.Utils.GameSettings.assets.PAUSE_UP,
+                    Zamboni.Utils.GameSettings.assets.PAUSE_DOWN,
+                    Zamboni.Utils.GameSettings.assets.PAUSE_HOVER
+                ].map(Engine.AssetManager.getAsset),
+
+                render: function (ctx) {
+                    ctx.drawImage(this.img[this.state], 950, 5, 40, 40);
+                },
+
+                update: function () {
+                    var mousePos = Engine.MouseInput.getMousePos();
+
+                    if (mousePos.x > 950 && mousePos.x < 990 && mousePos.y > 5 && mousePos.y < 45) {
+                        if (Engine.MouseInput.isMouseDown()) {
+                            this.state = 1;
+                        } else {
+                            this.state = 2;
+                        }
+                    } else {
+                        this.state = 0;
+                    }
+                }
+            };
 
         coinText.setFamily(Zamboni.Utils.GameSettings.gameFont);
         coinText.setBaseline("top");
@@ -49,10 +71,14 @@ Zamboni.States.GameState = {
             //Draw the number of coins and an image
             ctx.drawImage(coinImg, 5, 15, 20, 20);
             coinText.render(ctx);
+
+            pauseButton.render(ctx);
         };
 
         state.update = function (delta) {
             world.update(delta);
+
+            pauseButton.update();
 
             //Update GUI values
             coinText.setText(world.playerDescriptor.coinsCollected);
