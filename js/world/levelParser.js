@@ -75,6 +75,15 @@ Zamboni.World.LevelParser = (function () {
             //Set the type of the enemy, the default is type a
             enemy.type = (enemyObj.properties.type || "a").toLowerCase();
 
+            //The appropriate images
+            if (enemy.width > 20) {
+                enemy.leftImage = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.MONSTER2_LEFT);
+                enemy.rightImage = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.MONSTER2_RIGHT);
+            } else {
+                enemy.leftImage = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.MONSTER_LEFT);
+                enemy.rightImage = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.MONSTER_RIGHT);
+            }
+
             //Add it to the global enemy array
             worldDescriptor.enemyObjects.push(enemy);
 
