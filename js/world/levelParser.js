@@ -84,6 +84,9 @@ Zamboni.World.LevelParser = (function () {
                 enemy.rightImage = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.MONSTER_RIGHT);
             }
 
+            //The initial direction
+            enemy.img = enemy.rightImage;
+
             //Add it to the global enemy array
             worldDescriptor.enemyObjects.push(enemy);
 

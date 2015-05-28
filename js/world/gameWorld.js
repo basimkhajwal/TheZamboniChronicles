@@ -449,9 +449,15 @@ Zamboni.World.GameWorld = {
 
                     }
 
-
                     //Update the physics built in to a game entity
                     enemy.update(delta, worldDescriptor.entityCollision);
+
+                    //Update the image
+                    if (enemy.xChange > 0) {
+                        enemy.img = enemy.rightImage;
+                    } else if (enemy.xChange < 0) {
+                        enemy.img = enemy.leftImage;
+                    }
 
                     //Check collisions with platforms and apply a force if it is
                     worldDescriptor.platformObjects.forEach(function (platform) {
