@@ -75,6 +75,12 @@ Zamboni.Utils.GameSettings = {
         JAGO_RIGHT: "img/sprites/jago.png",
         JAGO_LEFT: "img/sprites/jago-left.png",
 
+        MONSTER_RIGHT: "img/sprites/monster-right.png",
+        MONSTER_LEFT: "img/sprites/monster-left.png",
+
+        MONSTER2_RIGHT: "img/sprites/block2-right.png",
+        MONSTER2_LEFT: "img/sprites/block2-left.png",
+
         //The objects
         SPIKES: "img/objects/spikes.png",
 
