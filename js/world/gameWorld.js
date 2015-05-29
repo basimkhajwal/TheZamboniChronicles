@@ -484,20 +484,21 @@ Zamboni.World.GameWorld = {
 
                     var lavaHeight,
                         lavaSpeed = 30,
-                        speed;
+                        speed,
+                        counter = 0;
 
                     for (i =  5; i < lava.waves.length - 1; i += 4) {
                         lavaHeight = lava.y - lava.waves[i];
 
                         if (lavaHeight > 5) {
-                            speed = lavaSpeed;
+                            lava.waveSpeed[counter] = Math.random() > 0.8 ? 10 * Math.random() : Math.abs(lava.waveSpeed[counter]);
                         } else if (lavaHeight <= 0) {
-                            speed = -lavaSpeed;
-                        } else {
-                            speed = (Math.random() * 2 - 1) * lavaSpeed;
+                            lava.waveSpeed[counter] = -(Math.random() > 0.8 ? 10 * Math.random() : Math.abs(lava.waveSpeed[counter]));
                         }
 
-                        lava.waves[i] += speed * delta;
+                        lava.waves[i] += lava.waveSpeed[counter] * delta;
+
+                        counter += 1;
                     }
 
 

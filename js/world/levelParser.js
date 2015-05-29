@@ -106,7 +106,10 @@ Zamboni.World.LevelParser = (function () {
                     height: lavaObj.height,
 
                     //For drawing a wavy cubic thing (it looks pretty)
-                    waves: []
+                    waves: [],
+
+                    //The speed of how they change
+                    waveSpeed: []
                 },
 
                 //How much to step by
@@ -130,6 +133,9 @@ Zamboni.World.LevelParser = (function () {
 
                 //Make a random height for it
                 lava.waves.push(lava.y + Math.random() * maxHeight * sign);
+
+                //If the wave is a high-point then give it a random speed
+                lava.waveSpeed.push(10 * Math.random());
 
                 //Flip the sign to make it wavy
                 sign *= -1;
