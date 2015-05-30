@@ -372,7 +372,6 @@ Zamboni.World.GameWorld = {
                             platform.vy *= -1;
                             platform.movingToEnd = true;
                         }
-
                     }
 
                 });
