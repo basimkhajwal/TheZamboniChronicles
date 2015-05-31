@@ -387,7 +387,6 @@ Engine.GameEntity = {
                 return false;
             },
 
-
             //Check if the bottom side collides with the respective collision function
             collidesBottom: function (collisionFunc) {
                 //console.log("Called " + this);
