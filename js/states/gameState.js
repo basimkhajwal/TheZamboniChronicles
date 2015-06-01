@@ -99,9 +99,6 @@ Zamboni.States.GameState = {
             ctx.drawImage(coinImg, 5, 15, 20, 20);
             coinText.render(ctx);
 
-            //Render the pause button
-            pauseButton.render(ctx);
-
             //Render the players lives
             for (i = 0; i < world.playerDescriptor.lives; i += 1) {
                 ctx.drawImage(lifeImg,  930 - ((i + 1) * (lifeImgSize + lifeImgPadding)), 25 - (lifeImgSize / 2), lifeImgSize, lifeImgSize);
@@ -109,11 +106,14 @@ Zamboni.States.GameState = {
 
             //If the game is paused then render text to show that it is
             if (paused) {
-                ctx.fillStyle = Zamboni.Utils.ColourScheme.WET_ASPHALT;
+                ctx.fillStyle = Zamboni.Utils.ColourScheme.SILVER;
                 ctx.fillRect(300, 225, 400, 150);
 
                 pauseText.render(ctx);
             }
+
+            //Render the pause button
+            pauseButton.render(ctx);
         };
 
         state.update = function (delta) {
