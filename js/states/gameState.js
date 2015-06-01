@@ -22,6 +22,9 @@ Zamboni.States.GameState = {
             //Whether or not the game is paused
             paused = false,
 
+            //Stop flittering when changing pause states
+            pauseChange = 0,
+
             //The game world
             world = Zamboni.World.GameWorld.create(),
 
@@ -36,6 +39,10 @@ Zamboni.States.GameState = {
             //Padding between life images
             lifeImgPadding = 10,
 
+            //The text to show when paused
+            pauseText = Engine.UI.TextArea.create(500, 300, "Game Paused"),
+
+            //The button class for toggling pause states
             pauseButton = {
                 state: 0, //0 = UP, 1 = DOWN, 2 = HOVER
 
@@ -65,10 +72,17 @@ Zamboni.States.GameState = {
                 }
             };
 
+        //Set values for coin text
         coinText.setFamily(Zamboni.Utils.GameSettings.gameFont);
         coinText.setBaseline("top");
         coinText.setSize(20);
         coinText.setColour(Zamboni.Utils.ColourScheme.ORANGE);
+
+        //Set values for pause text
+        pauseText.setFamily(Zamboni.Utils.GameSettings.gameFont);
+        pauseText.setBaseline("middle");
+        pauseText.setSize(40);
+        pauseText.setColour(Zamboni.Utils.ColourScheme.AMETHYST);
 
         state.onCreate = function (g) {
             game = g;
@@ -92,6 +106,14 @@ Zamboni.States.GameState = {
             for (i = 0; i < world.playerDescriptor.lives; i += 1) {
                 ctx.drawImage(lifeImg,  930 - ((i + 1) * (lifeImgSize + lifeImgPadding)), 25 - (lifeImgSize / 2), lifeImgSize, lifeImgSize);
             }
+
+            //If the game is paused then render text to show that it is
+            if (paused) {
+                ctx.fillStyle = Zamboni.Utils.ColourScheme.WET_ASPHALT;
+                ctx.fillRect(300, 225, 400, 150);
+
+                pauseText.render(ctx);
+            }
         };
 
         state.update = function (delta) {
@@ -103,8 +125,14 @@ Zamboni.States.GameState = {
 
             //Update the button and check if it was clicked
             pauseButton.update();
-            if (pauseButton.state === 1) {
+            if (pauseButton.state === 1 && pauseChange === 0) {
                 paused = !paused;
+                pauseChange = 1;
+
+                //Reset pause change after 500ms
+                setTimeout(function () {
+                    pauseChange = 0;
+                }, 500);
             }
 
             //Update GUI values
