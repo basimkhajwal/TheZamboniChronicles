@@ -82,7 +82,7 @@ Zamboni.States.GameState = {
         pauseText.setFamily(Zamboni.Utils.GameSettings.gameFont);
         pauseText.setBaseline("middle");
         pauseText.setSize(40);
-        pauseText.setColour(Zamboni.Utils.ColourScheme.WISTERIA);
+        pauseText.setColour(Zamboni.Utils.ColourScheme.AMETHYST);
 
         state.onCreate = function (g) {
             game = g;
@@ -107,12 +107,12 @@ Zamboni.States.GameState = {
             //If the game is paused then render text to show that it is
             if (paused) {
                 //Draw an overlay to make the rest of everything look darker
-                ctx.fillStyle = "rgba(0, 0, 0, 0.44)";
+                ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
                 ctx.fillRect(0, 0, 1000, 600);
 
                 //Draw the square around it
                 ctx.fillStyle = Zamboni.Utils.ColourScheme.GREEN_SEA;
-                Engine.DrawTools.roundRect(ctx, 300, 225, 400, 150, 30, true, false);
+                //Engine.DrawTools.roundRect(ctx, 300, 225, 400, 150, 30, true, false);
 
                 pauseText.render(ctx);
             }
