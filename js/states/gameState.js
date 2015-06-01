@@ -104,10 +104,8 @@ Zamboni.States.GameState = {
             //Update the button and check if it was clicked
             pauseButton.update();
             if (pauseButton.state === 1) {
-                paused = true;
+                paused = !paused;
             }
-
-
 
             //Update GUI values
             coinText.setText(world.playerDescriptor.coinsCollected);
