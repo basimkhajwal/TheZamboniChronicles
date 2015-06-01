@@ -25,6 +25,7 @@ Zamboni.States.GameState = {
             //GUI
             coinText = Engine.UI.TextArea.create(35, 13, ""),
             coinImg = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.COIN_1),
+            lifeImg = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.LIFE),
 
             pauseButton = {
                 state: 0, //0 = UP, 1 = DOWN, 2 = HOVER

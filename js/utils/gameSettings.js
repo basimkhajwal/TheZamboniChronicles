@@ -97,6 +97,8 @@ Zamboni.Utils.GameSettings = {
         COIN_6: "img/objects/coin-6.png",
         COIN_7: "img/objects/coin-7.png",
 
+        LIFE: "img/objects/life.png",
+
         PAUSE_UP: "img/pause-up.png",
         PAUSE_DOWN: "img/pause-down.png",
         PAUSE_HOVER: "img/pause-hover.png"
