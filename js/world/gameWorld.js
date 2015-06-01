@@ -310,6 +310,15 @@ Zamboni.World.GameWorld = {
                 coinsToRemove.forEach(function (coin) {
                     worldDescriptor.coinObjects.splice(worldDescriptor.coinObjects.indexOf(coin), 1);
                 });
+
+                //Check collisions with enemies
+                worldDescriptor.enemyObjects.forEach(function (enemy) {
+                    if (worldDescriptor.player.collides(enemy.collisionFunction)) {
+
+                        //DO STUF TODO
+
+                    }
+                });
             },
 
             updateCamera = function (delta) {
