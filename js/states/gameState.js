@@ -16,6 +16,9 @@ Zamboni.States.GameState = {
         var state = Engine.GameState.create(),
             game = null,
 
+            //Iterator variable
+            i,
+
             //Whether or not the game is paused
             paused = false,
 
@@ -26,6 +29,12 @@ Zamboni.States.GameState = {
             coinText = Engine.UI.TextArea.create(35, 13, ""),
             coinImg = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.COIN_1),
             lifeImg = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.LIFE),
+
+            //How big to draw the hearts that represent that players lives
+            lifeImgSize = 40,
+
+            //Padding between life images
+            lifeImgPadding = 10,
 
             pauseButton = {
                 state: 0, //0 = UP, 1 = DOWN, 2 = HOVER
@@ -78,6 +87,11 @@ Zamboni.States.GameState = {
 
             //Render the pause button
             pauseButton.render(ctx);
+
+            //Render the players lives
+            for (i = 0; i < world.playerDescriptor.lives; i += 1) {
+                ctx.drawImage(lifeImg,  950 - ((i + 1) * (lifeImgSize + lifeImgPadding)), 5, lifeImgSize, lifeImgSize);
+            }
         };
 
         state.update = function (delta) {
@@ -92,6 +106,8 @@ Zamboni.States.GameState = {
             if (pauseButton.state === 1) {
                 paused = true;
             }
+
+
 
             //Update GUI values
             coinText.setText(world.playerDescriptor.coinsCollected);
