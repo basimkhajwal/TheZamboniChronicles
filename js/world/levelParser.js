@@ -90,8 +90,9 @@ Zamboni.World.LevelParser = (function () {
             //Add it to the global enemy array
             worldDescriptor.enemyObjects.push(enemy);
 
-            //Add the collision function to the enemy object list
-            worldDescriptor.enemyCollisions.push(enemy.generateCollisionFunction());
+            //Add the collision function to the enemy object list and set it to the enemy
+            enemy.collisionFunction = enemy.generateCollisionFunction();
+            worldDescriptor.enemyCollisions.push(enemy.collisionFunction);
         },
 
         //Create a new lava area from an object
