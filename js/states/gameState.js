@@ -16,6 +16,9 @@ Zamboni.States.GameState = {
         var state = Engine.GameState.create(),
             game = null,
 
+            //Whether or not the game is paused
+            paused = false,
+
             //The game world
             world = Zamboni.World.GameWorld.create(),
 
@@ -72,13 +75,22 @@ Zamboni.States.GameState = {
             ctx.drawImage(coinImg, 5, 15, 20, 20);
             coinText.render(ctx);
 
+            //Render the pause button
             pauseButton.render(ctx);
         };
 
         state.update = function (delta) {
-            world.update(delta);
 
+            //If the game isn't paused then update the world
+            if (!paused) {
+                world.update(delta);
+            }
+
+            //Update the button and check if it was clicked
             pauseButton.update();
+            if (pauseButton.state === 1) {
+                paused = true;
+            }
 
             //Update GUI values
             coinText.setText(world.playerDescriptor.coinsCollected);
