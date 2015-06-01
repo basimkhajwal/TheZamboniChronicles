@@ -121,7 +121,7 @@ Zamboni.World.GameWorld = {
             playerDescriptor = {
 
                 direction: 1, //1 = Right, 0 = Left
-
+                lives: 3,
                 coinsCollected: 0,
                 isDead: false
 
