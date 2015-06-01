@@ -31,7 +31,7 @@ Zamboni.States.GameState = {
             lifeImg = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.LIFE),
 
             //How big to draw the hearts that represent that players lives
-            lifeImgSize = 40,
+            lifeImgSize = 30,
 
             //Padding between life images
             lifeImgPadding = 10,
@@ -90,7 +90,7 @@ Zamboni.States.GameState = {
 
             //Render the players lives
             for (i = 0; i < world.playerDescriptor.lives; i += 1) {
-                ctx.drawImage(lifeImg,  950 - ((i + 1) * (lifeImgSize + lifeImgPadding)), 5, lifeImgSize, lifeImgSize);
+                ctx.drawImage(lifeImg,  930 - ((i + 1) * (lifeImgSize + lifeImgPadding)), 25 - (lifeImgSize / 2), lifeImgSize, lifeImgSize);
             }
         };
 
