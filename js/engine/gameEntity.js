@@ -416,6 +416,4 @@ Engine.GameEntity = {
         };
 
     }
-
-
 };
