@@ -242,6 +242,9 @@ Zamboni.World.LevelParser = (function () {
             coin.width = coinObj.width;
             coin.height = coinObj.height;
 
+            //The amount of score that this coin generates
+            coin.value = parseInt(coinObj.value, 10) || 10;
+
             //Make a collision function for it
             coin.collisionFunction = generateCollision(coin.x, coin.y, coin.width, coin.height);
 
