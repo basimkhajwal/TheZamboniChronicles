@@ -321,9 +321,11 @@ Zamboni.World.GameWorld = {
 
                             //Squash the enemy
                             enemy.isSquashed = true;
+                            enemy.y += enemy.height / 2;
+                            enemy.height /= 2;
 
                             //Remove it from further collisions
-                            worldDescriptor.enemyCollisions.splice(worldDescriptor.enemyCollisions.indexOf(enemy), 1);
+                            worldDescriptor.enemyCollisions.splice(worldDescriptor.enemyCollisions.indexOf(enemy.collisionFunction), 1);
                             worldDescriptor.enemyCollision = mergeAllCollisions(worldDescriptor.enemyCollisions);
 
                             //Slow the player down
