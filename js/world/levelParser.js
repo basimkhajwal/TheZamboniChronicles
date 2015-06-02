@@ -60,7 +60,10 @@ Zamboni.World.LevelParser = (function () {
         parseEnemy = function (enemyObj, worldDescriptor) {
 
             //Create a new game entity for this enemy
-            var enemy = Engine.GameEntity.createEmpty();
+            var enemy = Engine.GameEntity.createEmpty(),
+
+                //Keep if for the closure to draw properly (see bottom of function definition)
+                oldRender = enemy.render;
 
             //Set the position and dimensions
             enemy.x = enemyObj.x;
@@ -71,6 +74,9 @@ Zamboni.World.LevelParser = (function () {
             //The settings for the enemy for forces
             enemy.applyGravity = true;
             enemy.moveLeft = true;
+
+            //If the enemy can be killed by jumping on it
+            enemy.squashable = true;
 
             //Time left if enemy is going to die
             enemy.isSquashed = false;
