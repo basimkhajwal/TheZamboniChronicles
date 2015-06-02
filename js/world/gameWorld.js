@@ -316,7 +316,19 @@ Zamboni.World.GameWorld = {
                 worldDescriptor.enemyObjects.forEach(function (enemy) {
                     if (worldDescriptor.player.collides(enemy.collisionFunction)) {
 
-                        //DO STUF TODO
+                        //If the collided enemy is squashable then kill it
+                        if (enemy.squashable) {
+
+                            //Squash the enemy
+                            enemy.isSquashed = true;
+
+                            //Remove it from further collisions
+                            worldDescriptor.enemyCollisions.splice(worldDescriptor.enemyCollisions.indexOf(enemy), 1);
+                            worldDescriptor.enemyCollision = mergeAllCollisions(worldDescriptor.enemyCollisions);
+
+                            //Slow the player down
+                            worldDescriptor.player.vy = 0;
+                        }
 
                     }
                 });
@@ -386,12 +398,25 @@ Zamboni.World.GameWorld = {
 
                 });
 
+                //Enemies to be removed in this tick
+                var removingEnemies = [];
+
                 //Update all the enemies
                 //Update enemies
                 worldDescriptor.enemyObjects.forEach(function (enemy) {
 
                     //Temporary variable for the side-checking enemy
                     var oldX;
+
+                    //If the enemy is dying then don't update it normally
+                    if (enemy.isSquashed) {
+                        enemy.squashedTime += delta;
+
+                        //If the squash time has elapsed then remove that enemy
+                        if (enemy.squashedTime >= 3) {
+                            removingEnemies.push(enemy);
+                        }
+                    }
 
                     //Move differently for different enemies
                     switch (enemy.type) {
