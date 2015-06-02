@@ -72,6 +72,10 @@ Zamboni.World.LevelParser = (function () {
             enemy.applyGravity = true;
             enemy.moveLeft = true;
 
+            //Time left if enemy is going to die
+            enemy.isSquashed = false;
+            enemy.squashedTime = 0;
+
             //Set the type of the enemy, the default is type a
             enemy.type = (enemyObj.properties.type || "a").toLowerCase();
 
