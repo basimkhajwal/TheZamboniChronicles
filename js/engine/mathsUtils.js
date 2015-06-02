@@ -39,6 +39,26 @@ Engine.MathsUtils = {
         }
     },
 
+    // --------------------------------- Tweening Methods ---------------------------------------------
+
+    Tweening: {
+
+        quadratic: function (a, b, delta) {
+            "use strict";
+
+            return a + (b - a) * delta * delta;
+        },
+
+        inverseQuadratic: function (a, b, delta) {
+            "use strict";
+
+            return this.quadratic(a, b, 1 - delta);
+        }
+
+
+    },
+
+
     // ------------------------- Spline / Curve Methods (one dimensional) -----------------------------
 
     Spline: {
