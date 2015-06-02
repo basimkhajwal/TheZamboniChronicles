@@ -317,7 +317,7 @@ Zamboni.World.GameWorld = {
                     if (worldDescriptor.player.collides(enemy.collisionFunction)) {
 
                         //If the collided enemy is squashable then kill it
-                        if (enemy.squashable) {
+                        if (!enemy.isSquashed && enemy.squashable) {
 
                             //Squash the enemy
                             enemy.isSquashed = true;
@@ -418,6 +418,9 @@ Zamboni.World.GameWorld = {
                         if (enemy.squashedTime >= 3) {
                             removingEnemies.push(enemy);
                         }
+
+                        //Stop any more updates
+                        return;
                     }
 
                     //Move differently for different enemies
@@ -505,6 +508,11 @@ Zamboni.World.GameWorld = {
                         }
 
                     });
+                });
+
+                //Remove all the enemies to be removed
+                removingEnemies.forEach(function (enemy) {
+                    worldDescriptor.enemyObjects.splice(worldDescriptor.enemyObjects.indexOf(enemy), 1);
                 });
 
                 //Update the animations for the coins
