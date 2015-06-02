@@ -122,6 +122,7 @@ Zamboni.World.GameWorld = {
 
                 direction: 1, //1 = Right, 0 = Left
                 lives: 3,
+                score: 0,
                 coinsCollected: 0,
                 isDead: false
 
