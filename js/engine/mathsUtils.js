@@ -14,7 +14,7 @@ Engine.MathsUtils = {
         linear: function (y1, y2, d) {
             "use strict";
 
-            return y1 + (y1 - y2) * d;
+            return y1 + (y2 - y1) * d;
         },
 
         cosine: function (y1, y2, d) {
