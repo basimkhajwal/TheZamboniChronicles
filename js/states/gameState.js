@@ -28,6 +28,9 @@ Zamboni.States.GameState = {
             //The game world
             world = Zamboni.World.GameWorld.create(),
 
+            //Text to show the current score of the player
+            scoreText = Engine.UI.TextArea.create(500, 10, "Score: "),
+
             //GUI
             coinText = Engine.UI.TextArea.create(35, 13, ""),
             coinImg = Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.assets.COIN_1),
@@ -84,6 +87,12 @@ Zamboni.States.GameState = {
         pauseText.setSize(40);
         pauseText.setColour(Zamboni.Utils.ColourScheme.AMETHYST);
 
+        //Set values for score text
+        scoreText.setFamily(Zamboni.Utils.GameSettings.gameFont);
+        scoreText.setBaseline("top");
+        scoreText.setSize(30);
+        scoreText.setColour(Zamboni.Utils.ColourScheme.SUN_FLOWER);
+
         state.onCreate = function (g) {
             game = g;
         };
@@ -98,6 +107,9 @@ Zamboni.States.GameState = {
             //Draw the number of coins and an image
             ctx.drawImage(coinImg, 5, 15, 20, 20);
             coinText.render(ctx);
+
+            //Draw the player's score
+            scoreText.render(ctx);
 
             //Render the players lives
             for (i = 0; i < world.playerDescriptor.lives; i += 1) {
@@ -127,6 +139,9 @@ Zamboni.States.GameState = {
             if (!paused) {
                 world.update(delta);
             }
+
+            //Update the score value
+            scoreText.setText("Score: " + world.playerDescriptor.score);
 
             //Update the button and check if it was clicked
             pauseButton.update();
