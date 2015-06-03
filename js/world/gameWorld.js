@@ -588,7 +588,17 @@ Zamboni.World.GameWorld = {
 
                 //Draw all the enemies
                 worldDescriptor.enemyObjects.forEach(function (enemy) {
+
+                    //Reduce the opacity if the enemy is dead
+                    if (enemy.isSquashed) {
+                        ctx.globalAlpha = 1 - Engine.MathsUtils.Tweening.quadratic(0, 1, enemy.squashedTime / 3);
+                    }
+
+                    //Call the game entity render function
                     enemy.render(ctx);
+
+                    //Reset the opacity
+                    ctx.globalAlpha = 1;
                 });
 
                 //Render all spikes
