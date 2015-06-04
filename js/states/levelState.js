@@ -47,7 +47,7 @@ Zamboni.States.LevelState = {
         state.render = function (ctx) {
             
             //Clear the screen
-            ctx.fillStyle = Engine.Utils.ColourScheme.PETER_RIVER;
+            ctx.fillStyle = Zamboni.Utils.ColourScheme.PETER_RIVER;
             ctx.fillRect(0, 0, 1000, 600);
             
             //Draw the title
