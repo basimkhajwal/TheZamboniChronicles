@@ -13,7 +13,7 @@ Engine.UI = Engine.UI || {};
 */
 Zamboni.States.LevelState = {
 
-    create: function () {
+    create: function (gameDescriptor) {
         "use strict";
 
         //Create an empty state object
