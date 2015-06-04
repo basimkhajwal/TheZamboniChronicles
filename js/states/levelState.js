@@ -50,6 +50,8 @@ Zamboni.States.LevelState = {
             ctx.fillStyle = Engine.Utils.ColourScheme.PETER_RIVER;
             ctx.fillRect(0, 0, 1000, 600);
             
+            //Draw the title
+            titleText.render(ctx);
         };
 
         state.update = function (delta) {
