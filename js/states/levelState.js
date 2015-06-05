@@ -13,6 +13,10 @@ Engine.UI = Engine.UI || {};
 */
 Zamboni.States.LevelState = {
 
+    /*
+    *   Create a new level with a gameDescriptor object that has an array of all the levels
+    *   E.g. { levels: [...] }
+    */
     create: function (gameDescriptor) {
         "use strict";
         
@@ -22,6 +26,11 @@ Zamboni.States.LevelState = {
             //The global game object
             game,
             
+            //The button to return to the menu
+            backButton = Engine.UI.TextButton.create(10, 10, 100, 50, String.fromCharCode("0xf177")),
+
+            //The buttons to go to the respective level
+
             //The top title
             titleText = Engine.UI.TextArea.create(500, 10, "Level Select");
             
@@ -29,14 +38,21 @@ Zamboni.States.LevelState = {
         //Setup all the title settings
         titleText.setFamily(Zamboni.Utils.GameSettings.gameFont);
         titleText.setBaseline("top");
-        titleText.setSize(30);
-        titleText.setColour(Zamboni.Utils.ColourScheme.POMEGRANATE);
+        titleText.setSize(45);
+        titleText.setColour(Zamboni.Utils.ColourScheme.WISTERIA);
         
-        //Setup all the stuff for drawing all the levels
+        //Setup the back button settings
         (function () {
+            var buttonText = backButton.getText();
             
+            buttonText.setFamily("FontAwesome");
+            buttonText.setSize(30);
+            buttonText.setColour(Zamboni.Utils.ColourScheme.SILVER);
             
-            
+            backButton.setCornerRadius(10);
+            backButton.setColour(Zamboni.Utils.ColourScheme.MIDNIGHT_BLUE);
+            backButton.setHoverColour(Zamboni.Utils.ColourScheme.BELIZE_HOLE);
+            backButton.setClickColour(Zamboni.Utils.ColourScheme.WET_ASPHALT);
         }());
       
         //When the state is created with a new game
@@ -47,14 +63,18 @@ Zamboni.States.LevelState = {
         state.render = function (ctx) {
             
             //Clear the screen
-            ctx.fillStyle = Zamboni.Utils.ColourScheme.PETER_RIVER;
+            ctx.fillStyle = Zamboni.Utils.ColourScheme.TURQUOISE;
             ctx.fillRect(0, 0, 1000, 600);
             
-            //Draw the title
+            //Draw the title and back button
             titleText.render(ctx);
+            backButton.render(ctx);
         };
 
         state.update = function (delta) {
+
+            //Update the back button
+            backButton.update();
 
         };
 
