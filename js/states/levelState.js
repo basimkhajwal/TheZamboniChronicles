@@ -37,12 +37,15 @@ Zamboni.States.LevelState = {
             titleText = Engine.UI.TextArea.create(500, 10, "Level Select"),
             
             //Settings for buttons
+            buttonsOffset = 75,
             buttonsPerLine = 5,
-            buttonPadding = 20,
+            buttonPaddingX = 20,
+            buttonPaddingY = 10,
             
             //Calculated settings
-            buttonWidth = (1000 - buttonPadding * (buttonsPerLine + 1)) / buttonsPerLine;
-            
+            buttonLines = Math.floor(gameDescriptor.levels.length / buttonsPerLine),
+            buttonWidth = (1000 - buttonPaddingX * (buttonsPerLine + 1)) / buttonsPerLine,
+            buttonHeight = ((600 - buttonsOffset) - buttonPaddingY * (buttonLines + 1)) / buttonLines;
         
         //Setup all the title settings
         titleText.setFamily(Zamboni.Utils.GameSettings.gameFont);
@@ -54,7 +57,8 @@ Zamboni.States.LevelState = {
             
             var buttonText = backButton.getText(),
                 i,
-                currentButton;
+                currentButton,
+                currentText;
             
             //Setup the back button settings
             buttonText.setFamily("FontAwesome");
@@ -67,7 +71,16 @@ Zamboni.States.LevelState = {
             
             //Setup the level level buttons
             for (i = 0; i < gameDescriptor.levels.length; i += 1) {
+                currentButton = Engine.UI.TextButton.create(buttonPaddingX * (i + 1) + buttonWidth * i, buttonPaddingY * (i + 1) + buttonHeight * i, "" + (i + 1));
+                currentText = currentButton.getText();
                 
+                currentText.setFamily(Zamboni.Utils.GameSettings.gameFont);
+                currentText.setSize(20);
+                currentText.setColour(Zamboni.Utils.ColourScheme.MIDNIGHT_BLUE);
+                currentButton.setCornerRadius(5);
+                currentButton.setColour(Zamboni.Utils.ColourScheme.SUN_FLOWER);
+                currentButton.setHoverColour(Zamboni.Utils.ColourScheme.ORANGE);
+                currentButton.setClickColour(Zamboni.Utils.ColourScheme.SUN_FLOWER);
             }
             
         }());
