@@ -23,16 +23,25 @@ Zamboni.States.LevelState = {
         //Create an empty state object
         var state = Engine.GameState.create(),
 
-            //The global game object
+            //The global game object and the state manager
             game,
+            gsm = game.getGameStateManager(),
             
             //The button to return to the menu
             backButton = Engine.UI.TextButton.create(10, 10, 100, 50, String.fromCharCode("0xf177")),
 
             //The buttons to go to the respective level
-
+            levelButtons = [],
+            
             //The top title
-            titleText = Engine.UI.TextArea.create(500, 10, "Level Select");
+            titleText = Engine.UI.TextArea.create(500, 10, "Level Select"),
+            
+            //Settings for buttons
+            buttonsPerLine = 5,
+            buttonPadding = 20,
+            
+            //Calculated settings
+            buttonWidth = (1000 - buttonPadding * (buttonsPerLine + 1)) / buttonsPerLine;
             
         
         //Setup all the title settings
@@ -41,18 +50,26 @@ Zamboni.States.LevelState = {
         titleText.setSize(45);
         titleText.setColour(Zamboni.Utils.ColourScheme.WISTERIA);
         
-        //Setup the back button settings
         (function () {
-            var buttonText = backButton.getText();
             
+            var buttonText = backButton.getText(),
+                i,
+                currentButton;
+            
+            //Setup the back button settings
             buttonText.setFamily("FontAwesome");
             buttonText.setSize(30);
             buttonText.setColour(Zamboni.Utils.ColourScheme.SILVER);
-            
             backButton.setCornerRadius(10);
             backButton.setColour(Zamboni.Utils.ColourScheme.MIDNIGHT_BLUE);
             backButton.setHoverColour(Zamboni.Utils.ColourScheme.BELIZE_HOLE);
             backButton.setClickColour(Zamboni.Utils.ColourScheme.WET_ASPHALT);
+            
+            //Setup the level level buttons
+            for (i = 0; i < gameDescriptor.levels.length; i += 1) {
+                
+            }
+            
         }());
       
         //When the state is created with a new game
@@ -75,6 +92,10 @@ Zamboni.States.LevelState = {
 
             //Update the back button
             backButton.update();
+            
+            if (backButton.isClicked()) {
+                gsm.setState(Zamboni.States.MenuState.create());
+            }
 
         };
 
