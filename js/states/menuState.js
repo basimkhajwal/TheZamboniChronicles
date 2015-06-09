@@ -161,7 +161,9 @@ Zamboni.States.MenuState = {
             if (startGame.isClicked()) {
                 var gsm = game.getGameStateManager();
 
-                gsm.setState(Zamboni.States.LevelState.create());
+                gsm.setState(Zamboni.States.LevelState.create({
+                    levels: Zamboni.Utils.GameSettings.levels
+                }));
             }
         };
 

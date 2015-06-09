@@ -82,7 +82,6 @@ Zamboni.States.LevelState = {
                 currentButton.setHoverColour(Zamboni.Utils.ColourScheme.ORANGE);
                 currentButton.setClickColour(Zamboni.Utils.ColourScheme.SUN_FLOWER);
             }
-            
         }());
       
         //When the state is created with a new game
