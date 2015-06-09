@@ -15,9 +15,9 @@ Zamboni.World = Zamboni.World || {};
 Zamboni.World.GameWorld = {
 
     /*
-    *   Create a new empty world
+    *   Create a new empty world with the given level details
     */
-    create: function () {
+    create: function (levelName) {
         "use strict";
 
 
@@ -636,8 +636,8 @@ Zamboni.World.GameWorld = {
                 });
             };
 
-        //Parse the level - TODO
-        parseLevel(Engine.AssetManager.getAsset(Zamboni.Utils.GameSettings.levels.TEST2));
+        //Parse the given level
+        parseLevel(Engine.AssetManager.getAsset(levelName));
 
         //Return all the public methods and variables
         return {
