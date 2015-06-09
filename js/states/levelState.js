@@ -25,7 +25,7 @@ Zamboni.States.LevelState = {
 
             //The global game object and the state manager
             game,
-            gsm = game.getGameStateManager(),
+            gsm,
             
             //The button to return to the menu
             backButton = Engine.UI.TextButton.create(10, 10, 100, 50, String.fromCharCode("0xf177")),
@@ -71,7 +71,7 @@ Zamboni.States.LevelState = {
             
             //Setup the level level buttons
             for (i = 0; i < gameDescriptor.levels.length; i += 1) {
-                currentButton = Engine.UI.TextButton.create(buttonPaddingX * (i + 1) + buttonWidth * i, buttonPaddingY * (i + 1) + buttonHeight * i, "" + (i + 1));
+                currentButton = Engine.UI.TextButton.create(buttonPaddingX * (i + 1) + buttonWidth * i, buttonPaddingY * (i + 1) + buttonHeight * i, i + 1);
                 currentText = currentButton.getText();
                 
                 currentText.setFamily(Zamboni.Utils.GameSettings.gameFont);
@@ -87,6 +87,7 @@ Zamboni.States.LevelState = {
         //When the state is created with a new game
         state.onCreate = function (g) {
             game = g;
+            gsm = game.getGameStateManager();
         };
 
         state.render = function (ctx) {
