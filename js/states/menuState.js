@@ -159,10 +159,18 @@ Zamboni.States.MenuState = {
 
             //If button is clicked then switch state
             if (startGame.isClicked()) {
-                var gsm = game.getGameStateManager();
+                var gsm = game.getGameStateManager(),
+                    levels = [],
+                    level;
+
+                for (level in Zamboni.Utils.GameSettings.levels) {
+                    if (Zamboni.Utils.GameSettings.levels.hasOwnProperty(level)) {
+                        levels.push(Zamboni.Utils.GameSettings.levels[level]);
+                    }
+                }
 
                 gsm.setState(Zamboni.States.LevelState.create({
-                    levels: Zamboni.Utils.GameSettings.levels
+                    levels: levels
                 }));
             }
         };
