@@ -9,8 +9,10 @@ Engine.UI = Engine.UI || {};
 
 Zamboni.States.GameState = {
 
-
-    create: function () {
+    /*
+    *   Create a new game state with the level passed as the string file name
+    */
+    create: function (levelName) {
         "use strict";
 
         var state = Engine.GameState.create(),
@@ -25,8 +27,8 @@ Zamboni.States.GameState = {
             //Stop flittering when changing pause states
             pauseChange = 0,
 
-            //The game world
-            world = Zamboni.World.GameWorld.create(),
+            //The game world with the level
+            world = Zamboni.World.GameWorld.create(levelName),
 
             //Text to show the current score of the player
             scoreText = Engine.UI.TextArea.create(500, 10, "Score: "),
