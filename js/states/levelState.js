@@ -43,9 +43,9 @@ Zamboni.States.LevelState = {
             buttonPaddingY = 10,
             
             //Calculated settings
-            buttonLines = Math.floor(gameDescriptor.levels.length / buttonsPerLine),
+            buttonLines = Math.floor(gameDescriptor.levels.length / buttonsPerLine) + 1,
             buttonWidth = (1000 - buttonPaddingX * (buttonsPerLine + 1)) / buttonsPerLine,
-            buttonHeight = ((600 - buttonsOffset) - buttonPaddingY * (buttonLines + 1)) / buttonLines;
+            buttonHeight = 100; //((600 - buttonsOffset) - buttonPaddingY * (buttonLines + 1)) / buttonLines
         
         //Setup all the title settings
         titleText.setFamily(Zamboni.Utils.GameSettings.gameFont);
@@ -71,16 +71,21 @@ Zamboni.States.LevelState = {
             
             //Setup the level level buttons
             for (i = 0; i < gameDescriptor.levels.length; i += 1) {
-                currentButton = Engine.UI.TextButton.create(buttonPaddingX * (i + 1) + buttonWidth * i, buttonPaddingY * (i + 1) + buttonHeight * i, i + 1);
+                currentButton = Engine.UI.TextButton.create(buttonPaddingX * (i + 1) + buttonWidth * i,
+                                                            buttonsOffset + buttonPaddingY * (Math.floor(i / buttonsPerLine) + 1) + buttonHeight * Math.floor(i / buttonsPerLine),
+                                                            buttonWidth, buttonHeight, i + 1);
+                currentButton.levelName = gameDescriptor.levels[i];
                 currentText = currentButton.getText();
                 
                 currentText.setFamily(Zamboni.Utils.GameSettings.gameFont);
-                currentText.setSize(20);
+                currentText.setSize(30);
                 currentText.setColour(Zamboni.Utils.ColourScheme.MIDNIGHT_BLUE);
-                currentButton.setCornerRadius(5);
+                currentButton.setCornerRadius(20);
                 currentButton.setColour(Zamboni.Utils.ColourScheme.SUN_FLOWER);
                 currentButton.setHoverColour(Zamboni.Utils.ColourScheme.ORANGE);
-                currentButton.setClickColour(Zamboni.Utils.ColourScheme.SUN_FLOWER);
+                currentButton.setClickColour(Zamboni.Utils.ColourScheme.ALIZARIN);
+
+                levelButtons.push(currentButton);
             }
         }());
       
@@ -99,16 +104,29 @@ Zamboni.States.LevelState = {
             //Draw the title and back button
             titleText.render(ctx);
             backButton.render(ctx);
+
+            //Render all the level buttons
+            levelButtons.forEach(function (btn) {
+                btn.render(ctx);
+            });
         };
 
         state.update = function (delta) {
 
             //Update the back button
             backButton.update();
-            
             if (backButton.isClicked()) {
                 gsm.setState(Zamboni.States.MenuState.create());
             }
+
+            //Update all the level buttons and check if it is clicked
+            levelButtons.forEach(function (btn) {
+                btn.update();
+
+                if (btn.isClicked()) {
+                    gsm.setState(Zamboni.States.GameState.create(btn.levelName));
+                }
+            });
 
         };
 
