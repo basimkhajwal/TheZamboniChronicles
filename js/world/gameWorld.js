@@ -361,6 +361,15 @@ Zamboni.World.GameWorld = {
                 //Update all the platforms
                 worldDescriptor.platformObjects.forEach(function (platform) {
 
+                    //Check if the platform is ready to start
+                    if (!platform.started) {
+
+                        //Update the time and cease updating for this one
+                        platform.timeToStart -= delta;
+                        platform.started = platform.timeToStart <= 0;
+                        return;
+                    }
+
                     //Apply the physics
                     platform.update(delta);
 
