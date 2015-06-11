@@ -288,6 +288,10 @@ Zamboni.World.LevelParser = (function () {
             platform.endX = parseInt(platformObj.properties.endX, 10);
             platform.endY = parseInt(platformObj.properties.endY, 10);
 
+            //Time limit to allow precise world building
+            platform.timeToStart = parseInt(platformObj.timeToStart, 10) || 0;
+            platform.started = platform.timeToStart !== 0;
+
             //Calculate which way to move
             changeX = platform.endX - platform.x;
             changeY = platform.endY - platform.y;
