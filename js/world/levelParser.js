@@ -262,6 +262,11 @@ Zamboni.World.LevelParser = (function () {
             worldDescriptor.coinObjects.push(coin);
         },
 
+        //Create a new shooting enemy from the JSON object TODO
+        parseShooter = function (shooterObj) {
+            //Add loading code TODO
+        },
+
         //Take the object of a platfrom from the JSON and creat a platform from it
         parsePlatform = function (platformObj, worldDescriptor) {
 
