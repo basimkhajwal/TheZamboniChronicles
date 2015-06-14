@@ -18,6 +18,16 @@ Zamboni.World.PlayerManager = {
         //Return a closure with the public methods
         return {
 
+            //Update the player related code here
+            update: function (delta) {
+
+            },
+
+            //Render the player correctly
+            render: function (ctx) {
+
+            }
+
         };
 
     }
