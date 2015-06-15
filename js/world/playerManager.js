@@ -13,8 +13,6 @@ Zamboni.World.PlayerManager = {
     create: function (worldDescriptor, playerDescriptor) {
         "use strict";
 
-
-
         //Return a closure with the public methods
         return {
 
@@ -31,6 +29,4 @@ Zamboni.World.PlayerManager = {
         };
 
     }
-
-
 };
